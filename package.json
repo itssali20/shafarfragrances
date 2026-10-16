@@ -1,0 +1,9 @@
+{
+  "name": "shafar-fragrances",
+  "private": true,
+  "type": "module",
+  "description": "Shafar Fragrances storefront: static pages, serverless API and admin dashboard.",
+  "dependencies": {
+    "@neondatabase/serverless": "^1.0.2"
+  }
+}

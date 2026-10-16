@@ -1,0 +1,905 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Shop | Shafar Fragrances</title>
+<meta name="description" content="Shop the Shafar collection: Parfum and Eau de Parfum in 50 ml bottles, with cash on delivery across Pakistan.">
+<meta name="robots" content="noindex">   <!-- preview build with sample content: remove this line at launch -->
+<meta name="theme-color" content="#F6EFE4">
+<link rel="icon" type="image/png" href="assets/favicon.png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600&family=Noto+Serif+Display:ital,wdth,wght@0,62.5..100,400..900;1,62.5..100,400..900&display=swap">
+<style>
+/* base rules every page relies on */
+:root{color-scheme:light}
+html{-webkit-text-size-adjust:100%}
+body{margin:0}
+img{max-width:100%}
+[hidden]{display:none!important}
+</style>
+<style>
+/* Layout: a short opening band, a sticky filter bar, then the product grid. Nothing is pinned: this page is for finding a bottle fast.
+   Choosing a category washes the whole page in that category's colour. */
+:root{
+  --cream:#F6EFE4;      /* page ground */
+  --linen:#FBF7F0;      /* raised surfaces: drawer, menu */
+  --sand:#E8DAC3;       /* hairlines and quiet fills */
+  --dune:#EBDDC6;       /* spotlight band */
+  --espresso:#2B1810;   /* brand brown: header, primary text */
+  --cocoa:#6B4A36;      /* secondary text */
+  --bronze:#8A5B1E;     /* small accents on light grounds */
+  --gold:#C9A24A;       /* logo gold, on brown only */
+  --amber-1:#F1D9B2;    /* Halila Lane arch, top */
+  --amber-2:#DDB684;    /* Halila Lane arch, base */
+  --word:#FFFBF4;
+  --display:"Noto Serif Display","Bodoni 72",Didot,"Playfair Display",Georgia,serif;
+  --ui:"Jost","Century Gothic","Avenir Next",Avenir,"Segoe UI",system-ui,sans-serif;
+  --pad:clamp(1.125rem,5vw,4.75rem);
+  --head:4.875rem;
+  color-scheme:light;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{font-size:clamp(12px,0.9467vw,18px)}   /*root*/
+@media (max-width:1080px){html{font-size:16px}}   /*root*/
+body{margin:0;background:var(--cream);color:var(--espresso);font-family:var(--ui);font-size:max(12.5px,1rem);line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+h1,h2,h3,p,ol,ul,dl,dd{margin:0}
+ol,ul{padding:0;list-style:none}
+button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:pointer}
+a{color:inherit}
+:focus-visible{outline:0.125rem solid currentColor;outline-offset:0.1875rem;border-radius:0.125rem}
+
+/* ---------- Header ---------- */
+.top{position:fixed;inset:0 0 auto 0;z-index:30;display:flex;align-items:center;justify-content:space-between;gap:1.25rem;
+  height:calc(var(--head) + env(safe-area-inset-top,0px));padding:env(safe-area-inset-top,0px) var(--pad) 0;
+  color:var(--espresso);transition:background-color .3s,box-shadow .3s}
+.top.is-solid{background:rgba(246,239,228,.9);-webkit-backdrop-filter:blur(0.75rem);backdrop-filter:blur(0.75rem);box-shadow:0 1px 0 rgba(43,24,16,.1)}
+.brand{display:flex;align-items:center;gap:0.75rem;text-decoration:none;flex:none}
+.brand img{display:block;width:auto;max-width:none}
+.brand__crest{height:3rem}
+.brand__word{height:1.9375rem}
+.menu{display:flex;align-items:center;gap:clamp(1.125rem,3vw,2.5rem)}
+.menu a,.menu button{font-size:max(10.5px,0.75rem);font-weight:500;letter-spacing:.2em;text-transform:uppercase;text-decoration:none;padding:0.625rem 0.125rem;position:relative}
+.menu a::after,.menu button::after{content:"";position:absolute;left:0.125rem;right:0.125rem;bottom:0.25rem;height:1px;background:currentColor;transform:scaleX(0);transform-origin:left;transition:transform .3s}
+.menu a:hover::after,.menu button:hover::after,.menu [aria-current]::after{transform:scaleX(1)}
+.tools{display:flex;align-items:center;gap:0.375rem;flex:none}
+.icon{position:relative;width:2.75rem;height:2.75rem;display:grid;place-items:center;border-radius:50%;transition:background-color .2s}
+.icon:hover{background:rgba(43,24,16,.08)}
+.icon svg{width:1.3125rem;height:1.3125rem;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.badge{position:absolute;top:0.1875rem;right:1px;min-width:1.125rem;height:1.125rem;padding:0 0.3125rem;border-radius:0.5625rem;background:var(--espresso);color:var(--cream);
+  font-size:max(10.5px,0.6562rem);font-weight:600;line-height:1.125rem;text-align:center;font-variant-numeric:tabular-nums}
+.burger{display:none}
+
+/* ---------- Shared pieces ---------- */
+main{position:relative}
+.eyebrow{font-size:max(10.5px,0.7188rem);font-weight:600;letter-spacing:.26em;text-transform:uppercase;color:var(--bronze)}
+.btn{display:inline-flex;align-items:center;justify-content:center;height:3.375rem;padding:0 1.875rem;border-radius:1.6875rem;background:var(--espresso);color:var(--word);
+  font-size:max(10.5px,0.75rem);font-weight:600;letter-spacing:.2em;text-transform:uppercase;text-decoration:none;transition:transform .2s}
+.btn:hover{transform:translateY(-0.125rem)}
+.more{display:inline-flex;align-items:center;gap:0.75rem;font-size:max(10.5px,0.75rem);font-weight:600;letter-spacing:.2em;text-transform:uppercase;text-decoration:none;padding:0.625rem 0}
+.more::after{content:"";width:2.125rem;height:1px;background:currentColor;transition:width .3s}
+.more:hover::after{width:3.25rem}
+.heart{flex:none;width:2.875rem;height:2.875rem;border-radius:50%;display:grid;place-items:center;border:1px solid rgba(43,24,16,.3);transition:border-color .2s}
+.heart:hover{border-color:currentColor}
+.heart svg{width:1.1875rem;height:1.1875rem;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linejoin:round;transition:fill .2s}
+.heart[aria-pressed="true"] svg{fill:currentColor}
+.slot{aspect-ratio:482/1100;position:relative}
+.slot img{display:block;height:100%;width:auto;max-width:none;position:relative;z-index:1}
+.slot::after,.traveller__shadow{content:"";position:absolute;left:-8%;right:-8%;bottom:-4.5%;height:9%;border-radius:50%;
+  background:radial-gradient(closest-side,#3A2113,transparent);opacity:.32;filter:blur(0.4375rem)}
+/* With the travelling bottle running, its three resting places stay empty */
+.travel .slot--t img,.travel .slot--t::after{visibility:hidden}
+
+/* ---------- Product cards (same component as Home) ---------- */
+.shop{padding:clamp(4.75rem,10vw,8.25rem) var(--pad) clamp(4.75rem,10vw,7.75rem);background:var(--cream)}
+.shop__head{position:relative;z-index:7;max-width:77.5rem;margin:0 auto clamp(2.25rem,5vw,3.875rem);display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:0.875rem 1.75rem}
+.shop__head h2{font-family:var(--display);font-weight:500;font-size:clamp(2.375rem,4.6vw,4.375rem);line-height:1;letter-spacing:-.01em;margin-top:0.75rem}
+.cards{max-width:77.5rem;margin-inline:auto;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(1rem,2.2vw,2.125rem)}
+.card{display:grid;grid-template-columns:minmax(0,1fr);grid-template-rows:auto 1fr;gap:1.25rem;color:var(--ink);min-width:0}
+.card__frame{aspect-ratio:4/5;border-radius:999px 999px 0.5rem 0.5rem;background:linear-gradient(180deg,var(--c),var(--e));display:grid;grid-template-rows:minmax(0,1fr);place-items:end center;padding-bottom:9%}
+.card__frame .slot{height:71%}
+.card__body{display:grid;grid-template-rows:auto auto 1fr auto;gap:0.5rem;min-width:0}
+.card__kind{font-size:max(10.5px,0.6875rem);font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:var(--accent)}
+.card__name{font-family:var(--display);font-weight:500;font-size:clamp(1.5625rem,2.3vw,2rem);line-height:1.05}
+.card__desc{font-size:max(12.5px,0.9062rem);line-height:1.5;color:var(--cocoa)}
+.card__buy{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:0.75rem;margin-top:0.625rem;padding-top:0.875rem;border-top:1px solid var(--sand)}
+.card__price{display:flex;align-items:baseline;gap:0.5rem;font-family:var(--display);font-weight:600;font-size:1.5625rem;line-height:1;font-variant-numeric:lining-nums tabular-nums;white-space:nowrap}
+.card__price span{font-family:var(--ui);font-weight:500;font-size:max(10.5px,0.7188rem);letter-spacing:.14em;text-transform:uppercase;color:var(--cocoa)}
+.card__acts{display:flex;gap:0.5rem;align-items:center}
+.card__add{height:2.875rem;padding:0 1.25rem;border-radius:1.4375rem;background:var(--ink);color:var(--word);font-size:max(10.5px,0.6875rem);font-weight:600;letter-spacing:.18em;text-transform:uppercase;white-space:nowrap;transition:transform .2s}
+.card__add:hover{transform:translateY(-0.125rem)}
+.card__add:disabled{opacity:.34;cursor:not-allowed;transform:none}
+.card__price.card__price--open{font-family:var(--ui);font-weight:500;font-size:max(12.5px,0.8438rem);letter-spacing:.02em;color:var(--cocoa)}
+
+/* ---------- Page wash: the ground colour follows the chosen category ---------- */
+:root{--wash:#F6EFE4}
+body{background:var(--wash);transition:background-color .9s ease}
+.top.is-solid{background:var(--wash);background:color-mix(in srgb,var(--wash) 90%,transparent);transition:background-color .9s ease,box-shadow .3s}
+
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+
+/* ---------- Opening band ---------- */
+.shead{position:relative;overflow:hidden;padding:calc(var(--head) + clamp(1.625rem,5vh,3.875rem)) var(--pad) clamp(1.375rem,3vw,2.5rem)}
+.shead__ghost{position:absolute;right:var(--pad);top:calc(var(--head) + 0.375rem);z-index:0;font-family:var(--display);font-weight:900;font-stretch:62.5%;font-size:clamp(8.125rem,24vw,25rem);line-height:.8;
+  text-transform:uppercase;white-space:nowrap;color:var(--word);pointer-events:none;-webkit-user-select:none;user-select:none}
+.shead__in{position:relative;z-index:1;max-width:77.5rem;margin-inline:auto;display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:1rem 2.5rem}
+.shead__in > div{display:grid;gap:0.875rem;justify-items:start}
+.shead h1{font-family:var(--display);font-weight:500;font-size:clamp(3.25rem,8vw,8rem);line-height:.95;letter-spacing:-.02em}
+.shead h1 em{font-weight:400}
+.shead__lede{max-width:34ch;color:var(--cocoa)}
+
+/* ---------- Filter bar ---------- */
+.fbar{position:sticky;top:var(--head);z-index:20;padding:0 var(--pad);background:var(--wash);background:color-mix(in srgb,var(--wash) 90%,transparent);
+  -webkit-backdrop-filter:blur(0.75rem);backdrop-filter:blur(0.75rem);transition:background-color .9s ease}
+.fbar__in{position:relative;max-width:77.5rem;margin-inline:auto;display:flex;align-items:center;gap:clamp(0.875rem,2.4vw,2.25rem);min-height:4.125rem;border-block:1px solid rgba(43,24,16,.15)}
+.tabs{display:flex;gap:clamp(1rem,2.2vw,2.125rem)}
+.tab{position:relative;padding:1.25rem 0 1.125rem;font-family:var(--display);font-weight:500;font-size:1.4375rem;line-height:1;white-space:nowrap;opacity:.48;transition:opacity .3s}
+.tab sup{font-family:var(--ui);font-size:max(10.5px,0.6562rem);font-weight:600;letter-spacing:.06em;margin-left:0.3125rem;vertical-align:top;position:relative;top:-0.125rem}
+.tab::after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:0.125rem;background:currentColor;transform:scaleX(0);transform-origin:left;transition:transform .45s cubic-bezier(.2,.7,.2,1)}
+.tab:hover{opacity:.8}
+.tab[aria-pressed="true"]{opacity:1}
+.tab[aria-pressed="true"]::after{transform:scaleX(1)}
+.fbar__sep{width:1px;height:1.625rem;background:rgba(43,24,16,.18);flex:none}
+.fbar__more{display:flex;align-items:center;gap:clamp(0.875rem,2.4vw,2.25rem);flex:1;min-width:0}
+.chips{display:flex;gap:0.5rem}
+.chip{height:2.25rem;padding:0 1rem;border-radius:1.125rem;border:1px solid rgba(43,24,16,.3);font-size:max(10.5px,0.7188rem);font-weight:500;letter-spacing:.16em;text-transform:uppercase;white-space:nowrap;transition:background-color .25s,color .25s,border-color .25s}
+.chip:hover{border-color:var(--espresso)}
+.chip[aria-pressed="true"]{background:var(--espresso);border-color:var(--espresso);color:var(--cream)}
+.fbar__right{margin-left:auto;display:flex;align-items:center;gap:1.125rem}
+.fbar__count{font-size:max(10.5px,0.75rem);font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--cocoa);white-space:nowrap;font-variant-numeric:tabular-nums}
+.sort{-webkit-appearance:none;appearance:none;height:2.25rem;padding:0 2.25rem 0 1rem;border:1px solid rgba(43,24,16,.3);border-radius:1.125rem;font:inherit;font-size:max(10.5px,0.8125rem);color:inherit;cursor:pointer;
+  background:transparent url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5l5 5 5-5' fill='none' stroke='%232B1810' stroke-width='1.5'/%3E%3C/svg%3E") no-repeat right 0.875rem center/0.6875rem}
+.fbar__toggle{display:none}
+
+/* ---------- Grid ---------- */
+.store{padding:clamp(1.875rem,4vw,3.625rem) var(--pad) clamp(4.75rem,10vw,8rem)}
+.sgrid{max-width:77.5rem;margin-inline:auto;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(2.125rem,4vw,3.875rem) clamp(1rem,2.2vw,2.125rem)}
+.sgrid .is-out{display:none}
+.sgrid .card__frame{position:relative;width:100%;cursor:pointer;transition:filter .4s}
+.sgrid .card .slot img{transition:transform .7s cubic-bezier(.2,.7,.2,1)}
+.sgrid .card:hover .slot img,.sgrid .card__frame:focus-visible .slot img{transform:translateY(-3%) rotate(-5deg) scale(1.05)}
+.sgrid .card:hover .card__frame{filter:saturate(1.12)}
+.card__flag{position:absolute;left:0.875rem;bottom:0.875rem;z-index:2;padding:0.3125rem 0.6875rem;border-radius:0.875rem;background:var(--ink);color:var(--word);font-size:max(10.5px,0.6562rem);font-weight:600;letter-spacing:.16em;text-transform:uppercase}
+.card__flag--sample{background:none;border:1px dashed var(--ink);color:var(--ink)}
+.card__peek{position:absolute;right:0.875rem;bottom:0.875rem;z-index:2;height:2.125rem;padding:0 0.875rem;border-radius:1.0625rem;display:flex;align-items:center;background:var(--word);color:var(--ink);
+  font-size:max(10.5px,0.6562rem);font-weight:600;letter-spacing:.16em;text-transform:uppercase;opacity:0;transform:translateY(0.625rem);transition:opacity .35s,transform .35s}
+.sgrid .card:hover .card__peek,.sgrid .card__frame:focus-visible .card__peek{opacity:1;transform:none}
+.tile{grid-column:span 2;position:relative;overflow:hidden;border-radius:0.625rem;min-height:20rem;display:grid;align-content:end;padding:clamp(1.375rem,2.6vw,2.5rem);color:#F6EAD6;background:#2C190F;text-decoration:none}
+.tile img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform 1.2s cubic-bezier(.2,.7,.2,1)}
+.tile:hover img{transform:scale(1.05)}
+.tile::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(24,13,7,0) 30%,rgba(24,13,7,.82) 100%)}
+.tile__copy{position:relative;z-index:1;display:grid;gap:0.75rem;justify-items:start;max-width:36ch}
+.tile .eyebrow{color:var(--gold)}
+.tile h3{font-family:var(--display);font-weight:500;font-size:clamp(1.75rem,3vw,2.875rem);line-height:1.02;letter-spacing:-.01em}
+.tile h3 em{font-weight:400;color:#E3C57A}
+.tile .more{color:#F6EAD6}
+.tile--ask{background:#3A2113}
+.tile--ask::after{display:none}
+.tile--ask img{inset:auto;right:-5%;top:50%;width:44%;height:auto;object-fit:contain;opacity:.17;transform:translateY(-50%)}
+.tile--ask:hover img{transform:translateY(-50%) scale(1.06)}
+.empty{grid-column:1/-1;display:grid;gap:1rem;justify-items:start;padding:clamp(2.5rem,7vw,5.625rem) 0}
+.empty p{font-family:var(--display);font-size:clamp(1.625rem,2.6vw,2.375rem);line-height:1.15;max-width:24ch}
+
+/* ---------- Closing band ---------- */
+.nudge{padding:clamp(4rem,8vw,7rem) var(--pad);background:var(--dune);text-align:center;display:grid;gap:1.125rem;justify-items:center}
+.nudge h2{font-family:var(--display);font-weight:500;font-size:clamp(2.375rem,4.6vw,4.375rem);line-height:1.02;letter-spacing:-.01em}
+.nudge h2 em{font-weight:400}
+.nudge p:not(.eyebrow){max-width:40ch;color:var(--cocoa)}
+
+/* ---------- Quick view ---------- */
+.qvscrim{position:fixed;inset:0;z-index:42;background:rgba(43,24,16,.42);opacity:0;visibility:hidden;transition:opacity .3s,visibility 0s .3s}
+.qvscrim.open{opacity:1;visibility:visible;transition-delay:0s}
+.qv{position:fixed;top:0;right:0;bottom:0;z-index:43;width:min(33.75rem,100%);display:grid;grid-template-rows:auto minmax(0,1fr);background:var(--linen);color:var(--ink);
+  transform:translateX(102%);visibility:hidden;transition:transform .45s cubic-bezier(.2,.7,.2,1),visibility 0s .45s}
+.qv.open{transform:none;visibility:visible;transition-delay:0s}
+.qv__top{position:relative;overflow:hidden;height:min(44vh,25rem);height:min(44svh,25rem);display:grid;grid-template-rows:minmax(0,1fr);place-items:end center;padding:calc(1.125rem + env(safe-area-inset-top,0px)) 0 1.375rem;background:linear-gradient(180deg,var(--c),var(--e))}
+.qv__word{position:absolute;left:0;right:0;top:50%;transform:translateY(-50%);text-align:center;font-family:var(--display);font-weight:900;font-stretch:62.5%;font-size:7.5rem;line-height:.8;text-transform:uppercase;white-space:nowrap;color:var(--word)}
+.qv__top img{position:relative;z-index:1;display:block;height:100%;width:auto;max-width:none}
+.qv__close{position:absolute;top:calc(0.75rem + env(safe-area-inset-top,0px));right:0.75rem;z-index:2;color:var(--ink)}
+.qv__body{overflow-y:auto;display:grid;gap:0.875rem;align-content:start;justify-items:start;padding:1.625rem 1.875rem calc(1.875rem + env(safe-area-inset-bottom,0px))}
+.qv__kind{font-size:max(10.5px,0.7188rem);font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:var(--accent)}
+.qv__name{font-family:var(--display);font-weight:500;font-size:2.875rem;line-height:1}
+.qv__desc{color:var(--cocoa);max-width:42ch}
+.qv__label{margin-top:0.375rem;font-size:max(10.5px,0.7188rem);font-weight:500;letter-spacing:.22em;text-transform:uppercase}
+.qv__sizes{display:flex;gap:0.625rem}
+.qv__sizes input{position:absolute;opacity:0;pointer-events:none}
+.qv__sizes label{width:3.625rem;height:3.625rem;border-radius:50%;display:grid;place-content:center;justify-items:center;cursor:pointer;border:1px solid var(--ink);border-color:color-mix(in srgb,var(--ink) 38%,transparent);
+  font-size:max(10.5px,0.625rem);font-weight:500;letter-spacing:.12em;text-transform:uppercase;line-height:1.1;transition:background-color .25s,color .25s,border-color .25s}
+.qv__sizes label b{font-size:1.0625rem;font-weight:600;letter-spacing:0}
+.qv__sizes input:checked+label{background:var(--ink);border-color:var(--ink);color:var(--word)}
+.qv__sizes input:focus-visible+label{outline:0.125rem solid var(--ink);outline-offset:0.1875rem}
+.qv__price{display:flex;align-items:baseline;gap:0.625rem;min-height:2.75rem}
+.qv__amt{font-family:var(--display);font-weight:600;font-size:2.375rem;line-height:1;font-variant-numeric:lining-nums tabular-nums}
+.qv__amt.is-open{font-family:var(--ui);font-size:max(12.5px,0.9375rem);font-weight:500}
+.qv__for{font-size:max(10.5px,0.75rem);letter-spacing:.14em;text-transform:uppercase;color:var(--cocoa)}
+.qv__acts{display:flex;gap:0.625rem;align-items:center;width:100%}
+.qv__add{flex:1;height:3.375rem;border-radius:1.6875rem;background:var(--ink);color:var(--word);font-size:max(10.5px,0.75rem);font-weight:600;letter-spacing:.2em;text-transform:uppercase;transition:opacity .2s}
+.qv__add:disabled{opacity:.4;cursor:not-allowed}
+.qv .heart{width:3.375rem;height:3.375rem;color:var(--ink)}
+.qv .more{color:var(--ink);margin-top:0.125rem}
+
+/* ---------- Footer ---------- */
+.foot{position:relative;overflow:hidden;background:#2C190F;color:#E9DCC7;padding:clamp(3.5rem,8vw,6.875rem) var(--pad) 0}
+.foot a{color:inherit;text-decoration:none}
+.foot__top{max-width:77.5rem;margin-inline:auto;display:grid;grid-template-columns:minmax(0,1.5fr) repeat(3,minmax(0,1fr));gap:clamp(1.75rem,4vw,4.5rem)}
+.foot__brand{display:grid;gap:1.375rem;justify-items:start;align-content:start}
+.foot__brand img{width:11rem;height:auto;display:block}
+.foot__brand p{max-width:30ch;color:#D9C7AC}
+.foot__pay{white-space:nowrap;display:inline-flex;align-items:center;gap:0.625rem;padding:0.5625rem 1rem;border:1px solid rgba(201,162,74,.5);border-radius:1.375rem;font-size:max(10.5px,0.7188rem);font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:#E3C57A}
+.foot__pay::before{content:"";width:0.4375rem;height:0.4375rem;border-radius:50%;background:var(--gold)}
+.foot__col h3{font-size:max(10.5px,0.7188rem);font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);margin-bottom:1.125rem}
+.foot__col ul{display:grid;gap:0.6875rem}
+.foot__col a,.foot__col button{font-family:var(--display);font-size:1.3125rem;line-height:1.2;background-image:linear-gradient(currentColor,currentColor);background-repeat:no-repeat;background-position:0 100%;background-size:0 1px;transition:background-size .35s}
+.foot__col a:hover,.foot__col button:hover{background-size:100% 1px}
+.foot__col small{display:block;margin-top:0.875rem;font-size:max(10.5px,0.8125rem);color:#BFAE94}
+.foot__word{margin-top:clamp(2.25rem,6vw,5.25rem);font-family:var(--display);font-weight:900;font-stretch:62.5%;font-size:24.4vw;line-height:.74;text-align:center;text-transform:uppercase;white-space:nowrap;
+  background:linear-gradient(180deg,#E3C57A 0%,#B0842D 46%,#4A2F14 92%);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-user-select:none;user-select:none;padding-bottom:.1em}
+.foot__base{position:relative;max-width:77.5rem;margin-inline:auto;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:0.75rem 1.5rem;
+  padding:1.125rem 0 calc(1.375rem + env(safe-area-inset-bottom,0px));border-top:1px solid rgba(233,220,199,.16);font-size:max(10.5px,0.75rem);letter-spacing:.14em;text-transform:uppercase;color:#BFAE94}
+.foot__up{display:inline-flex;align-items:center;gap:0.625rem;color:#E9DCC7;font-size:max(10.5px,0.75rem);letter-spacing:.2em;text-transform:uppercase}
+.foot__up::after{content:"";width:2.375rem;height:2.375rem;border-radius:50%;border:1px solid rgba(233,220,199,.4);background:linear-gradient(#E9DCC7,#E9DCC7) center/1px 0.875rem no-repeat}
+
+/* ---------- Drawer, scrim, toast ---------- */
+.scrim{position:fixed;inset:0;z-index:40;background:rgba(43,24,16,.38);opacity:0;visibility:hidden;transition:opacity .3s,visibility 0s .3s}
+.scrim.open{opacity:1;visibility:visible;transition-delay:0s}
+.drawer{position:fixed;top:0;right:0;bottom:0;z-index:41;width:min(26.25rem,100%);background:var(--linen);color:var(--espresso);display:flex;flex-direction:column;
+  padding:calc(1.375rem + env(safe-area-inset-top,0px)) 1.5rem calc(1.375rem + env(safe-area-inset-bottom,0px));
+  transform:translateX(102%);visibility:hidden;transition:transform .38s cubic-bezier(.2,.7,.2,1),visibility 0s .38s}
+.drawer.open{transform:none;visibility:visible;transition-delay:0s}
+.drawer__head{display:flex;align-items:center;justify-content:space-between;padding-bottom:1rem;border-bottom:1px solid var(--sand)}
+.drawer__head h2{font-family:var(--display);font-weight:500;font-size:1.875rem;line-height:1}
+.drawer__list{flex:1;overflow-y:auto;min-height:0}
+.line{display:grid;grid-template-columns:3.375rem minmax(0,1fr) auto;gap:0.875rem;align-items:center;padding:1rem 0;border-bottom:1px solid var(--sand)}
+.line__pic{width:3.375rem;height:4.75rem;border-radius:1.6875rem 1.6875rem 0.25rem 0.25rem;display:grid;place-items:center}
+.line__pic img{height:3.625rem;width:auto}
+.line__name{font-family:var(--display);font-weight:500;font-size:1.25rem;line-height:1.1}
+.line__meta{font-size:max(10.5px,0.75rem);letter-spacing:.12em;text-transform:uppercase;color:var(--cocoa)}
+.line__side{display:grid;gap:0.375rem;justify-items:end;font-variant-numeric:tabular-nums}
+.qty{display:flex;align-items:center;gap:0.125rem;margin-top:0.375rem}
+.qty button{width:1.875rem;height:1.875rem;border-radius:50%;border:1px solid var(--sand);line-height:1}
+.qty span{min-width:1.5rem;text-align:center;font-variant-numeric:tabular-nums}
+.link{font-size:max(10.5px,0.75rem);letter-spacing:.12em;text-transform:uppercase;text-decoration:underline;text-underline-offset:0.1875rem;color:var(--cocoa)}
+.drawer__empty{padding:2.5rem 0;color:var(--cocoa)}
+.drawer__foot{padding-top:1rem;border-top:1px solid var(--sand);display:grid;gap:0.5rem}
+.drawer__total{display:flex;justify-content:space-between;align-items:baseline;font-size:max(10.5px,0.8125rem);letter-spacing:.16em;text-transform:uppercase}
+.drawer__total b{font-family:var(--display);font-size:1.75rem;font-weight:600;letter-spacing:0;text-transform:none;font-variant-numeric:lining-nums tabular-nums}
+.drawer__note{font-size:max(10.5px,0.8125rem);color:var(--cocoa)}
+.toast{position:fixed;left:50%;bottom:calc(1.375rem + env(safe-area-inset-bottom,0px));z-index:50;transform:translate(-50%,1.25rem);max-width:calc(100% - 2rem);
+  background:var(--espresso);color:var(--cream);padding:0.75rem 1.25rem;border-radius:1.5rem;font-size:max(12.5px,0.875rem);opacity:0;visibility:hidden;transition:opacity .25s,transform .25s,visibility 0s .25s}
+.toast.show{opacity:1;visibility:visible;transform:translate(-50%,0);transition-delay:0s}
+
+/* ---------- Narrow screens ---------- */
+@media (max-width:1080px){
+  :root{--head:4rem}
+  .brand{gap:0.5625rem}.brand__crest{height:2.375rem}.brand__word{height:1.5rem}
+  .burger{display:grid}
+  .menu{position:absolute;top:calc(100% - 0.25rem);left:0.75rem;right:0.75rem;flex-direction:column;align-items:stretch;gap:0;padding:0.5rem 1.25rem;border-radius:0.875rem;background:var(--linen);
+    box-shadow:0 1.125rem 2.5rem rgba(43,24,16,.18);opacity:0;visibility:hidden;transform:translateY(-0.5rem);transition:opacity .2s,transform .2s,visibility 0s .2s}
+  .menu.open{opacity:1;visibility:visible;transform:none;transition-delay:0s}
+  .menu a,.menu button{padding:0.9375rem 0.125rem;text-align:left;border-bottom:1px solid var(--sand)}
+  .menu > :last-child{border-bottom:0}
+  .menu a::after,.menu button::after{display:none}
+  .sgrid{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .fbar__toggle{display:inline-flex;align-items:center;gap:0.5rem;margin-left:auto;height:2.25rem;padding:0 1rem;border-radius:1.125rem;border:1px solid rgba(43,24,16,.3);font-size:max(10.5px,0.7188rem);font-weight:500;letter-spacing:.16em;text-transform:uppercase;white-space:nowrap}
+  .fbar__sep{display:none}
+  .fbar__more{position:absolute;left:0;right:0;top:100%;flex:none;flex-wrap:wrap;gap:0.875rem 1.125rem;padding:1rem 1.125rem;border-radius:0 0 0.875rem 0.875rem;background:var(--linen);box-shadow:0 1.125rem 2.5rem rgba(43,24,16,.16);
+    opacity:0;visibility:hidden;transform:translateY(-0.375rem);transition:opacity .2s,transform .2s,visibility 0s .2s}
+  .fbar__more.open{opacity:1;visibility:visible;transform:none;transition-delay:0s}
+  .fbar__right{margin-left:0;width:100%;justify-content:space-between}
+}
+@media (max-width:900px){
+  .shead__ghost{font-size:44vw;right:0.5rem}
+  .tabs{gap:1.125rem;overflow-x:auto;scrollbar-width:none}
+  .tabs::-webkit-scrollbar{display:none}
+  .tab{font-size:1.25rem}
+  .fbar__in{gap:0.75rem}
+  .sgrid{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:2.375rem}
+  .card{gap:0.875rem}
+  .card__desc{font-size:max(12.5px,0.8438rem)}
+  .card__buy{gap:0.625rem}
+  .card__acts{width:100%}
+  .card__add{flex:1;padding:0 0.625rem}
+  .card__peek{display:none}
+  .card__flag{left:0.625rem;bottom:0.625rem;font-size:max(10.5px,0.625rem);padding:0.25rem 0.5625rem}
+  .tile{min-height:18.75rem}
+  .qv__name{font-size:2.375rem}
+  .foot__top{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .foot__brand{grid-column:1/-1}
+  .foot__base{justify-content:center;text-align:center}
+}
+@media (max-width:420px){
+  .card__desc{display:none}
+  .card__price{font-size:1.375rem}
+  .card__add{font-size:max(10.5px,0.6562rem);letter-spacing:.14em}
+  .heart{width:2.75rem;height:2.75rem}
+  .fbar__toggle{padding:0 0.75rem}
+}
+@media (prefers-reduced-motion:reduce){*{transition-duration:.01ms!important}}
+</style>
+</head>
+<body>
+<header class="top" id="top">
+  <a class="brand" href="index.html" aria-label="Shafar Fragrances">
+    <img class="brand__crest" src="assets/crest.png" alt="" width="480" height="512">
+    <img class="brand__word" src="assets/wordmark.png" alt="" width="720" height="227">
+  </a>
+  <nav class="menu" id="menu" aria-label="Main">
+    <a href="index.html">Featured</a>
+    <a href="home.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="#shop" aria-current="page">Shop</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+  <div class="tools">
+    <button class="icon" type="button" id="open-wish" aria-label="Wishlist">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.3s-7.5-4.4-7.5-10.1A4.2 4.2 0 0 1 12 7.6a4.2 4.2 0 0 1 7.5 2.6c0 5.7-7.5 10.1-7.5 10.1z"/></svg>
+      <span class="badge" id="wish-count" hidden>0</span>
+    </button>
+    <button class="icon" type="button" id="open-cart" aria-label="Cart">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5.5 8.5h13l-1 11.5h-11z"/><path d="M9 8.5V7a3 3 0 0 1 6 0v1.5"/></svg>
+      <span class="badge" id="cart-count" hidden>0</span>
+    </button>
+    <button class="icon burger" type="button" id="burger" aria-label="Menu" aria-expanded="false" aria-controls="menu">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8h16M4 16h16"/></svg>
+    </button>
+  </div>
+</header>
+
+<main id="shop">
+  <section class="shead" aria-labelledby="shop-title">
+    <span class="shead__ghost" id="ghost" aria-hidden="true">Shop</span>
+    <div class="shead__in">
+      <div>
+        <p class="eyebrow" data-rise>Shop</p>
+        <h1 id="shop-title" data-rise>The <em>collection</em></h1>
+      </div>
+      <p class="shead__lede" data-rise>Parfum and Eau de Parfum, every bottle 50 ml. Cash on delivery across Pakistan.</p>
+    </div>
+  </section>
+
+  <div class="fbar" id="fbar">
+    <div class="fbar__in">
+      <div class="tabs" role="group" aria-label="Category">
+        <button class="tab" type="button" data-cat="all" aria-pressed="true">All<sup></sup></button>
+        <button class="tab" type="button" data-cat="men" aria-pressed="false">Men<sup></sup></button>
+        <button class="tab" type="button" data-cat="women" aria-pressed="false">Women<sup></sup></button>
+        <button class="tab" type="button" data-cat="unisex" aria-pressed="false">Unisex<sup></sup></button>
+      </div>
+      <button class="fbar__toggle" type="button" id="fbar-toggle" aria-expanded="false" aria-controls="fbar-more">Filter</button>
+      <span class="fbar__sep" aria-hidden="true"></span>
+      <div class="fbar__more" id="fbar-more">
+        <div class="chips" role="group" aria-label="Strength">
+          <button class="chip" type="button" data-kind="Parfum" aria-pressed="false">Parfum</button>
+          <button class="chip" type="button" data-kind="Eau de Parfum" aria-pressed="false">Eau de Parfum</button>
+        </div>
+        <div class="fbar__right">
+          <span class="fbar__count" id="count" aria-live="polite"></span>
+          <label class="sr" for="sort">Sort by</label>
+          <select class="sort" id="sort">
+            <option value="featured">Best sellers first</option>
+            <option value="low">Price: low to high</option>
+            <option value="high">Price: high to low</option>
+            <option value="name">Name: A to Z</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <section class="store" aria-label="Fragrances">
+    <div class="sgrid" id="grid"></div>
+  </section>
+
+  <section class="nudge" aria-labelledby="nudge-title">
+    <p class="eyebrow">Can't decide?</p>
+    <h2 id="nudge-title">Start with <em>the best sellers</em></h2>
+    <p>Four bottles, one screen each. Scroll through them and see which one feels like you.</p>
+    <a class="btn" href="index.html">See the Featured page</a>
+  </section>
+</main>
+
+<footer class="foot" id="footer">
+  <div class="foot__top">
+    <div class="foot__brand">
+      <img src="assets/logo-gold.png" alt="Shafar Fragrances" width="488" height="516" loading="lazy">
+      <p>Where every scent tells a tale. Affordable luxury perfumes in Parfum and Eau de Parfum strength.</p>
+      <span class="foot__pay">Cash on delivery across Pakistan</span>
+    </div>
+    <nav class="foot__col" aria-label="Shop">
+      <h3>Shop</h3>
+      <ul>
+        <li><a href="index.html">Featured</a></li>
+        <li><a href="home.html#best-sellers">Best sellers</a></li>
+        <li><button type="button" data-cat-link="men">Men</button></li>
+        <li><button type="button" data-cat-link="women">Women</button></li>
+        <li><button type="button" data-cat-link="unisex">Unisex</button></li>
+      </ul>
+    </nav>
+    <nav class="foot__col" aria-label="Shafar">
+      <h3>Shafar</h3>
+      <ul>
+        <li><a href="about.html">Our story</a></li>
+        <li><a href="home.html#reviews">Reviews</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+    <div class="foot__col">
+      <h3>Get in touch</h3>
+      <ul>
+        <li><a href="https://wa.me/923180250552" target="_blank" rel="noopener">WhatsApp</a></li>
+        <li><a href="https://www.instagram.com/shafar.fragrances/" target="_blank" rel="noopener">Instagram</a></li>
+      </ul>
+      <small>0318 0250552<br>shafarfragrances@gmail.com<br>www.shafarfragrances.com</small>
+    </div>
+  </div>
+  <div class="foot__word" id="foot-word" aria-hidden="true">Shafar</div>
+  <div class="foot__base">
+    <p>&copy; 2026 Shafar Fragrances</p>
+    <a class="foot__up" href="#shop">Back to top</a>
+  </div>
+</footer>
+
+<div class="scrim" id="scrim"></div>
+<aside class="drawer" id="drawer" role="dialog" aria-modal="true" aria-labelledby="drawer-title">
+  <div class="drawer__head">
+    <h2 id="drawer-title">Cart</h2>
+    <button class="icon" type="button" id="drawer-close" aria-label="Close">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+  </div>
+  <div class="drawer__list" id="drawer-list"></div>
+  <div class="drawer__foot" id="drawer-foot" hidden>
+    <p class="drawer__total"><span>Subtotal</span><b id="drawer-total"></b></p>
+    <a class="btn" href="checkout.html" style="display:flex;align-items:center;justify-content:center;text-decoration:none;--ink:#2B1810;margin-top:6px">Checkout</a>
+    <p class="drawer__note">Cash on delivery across Pakistan.</p>
+  </div>
+</aside>
+<div class="qvscrim" id="qv-scrim"></div>
+<aside class="qv" id="qv" role="dialog" aria-modal="true" aria-labelledby="qv-name">
+  <div class="qv__top">
+    <span class="qv__word" id="qv-word" aria-hidden="true"></span>
+    <img id="qv-img" src="assets/halila.webp" alt="">
+    <button class="icon qv__close" type="button" id="qv-close" aria-label="Close">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+  </div>
+  <form class="qv__body" id="qv-form">
+    <p class="qv__kind" id="qv-kind"></p>
+    <h2 class="qv__name" id="qv-name"></h2>
+    <p class="qv__desc" id="qv-desc"></p>
+    <p class="qv__label" id="qv-size-label">Size</p>
+    <div class="qv__sizes" role="radiogroup" aria-labelledby="qv-size-label">
+      <input type="radio" name="qv-size" id="qv-50" value="50" checked><label for="qv-50"><b>50</b>ml</label>
+    </div>
+    <p class="qv__price" aria-live="polite"><span class="qv__amt" id="qv-amt"></span><span class="qv__for" id="qv-for"></span></p>
+    <div class="qv__acts">
+      <button class="qv__add" type="submit" id="qv-add">Add to cart</button>
+      <button class="heart" type="button" id="qv-heart" data-wish="" aria-pressed="false" aria-label="Save to wishlist"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.3s-7.5-4.4-7.5-10.1A4.2 4.2 0 0 1 12 7.6a4.2 4.2 0 0 1 7.5 2.6c0 5.7-7.5 10.1-7.5 10.1z"/></svg></button>
+    </div>
+    <a class="more" id="qv-full" href="product.html">Full details</a>
+  </form>
+</aside>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="js/catalog.js"></script>
+<script src="/api/catalog"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/Flip.min.js"></script>
+<script>
+(function () {
+  'use strict';
+
+  /* ------------------------------------------------------------------
+     PRODUCTS. Every bottle here is a real Shafar fragrance.
+     cat: men | women | unisex. null would mean no category yet:
+     such a product shows under "All" only.
+     A size with null has no price yet: it shows "Price to be added"
+     and cannot go in the cart.
+     ------------------------------------------------------------------ */
+  var PRODUCTS = {
+    halila:     { name: 'Halila Lane',      kind: 'Parfum',        cat: 'unisex', best: true,  img: 'assets/halila.webp', tint: '#EFD3A8', deep: '#D9AE78', ink: '#3A2113', accent: '#7A3F10', desc: 'Deep, warm and unhurried. Made for evenings that run late.', prices: { 50: 2800 } },
+    belford:    { name: 'Belford',          kind: 'Eau de Parfum', cat: 'women',  best: true,  img: 'assets/belford.webp', tint: '#F5CFC0', deep: '#E5A391', ink: '#4A1210', accent: '#A3160F', desc: 'Bold from the first spray. Rich, confident and made for the night.', prices: { 50: 2700 } },
+    charleston: { name: 'Charleston',       kind: 'Parfum',        cat: 'women',  best: true,  img: 'assets/charleston.webp', tint: '#FADAE4', deep: '#F0AEC6', ink: '#57112F', accent: '#B0144F', desc: 'Bright, sweet and full of life. A playful scent that gets remembered.', prices: { 50: 2600 } },
+    shawano:    { name: 'Shawano',          kind: 'Parfum',        cat: 'men',    best: true,  img: 'assets/shawano.webp', tint: '#D6DFEC', deep: '#AEBED6', ink: '#18223A', accent: '#2C3E63', desc: 'Cool, clean and sure of itself. For days that have to go well.', prices: { 50: 2200 } },
+    argos:      { name: 'Argos',            kind: 'Eau de Parfum', cat: 'men',    best: true,  img: 'assets/argos.webp', tint: '#F0DAB6', deep: '#D9B480', ink: '#372412', accent: '#78400F', desc: 'An old name with a golden glow. Quietly grand.', prices: { 50: 2250 } },
+    southampton:{ name: 'Southampton',      kind: 'Parfum',        cat: 'men',    best: true,  img: 'assets/southampton.webp', tint: '#EDC8A9', deep: '#D59C73', ink: '#371E12', accent: '#782E0F', desc: 'Tailored and well travelled. Polished and always in place.', prices: { 50: 2700 } },
+    bradford:   { name: 'Bradford',         kind: 'Parfum',        cat: 'men',    best: true,  img: 'assets/bradford.webp', tint: '#EECFAE', deep: '#D7A578', ink: '#372112', accent: '#78350F', desc: 'Honest and dependable. A signature for the working week.', prices: { 50: 2600 } },
+    tobaccooudh:{ name: 'Tobacco Oudh',     kind: 'Parfum',        cat: 'unisex', best: true,  img: 'assets/tobaccooudh.webp', tint: '#EECAAA', deep: '#D69E74', ink: '#371F12', accent: '#78300F', desc: 'Tobacco and oudh, just as the name promises. Deep and made to linger.', prices: { 50: 2550 } },
+    jutland:    { name: 'Jutland',          kind: 'Eau de Parfum', cat: 'women',  best: true,  img: 'assets/jutland.webp', tint: '#F1C3B7', deep: '#DD8F80', ink: '#430E0A', accent: '#96130C', desc: 'Deep red and full of nerve. Made for the night.', prices: { 50: 2650 } },
+    elmira:     { name: 'Elmira',           kind: 'Parfum',        cat: 'women',  best: true,  img: 'assets/elmira.webp', tint: '#F6CDCB', deep: '#E69C9A', ink: '#4A0E12', accent: '#A8121C', desc: 'The red one. Vivid, confident and impossible to miss.', prices: { 50: 2450 } },
+    belleville: { name: 'Belle Ville',      kind: 'Parfum',        cat: 'men',    best: false, img: 'assets/belleville.webp', tint: '#EDC2A5', deep: '#D4946F', ink: '#371C12', accent: '#78290F', desc: 'A beautiful town after dark. Smooth, easy and quietly confident.', prices: { 50: 2450 } },
+    elko:       { name: 'Elko',             kind: 'Eau de Parfum', cat: 'men',    best: false, img: 'assets/elko.webp', tint: '#EFD0AF', deep: '#D7A779', ink: '#372112', accent: '#78360F', desc: 'Open road, clear sky. An easy pick for every day.', prices: { 50: 2600 } },
+    hudson:     { name: 'Hudson',           kind: 'Parfum',        cat: 'men',    best: false, img: 'assets/hudson.webp', tint: '#EDC1A5', deep: '#D4936F', ink: '#371C12', accent: '#78290F', desc: 'City nights and a sharp collar. Smooth and sure of itself.', prices: { 50: 2500 } },
+    inverlake:  { name: 'Inverlake Platos', kind: 'Eau de Parfum', cat: 'men',    best: false, img: 'assets/inverlake.webp', tint: '#EECCAC', deep: '#D6A175', ink: '#371F12', accent: '#78320F', desc: 'Still water and slow mornings. Calm, and close to the skin.', prices: { 50: 2600 } },
+    amesvelle:  { name: 'Amesvelle',        kind: 'Parfum',        cat: 'women',  best: false, img: 'assets/amesvelle.webp', tint: '#F4CCC2', deep: '#E4A195', ink: '#421610', accent: '#9C2211', desc: 'Graceful and a little regal. Made for evenings that matter.', prices: { 50: 2850 } },
+    liverpool:  { name: 'Liverpool',        kind: 'Eau de Parfum', cat: 'men',    best: false, img: 'assets/liverpool.webp', tint: '#EFD4B1', deep: '#D8AC7B', ink: '#372212', accent: '#783A0F', desc: 'Port-city spirit. Lively, sociable and easy to wear.', prices: { 50: 2700 } },
+    ofidow:     { name: 'Ofidow',           kind: 'Parfum',        cat: 'men',    best: false, img: 'assets/ofidow.webp', tint: '#EECDAD', deep: '#D6A377', ink: '#372012', accent: '#78330F', desc: 'Hard to place, easy to remember. A little mysterious.', prices: { 50: 2800 } },
+    torrance:   { name: 'Torrance',         kind: 'Eau de Parfum', cat: 'unisex', best: false, img: 'assets/torrance.webp', tint: '#ECC0A4', deep: '#D4916E', ink: '#371C12', accent: '#78270F', desc: 'Easy and laid-back. The one you reach for without thinking.', prices: { 50: 2600 } },
+    forthworth: { name: 'Forth Worth',      kind: 'Parfum',        cat: 'women',  best: false, img: 'assets/forthworth.webp', tint: '#F4CBC2', deep: '#E4A195', ink: '#421510', accent: '#9C2111', desc: 'Big-hearted and self-assured. A scent that walks in first.', prices: { 50: 2500 } },
+    exermont:   { name: 'Exermont',         kind: 'Parfum',        cat: 'men',    best: false, img: 'assets/exermont.webp', tint: '#EDC6A8', deep: '#D59A72', ink: '#371E12', accent: '#782D0F', desc: 'Bold and deliberate. Made for the nights that count.', prices: { 50: 2700 } },
+    cuba:       { name: 'Cuba',             kind: 'Parfum',        cat: 'unisex', best: false, img: 'assets/cuba.webp', tint: '#EDC4A7', deep: '#D49770', ink: '#371D12', accent: '#782B0F', desc: 'Slow evenings and loud laughter. Full of character.', prices: { 50: 2500 } },
+    moroni:     { name: 'Moroni',           kind: 'Parfum',        cat: 'men',    best: false, img: 'assets/moroni.webp', tint: '#F0DBB7', deep: '#D9B681', ink: '#372512', accent: '#78420F', desc: 'Island air and unhurried days. Easy to love.', prices: { 50: 2700 } },
+    whiteoudh:  { name: 'White Oudh',       kind: 'Eau de Parfum', cat: 'unisex', best: false, img: 'assets/whiteoudh.webp', tint: '#EDC5A7', deep: '#D59871', ink: '#371D12', accent: '#782C0F', desc: 'Oudh with a lighter hand, as the name promises. Refined and calm.', prices: { 50: 3200 } },
+    monastir:   { name: 'Monastir',         kind: 'Parfum',        cat: 'men',    best: false, img: 'assets/monastir.webp', tint: '#EFD6B3', deep: '#D8AF7D', ink: '#372312', accent: '#783C0F', desc: 'Named for a coast of sun and old stone. Made to travel well.', prices: { 50: null } },
+    elba:       { name: 'Elba',             kind: 'Eau de Parfum', cat: 'women',  best: false, img: 'assets/elba.webp', tint: '#F4CCC2', deep: '#E4A295', ink: '#421610', accent: '#9C2411', desc: 'An island name for sunny days. Light-hearted and easy to love.', prices: { 50: null } },
+    imperial:   { name: 'Imperial',         kind: 'Parfum',        cat: 'men',    best: false, img: 'assets/imperial.webp', tint: '#EFD3B0', deep: '#D7AA7B', ink: '#372212', accent: '#78390F', desc: 'Made to be noticed. Grand, and worn with confidence.', prices: { 50: null } },
+    auckland:   { name: 'Auckland',         kind: 'Eau de Parfum', cat: 'men',    best: false, img: 'assets/auckland.webp', tint: '#EDC6A8', deep: '#D59A72', ink: '#371E12', accent: '#782D0F', desc: 'Harbour light and a fresh start. Open and easy to wear.', prices: { 50: null } },
+    stromboli:  { name: 'Stromboli',        kind: 'Parfum',        cat: 'women',  best: false, img: 'assets/stromboli.webp', tint: '#F4CBC2', deep: '#E4A095', ink: '#421510', accent: '#9C2011', desc: 'Named for a volcano. Fiery, vivid and made to be noticed.', prices: { 50: null } },
+    hachita:    { name: 'Hachita',          kind: 'Parfum',        cat: 'men',    best: false, img: 'assets/hachita.webp', tint: '#EEC9AA', deep: '#D59D73', ink: '#371E12', accent: '#782F0F', desc: 'Desert roads and wide skies. Quiet and steady.', prices: { 50: null } }
+  };
+  var DEFAULT_SIZE = 50;
+  var ORDER = ['halila', 'belford', 'charleston', 'shawano', 'argos', 'southampton', 'bradford', 'tobaccooudh', 'jutland', 'elmira', 'belleville', 'elko', 'hudson', 'inverlake', 'amesvelle', 'liverpool', 'ofidow', 'torrance', 'forthworth', 'exermont', 'cuba', 'moroni', 'whiteoudh', 'monastir', 'elba', 'imperial', 'auckland', 'stromboli', 'hachita'];   // "Best sellers first"
+  if (window.SHAFAR_ORDER && window.SHAFAR_CATALOG) { PRODUCTS = window.SHAFAR_CATALOG; ORDER = window.SHAFAR_ORDER.filter(function (id) { return PRODUCTS[id]; }); }   // live list from the dashboard
+  // category -> page wash colour and the giant word in the opening band
+  var CATS = { all: { wash: '#F6EFE4', word: 'Shop' }, men: { wash: '#E4EBF4', word: 'Men' }, women: { wash: '#FAE5EC', word: 'Women' }, unisex: { wash: '#F5E6CB', word: 'Unisex' } };
+
+  var $ = function (s, el) { return (el || document).querySelector(s); };
+  var $$ = function (s, el) { return Array.prototype.slice.call((el || document).querySelectorAll(s)); };
+  var rupees = function (n) { return 'Rs ' + Number(n).toLocaleString('en-US'); };
+  var el = function (tag, cls, text) { var n = document.createElement(tag); if (cls) n.className = cls; if (text != null) n.textContent = text; return n; };
+  var root = document.documentElement;
+  var HEART = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.3s-7.5-4.4-7.5-10.1A4.2 4.2 0 0 1 12 7.6a4.2 4.2 0 0 1 7.5 2.6c0 5.7-7.5 10.1-7.5 10.1z"/></svg>';
+
+  /* ---------- Build the product cards (before the cart buttons are wired) ---------- */
+  var grid = $('#grid'), cards = {};
+  ORDER.forEach(function (id) {
+    var p = PRODUCTS[id], card = el('article', 'card');
+    card.dataset.id = id;
+    card.style.cssText = '--c:' + p.tint + ';--e:' + p.deep + ';--ink:' + p.ink + ';--accent:' + p.accent;
+    var frame = el('button', 'card__frame'), slot = el('div', 'slot'), im = el('img');
+    frame.type = 'button'; frame.dataset.open = id; frame.setAttribute('aria-label', 'Quick view: ' + p.name);
+    im.src = p.img; im.alt = 'Shafar ' + p.name + ' bottle'; im.loading = 'lazy';
+    slot.appendChild(im); frame.appendChild(slot);
+    if (p.best) frame.appendChild(el('span', 'card__flag', 'Best seller'));
+    frame.appendChild(el('span', 'card__peek', 'Quick view'));
+    var body = el('div', 'card__body');
+    body.appendChild(el('p', 'card__kind', p.kind));
+    var title = el('h3', 'card__name'), link = el('a', '', p.name);
+    link.href = 'product.html#' + id; link.style.textDecoration = 'none';
+    title.appendChild(link); body.appendChild(title);
+    body.appendChild(el('p', 'card__desc', p.desc));
+    var unit = p.prices[DEFAULT_SIZE], buy = el('div', 'card__buy');
+    var price = el('p', 'card__price' + (unit == null ? ' card__price--open' : ''), unit == null ? (p.soldout ? 'Sold out' : 'Price to be added') : rupees(unit) + ' ');
+    if (unit != null) price.appendChild(el('span', '', DEFAULT_SIZE + ' ml'));
+    var acts = el('div', 'card__acts'), add = el('button', 'card__add', 'Add to cart'), heart = el('button', 'heart');
+    add.type = 'button'; add.dataset.add = id; add.disabled = unit == null;
+    heart.type = 'button'; heart.dataset.wish = id; heart.setAttribute('aria-pressed', 'false'); heart.setAttribute('aria-label', 'Save ' + p.name + ' to wishlist'); heart.innerHTML = HEART;
+    acts.appendChild(add); acts.appendChild(heart); buy.appendChild(price); buy.appendChild(acts); body.appendChild(buy);
+    card.appendChild(frame); card.appendChild(body); grid.appendChild(card);
+    cards[id] = card;
+  });
+  // two editorial tiles break the grid when nothing is filtered: one after the first row, one at the end
+  var tile = el('a', 'tile');
+  tile.href = 'about.html';
+  tile.innerHTML = '<img src="assets/shop-tile.webp" alt="" loading="lazy"><div class="tile__copy"><p class="eyebrow">The film</p><h3>See Halila Lane <em>come to life</em></h3><span class="more">Watch it on the About page</span></div>';
+  var tile2 = el('a', 'tile tile--ask');
+  tile2.href = 'contact.html';
+  tile2.innerHTML = '<img src="assets/crest-gold.webp" alt="" loading="lazy"><div class="tile__copy"><p class="eyebrow">Need a hand?</p><h3>Not sure which one <em>is yours?</em></h3><span class="more">Ask us on WhatsApp</span></div>';
+  var empty = el('div', 'empty is-out');
+  empty.appendChild(el('p', '', 'Nothing matches those filters yet.'));
+  var clear = el('button', 'btn', 'Clear filters'); clear.type = 'button'; empty.appendChild(clear);
+  grid.appendChild(tile); grid.appendChild(tile2); grid.appendChild(empty);
+
+  /* ---------- Toast ---------- */
+  var toastEl = $('#toast'), toastTimer;
+  function toast(msg) {
+    toastEl.textContent = msg;
+    toastEl.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(function () { toastEl.classList.remove('show'); }, 2400);
+  }
+  $$('[data-soon]').forEach(function (b) {
+    b.addEventListener('click', function () { toast('The ' + b.dataset.soon + ' page is not built yet.'); closeMenu(); });
+  });
+
+  /* ---------- Mobile menu ---------- */
+  var menu = $('#menu'), burger = $('#burger');
+  function closeMenu() { menu.classList.remove('open'); burger.setAttribute('aria-expanded', 'false'); }
+  burger.addEventListener('click', function () {
+    var open = menu.classList.toggle('open');
+    burger.setAttribute('aria-expanded', String(open));
+  });
+  $$('a', menu).forEach(function (a) { a.addEventListener('click', closeMenu); });
+
+  /* ---------- Cart and wishlist (saved in this browser, shared by every page) ---------- */
+  var CAT = window.SHAFAR_CATALOG || PRODUCTS;      // every product, so the cart can show a bottle added on another page
+  var cart = [], wish = [];
+  try {
+    cart = JSON.parse(localStorage.getItem('shafar.cart') || '[]').filter(function (l) { return CAT[l.id] && CAT[l.id].prices[l.size] != null && l.qty > 0; });
+    wish = JSON.parse(localStorage.getItem('shafar.wish') || '[]').filter(function (id) { return CAT[id]; });
+  } catch (e) { cart = []; wish = []; }
+  function save() { try { localStorage.setItem('shafar.cart', JSON.stringify(cart)); localStorage.setItem('shafar.wish', JSON.stringify(wish)); } catch (e) {} }
+  var drawer = $('#drawer'), scrim = $('#scrim'), list = $('#drawer-list'), foot = $('#drawer-foot');
+  var drawerMode = 'cart', lastFocus = null;
+
+  function badge(node, n) { node.textContent = n; node.hidden = n === 0; }
+  function syncBadges() {
+    badge($('#cart-count'), cart.reduce(function (s, l) { return s + l.qty; }, 0));
+    badge($('#wish-count'), wish.length);
+    save();
+  }
+  function addToCart(id, size) {
+    var line = cart.filter(function (l) { return l.id === id && l.size === size; })[0];
+    if (line) line.qty += 1; else cart.push({ id: id, size: size, qty: 1 });
+    syncBadges();
+    if (drawer.classList.contains('open')) renderDrawer();
+  }
+  function pic(id) {
+    var box = el('div', 'line__pic');
+    box.style.background = CAT[id].tint;
+    var im = el('img'); im.src = CAT[id].img; im.alt = '';
+    box.appendChild(im);
+    return box;
+  }
+  function renderDrawer() {
+    $('#drawer-title').textContent = drawerMode === 'cart' ? 'Cart' : 'Wishlist';
+    list.textContent = '';
+    var total = 0;
+    if (drawerMode === 'cart') {
+      if (!cart.length) list.appendChild(el('p', 'drawer__empty', 'Your cart is empty. Pick a bottle and add it.'));
+      cart.forEach(function (l) {
+        var p = CAT[l.id], unit = p.prices[l.size];
+        total += unit * l.qty;
+        var row = el('div', 'line'), mid = el('div');
+        mid.appendChild(el('p', 'line__name', p.name));
+        mid.appendChild(el('p', 'line__meta', p.kind + ' · ' + l.size + ' ml'));
+        var q = el('div', 'qty');
+        var minus = el('button', '', '−'); minus.type = 'button'; minus.setAttribute('aria-label', 'One less ' + p.name);
+        var plus = el('button', '', '+'); plus.type = 'button'; plus.setAttribute('aria-label', 'One more ' + p.name);
+        minus.addEventListener('click', function () { l.qty -= 1; if (l.qty < 1) cart.splice(cart.indexOf(l), 1); syncBadges(); renderDrawer(); });
+        plus.addEventListener('click', function () { l.qty += 1; syncBadges(); renderDrawer(); });
+        q.appendChild(minus); q.appendChild(el('span', '', l.qty)); q.appendChild(plus);
+        mid.appendChild(q);
+        var side = el('div', 'line__side');
+        side.appendChild(el('b', '', rupees(unit * l.qty)));
+        var rm = el('button', 'link', 'Remove'); rm.type = 'button';
+        rm.addEventListener('click', function () { cart.splice(cart.indexOf(l), 1); syncBadges(); renderDrawer(); });
+        side.appendChild(rm);
+        row.appendChild(pic(l.id)); row.appendChild(mid); row.appendChild(side);
+        list.appendChild(row);
+      });
+      foot.hidden = !cart.length;
+      $('#drawer-total').textContent = rupees(total);
+    } else {
+      foot.hidden = true;
+      if (!wish.length) list.appendChild(el('p', 'drawer__empty', 'Nothing saved yet. Tap the heart on a bottle to keep it here.'));
+      wish.forEach(function (id) {
+        var p = CAT[id], row = el('div', 'line'), mid = el('div');
+        mid.appendChild(el('p', 'line__name', p.name));
+        var unit = p.prices[DEFAULT_SIZE];
+        mid.appendChild(el('p', 'line__meta', p.kind + ' · ' + (unit == null ? (p.soldout ? 'Sold out' : 'Price to be added') : rupees(unit) + ' for ' + DEFAULT_SIZE + ' ml')));
+        var side = el('div', 'line__side');
+        var add = el('button', 'link', 'Add to cart'); add.type = 'button';
+        add.addEventListener('click', function () { addToCart(id, DEFAULT_SIZE); toast(p.name + ', ' + DEFAULT_SIZE + ' ml added to cart.'); });
+        var rm = el('button', 'link', 'Remove'); rm.type = 'button';
+        rm.addEventListener('click', function () { setWish(id, false); renderDrawer(); });
+        if (unit != null) side.appendChild(add);
+        side.appendChild(rm);
+        row.appendChild(pic(id)); row.appendChild(mid); row.appendChild(side);
+        list.appendChild(row);
+      });
+    }
+  }
+  function openDrawer(mode, from) {
+    drawerMode = mode; lastFocus = from || null;
+    renderDrawer();
+    drawer.classList.add('open'); scrim.classList.add('open');
+    closeMenu();
+    $('#drawer-close').focus();
+  }
+  function closeDrawer() {
+    drawer.classList.remove('open'); scrim.classList.remove('open');
+    if (lastFocus) lastFocus.focus();
+  }
+  $('#open-cart').addEventListener('click', function () { openDrawer('cart', this); });
+  $('#open-wish').addEventListener('click', function () { openDrawer('wish', this); });
+  $('#drawer-close').addEventListener('click', closeDrawer);
+  scrim.addEventListener('click', closeDrawer);
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') { closeDrawer(); closeMenu(); } });
+
+  function setWish(id, on) {
+    var i = wish.indexOf(id);
+    if (on && i < 0) wish.push(id);
+    if (!on && i >= 0) wish.splice(i, 1);
+    $$('[data-wish="' + id + '"]').forEach(function (h) {
+      h.setAttribute('aria-pressed', String(on));
+      h.setAttribute('aria-label', on ? 'Remove ' + CAT[id].name + ' from wishlist' : 'Save ' + CAT[id].name + ' to wishlist');
+    });
+    syncBadges();
+  }
+  $$('[data-add]').forEach(function (b) {
+    b.addEventListener('click', function () {
+      var id = b.dataset.add;
+      if (CAT[id].prices[DEFAULT_SIZE] == null) { toast('The price for ' + CAT[id].name + ' is still to be added.'); return; }
+      addToCart(id, DEFAULT_SIZE);
+      toast(CAT[id].name + ', ' + DEFAULT_SIZE + ' ml added to cart.');
+    });
+  });
+  $$('[data-wish]').forEach(function (b) {
+    b.addEventListener('click', function () {
+      var id = b.dataset.wish, on = b.getAttribute('aria-pressed') !== 'true';
+      setWish(id, on);
+      toast(on ? CAT[id].name + ' saved to your wishlist.' : CAT[id].name + ' removed from your wishlist.');
+    });
+  });
+
+  // restore what was saved on other pages
+  wish.forEach(function (id) { $$('[data-wish="' + id + '"]').forEach(function (h) { h.setAttribute('aria-pressed', 'true'); }); });
+  syncBadges();
+
+  /* ---------- Header turns solid once you leave the top ---------- */
+  var topBar = $('#top');
+  function solid() { topBar.classList.toggle('is-solid', window.scrollY > 24); }
+  window.addEventListener('scroll', solid, { passive: true });
+  solid();
+
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var hasGsap = !!window.gsap && !reduce, hasFlip = hasGsap && !!window.Flip;
+  if (hasFlip) gsap.registerPlugin(Flip);
+  $$('a[href="#shop"]').forEach(function (a) {
+    a.addEventListener('click', function (e) { e.preventDefault(); window.scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' }); });
+  });
+
+  /* ==================================================================
+     FILTERS
+     One state object; show() works out which cards are in, in what order,
+     and the cards glide from their old places to their new ones.
+     ================================================================== */
+  var state = { cat: 'all', kind: null, sort: 'featured' };
+  var tabs = $$('.tab'), chips = $$('.chip'), sortSel = $('#sort'), countEl = $('#count'), ghost = $('#ghost');
+  var more = $('#fbar-more'), toggle = $('#fbar-toggle');
+
+  function matches(id) {
+    var p = PRODUCTS[id];
+    return (state.cat === 'all' || p.cat === state.cat) && (!state.kind || p.kind === state.kind);
+  }
+  function ordered() {
+    var list = ORDER.filter(matches), price = function (id) { return PRODUCTS[id].prices[DEFAULT_SIZE]; };
+    // bottles without a price yet always go to the end
+    var byPrice = function (dir) { return function (a, b) { var x = price(a), y = price(b); return (x == null || y == null) ? (x == null) - (y == null) : dir * (x - y); }; };
+    if (state.sort === 'low') list.sort(byPrice(1));
+    if (state.sort === 'high') list.sort(byPrice(-1));
+    if (state.sort === 'name') list.sort(function (a, b) { return PRODUCTS[a].name.localeCompare(PRODUCTS[b].name); });
+    return list;
+  }
+  function show(animate) {
+    var list = ordered(), plain = state.cat === 'all' && !state.kind && state.sort === 'featured';
+    var movers = ORDER.map(function (id) { return cards[id]; }).concat([tile, tile2]);
+    var before = (animate && hasFlip) ? Flip.getState(movers) : null;
+
+    ORDER.forEach(function (id) { cards[id].classList.toggle('is-out', list.indexOf(id) < 0); });
+    list.forEach(function (id) { grid.appendChild(cards[id]); });
+    tile.classList.toggle('is-out', !plain);
+    if (plain) grid.insertBefore(tile, cards[list[4]] || null);            // after the first row of four
+    tile2.classList.toggle('is-out', !plain);
+    grid.appendChild(tile2);
+    askFit(list.length);
+    empty.classList.toggle('is-out', list.length > 0);
+    grid.appendChild(empty);
+
+    countEl.textContent = list.length + (list.length === 1 ? ' fragrance' : ' fragrances');
+    tabs.forEach(function (t) { t.setAttribute('aria-pressed', String(t.dataset.cat === state.cat)); });
+    chips.forEach(function (c) { c.setAttribute('aria-pressed', String(c.dataset.kind === state.kind)); });
+    sortSel.value = state.sort;
+
+    if (before) {
+      Flip.from(before, { duration: 0.7, ease: 'power2.inOut', absolute: true, stagger: 0.015,
+        onEnter: function (els) { return gsap.fromTo(els, { autoAlpha: 0, scale: 0.92 }, { autoAlpha: 1, scale: 1, duration: 0.5, ease: 'power2.out' }); },
+        onLeave: function (els) { return gsap.to(els, { autoAlpha: 0, scale: 0.92, duration: 0.3, ease: 'power1.in' }); } });
+    }
+  }
+  // the closing tile stretches to fill whatever is left of the last row, so the grid always ends square
+  function askFit(n) {
+    if (n == null) n = ORDER.length;
+    var cols = getComputedStyle(grid).gridTemplateColumns.split(' ').filter(Boolean).length || 1, left = (n + 2) % cols;
+    tile2.style.gridColumn = 'span ' + (left ? cols - left : cols);
+  }
+  window.addEventListener('resize', function () { askFit(); });
+  function setCat(cat, animate) {
+    if (!CATS[cat]) cat = 'all';
+    var changed = cat !== state.cat;
+    state.cat = cat;
+    root.style.setProperty('--wash', CATS[cat].wash);
+    if (changed && hasGsap && animate) {
+      gsap.to(ghost, { yPercent: -30, autoAlpha: 0, duration: 0.25, ease: 'power1.in', overwrite: true, onComplete: function () {
+        ghost.textContent = CATS[cat].word;
+        gsap.fromTo(ghost, { yPercent: 30, autoAlpha: 0 }, { yPercent: 0, autoAlpha: 1, duration: 0.6, ease: 'power3.out', overwrite: true });
+      } });
+    } else { ghost.textContent = CATS[cat].word; }
+    show(animate);
+  }
+  // counts beside each tab
+  tabs.forEach(function (t) {
+    var n = ORDER.filter(function (id) { return t.dataset.cat === 'all' || PRODUCTS[id].cat === t.dataset.cat; }).length;
+    $('sup', t).textContent = n;
+    t.addEventListener('click', function () { setCat(t.dataset.cat, true); });
+  });
+  chips.forEach(function (c) {
+    c.addEventListener('click', function () { state.kind = state.kind === c.dataset.kind ? null : c.dataset.kind; show(true); });
+  });
+  sortSel.addEventListener('change', function () { state.sort = sortSel.value; show(true); });
+  clear.addEventListener('click', function () { state.kind = null; state.sort = 'featured'; setCat('all', true); });
+  toggle.addEventListener('click', function () {
+    var open = more.classList.toggle('open'); toggle.setAttribute('aria-expanded', String(open));
+  });
+  // footer category links, and links from other pages that end in #men, #women or #unisex
+  $$('[data-cat-link]').forEach(function (b) {
+    b.addEventListener('click', function () { setCat(b.dataset.catLink, true); window.scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' }); });
+  });
+  setCat((location.hash || '').replace('#', '').toLowerCase(), false);
+
+  /* ---------- Quick view ---------- */
+  var qv = $('#qv'), qvScrim = $('#qv-scrim'), qvForm = $('#qv-form'), qvId = null, qvFrom = null;
+  function qvPrice() {
+    var p = PRODUCTS[qvId], s = Number(qvForm.elements['qv-size'].value), price = p.prices[s], amt = $('#qv-amt');
+    amt.textContent = price == null ? (p.soldout ? 'Sold out' : 'Price to be added') : rupees(price);
+    amt.classList.toggle('is-open', price == null);
+    $('#qv-for').textContent = s + ' ml';
+    $('#qv-add').disabled = price == null;
+  }
+  function qvOpen(id, from) {
+    var p = PRODUCTS[id], word = $('#qv-word'), first = p.name.split(' ')[0];
+    qvId = id; qvFrom = from || null;
+    qv.style.cssText = '--c:' + p.tint + ';--e:' + p.deep + ';--ink:' + p.ink + ';--accent:' + p.accent;
+    $('#qv-img').src = p.img; $('#qv-img').alt = 'Shafar ' + p.name + ' bottle';
+    word.textContent = first; word.style.fontSize = '100px';
+    word.style.fontSize = Math.floor(Math.min(100 * (qv.clientWidth * 0.9) / word.scrollWidth, $('.qv__top', qv).clientHeight * 0.5)) + 'px';
+    $('#qv-kind').textContent = p.kind;
+    $('#qv-name').textContent = p.name;
+    $('#qv-desc').textContent = p.desc;
+    $('#qv-50').checked = true;
+    $('#qv-full').href = 'product.html#' + id;
+    var h = $('#qv-heart'), on = wish.indexOf(id) >= 0;
+    h.dataset.wish = id; h.setAttribute('aria-pressed', String(on)); h.setAttribute('aria-label', (on ? 'Remove ' : 'Save ') + p.name + (on ? ' from wishlist' : ' to wishlist'));
+    qvPrice();
+    qv.classList.add('open'); qvScrim.classList.add('open');
+    $('#qv-close').focus();
+    if (hasGsap) gsap.fromTo('#qv-img', { y: 40, rotation: 6, autoAlpha: 0 }, { y: 0, rotation: 0, autoAlpha: 1, duration: 0.8, ease: 'power3.out', delay: 0.12 });
+  }
+  function qvClose() {
+    if (!qv.classList.contains('open')) return;
+    qv.classList.remove('open'); qvScrim.classList.remove('open');
+    if (qvFrom) qvFrom.focus();
+  }
+  grid.addEventListener('click', function (e) {
+    var b = e.target.closest('[data-open]');
+    if (b) qvOpen(b.dataset.open, b);
+  });
+  qvForm.addEventListener('change', qvPrice);
+  qvForm.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var s = Number(qvForm.elements['qv-size'].value), p = PRODUCTS[qvId];
+    if (p.prices[s] == null) return;
+    addToCart(qvId, s);
+    toast(p.name + ', ' + s + ' ml added to cart.');
+  });
+  $('#qv-close').addEventListener('click', qvClose);
+  qvScrim.addEventListener('click', qvClose);
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') qvClose(); });
+  $('#open-cart').addEventListener('click', qvClose);
+  $('#open-wish').addEventListener('click', qvClose);
+
+  /* ---------- Entrances ---------- */
+  if (hasGsap) {
+    gsap.from('.shead [data-rise]', { y: 30, autoAlpha: 0, duration: 1, ease: 'power3.out', stagger: 0.09, delay: 0.1 });
+    gsap.from(ghost, { xPercent: 8, autoAlpha: 0, duration: 1.4, ease: 'power3.out' });
+    gsap.from($$('.card:not(.is-out), .tile:not(.is-out)', grid), { y: 46, autoAlpha: 0, duration: 0.9, ease: 'power3.out', stagger: 0.06, delay: 0.25, clearProps: 'transform,opacity,visibility' });
+  }
+})();
+</script>
+<script>
+/* Visitor count for the dashboard: a random id kept in this browser, no personal data. */
+(function () {
+  try {
+    var k = 'shafar.vid', v = localStorage.getItem(k);
+    if (!v) { v = Math.random().toString(36).slice(2) + Date.now().toString(36); localStorage.setItem(k, v); }
+    var data = JSON.stringify({ vid: v, path: location.pathname, ref: document.referrer });
+    if (navigator.sendBeacon) navigator.sendBeacon('/api/track', data);
+    else fetch('/api/track', { method: 'POST', body: data, keepalive: true });
+  } catch (e) {}
+})();
+</script>
+</body>
+</html>

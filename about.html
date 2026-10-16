@@ -1,0 +1,880 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>About | Shafar Fragrances</title>
+<meta name="description" content="The tale behind every scent: how Shafar began and how each bottle is made.">
+<meta name="robots" content="noindex">   <!-- preview build with sample content: remove this line at launch -->
+<meta name="theme-color" content="#F6EFE4">
+<link rel="icon" type="image/png" href="assets/favicon.png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600&family=Noto+Serif+Display:ital,wdth,wght@0,62.5..100,400..900;1,62.5..100,400..900&display=swap">
+<style>
+/* base rules every page relies on */
+:root{color-scheme:light}
+html{-webkit-text-size-adjust:100%}
+body{margin:0}
+img{max-width:100%}
+[hidden]{display:none!important}
+</style>
+<style>
+/* Layout: one pinned full-screen film. Scrolling plays it; four short lines of copy come and go with the shots. */
+:root{
+  --cream:#F6EFE4;      /* page ground */
+  --linen:#FBF7F0;      /* raised surfaces: drawer, menu */
+  --sand:#E8DAC3;       /* hairlines and quiet fills */
+  --dune:#EBDDC6;       /* spotlight band */
+  --espresso:#2B1810;   /* brand brown: header, primary text */
+  --cocoa:#6B4A36;      /* secondary text */
+  --bronze:#8A5B1E;     /* small accents on light grounds */
+  --gold:#C9A24A;       /* logo gold, on brown only */
+  --amber-1:#F1D9B2;    /* Halila Lane arch, top */
+  --amber-2:#DDB684;    /* Halila Lane arch, base */
+  --word:#FFFBF4;
+  --display:"Noto Serif Display","Bodoni 72",Didot,"Playfair Display",Georgia,serif;
+  --ui:"Jost","Century Gothic","Avenir Next",Avenir,"Segoe UI",system-ui,sans-serif;
+  --pad:clamp(1.125rem,5vw,4.75rem);
+  --head:4.875rem;
+  color-scheme:light;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{font-size:clamp(12px,0.9467vw,18px)}   /*root*/
+@media (max-width:1080px){html{font-size:16px}}   /*root*/
+body{margin:0;background:var(--cream);color:var(--espresso);font-family:var(--ui);font-size:max(12.5px,1rem);line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+h1,h2,h3,p,ol,ul,dl,dd{margin:0}
+ol,ul{padding:0;list-style:none}
+button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:pointer}
+a{color:inherit}
+:focus-visible{outline:0.125rem solid currentColor;outline-offset:0.1875rem;border-radius:0.125rem}
+
+/* ---------- Header ---------- */
+.top{position:fixed;inset:0 0 auto 0;z-index:30;display:flex;align-items:center;justify-content:space-between;gap:1.25rem;
+  height:calc(var(--head) + env(safe-area-inset-top,0px));padding:env(safe-area-inset-top,0px) var(--pad) 0;
+  color:var(--espresso);transition:background-color .3s,box-shadow .3s}
+.top.is-solid{background:rgba(246,239,228,.9);-webkit-backdrop-filter:blur(0.75rem);backdrop-filter:blur(0.75rem);box-shadow:0 1px 0 rgba(43,24,16,.1)}
+.brand{display:flex;align-items:center;gap:0.75rem;text-decoration:none;flex:none}
+.brand img{display:block;width:auto;max-width:none}
+.brand__crest{height:3rem}
+.brand__word{height:1.9375rem}
+.menu{display:flex;align-items:center;gap:clamp(1.125rem,3vw,2.5rem)}
+.menu a,.menu button{font-size:max(10.5px,0.75rem);font-weight:500;letter-spacing:.2em;text-transform:uppercase;text-decoration:none;padding:0.625rem 0.125rem;position:relative}
+.menu a::after,.menu button::after{content:"";position:absolute;left:0.125rem;right:0.125rem;bottom:0.25rem;height:1px;background:currentColor;transform:scaleX(0);transform-origin:left;transition:transform .3s}
+.menu a:hover::after,.menu button:hover::after,.menu [aria-current]::after{transform:scaleX(1)}
+.tools{display:flex;align-items:center;gap:0.375rem;flex:none}
+.icon{position:relative;width:2.75rem;height:2.75rem;display:grid;place-items:center;border-radius:50%;transition:background-color .2s}
+.icon:hover{background:rgba(43,24,16,.08)}
+.icon svg{width:1.3125rem;height:1.3125rem;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.badge{position:absolute;top:0.1875rem;right:1px;min-width:1.125rem;height:1.125rem;padding:0 0.3125rem;border-radius:0.5625rem;background:var(--espresso);color:var(--cream);
+  font-size:max(10.5px,0.6562rem);font-weight:600;line-height:1.125rem;text-align:center;font-variant-numeric:tabular-nums}
+.burger{display:none}
+
+/* ---------- Shared pieces ---------- */
+main{position:relative}
+.eyebrow{font-size:max(10.5px,0.7188rem);font-weight:600;letter-spacing:.26em;text-transform:uppercase;color:var(--bronze)}
+.btn{display:inline-flex;align-items:center;justify-content:center;height:3.375rem;padding:0 1.875rem;border-radius:1.6875rem;background:var(--espresso);color:var(--word);
+  font-size:max(10.5px,0.75rem);font-weight:600;letter-spacing:.2em;text-transform:uppercase;text-decoration:none;transition:transform .2s}
+.btn:hover{transform:translateY(-0.125rem)}
+.more{display:inline-flex;align-items:center;gap:0.75rem;font-size:max(10.5px,0.75rem);font-weight:600;letter-spacing:.2em;text-transform:uppercase;text-decoration:none;padding:0.625rem 0}
+.more::after{content:"";width:2.125rem;height:1px;background:currentColor;transition:width .3s}
+.more:hover::after{width:3.25rem}
+.heart{flex:none;width:2.875rem;height:2.875rem;border-radius:50%;display:grid;place-items:center;border:1px solid rgba(43,24,16,.3);transition:border-color .2s}
+.heart:hover{border-color:currentColor}
+.heart svg{width:1.1875rem;height:1.1875rem;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linejoin:round;transition:fill .2s}
+.heart[aria-pressed="true"] svg{fill:currentColor}
+.slot{aspect-ratio:482/1100;position:relative}
+.slot img{display:block;height:100%;width:auto;max-width:none;position:relative;z-index:1}
+.slot::after,.traveller__shadow{content:"";position:absolute;left:-8%;right:-8%;bottom:-4.5%;height:9%;border-radius:50%;
+  background:radial-gradient(closest-side,#3A2113,transparent);opacity:.32;filter:blur(0.4375rem)}
+/* With the travelling bottle running, its three resting places stay empty */
+.travel .slot--t img,.travel .slot--t::after{visibility:hidden}
+
+/* ---------- Header over the dark film ---------- */
+.top.on-dark{color:#F6EAD6}
+.top.on-dark .brand img{filter:brightness(0) invert(.93) sepia(.25)}
+.top.on-dark .icon:hover{background:rgba(246,234,214,.14)}
+.top.on-dark .badge{background:#F6EAD6;color:var(--espresso)}
+
+/* ---------- Scroll film hero ---------- */
+main{background:#2C190F}
+.vhero{background:#1E110A;color:#F6EAD6}
+.vhero__stage{position:relative;height:100vh;height:100svh;min-height:27.5rem;overflow:hidden}
+.vhero video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 50%;display:block;background:#1E110A}
+/* On very wide, short windows the whole frame is shown and its sides melt into the dark, so the bottle is never cropped */
+@media (min-aspect-ratio:16/9){
+  .vhero video{inset:0 auto 0 50%;width:auto;height:100%;aspect-ratio:1600/894;transform:translateX(-50%);object-fit:fill;
+    -webkit-mask-image:linear-gradient(90deg,transparent 0,#000 16%,#000 84%,transparent 100%);mask-image:linear-gradient(90deg,transparent 0,#000 16%,#000 84%,transparent 100%)}
+}
+.vhero__shade{position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(90deg,rgba(24,13,7,.78) 0%,rgba(24,13,7,.3) 34%,rgba(24,13,7,0) 52%,rgba(24,13,7,0) 62%,rgba(24,13,7,.5) 100%),
+             linear-gradient(180deg,rgba(24,13,7,.62) 0%,rgba(24,13,7,0) 22%,rgba(24,13,7,0) 72%,#2C190F 100%)}
+.beat{position:absolute;z-index:2;display:grid;gap:1.125rem;max-width:min(88%,32.5rem)}
+.beat--lead{left:var(--pad);top:50%;transform:translateY(-50%);justify-items:start}
+.beat--right{right:var(--pad);top:50%;transform:translateY(-50%);justify-items:end;text-align:right;max-width:min(80%,27.5rem)}
+.beat--left{left:var(--pad);top:50%;transform:translateY(-50%);max-width:min(80%,27.5rem)}
+.beat--end{left:var(--pad);top:50%;transform:translateY(-50%);justify-items:start;max-width:min(80%,27.5rem)}
+.beat .eyebrow{color:var(--gold)}
+.vhero h1{font-family:var(--display);font-weight:500;font-size:clamp(2.75rem,6vw,6.25rem);line-height:.98;letter-spacing:-.015em;text-wrap:balance}
+.vhero h1 em,.beat__line em{font-weight:400;color:#E3C57A}
+.beat__line{font-family:var(--display);font-weight:500;font-size:clamp(2rem,3.8vw,3.875rem);line-height:1.05;letter-spacing:-.01em;text-wrap:balance}
+.beat__sub{max-width:36ch;color:#E2D3BA;font-size:1.0625rem}
+.vhero__bar{position:absolute;left:var(--pad);right:var(--pad);bottom:1.875rem;z-index:2;height:1px;background:rgba(246,234,214,.22)}
+.vhero__bar span{position:absolute;inset:0;background:var(--gold);transform-origin:left;transform:scaleX(0)}
+.vhero__hint{position:absolute;left:var(--pad);bottom:2.875rem;z-index:2;display:flex;align-items:center;gap:0.75rem;font-size:max(10.5px,0.7188rem);font-weight:500;letter-spacing:.24em;text-transform:uppercase;color:#E2D3BA}
+.vhero__hint::after{content:"";width:1px;height:1.75rem;background:currentColor;transform-origin:top;animation:drip 1.8s ease-in-out infinite}
+@keyframes drip{0%{transform:scaleY(0)}55%{transform:scaleY(1)}100%{transform:scaleY(1);opacity:0}}
+/* Scroll film running: the lines after the first wait for their shot */
+.film .beat:not(.beat--lead){visibility:hidden}
+/* Not running (no script or reduced motion): show only the opening line over the still */
+.vhero:not(.is-live) .beat:not(.beat--lead),.vhero:not(.is-live) .vhero__bar,.vhero:not(.is-live) .vhero__hint{display:none}
+
+/* ---------- Draft markers: copy that still needs the owner's facts ---------- */
+.draft{display:inline-flex;align-items:center;padding:0.25rem 0.75rem;border:1px dashed var(--bronze);border-radius:1.25rem;font-size:max(10.5px,0.6562rem);font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--bronze);white-space:nowrap}
+.draft--light{border-color:rgba(227,197,122,.7);color:#E3C57A}
+.sec-h{font-family:var(--display);font-weight:500;font-size:clamp(2.375rem,4.6vw,4.375rem);line-height:1.02;letter-spacing:-.01em;text-wrap:balance}
+.sec-h em{font-weight:400}
+
+/* ---------- Our story ---------- */
+.story2{background:var(--cream);color:var(--espresso);padding:clamp(5.25rem,11vw,9.375rem) var(--pad)}
+.story2__in{max-width:77.5rem;margin-inline:auto;display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1fr);gap:clamp(2.25rem,7vw,7.5rem);align-items:start}
+.story2__pic{position:sticky;top:calc(var(--head) + 1.75rem);aspect-ratio:4/5;max-height:calc(100vh - var(--head) - 3.5rem);border-radius:999px 999px 0.625rem 0.625rem;overflow:hidden;background:#3A2113;justify-self:center;width:100%}
+.story2__pic img{display:block;width:100%;height:112%;object-fit:cover;max-width:none}
+.story2__copy{display:grid;gap:1.5rem;justify-items:start}
+.story2__text{display:grid;gap:1.375rem;margin-top:0.375rem}
+.story2__text p{font-family:var(--display);font-weight:400;font-size:clamp(1.375rem,2.15vw,2.0625rem);line-height:1.3;letter-spacing:-.005em}
+.story2__blank{max-width:52ch;padding:0.875rem 1.125rem;border:1px dashed var(--bronze);border-radius:0.5rem;color:var(--bronze);font-size:max(12.5px,0.9375rem)}
+
+/* ---------- How a bottle is made: steps slide sideways while the section stays put ---------- */
+.make{background:var(--dune);color:var(--espresso)}
+.make__stage{position:relative;display:grid;grid-template-columns:minmax(0,1fr);grid-template-rows:auto minmax(0,1fr) auto;row-gap:1.125rem;padding:calc(var(--head) + 1.625rem) 0 1.875rem;overflow:hidden}
+.make__head{padding-inline:var(--pad);display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:0.75rem 1.75rem}
+.make__head > div{display:grid;gap:0.75rem;justify-items:start}
+.make__track{display:flex;align-items:stretch;padding-inline:var(--pad);overflow-x:auto;scrollbar-width:none}
+.make__track::-webkit-scrollbar{display:none}
+.step{flex:none;width:clamp(16.875rem,31vw,29.375rem);display:grid;gap:0.75rem;align-content:center;padding-right:clamp(1.5rem,3.4vw,3.5rem);margin-right:clamp(1.5rem,3.4vw,3.5rem);border-right:1px solid rgba(43,24,16,.16)}
+.step:last-child{border-right:0;margin-right:0}
+.step__no{font-family:var(--display);font-weight:900;font-stretch:62.5%;font-size:clamp(6.875rem,15vw,14.5rem);line-height:.8;
+  background:linear-gradient(180deg,#C9A24A 0%,#8A5B1E 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.step__name{font-family:var(--display);font-weight:500;font-size:clamp(1.75rem,2.8vw,2.75rem);line-height:1.05}
+.step__text{max-width:30ch;color:var(--cocoa)}
+.make__foot{padding-inline:var(--pad);display:none;align-items:center;gap:1.25rem}
+.make__count{font-size:max(10.5px,0.75rem);letter-spacing:.2em;font-variant-numeric:tabular-nums;white-space:nowrap}
+.make__count b{font-family:var(--display);font-weight:600;font-size:1.5rem;letter-spacing:0;margin-right:0.25rem}
+.make__bar{flex:1;height:1px;background:rgba(43,24,16,.2);position:relative}
+.make__bar span{position:absolute;inset:0;background:var(--espresso);transform-origin:left;transform:scaleX(0)}
+.make.is-live .make__stage{height:100vh;height:100svh;min-height:29.375rem}
+.make.is-live .make__track{overflow:visible;width:max-content;will-change:transform;align-self:center;justify-self:start}
+.make.is-live .make__foot{display:flex}
+
+/* ---------- Numbers ---------- */
+.nums{background:var(--cream);color:var(--espresso);padding:clamp(4rem,8vw,7rem) var(--pad)}
+.nums__grid{max-width:77.5rem;margin-inline:auto;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-block:1px solid var(--sand)}
+.num{display:grid;gap:0.75rem;align-content:start;justify-items:start;padding:2.375rem 1.5rem 2.125rem 0}
+.num + .num{padding-left:clamp(1.125rem,2.4vw,2.25rem);border-left:1px solid var(--sand)}
+.num__val{font-family:var(--display);font-weight:600;font-size:clamp(2.75rem,5.2vw,5.25rem);line-height:.95;font-variant-numeric:lining-nums tabular-nums;white-space:nowrap}
+.num__label{font-size:max(10.5px,0.75rem);font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:var(--cocoa)}
+
+/* ---------- A note from the house (brand voice, no portrait) ---------- */
+.founder{background:#2C190F;color:#F1E6D3;padding:clamp(5.25rem,11vw,9.375rem) var(--pad)}
+.founder__in{max-width:70rem;margin-inline:auto;display:grid;grid-template-columns:minmax(0,.66fr) minmax(0,1fr);gap:clamp(2.25rem,6vw,6.5rem);align-items:center}
+.founder__pic{aspect-ratio:4/5;margin:0;padding:0.625rem;border-radius:999px 999px 0.875rem 0.875rem;border:1px solid rgba(227,197,122,.55)}
+.house{position:relative;display:block;height:100%;overflow:hidden;border-radius:999px 999px 0.375rem 0.375rem;background:radial-gradient(90% 62% at 50% 34%,#8A5A30 0%,#5A3519 46%,#2E1A0E 100%)}
+.house::before{content:"";position:absolute;inset:1rem;border-radius:999px 999px 0.125rem 0.125rem;border:1px solid rgba(227,197,122,.28)}
+.house__crest{position:absolute;left:0;right:0;top:9%;display:block;margin-inline:auto;width:74%;height:auto;opacity:.2}
+.house__beam{position:absolute;left:50%;top:0;width:70%;height:78%;transform:translateX(-50%);background:radial-gradient(50% 60% at 50% 0,rgba(255,226,170,.34),transparent 72%);pointer-events:none}
+.house__bottle{position:absolute;left:0;right:0;bottom:11%;display:block;margin-inline:auto;height:56%;width:auto;max-width:none;z-index:1;filter:drop-shadow(0 1.125rem 1.375rem rgba(20,10,4,.45))}
+.house__floor{position:absolute;left:18%;right:18%;bottom:8%;height:7%;border-radius:50%;background:radial-gradient(closest-side,rgba(14,7,3,.6),transparent)}
+.house__stamp{position:absolute;left:0;right:0;bottom:3.4%;z-index:2;text-align:center;font-size:max(10.5px,0.6562rem);font-weight:600;letter-spacing:.32em;text-transform:uppercase;color:#E3C57A}
+.founder__copy{display:grid;gap:1.375rem;justify-items:start}
+.founder .eyebrow{color:var(--gold)}
+.founder__mark{font-family:var(--display);font-weight:700;font-size:7.5rem;line-height:.6;height:3.25rem;color:var(--gold)}
+.founder__text{margin:0;font-family:var(--display);font-weight:400;font-size:clamp(1.5rem,2.5vw,2.375rem);line-height:1.28}
+.founder__sign{display:grid;gap:0.375rem;width:100%;padding-top:1.25rem;border-top:1px solid rgba(233,220,199,.2)}
+.founder__name{font-family:var(--display);font-style:italic;font-size:1.875rem;line-height:1.1;color:#E3C57A}
+.founder__role{font-size:max(10.5px,0.75rem);font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:#BFAE94}
+
+/* ---------- Find your scent ---------- */
+.find{position:relative;overflow:hidden;display:grid;justify-items:center;gap:1.25rem;text-align:center;color:var(--espresso);
+  padding:clamp(5.25rem,11vw,9.375rem) var(--pad) 0;background:linear-gradient(180deg,var(--cream) 0%,#F3E0BE 62%,#E6C594 100%)}
+.find h2{font-family:var(--display);font-weight:500;font-size:clamp(2.875rem,7vw,7.25rem);line-height:.98;letter-spacing:-.015em}
+.find h2 em{font-weight:400}
+.find > p{max-width:40ch;color:var(--cocoa);font-size:1.0625rem}
+.find__bottles{display:flex;align-items:flex-end;justify-content:center;gap:clamp(0.875rem,3.6vw,4rem);margin-top:clamp(1.5rem,3.4vw,3.25rem)}
+.find__bottles span{display:block;position:relative}
+.find__bottles img{display:block;height:min(36vh,21.25rem);height:min(36svh,21.25rem);width:auto;max-width:none;position:relative;z-index:1}
+.find__bottles span:nth-child(1) img{height:min(30vh,17.75rem);height:min(30svh,17.75rem)}
+.find__bottles span:nth-child(3) img{height:min(33vh,19.5rem);height:min(33svh,19.5rem)}
+.find__bottles span:nth-child(4) img{height:min(28vh,16.5rem);height:min(28svh,16.5rem)}
+.find__bottles span::after{content:"";position:absolute;left:-10%;right:-10%;bottom:-3%;height:8%;border-radius:50%;background:radial-gradient(closest-side,#3A2113,transparent);opacity:.4;filter:blur(0.375rem)}
+
+/* ---------- Footer ---------- */
+.foot{position:relative;overflow:hidden;background:#2C190F;color:#E9DCC7;padding:clamp(3.5rem,8vw,6.875rem) var(--pad) 0}
+.foot a{color:inherit;text-decoration:none}
+.foot__top{max-width:77.5rem;margin-inline:auto;display:grid;grid-template-columns:minmax(0,1.5fr) repeat(3,minmax(0,1fr));gap:clamp(1.75rem,4vw,4.5rem)}
+.foot__brand{display:grid;gap:1.375rem;justify-items:start;align-content:start}
+.foot__brand img{width:11rem;height:auto;display:block}
+.foot__brand p{max-width:30ch;color:#D9C7AC}
+.foot__pay{white-space:nowrap;display:inline-flex;align-items:center;gap:0.625rem;padding:0.5625rem 1rem;border:1px solid rgba(201,162,74,.5);border-radius:1.375rem;font-size:max(10.5px,0.7188rem);font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:#E3C57A}
+.foot__pay::before{content:"";width:0.4375rem;height:0.4375rem;border-radius:50%;background:var(--gold)}
+.foot__col h3{font-size:max(10.5px,0.7188rem);font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);margin-bottom:1.125rem}
+.foot__col ul{display:grid;gap:0.6875rem}
+.foot__col a,.foot__col button{font-family:var(--display);font-size:1.3125rem;line-height:1.2;background-image:linear-gradient(currentColor,currentColor);background-repeat:no-repeat;background-position:0 100%;background-size:0 1px;transition:background-size .35s}
+.foot__col a:hover,.foot__col button:hover{background-size:100% 1px}
+.foot__col small{display:block;margin-top:0.875rem;font-size:max(10.5px,0.8125rem);color:#BFAE94}
+.foot__word{margin-top:clamp(2.25rem,6vw,5.25rem);font-family:var(--display);font-weight:900;font-stretch:62.5%;font-size:24.4vw;line-height:.74;text-align:center;text-transform:uppercase;white-space:nowrap;
+  background:linear-gradient(180deg,#E3C57A 0%,#B0842D 46%,#4A2F14 92%);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-user-select:none;user-select:none;padding-bottom:.1em}
+.foot__base{position:relative;max-width:77.5rem;margin-inline:auto;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:0.75rem 1.5rem;
+  padding:1.125rem 0 calc(1.375rem + env(safe-area-inset-bottom,0px));border-top:1px solid rgba(233,220,199,.16);font-size:max(10.5px,0.75rem);letter-spacing:.14em;text-transform:uppercase;color:#BFAE94}
+.foot__up{display:inline-flex;align-items:center;gap:0.625rem;color:#E9DCC7;font-size:max(10.5px,0.75rem);letter-spacing:.2em;text-transform:uppercase}
+.foot__up::after{content:"";width:2.375rem;height:2.375rem;border-radius:50%;border:1px solid rgba(233,220,199,.4);background:linear-gradient(#E9DCC7,#E9DCC7) center/1px 0.875rem no-repeat}
+
+/* ---------- Drawer, scrim, toast ---------- */
+.scrim{position:fixed;inset:0;z-index:40;background:rgba(43,24,16,.38);opacity:0;visibility:hidden;transition:opacity .3s,visibility 0s .3s}
+.scrim.open{opacity:1;visibility:visible;transition-delay:0s}
+.drawer{position:fixed;top:0;right:0;bottom:0;z-index:41;width:min(26.25rem,100%);background:var(--linen);color:var(--espresso);display:flex;flex-direction:column;
+  padding:calc(1.375rem + env(safe-area-inset-top,0px)) 1.5rem calc(1.375rem + env(safe-area-inset-bottom,0px));
+  transform:translateX(102%);visibility:hidden;transition:transform .38s cubic-bezier(.2,.7,.2,1),visibility 0s .38s}
+.drawer.open{transform:none;visibility:visible;transition-delay:0s}
+.drawer__head{display:flex;align-items:center;justify-content:space-between;padding-bottom:1rem;border-bottom:1px solid var(--sand)}
+.drawer__head h2{font-family:var(--display);font-weight:500;font-size:1.875rem;line-height:1}
+.drawer__list{flex:1;overflow-y:auto;min-height:0}
+.line{display:grid;grid-template-columns:3.375rem minmax(0,1fr) auto;gap:0.875rem;align-items:center;padding:1rem 0;border-bottom:1px solid var(--sand)}
+.line__pic{width:3.375rem;height:4.75rem;border-radius:1.6875rem 1.6875rem 0.25rem 0.25rem;display:grid;place-items:center}
+.line__pic img{height:3.625rem;width:auto}
+.line__name{font-family:var(--display);font-weight:500;font-size:1.25rem;line-height:1.1}
+.line__meta{font-size:max(10.5px,0.75rem);letter-spacing:.12em;text-transform:uppercase;color:var(--cocoa)}
+.line__side{display:grid;gap:0.375rem;justify-items:end;font-variant-numeric:tabular-nums}
+.qty{display:flex;align-items:center;gap:0.125rem;margin-top:0.375rem}
+.qty button{width:1.875rem;height:1.875rem;border-radius:50%;border:1px solid var(--sand);line-height:1}
+.qty span{min-width:1.5rem;text-align:center;font-variant-numeric:tabular-nums}
+.link{font-size:max(10.5px,0.75rem);letter-spacing:.12em;text-transform:uppercase;text-decoration:underline;text-underline-offset:0.1875rem;color:var(--cocoa)}
+.drawer__empty{padding:2.5rem 0;color:var(--cocoa)}
+.drawer__foot{padding-top:1rem;border-top:1px solid var(--sand);display:grid;gap:0.5rem}
+.drawer__total{display:flex;justify-content:space-between;align-items:baseline;font-size:max(10.5px,0.8125rem);letter-spacing:.16em;text-transform:uppercase}
+.drawer__total b{font-family:var(--display);font-size:1.75rem;font-weight:600;letter-spacing:0;text-transform:none;font-variant-numeric:lining-nums tabular-nums}
+.drawer__note{font-size:max(10.5px,0.8125rem);color:var(--cocoa)}
+.toast{position:fixed;left:50%;bottom:calc(1.375rem + env(safe-area-inset-bottom,0px));z-index:50;transform:translate(-50%,1.25rem);max-width:calc(100% - 2rem);
+  background:var(--espresso);color:var(--cream);padding:0.75rem 1.25rem;border-radius:1.5rem;font-size:max(12.5px,0.875rem);opacity:0;visibility:hidden;transition:opacity .25s,transform .25s,visibility 0s .25s}
+.toast.show{opacity:1;visibility:visible;transform:translate(-50%,0);transition-delay:0s}
+
+/* ---------- Narrow screens ---------- */
+@media (max-width:1080px){
+  :root{--head:4rem}
+  .brand{gap:0.5625rem}.brand__crest{height:2.375rem}.brand__word{height:1.5rem}
+  .burger{display:grid}
+  .menu{position:absolute;top:calc(100% - 0.25rem);left:0.75rem;right:0.75rem;flex-direction:column;align-items:stretch;gap:0;padding:0.5rem 1.25rem;border-radius:0.875rem;background:var(--linen);
+    box-shadow:0 1.125rem 2.5rem rgba(43,24,16,.18);opacity:0;visibility:hidden;transform:translateY(-0.5rem);transition:opacity .2s,transform .2s,visibility 0s .2s}
+  .menu.open{opacity:1;visibility:visible;transform:none;transition-delay:0s}
+  .menu a,.menu button{padding:0.9375rem 0.125rem;text-align:left;border-bottom:1px solid var(--sand)}
+  .menu > :last-child{border-bottom:0}
+  .menu a::after,.menu button::after{display:none}
+  .top.on-dark .menu{color:var(--espresso)}
+}
+@media (max-width:900px){
+  /* phones: the film takes the top of the screen and the copy sits beneath it on the brown ground */
+  .vhero__stage{background:#2C190F}
+  .vhero video{inset:0 0 auto 0;width:100%;height:64%;aspect-ratio:auto;transform:none;object-fit:cover;-webkit-mask-image:none;mask-image:none}
+  .vhero__shade{background:linear-gradient(180deg,rgba(24,13,7,.66) 0%,rgba(24,13,7,0) 16%,rgba(44,25,15,0) 44%,#2C190F 64%)}
+  .beat,.beat--lead,.beat--right,.beat--left,.beat--end{left:var(--pad);right:var(--pad);top:62%;bottom:auto;transform:none;max-width:none;margin:0;justify-items:center;text-align:center;gap:0.75rem}
+  .beat__sub{font-size:max(12.5px,0.9688rem)}
+  .story2__in{grid-template-columns:minmax(0,1fr)}
+  .story2__pic{position:relative;top:0;max-width:21.25rem;max-height:none}
+  .step{width:76vw}
+  .nums__grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .num{padding:1.625rem 0.875rem 1.5rem 0}
+  .num:nth-child(odd){padding-left:0;border-left:0}
+  .num:nth-child(n+3){border-top:1px solid var(--sand)}
+  .founder__in{grid-template-columns:minmax(0,1fr)}
+  .founder__pic{max-width:16.25rem}
+  .find__bottles img,.find__bottles span:nth-child(n) img{height:min(22vh,12.5rem);height:min(22svh,12.5rem)}
+  .find__bottles span:nth-child(1) img,.find__bottles span:nth-child(4) img{height:min(18vh,10.25rem);height:min(18svh,10.25rem)}
+  .foot__top{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .foot__brand{grid-column:1/-1}
+  .foot__base{justify-content:center;text-align:center}
+}
+@media (prefers-reduced-motion:reduce){*{transition-duration:.01ms!important}.vhero__hint::after{animation:none}}
+</style>
+</head>
+<body>
+<header class="top on-dark" id="top">
+  <a class="brand" href="index.html" aria-label="Shafar Fragrances">
+    <img class="brand__crest" src="assets/crest.png" alt="" width="480" height="512">
+    <img class="brand__word" src="assets/wordmark.png" alt="" width="720" height="227">
+  </a>
+  <nav class="menu" id="menu" aria-label="Main">
+    <a href="index.html">Featured</a>
+    <a href="home.html">Home</a>
+    <a href="#about" aria-current="page">About</a>
+    <a href="shop.html">Shop</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+  <div class="tools">
+    <button class="icon" type="button" id="open-wish" aria-label="Wishlist">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.3s-7.5-4.4-7.5-10.1A4.2 4.2 0 0 1 12 7.6a4.2 4.2 0 0 1 7.5 2.6c0 5.7-7.5 10.1-7.5 10.1z"/></svg>
+      <span class="badge" id="wish-count" hidden>0</span>
+    </button>
+    <button class="icon" type="button" id="open-cart" aria-label="Cart">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5.5 8.5h13l-1 11.5h-11z"/><path d="M9 8.5V7a3 3 0 0 1 6 0v1.5"/></svg>
+      <span class="badge" id="cart-count" hidden>0</span>
+    </button>
+    <button class="icon burger" type="button" id="burger" aria-label="Menu" aria-expanded="false" aria-controls="menu">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8h16M4 16h16"/></svg>
+    </button>
+  </div>
+</header>
+
+<main id="about">
+  <section class="vhero" id="vhero" aria-labelledby="vhero-title">
+    <div class="vhero__stage" id="vhero-stage">
+      <video id="vhero-video" src="assets/about-hero.mp4" poster="assets/about-hero-poster.jpg" muted playsinline preload="auto" aria-hidden="true" tabindex="-1"></video>
+      <div class="vhero__shade"></div>
+
+      <div class="beat beat--lead" data-beat>
+        <p class="eyebrow">About Shafar</p>
+        <h1 id="vhero-title">The tale behind <em>every scent</em></h1>
+        <p class="beat__sub">Keep scrolling. The bottle will show you.</p>
+      </div>
+      <div class="beat beat--right" data-beat>
+        <p class="beat__line">It begins the moment <em>the cap lifts</em></p>
+      </div>
+      <div class="beat beat--left" data-beat>
+        <p class="beat__line">One spray, and <em>the story starts</em></p>
+      </div>
+      <div class="beat beat--end" data-beat>
+        <p class="eyebrow">Affordable luxury perfumes</p>
+        <p class="beat__line">This is <em>Shafar</em></p>
+      </div>
+
+      <p class="vhero__hint" id="vhero-hint" aria-hidden="true">Scroll</p>
+      <div class="vhero__bar" aria-hidden="true"><span id="vhero-bar"></span></div>
+    </div>
+  </section>
+
+  <section class="story2" id="story" aria-labelledby="story-title">
+    <div class="story2__in">
+      <div class="story2__pic"><img id="story-img" src="assets/about-story.webp" alt="Shafar Halila Lane bottle in a drift of golden mist" width="715" height="894" loading="lazy"></div>
+      <div class="story2__copy">
+        <p class="eyebrow" data-show>Our story</p>
+        <h2 class="sec-h" id="story-title" data-show>Luxury that <em>does not ask for much</em></h2>
+        <span class="draft" data-show>Draft copy</span>
+        <div class="story2__text" id="story-text">
+          <p>Shafar began with one stubborn idea: a perfume should smell expensive without being expensive.</p>
+          <p>Every fragrance carries the name of a place. Halila Lane, Belford, Charleston, Shawano. A name on the label and a story in the bottle.</p>
+          <p>We bottle in Parfum and Eau de Parfum strength, in 50 ml bottles, and deliver across Pakistan with cash on delivery.</p>
+        </div>
+        <p class="story2__blank">Still needed from you: the year Shafar started, and the city. That becomes the opening line of this story.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="make" id="making" aria-labelledby="make-title">
+    <div class="make__stage" id="make-stage">
+      <div class="make__head">
+        <div>
+          <p class="eyebrow">The making</p>
+          <h2 class="sec-h" id="make-title">How a bottle <em>is made</em></h2>
+        </div>
+        <span class="draft">Draft steps</span>
+      </div>
+      <ol class="make__track" id="make-track">
+        <li class="step"><span class="step__no" aria-hidden="true">01</span><h3 class="step__name">Sourcing</h3><p class="step__text">It starts with the oils. Each one is chosen for how it smells on skin hours later, not in the first minute.</p></li>
+        <li class="step"><span class="step__no" aria-hidden="true">02</span><h3 class="step__name">Blending</h3><p class="step__text">The notes are blended in small batches and adjusted until the balance is right.</p></li>
+        <li class="step"><span class="step__no" aria-hidden="true">03</span><h3 class="step__name">Maturing</h3><p class="step__text">The blend is left to rest, so the separate notes settle into one scent.</p></li>
+        <li class="step"><span class="step__no" aria-hidden="true">04</span><h3 class="step__name">Bottling</h3><p class="step__text">Filled into 50 ml bottles, then capped and labelled.</p></li>
+        <li class="step"><span class="step__no" aria-hidden="true">05</span><h3 class="step__name">Checking</h3><p class="step__text">Every bottle is checked before it is boxed and sent to you.</p></li>
+      </ol>
+      <div class="make__foot" aria-hidden="true">
+        <p class="make__count"><b id="make-count">01</b>/ 05</p>
+        <div class="make__bar"><span id="make-bar"></span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="nums" id="numbers" aria-label="Shafar in numbers">
+    <div class="nums__grid" id="nums-grid">
+      <div class="num"><span class="num__val" data-count="13" data-suffix="+">13+</span><span class="num__label">Fragrances in the range</span></div>
+      <div class="num"><span class="num__val" data-count="50">50</span><span class="num__label">ml in every bottle</span></div>
+      <div class="num"><span class="num__val" data-count="1234">1,234</span><span class="num__label">Orders delivered</span><span class="draft">Sample number</span></div>
+      <div class="num"><span class="num__val" data-count="56">56</span><span class="num__label">Cities reached</span><span class="draft">Sample number</span></div>
+    </div>
+  </section>
+
+  <section class="founder" id="founder" aria-labelledby="founder-title">
+    <div class="founder__in">
+      <figure class="founder__pic" data-show aria-hidden="true">
+        <span class="house" id="house-art">
+          <img class="house__crest" id="house-crest" src="assets/crest-gold.webp" alt="" width="420" height="447" loading="lazy">
+          <span class="house__beam"></span>
+          <span class="house__floor"></span>
+          <img class="house__bottle" id="house-bottle" src="assets/halila.webp" alt="" width="482" height="1100" loading="lazy">
+          <span class="house__stamp">Shafar &middot; Pakistan</span>
+        </span>
+      </figure>
+      <div class="founder__copy">
+        <p class="eyebrow" id="founder-title" data-show>A note from the house</p>
+        <span class="draft draft--light" data-show>Draft copy for you to approve</span>
+        <span class="founder__mark" aria-hidden="true" data-show>&ldquo;</span>
+        <blockquote class="founder__text" data-show>Shafar began with one simple idea: nobody should have to choose between a perfume they love and a price they can live with. Every bottle we send is one we would wear ourselves.</blockquote>
+        <div class="founder__sign" data-show>
+          <span class="founder__name">The House of Shafar</span>
+          <span class="founder__role">Where every scent tells a tale</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="find" id="find" aria-labelledby="find-title">
+    <p class="eyebrow" data-show>Your turn</p>
+    <h2 id="find-title" data-show>Find <em>your scent</em></h2>
+    <p data-show>Every story needs someone to wear it. Start with the one that sounds like you.</p>
+    <a class="btn" data-show href="shop.html">Shop the collection</a>
+    <div class="find__bottles" id="find-bottles" aria-hidden="true">
+      <span><img src="assets/shawano.webp" alt="" width="494" height="1100" loading="lazy"></span>
+      <span><img src="assets/halila.webp" alt="" width="482" height="1100" loading="lazy"></span>
+      <span><img src="assets/belford.webp" alt="" width="498" height="1100" loading="lazy"></span>
+      <span><img src="assets/charleston.webp" alt="" width="497" height="1100" loading="lazy"></span>
+    </div>
+  </section>
+</main>
+
+<footer class="foot" id="footer">
+  <div class="foot__top">
+    <div class="foot__brand">
+      <img src="assets/logo-gold.png" alt="Shafar Fragrances" width="488" height="516" loading="lazy">
+      <p>Where every scent tells a tale. Affordable luxury perfumes in Parfum and Eau de Parfum strength.</p>
+      <span class="foot__pay">Cash on delivery across Pakistan</span>
+    </div>
+    <nav class="foot__col" aria-label="Shop">
+      <h3>Shop</h3>
+      <ul>
+        <li><a href="index.html">Featured</a></li>
+        <li><a href="home.html#best-sellers">Best sellers</a></li>
+        <li><a href="shop.html#men">Men</a></li>
+        <li><a href="shop.html#women">Women</a></li>
+        <li><a href="shop.html#unisex">Unisex</a></li>
+      </ul>
+    </nav>
+    <nav class="foot__col" aria-label="Shafar">
+      <h3>Shafar</h3>
+      <ul>
+        <li><a href="#story">Our story</a></li>
+        <li><a href="home.html#reviews">Reviews</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+    <div class="foot__col">
+      <h3>Get in touch</h3>
+      <ul>
+        <li><a href="https://wa.me/923180250552" target="_blank" rel="noopener">WhatsApp</a></li>
+        <li><a href="https://www.instagram.com/shafar.fragrances/" target="_blank" rel="noopener">Instagram</a></li>
+      </ul>
+      <small>0318 0250552<br>shafarfragrances@gmail.com<br>www.shafarfragrances.com</small>
+    </div>
+  </div>
+  <div class="foot__word" id="foot-word" aria-hidden="true">Shafar</div>
+  <div class="foot__base">
+    <p>&copy; 2026 Shafar Fragrances</p>
+    <a class="foot__up" href="#about">Back to top</a>
+  </div>
+</footer>
+
+<div class="scrim" id="scrim"></div>
+<aside class="drawer" id="drawer" role="dialog" aria-modal="true" aria-labelledby="drawer-title">
+  <div class="drawer__head">
+    <h2 id="drawer-title">Cart</h2>
+    <button class="icon" type="button" id="drawer-close" aria-label="Close">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+  </div>
+  <div class="drawer__list" id="drawer-list"></div>
+  <div class="drawer__foot" id="drawer-foot" hidden>
+    <p class="drawer__total"><span>Subtotal</span><b id="drawer-total"></b></p>
+    <a class="btn" href="checkout.html" style="display:flex;align-items:center;justify-content:center;text-decoration:none;--ink:#2B1810;margin-top:6px">Checkout</a>
+    <p class="drawer__note">Cash on delivery across Pakistan.</p>
+  </div>
+</aside>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="js/catalog.js"></script>
+<script src="/api/catalog"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script>
+(function () {
+  'use strict';
+
+  /* ---------- Products (same data as the other pages; the cart drawer needs them) ---------- */
+  var PRODUCTS = {
+    halila:     { name: 'Halila Lane',      kind: 'Parfum',        cat: 'unisex', best: true,  img: 'assets/halila.webp', tint: '#EFD3A8', deep: '#D9AE78', ink: '#3A2113', accent: '#7A3F10', desc: 'Deep, warm and unhurried. Made for evenings that run late.', prices: { 50: 2800 } },
+    belford:    { name: 'Belford',          kind: 'Eau de Parfum', cat: 'women',  best: true,  img: 'assets/belford.webp', tint: '#F5CFC0', deep: '#E5A391', ink: '#4A1210', accent: '#A3160F', desc: 'Bold from the first spray. Rich, confident and made for the night.', prices: { 50: 2700 } },
+    charleston: { name: 'Charleston',       kind: 'Parfum',        cat: 'women',  best: true,  img: 'assets/charleston.webp', tint: '#FADAE4', deep: '#F0AEC6', ink: '#57112F', accent: '#B0144F', desc: 'Bright, sweet and full of life. A playful scent that gets remembered.', prices: { 50: 2600 } },
+    shawano:    { name: 'Shawano',          kind: 'Parfum',        cat: 'men',    best: true,  img: 'assets/shawano.webp', tint: '#D6DFEC', deep: '#AEBED6', ink: '#18223A', accent: '#2C3E63', desc: 'Cool, clean and sure of itself. For days that have to go well.', prices: { 50: 2200 } },
+    argos:      { name: 'Argos',            kind: 'Eau de Parfum', cat: 'men',    best: true,  img: 'assets/argos.webp', tint: '#F0DAB6', deep: '#D9B480', ink: '#372412', accent: '#78400F', desc: 'An old name with a golden glow. Quietly grand.', prices: { 50: 2250 } },
+    southampton:{ name: 'Southampton',      kind: 'Parfum',        cat: 'men',    best: true,  img: 'assets/southampton.webp', tint: '#EDC8A9', deep: '#D59C73', ink: '#371E12', accent: '#782E0F', desc: 'Tailored and well travelled. Polished and always in place.', prices: { 50: 2700 } },
+    bradford:   { name: 'Bradford',         kind: 'Parfum',        cat: 'men',    best: true,  img: 'assets/bradford.webp', tint: '#EECFAE', deep: '#D7A578', ink: '#372112', accent: '#78350F', desc: 'Honest and dependable. A signature for the working week.', prices: { 50: 2600 } },
+    tobaccooudh:{ name: 'Tobacco Oudh',     kind: 'Parfum',        cat: 'unisex', best: true,  img: 'assets/tobaccooudh.webp', tint: '#EECAAA', deep: '#D69E74', ink: '#371F12', accent: '#78300F', desc: 'Tobacco and oudh, just as the name promises. Deep and made to linger.', prices: { 50: 2550 } },
+    jutland:    { name: 'Jutland',          kind: 'Eau de Parfum', cat: 'women',  best: true,  img: 'assets/jutland.webp', tint: '#F1C3B7', deep: '#DD8F80', ink: '#430E0A', accent: '#96130C', desc: 'Deep red and full of nerve. Made for the night.', prices: { 50: 2650 } },
+    elmira:     { name: 'Elmira',           kind: 'Parfum',        cat: 'women',  best: true,  img: 'assets/elmira.webp', tint: '#F6CDCB', deep: '#E69C9A', ink: '#4A0E12', accent: '#A8121C', desc: 'The red one. Vivid, confident and impossible to miss.', prices: { 50: 2450 } },
+    belleville: { name: 'Belle Ville',      kind: 'Parfum',        cat: 'men',    best: false, img: 'assets/belleville.webp', tint: '#EDC2A5', deep: '#D4946F', ink: '#371C12', accent: '#78290F', desc: 'A beautiful town after dark. Smooth, easy and quietly confident.', prices: { 50: 2450 } },
+    elko:       { name: 'Elko',             kind: 'Eau de Parfum', cat: 'men',    best: false, img: 'assets/elko.webp', tint: '#EFD0AF', deep: '#D7A779', ink: '#372112', accent: '#78360F', desc: 'Open road, clear sky. An easy pick for every day.', prices: { 50: 2600 } },
+    hudson:     { name: 'Hudson',           kind: 'Parfum',        cat: 'men',    best: false, img: 'assets/hudson.webp', tint: '#EDC1A5', deep: '#D4936F', ink: '#371C12', accent: '#78290F', desc: 'City nights and a sharp collar. Smooth and sure of itself.', prices: { 50: 2500 } },
+    inverlake:  { name: 'Inverlake Platos', kind: 'Eau de Parfum', cat: 'men',    best: false, img: 'assets/inverlake.webp', tint: '#EECCAC', deep: '#D6A175', ink: '#371F12', accent: '#78320F', desc: 'Still water and slow mornings. Calm, and close to the skin.', prices: { 50: 2600 } },
+    amesvelle:  { name: 'Amesvelle',        kind: 'Parfum',        cat: 'women',  best: false, img: 'assets/amesvelle.webp', tint: '#F4CCC2', deep: '#E4A195', ink: '#421610', accent: '#9C2211', desc: 'Graceful and a little regal. Made for evenings that matter.', prices: { 50: 2850 } },
+    liverpool:  { name: 'Liverpool',        kind: 'Eau de Parfum', cat: 'men',    best: false, img: 'assets/liverpool.webp', tint: '#EFD4B1', deep: '#D8AC7B', ink: '#372212', accent: '#783A0F', desc: 'Port-city spirit. Lively, sociable and easy to wear.', prices: { 50: 2700 } },
+    ofidow:     { name: 'Ofidow',           kind: 'Parfum',        cat: 'men',    best: false, img: 'assets/ofidow.webp', tint: '#EECDAD', deep: '#D6A377', ink: '#372012', accent: '#78330F', desc: 'Hard to place, easy to remember. A little mysterious.', prices: { 50: 2800 } },
+    torrance:   { name: 'Torrance',         kind: 'Eau de Parfum', cat: 'unisex', best: false, img: 'assets/torrance.webp', tint: '#ECC0A4', deep: '#D4916E', ink: '#371C12', accent: '#78270F', desc: 'Easy and laid-back. The one you reach for without thinking.', prices: { 50: 2600 } },
+    forthworth: { name: 'Forth Worth',      kind: 'Parfum',        cat: 'women',  best: false, img: 'assets/forthworth.webp', tint: '#F4CBC2', deep: '#E4A195', ink: '#421510', accent: '#9C2111', desc: 'Big-hearted and self-assured. A scent that walks in first.', prices: { 50: 2500 } },
+    exermont:   { name: 'Exermont',         kind: 'Parfum',        cat: 'men',    best: false, img: 'assets/exermont.webp', tint: '#EDC6A8', deep: '#D59A72', ink: '#371E12', accent: '#782D0F', desc: 'Bold and deliberate. Made for the nights that count.', prices: { 50: 2700 } },
+    cuba:       { name: 'Cuba',             kind: 'Parfum',        cat: 'unisex', best: false, img: 'assets/cuba.webp', tint: '#EDC4A7', deep: '#D49770', ink: '#371D12', accent: '#782B0F', desc: 'Slow evenings and loud laughter. Full of character.', prices: { 50: 2500 } },
+    moroni:     { name: 'Moroni',           kind: 'Parfum',        cat: 'men',    best: false, img: 'assets/moroni.webp', tint: '#F0DBB7', deep: '#D9B681', ink: '#372512', accent: '#78420F', desc: 'Island air and unhurried days. Easy to love.', prices: { 50: 2700 } },
+    whiteoudh:  { name: 'White Oudh',       kind: 'Eau de Parfum', cat: 'unisex', best: false, img: 'assets/whiteoudh.webp', tint: '#EDC5A7', deep: '#D59871', ink: '#371D12', accent: '#782C0F', desc: 'Oudh with a lighter hand, as the name promises. Refined and calm.', prices: { 50: 3200 } },
+    monastir:   { name: 'Monastir',         kind: 'Parfum',        cat: 'men',    best: false, img: 'assets/monastir.webp', tint: '#EFD6B3', deep: '#D8AF7D', ink: '#372312', accent: '#783C0F', desc: 'Named for a coast of sun and old stone. Made to travel well.', prices: { 50: null } },
+    elba:       { name: 'Elba',             kind: 'Eau de Parfum', cat: 'women',  best: false, img: 'assets/elba.webp', tint: '#F4CCC2', deep: '#E4A295', ink: '#421610', accent: '#9C2411', desc: 'An island name for sunny days. Light-hearted and easy to love.', prices: { 50: null } },
+    imperial:   { name: 'Imperial',         kind: 'Parfum',        cat: 'men',    best: false, img: 'assets/imperial.webp', tint: '#EFD3B0', deep: '#D7AA7B', ink: '#372212', accent: '#78390F', desc: 'Made to be noticed. Grand, and worn with confidence.', prices: { 50: null } },
+    auckland:   { name: 'Auckland',         kind: 'Eau de Parfum', cat: 'men',    best: false, img: 'assets/auckland.webp', tint: '#EDC6A8', deep: '#D59A72', ink: '#371E12', accent: '#782D0F', desc: 'Harbour light and a fresh start. Open and easy to wear.', prices: { 50: null } },
+    stromboli:  { name: 'Stromboli',        kind: 'Parfum',        cat: 'women',  best: false, img: 'assets/stromboli.webp', tint: '#F4CBC2', deep: '#E4A095', ink: '#421510', accent: '#9C2011', desc: 'Named for a volcano. Fiery, vivid and made to be noticed.', prices: { 50: null } },
+    hachita:    { name: 'Hachita',          kind: 'Parfum',        cat: 'men',    best: false, img: 'assets/hachita.webp', tint: '#EEC9AA', deep: '#D59D73', ink: '#371E12', accent: '#782F0F', desc: 'Desert roads and wide skies. Quiet and steady.', prices: { 50: null } }
+  };
+  var DEFAULT_SIZE = 50;
+  var BEST = Object.keys(PRODUCTS).filter(function (id) { return PRODUCTS[id].best; });      // the carousel
+  var WHEEL = ['halila', 'elmira', 'argos', 'charleston', 'tobaccooudh', 'jutland', 'shawano', 'belford'];      // the wheel: a short pick, so the section passes quickly
+  var priced = function (id) { return PRODUCTS[id].prices[DEFAULT_SIZE] != null; };
+
+  var $ = function (s, el) { return (el || document).querySelector(s); };
+  var $$ = function (s, el) { return Array.prototype.slice.call((el || document).querySelectorAll(s)); };
+  var rupees = function (n) { return 'Rs ' + Number(n).toLocaleString('en-US'); };
+  var el = function (tag, cls, text) { var n = document.createElement(tag); if (cls) n.className = cls; if (text != null) n.textContent = text; return n; };
+  var root = document.documentElement;
+
+  /* ---------- Toast ---------- */
+  var toastEl = $('#toast'), toastTimer;
+  function toast(msg) {
+    toastEl.textContent = msg;
+    toastEl.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(function () { toastEl.classList.remove('show'); }, 2400);
+  }
+  $$('[data-soon]').forEach(function (b) {
+    b.addEventListener('click', function () { toast('The ' + b.dataset.soon + ' page is not built yet.'); closeMenu(); });
+  });
+
+  /* ---------- Mobile menu ---------- */
+  var menu = $('#menu'), burger = $('#burger');
+  function closeMenu() { menu.classList.remove('open'); burger.setAttribute('aria-expanded', 'false'); }
+  burger.addEventListener('click', function () {
+    var open = menu.classList.toggle('open');
+    burger.setAttribute('aria-expanded', String(open));
+  });
+  $$('a', menu).forEach(function (a) { a.addEventListener('click', closeMenu); });
+
+  /* ---------- Cart and wishlist (saved in this browser, shared by every page) ---------- */
+  var CAT = window.SHAFAR_CATALOG || PRODUCTS;      // every product, so the cart can show a bottle added on another page
+  var cart = [], wish = [];
+  try {
+    cart = JSON.parse(localStorage.getItem('shafar.cart') || '[]').filter(function (l) { return CAT[l.id] && CAT[l.id].prices[l.size] != null && l.qty > 0; });
+    wish = JSON.parse(localStorage.getItem('shafar.wish') || '[]').filter(function (id) { return CAT[id]; });
+  } catch (e) { cart = []; wish = []; }
+  function save() { try { localStorage.setItem('shafar.cart', JSON.stringify(cart)); localStorage.setItem('shafar.wish', JSON.stringify(wish)); } catch (e) {} }
+  var drawer = $('#drawer'), scrim = $('#scrim'), list = $('#drawer-list'), foot = $('#drawer-foot');
+  var drawerMode = 'cart', lastFocus = null;
+
+  function badge(node, n) { node.textContent = n; node.hidden = n === 0; }
+  function syncBadges() {
+    badge($('#cart-count'), cart.reduce(function (s, l) { return s + l.qty; }, 0));
+    badge($('#wish-count'), wish.length);
+    save();
+  }
+  function addToCart(id, size) {
+    var line = cart.filter(function (l) { return l.id === id && l.size === size; })[0];
+    if (line) line.qty += 1; else cart.push({ id: id, size: size, qty: 1 });
+    syncBadges();
+    if (drawer.classList.contains('open')) renderDrawer();
+  }
+  function pic(id) {
+    var box = el('div', 'line__pic');
+    box.style.background = CAT[id].tint;
+    var im = el('img'); im.src = CAT[id].img; im.alt = '';
+    box.appendChild(im);
+    return box;
+  }
+  function renderDrawer() {
+    $('#drawer-title').textContent = drawerMode === 'cart' ? 'Cart' : 'Wishlist';
+    list.textContent = '';
+    var total = 0;
+    if (drawerMode === 'cart') {
+      if (!cart.length) list.appendChild(el('p', 'drawer__empty', 'Your cart is empty. Add a bottle from the Home page.'));
+      cart.forEach(function (l) {
+        var p = CAT[l.id], unit = p.prices[l.size];
+        total += unit * l.qty;
+        var row = el('div', 'line'), mid = el('div');
+        mid.appendChild(el('p', 'line__name', p.name));
+        mid.appendChild(el('p', 'line__meta', p.kind + ' · ' + l.size + ' ml'));
+        var q = el('div', 'qty');
+        var minus = el('button', '', '−'); minus.type = 'button'; minus.setAttribute('aria-label', 'One less ' + p.name);
+        var plus = el('button', '', '+'); plus.type = 'button'; plus.setAttribute('aria-label', 'One more ' + p.name);
+        minus.addEventListener('click', function () { l.qty -= 1; if (l.qty < 1) cart.splice(cart.indexOf(l), 1); syncBadges(); renderDrawer(); });
+        plus.addEventListener('click', function () { l.qty += 1; syncBadges(); renderDrawer(); });
+        q.appendChild(minus); q.appendChild(el('span', '', l.qty)); q.appendChild(plus);
+        mid.appendChild(q);
+        var side = el('div', 'line__side');
+        side.appendChild(el('b', '', rupees(unit * l.qty)));
+        var rm = el('button', 'link', 'Remove'); rm.type = 'button';
+        rm.addEventListener('click', function () { cart.splice(cart.indexOf(l), 1); syncBadges(); renderDrawer(); });
+        side.appendChild(rm);
+        row.appendChild(pic(l.id)); row.appendChild(mid); row.appendChild(side);
+        list.appendChild(row);
+      });
+      foot.hidden = !cart.length;
+      $('#drawer-total').textContent = rupees(total);
+    } else {
+      foot.hidden = true;
+      if (!wish.length) list.appendChild(el('p', 'drawer__empty', 'Nothing saved yet. Tap the heart on a bottle to keep it here.'));
+      wish.forEach(function (id) {
+        var p = CAT[id], row = el('div', 'line'), mid = el('div');
+        mid.appendChild(el('p', 'line__name', p.name));
+        var unit = p.prices[DEFAULT_SIZE];
+        mid.appendChild(el('p', 'line__meta', p.kind + ' · ' + (unit == null ? (p.soldout ? 'Sold out' : 'Price to be added') : rupees(unit) + ' for ' + DEFAULT_SIZE + ' ml')));
+        var side = el('div', 'line__side');
+        var add = el('button', 'link', 'Add to cart'); add.type = 'button';
+        add.addEventListener('click', function () { addToCart(id, DEFAULT_SIZE); toast(p.name + ', ' + DEFAULT_SIZE + ' ml added to cart.'); });
+        var rm = el('button', 'link', 'Remove'); rm.type = 'button';
+        rm.addEventListener('click', function () { setWish(id, false); renderDrawer(); });
+        if (unit != null) side.appendChild(add);
+        side.appendChild(rm);
+        row.appendChild(pic(id)); row.appendChild(mid); row.appendChild(side);
+        list.appendChild(row);
+      });
+    }
+  }
+  function openDrawer(mode, from) {
+    drawerMode = mode; lastFocus = from || null;
+    renderDrawer();
+    drawer.classList.add('open'); scrim.classList.add('open');
+    closeMenu();
+    $('#drawer-close').focus();
+  }
+  function closeDrawer() {
+    drawer.classList.remove('open'); scrim.classList.remove('open');
+    if (lastFocus) lastFocus.focus();
+  }
+  $('#open-cart').addEventListener('click', function () { openDrawer('cart', this); });
+  $('#open-wish').addEventListener('click', function () { openDrawer('wish', this); });
+  $('#drawer-close').addEventListener('click', closeDrawer);
+  scrim.addEventListener('click', closeDrawer);
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') { closeDrawer(); closeMenu(); } });
+
+  function setWish(id, on) {
+    var i = wish.indexOf(id);
+    if (on && i < 0) wish.push(id);
+    if (!on && i >= 0) wish.splice(i, 1);
+    $$('[data-wish="' + id + '"]').forEach(function (h) {
+      h.setAttribute('aria-pressed', String(on));
+      h.setAttribute('aria-label', on ? 'Remove ' + CAT[id].name + ' from wishlist' : 'Save ' + CAT[id].name + ' to wishlist');
+    });
+    syncBadges();
+  }
+  $$('[data-add]').forEach(function (b) {
+    b.addEventListener('click', function () {
+      var id = b.dataset.add;
+      if (CAT[id].prices[DEFAULT_SIZE] == null) { toast('The price for ' + CAT[id].name + ' is still to be added.'); return; }
+      addToCart(id, DEFAULT_SIZE);
+      toast(CAT[id].name + ', ' + DEFAULT_SIZE + ' ml added to cart.');
+    });
+  });
+  $$('[data-wish]').forEach(function (b) {
+    b.addEventListener('click', function () {
+      var id = b.dataset.wish, on = b.getAttribute('aria-pressed') !== 'true';
+      setWish(id, on);
+      toast(on ? CAT[id].name + ' saved to your wishlist.' : CAT[id].name + ' removed from your wishlist.');
+    });
+  });
+
+  // restore what was saved on other pages
+  wish.forEach(function (id) { $$('[data-wish="' + id + '"]').forEach(function (h) { h.setAttribute('aria-pressed', 'true'); }); });
+  syncBadges();
+
+  /* ---------- Header: light over the film, solid cream once the film has scrolled away ---------- */
+  var topBar = $('#top'), filmSection = $('#vhero');
+  function headerState() {
+    var past = filmSection.getBoundingClientRect().bottom < topBar.offsetHeight + 2;
+    topBar.classList.toggle('on-dark', !past);
+    topBar.classList.toggle('is-solid', past);
+  }
+  window.addEventListener('scroll', headerState, { passive: true });
+  headerState();
+
+  /* ---------- In-page links ---------- */
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  $$('a[href^="#"]').forEach(function (a) {
+    a.addEventListener('click', function (e) {
+      var target = $(a.getAttribute('href'));
+      if (!target) return;
+      e.preventDefault();
+      var y = target.id === 'about' ? 0 : target.getBoundingClientRect().top + window.scrollY - topBar.offsetHeight + 2;
+      window.scrollTo({ top: y, behavior: reduce ? 'auto' : 'smooth' });
+    });
+  });
+
+  /* ==================================================================
+     SCROLL FILM
+     The hero is pinned for a long scroll and the film's playhead follows
+     the scrollbar, so scrolling down plays it and scrolling up rewinds it.
+     The film file has every frame stored whole, which is what makes
+     stepping to any frame instant.
+     Without GSAP the film simply loops; with reduced motion it stays on
+     the opening still.
+     ================================================================== */
+  var video = $('#vhero-video'), stage = $('#vhero-stage');
+  if (reduce) return;
+  if (!window.gsap || !window.ScrollTrigger) {
+    video.loop = true; video.autoplay = true;
+    var pr = video.play(); if (pr && pr.catch) pr.catch(function () {});
+    return;
+  }
+  gsap.registerPlugin(ScrollTrigger);
+  ScrollTrigger.config({ ignoreMobileResize: true });
+  root.classList.add('film');
+  filmSection.classList.add('is-live');
+
+  var SCROLL_SCREENS = 3.4;                 // how many screens of scrolling the film lasts
+  var beats = $$('[data-beat]', stage), bar = $('#vhero-bar'), hint = $('#vhero-hint');
+  var play = { t: 0 }, dur = 0, wanted = 0;
+
+  function seek() {
+    if (!dur) return;
+    wanted = Math.min(dur - 0.04, Math.max(0, play.t * dur));
+    if (!video.seeking && Math.abs(video.currentTime - wanted) > 0.015) video.currentTime = wanted;
+  }
+  video.addEventListener('seeked', function () { if (Math.abs(video.currentTime - wanted) > 0.03) video.currentTime = wanted; });
+  function ready() { dur = video.duration || 0; seek(); }
+  if (video.readyState >= 1) ready(); else video.addEventListener('loadedmetadata', ready);
+
+  // phones only load the film after a touch: play and stop it once so every frame is available
+  var primed = false;
+  function prime() {
+    if (primed) return; primed = true;
+    var p = video.play();
+    if (p && p.then) p.then(function () { video.pause(); seek(); }).catch(function () {});
+  }
+  window.addEventListener('touchstart', prime, { passive: true, once: true });
+  window.addEventListener('pointerdown', prime, { passive: true, once: true });
+
+  // where each line of copy appears and leaves, as a share of the film (0 to 1)
+  var CUES = [[0, 0.15], [0.22, 0.36], [0.46, 0.7], [0.84, 1]];
+  gsap.set(beats.slice(1), { autoAlpha: 0 });
+  var tl = gsap.timeline({
+    defaults: { ease: 'none' },
+    scrollTrigger: {
+      trigger: stage, start: 'top top',
+      end: function () { return '+=' + stage.offsetHeight * SCROLL_SCREENS; },
+      pin: true, scrub: 0.5, invalidateOnRefresh: true,
+      onUpdate: function (self) { bar.style.transform = 'scaleX(' + self.progress + ')'; }
+    }
+  });
+  tl.to(play, { t: 1, duration: 1, onUpdate: seek }, 0);
+  tl.to(hint, { autoAlpha: 0, duration: 0.05 }, 0.02);
+  beats.forEach(function (b, i) {
+    var kids = Array.prototype.slice.call(b.children), from = CUES[i][0], to = CUES[i][1];
+    if (i > 0) {
+      tl.set(b, { autoAlpha: 1 }, from)
+        .fromTo(kids, { y: 34, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 0.06, stagger: 0.012, ease: 'power2.out', immediateRender: false }, from);
+    }
+    if (to < 1) {
+      tl.fromTo(kids, { y: 0, autoAlpha: 1 }, { y: -28, autoAlpha: 0, duration: 0.05, stagger: 0.008, ease: 'power1.in', immediateRender: false }, to)
+        .set(b, { autoAlpha: 0 }, to + 0.07);
+    }
+  });
+  tl.set({}, {}, 1);
+
+  /* ---------- Sections after the film (created after the film so their scroll positions include its pinned distance) ---------- */
+  $$('[data-show]').forEach(function (n, i) {
+    gsap.from(n, { y: 28, autoAlpha: 0, duration: 0.9, ease: 'power3.out', delay: (i % 3) * 0.06, scrollTrigger: { trigger: n, start: 'top 90%' } });
+  });
+
+  // Our story: the picture drifts inside its arch and the text lights up word by word as it is read
+  gsap.fromTo('#story-img', { yPercent: -10.5 }, { yPercent: 0, ease: 'none', scrollTrigger: { trigger: '.story2', start: 'top bottom', end: 'bottom top', scrub: 0.6 } });
+  var storyText = $('#story-text'), words = [];
+  $$('p', storyText).forEach(function (p) {
+    var parts = p.textContent.trim().split(/\s+/);
+    p.textContent = '';
+    parts.forEach(function (w, i) {
+      var s = el('span', 'w', w);
+      p.appendChild(s); if (i < parts.length - 1) p.appendChild(document.createTextNode(' '));
+      words.push(s);
+    });
+  });
+  gsap.fromTo(words, { opacity: 0.16 }, { opacity: 1, ease: 'none', stagger: 0.06,
+    scrollTrigger: { trigger: storyText, start: 'top 80%', end: 'bottom 48%', scrub: 0.5 } });
+
+  // How a bottle is made: scrolling down slides the steps sideways
+  var make = $('#making'), makeStage = $('#make-stage'), makeTrack = $('#make-track'), makeBar = $('#make-bar'), makeCount = $('#make-count');
+  var stepsN = $$('.step', makeTrack).length;
+  make.classList.add('is-live');
+  var slide = function () { return Math.max(0, makeTrack.scrollWidth - makeStage.clientWidth); };
+  gsap.to(makeTrack, { x: function () { return -slide(); }, ease: 'none',
+    scrollTrigger: {
+      trigger: makeStage, start: 'top top',
+      end: function () { return '+=' + Math.max(slide(), makeStage.offsetHeight * 0.9); },
+      pin: true, scrub: 0.6, invalidateOnRefresh: true,
+      onUpdate: function (self) {
+        makeBar.style.transform = 'scaleX(' + self.progress + ')';
+        makeCount.textContent = ('0' + (Math.round(self.progress * (stepsN - 1)) + 1)).slice(-2);
+      }
+    } });
+
+  // Numbers count up once, when they come into view
+  $$('.num__val').forEach(function (n, i) {
+    var target = Number(n.dataset.count), suffix = n.dataset.suffix || '', o = { v: 0 };
+    n.textContent = '0' + suffix;
+    gsap.to(o, { v: target, duration: 1.6, ease: 'power2.out', delay: i * 0.12,
+      onUpdate: function () { n.textContent = Math.round(o.v).toLocaleString('en-US') + suffix; },
+      scrollTrigger: { trigger: '#nums-grid', start: 'top 82%' } });
+  });
+
+  // A note from the house: the bottle rises into the light while the crest turns slowly behind it
+  gsap.fromTo('#house-bottle', { yPercent: 14 }, { yPercent: -2, ease: 'none', scrollTrigger: { trigger: '#founder', start: 'top bottom', end: 'bottom 40%', scrub: 0.6 } });
+  gsap.fromTo('#house-crest', { rotation: -8, scale: 0.92 }, { rotation: 6, scale: 1.04, ease: 'none', scrollTrigger: { trigger: '#founder', start: 'top bottom', end: 'bottom top', scrub: 0.8 } });
+
+  // Find your scent: the bottles rise into place
+  $$('#find-bottles span').forEach(function (b, i) {
+    gsap.fromTo(b, { yPercent: [30, 16, 40, 24][i % 4] }, { yPercent: 0, ease: 'none',
+      scrollTrigger: { trigger: '#find', start: 'top bottom', end: 'bottom bottom', scrub: 0.6 } });
+  });
+
+  // opening line rises in on load
+  gsap.from(beats[0].children, { y: 30, autoAlpha: 0, duration: 1, ease: 'power3.out', stagger: 0.1, delay: 0.15 });
+  gsap.from('.foot__top > *', { y: 30, autoAlpha: 0, duration: 0.9, ease: 'power3.out', stagger: 0.08, scrollTrigger: { trigger: '.foot', start: 'top 85%' } });
+  gsap.fromTo('#foot-word', { yPercent: 42 }, { yPercent: 0, ease: 'none', scrollTrigger: { trigger: '#foot-word', start: 'top bottom', end: 'bottom bottom', scrub: 0.6 } });
+  ScrollTrigger.sort();
+  ScrollTrigger.refresh();
+  window.addEventListener('load', function () { ScrollTrigger.refresh(); });
+})();
+</script>
+<script>
+/* Arriving with #section in the address (for example home.html#reviews): scroll there once the page has settled. */
+window.addEventListener('load', function () {
+  var id = (location.hash || '').slice(1); if (!id) return;
+  var target = document.getElementById(id), bar = document.getElementById('top');
+  if (!target || target === document.querySelector('main')) return;
+  setTimeout(function () {
+    if (window.ScrollTrigger) ScrollTrigger.refresh();
+    window.scrollTo(0, target.getBoundingClientRect().top + window.scrollY - (bar ? bar.offsetHeight : 0) + 2);
+  }, 350);
+});
+</script>
+<script>
+/* Visitor count for the dashboard: a random id kept in this browser, no personal data. */
+(function () {
+  try {
+    var k = 'shafar.vid', v = localStorage.getItem(k);
+    if (!v) { v = Math.random().toString(36).slice(2) + Date.now().toString(36); localStorage.setItem(k, v); }
+    var data = JSON.stringify({ vid: v, path: location.pathname, ref: document.referrer });
+    if (navigator.sendBeacon) navigator.sendBeacon('/api/track', data);
+    else fetch('/api/track', { method: 'POST', body: data, keepalive: true });
+  } catch (e) {}
+})();
+</script>
+</body>
+</html>

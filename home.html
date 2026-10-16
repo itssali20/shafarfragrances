@@ -1,0 +1,1278 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Home | Shafar Fragrances</title>
+<meta name="description" content="Where every scent tells a tale. Explore the Shafar collection for men, women and everyone.">
+<meta name="robots" content="noindex">   <!-- preview build with sample content: remove this line at launch -->
+<meta name="theme-color" content="#F6EFE4">
+<link rel="icon" type="image/png" href="assets/favicon.png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600&family=Noto+Serif+Display:ital,wdth,wght@0,62.5..100,400..900;1,62.5..100,400..900&display=swap">
+<style>
+/* base rules every page relies on */
+:root{color-scheme:light}
+html{-webkit-text-size-adjust:100%}
+body{margin:0}
+img{max-width:100%}
+[hidden]{display:none!important}
+</style>
+<style>
+/* Layout: three stops for one travelling bottle. Hero: copy left, bottle standing in an arch on the right.
+   Spotlight: bottle centred on a round backdrop, story left, facts right.
+   Collection: four arch-framed cards; the bottle settles into the first card and stays. */
+:root{
+  --cream:#F6EFE4;      /* page ground */
+  --linen:#FBF7F0;      /* raised surfaces: drawer, menu */
+  --sand:#E8DAC3;       /* hairlines and quiet fills */
+  --dune:#EBDDC6;       /* spotlight band */
+  --espresso:#2B1810;   /* brand brown: header, primary text */
+  --cocoa:#6B4A36;      /* secondary text */
+  --bronze:#8A5B1E;     /* small accents on light grounds */
+  --gold:#C9A24A;       /* logo gold, on brown only */
+  --amber-1:#F1D9B2;    /* Halila Lane arch, top */
+  --amber-2:#DDB684;    /* Halila Lane arch, base */
+  --word:#FFFBF4;
+  --display:"Noto Serif Display","Bodoni 72",Didot,"Playfair Display",Georgia,serif;
+  --ui:"Jost","Century Gothic","Avenir Next",Avenir,"Segoe UI",system-ui,sans-serif;
+  --pad:clamp(1.125rem,5vw,4.75rem);
+  --head:4.875rem;
+  color-scheme:light;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{font-size:clamp(12px,0.9467vw,18px)}   /*root*/
+@media (max-width:1080px){html{font-size:16px}}   /*root*/
+body{margin:0;background:var(--cream);color:var(--espresso);font-family:var(--ui);font-size:max(12.5px,1rem);line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+h1,h2,h3,p,ol,ul,dl,dd{margin:0}
+ol,ul{padding:0;list-style:none}
+button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:pointer}
+a{color:inherit}
+:focus-visible{outline:0.125rem solid currentColor;outline-offset:0.1875rem;border-radius:0.125rem}
+
+/* ---------- Header (same as the Featured page) ---------- */
+.top{position:fixed;inset:0 0 auto 0;z-index:30;display:flex;align-items:center;justify-content:space-between;gap:1.25rem;
+  height:calc(var(--head) + env(safe-area-inset-top,0px));padding:env(safe-area-inset-top,0px) var(--pad) 0;
+  color:var(--espresso);transition:background-color .3s,box-shadow .3s}
+.top.is-solid{background:rgba(246,239,228,.9);-webkit-backdrop-filter:blur(0.75rem);backdrop-filter:blur(0.75rem);box-shadow:0 1px 0 rgba(43,24,16,.1)}
+.brand{display:flex;align-items:center;gap:0.75rem;text-decoration:none;flex:none}
+.brand img{display:block;width:auto;max-width:none}
+.brand__crest{height:3rem}
+.brand__word{height:1.9375rem}
+.menu{display:flex;align-items:center;gap:clamp(1.125rem,3vw,2.5rem)}
+.menu a,.menu button{font-size:max(10.5px,0.75rem);font-weight:500;letter-spacing:.2em;text-transform:uppercase;text-decoration:none;padding:0.625rem 0.125rem;position:relative}
+.menu a::after,.menu button::after{content:"";position:absolute;left:0.125rem;right:0.125rem;bottom:0.25rem;height:1px;background:currentColor;transform:scaleX(0);transform-origin:left;transition:transform .3s}
+.menu a:hover::after,.menu button:hover::after,.menu [aria-current]::after{transform:scaleX(1)}
+.tools{display:flex;align-items:center;gap:0.375rem;flex:none}
+.icon{position:relative;width:2.75rem;height:2.75rem;display:grid;place-items:center;border-radius:50%;transition:background-color .2s}
+.icon:hover{background:rgba(43,24,16,.08)}
+.icon svg{width:1.3125rem;height:1.3125rem;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.badge{position:absolute;top:0.1875rem;right:1px;min-width:1.125rem;height:1.125rem;padding:0 0.3125rem;border-radius:0.5625rem;background:var(--espresso);color:var(--cream);
+  font-size:max(10.5px,0.6562rem);font-weight:600;line-height:1.125rem;text-align:center;font-variant-numeric:tabular-nums}
+.burger{display:none}
+
+/* ---------- Shared pieces ---------- */
+main{position:relative}
+.eyebrow{font-size:max(10.5px,0.7188rem);font-weight:600;letter-spacing:.26em;text-transform:uppercase;color:var(--bronze)}
+.btn{display:inline-flex;align-items:center;justify-content:center;height:3.375rem;padding:0 1.875rem;border-radius:1.6875rem;background:var(--espresso);color:var(--word);
+  font-size:max(10.5px,0.75rem);font-weight:600;letter-spacing:.2em;text-transform:uppercase;text-decoration:none;transition:transform .2s}
+.btn:hover{transform:translateY(-0.125rem)}
+.more{display:inline-flex;align-items:center;gap:0.75rem;font-size:max(10.5px,0.75rem);font-weight:600;letter-spacing:.2em;text-transform:uppercase;text-decoration:none;padding:0.625rem 0}
+.more::after{content:"";width:2.125rem;height:1px;background:currentColor;transition:width .3s}
+.more:hover::after{width:3.25rem}
+.heart{flex:none;width:2.875rem;height:2.875rem;border-radius:50%;display:grid;place-items:center;border:1px solid rgba(43,24,16,.3);transition:border-color .2s}
+.heart:hover{border-color:currentColor}
+.heart svg{width:1.1875rem;height:1.1875rem;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linejoin:round;transition:fill .2s}
+.heart[aria-pressed="true"] svg{fill:currentColor}
+.slot{aspect-ratio:482/1100;position:relative}
+.slot img{display:block;height:100%;width:auto;max-width:none;position:relative;z-index:1}
+.slot::after,.traveller__shadow{content:"";position:absolute;left:-8%;right:-8%;bottom:-4.5%;height:9%;border-radius:50%;
+  background:radial-gradient(closest-side,#3A2113,transparent);opacity:.32;filter:blur(0.4375rem)}
+/* With the travelling bottle running, its three resting places stay empty */
+.travel .slot--t img,.travel .slot--t::after{visibility:hidden}
+
+/* ---------- The travelling bottle ---------- */
+.traveller{display:none}
+.travel .traveller{display:block;position:absolute;left:0;top:0;z-index:6;pointer-events:none;will-change:transform}
+.travel .traveller.is-flying{position:fixed}
+.traveller__in{position:relative;width:100%;height:100%}
+.traveller img{display:block;width:100%;height:100%;max-width:none;position:relative;z-index:1}
+
+/* ---------- Hero ---------- */
+.hero{position:relative;display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);column-gap:clamp(1.5rem,4vw,4rem);
+  min-height:100vh;min-height:100svh;padding:calc(var(--head) + 1rem) var(--pad) 0;overflow:hidden;
+  background:radial-gradient(58% 72% at 76% 64%,#F4E6CE 0%,rgba(244,230,206,0) 72%),var(--cream)}
+.hero__copy{align-self:center;display:grid;gap:clamp(1.125rem,2.6vh,1.75rem);justify-items:start;padding-bottom:clamp(6.875rem,17vh,10.625rem)}
+.hero h1{font-family:var(--display);font-weight:500;font-size:clamp(2.875rem,6.5vw,6.625rem);line-height:.98;letter-spacing:-.015em;text-wrap:balance}
+.hero h1 em{font-weight:400}
+.hero__lede{max-width:40ch;font-size:clamp(1rem,1.25vw,1.1562rem);color:var(--cocoa)}
+.hero__cta{display:flex;flex-wrap:wrap;align-items:center;gap:0.875rem 1.875rem;margin-top:0.375rem}
+.hero__stage{align-self:end;justify-self:center}
+.arch{position:relative;width:min(31vw,26.25rem);height:min(76vh,42.5rem);height:min(76svh,42.5rem);border-radius:999px 999px 0 0;
+  background:linear-gradient(180deg,var(--amber-1),var(--amber-2));display:grid;grid-template-rows:minmax(0,1fr);place-items:end center;padding-bottom:5.5%}
+.arch::before{content:"";position:absolute;inset:-1.125rem -1.125rem 0;border:1px solid rgba(138,91,30,.42);border-bottom:0;border-radius:inherit;pointer-events:none}
+.arch .slot{height:81%}
+.facts{position:absolute;left:var(--pad);bottom:1.875rem;display:flex;flex-wrap:wrap;gap:0.5rem 0;font-size:max(10.5px,0.75rem);font-weight:500;letter-spacing:.16em;text-transform:uppercase}
+.facts li{padding:0.375rem 1.375rem;border-left:1px solid rgba(43,24,16,.25)}
+.facts li:first-child{padding-left:0;border-left:0}
+
+/* ---------- Spotlight ---------- */
+.spot{position:relative;display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);align-items:center;column-gap:clamp(2.25rem,6vw,6.5rem);
+  min-height:94vh;min-height:94svh;padding:clamp(6rem,15vh,10.625rem) var(--pad);background:var(--dune)}
+.spot__copy{justify-self:end;max-width:20.625rem;display:grid;gap:1rem;justify-items:start}
+.spot h2{font-family:var(--display);font-weight:500;font-size:clamp(2.5rem,4.4vw,4.25rem);line-height:1;letter-spacing:-.01em}
+.spot__copy p:not(.eyebrow){color:var(--cocoa);max-width:30ch}
+.spot__copy .btn{margin-top:0.5rem}
+.halo{position:relative;width:min(34vw,60vh,26.875rem);width:min(34vw,60svh,26.875rem);aspect-ratio:1;border-radius:50%;
+  background:radial-gradient(circle at 50% 36%,#F8EBD2,#E3C08F);display:grid;grid-template-rows:minmax(0,1fr);place-items:center}
+.halo::before,.halo::after{content:"";position:absolute;border-radius:50%;pointer-events:none}
+.halo::before{inset:-2.125rem;border:1px solid rgba(138,91,30,.3)}
+.halo::after{inset:-4.875rem;border:1px solid rgba(138,91,30,.15)}
+.halo .slot{height:122%}
+.spec{max-width:20rem;width:100%}
+.spec div{display:flex;align-items:baseline;justify-content:space-between;gap:1.25rem;padding:1.0625rem 0;border-top:1px solid rgba(43,24,16,.18)}
+.spec div:last-child{border-bottom:1px solid rgba(43,24,16,.18)}
+.spec dt{font-size:max(10.5px,0.7188rem);font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:var(--cocoa)}
+.spec dd{font-family:var(--display);font-weight:500;font-size:1.4375rem;text-align:right;font-variant-numeric:lining-nums}
+
+/* ---------- Collection ---------- */
+.shop{padding:clamp(4.75rem,10vw,8.25rem) var(--pad) clamp(4.75rem,10vw,7.75rem);background:var(--cream)}
+.shop__head{position:relative;z-index:7;max-width:77.5rem;margin:0 auto clamp(2.25rem,5vw,3.875rem);display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:0.875rem 1.75rem}
+.shop__head h2{font-family:var(--display);font-weight:500;font-size:clamp(2.375rem,4.6vw,4.375rem);line-height:1;letter-spacing:-.01em;margin-top:0.75rem}
+.cards{max-width:77.5rem;margin-inline:auto;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(1rem,2.2vw,2.125rem)}
+.card{display:grid;grid-template-columns:minmax(0,1fr);grid-template-rows:auto 1fr;gap:1.25rem;color:var(--ink);min-width:0}
+.card__frame{aspect-ratio:4/5;border-radius:999px 999px 0.5rem 0.5rem;background:linear-gradient(180deg,var(--c),var(--e));display:grid;grid-template-rows:minmax(0,1fr);place-items:end center;padding-bottom:9%}
+.card__frame .slot{height:71%}
+.card__body{display:grid;grid-template-rows:auto auto 1fr auto;gap:0.5rem;min-width:0}
+.card__kind{font-size:max(10.5px,0.6875rem);font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:var(--accent)}
+.card__name{font-family:var(--display);font-weight:500;font-size:clamp(1.5625rem,2.3vw,2rem);line-height:1.05}
+.card__desc{font-size:max(12.5px,0.9062rem);line-height:1.5;color:var(--cocoa)}
+.card__buy{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:0.75rem;margin-top:0.625rem;padding-top:0.875rem;border-top:1px solid var(--sand)}
+.card__price{display:flex;align-items:baseline;gap:0.5rem;font-family:var(--display);font-weight:600;font-size:1.5625rem;line-height:1;font-variant-numeric:lining-nums tabular-nums;white-space:nowrap}
+.card__price span{font-family:var(--ui);font-weight:500;font-size:max(10.5px,0.7188rem);letter-spacing:.14em;text-transform:uppercase;color:var(--cocoa)}
+.card__acts{display:flex;gap:0.5rem;align-items:center}
+.card__add{height:2.875rem;padding:0 1.25rem;border-radius:1.4375rem;background:var(--ink);color:var(--word);font-size:max(10.5px,0.6875rem);font-weight:600;letter-spacing:.18em;text-transform:uppercase;white-space:nowrap;transition:transform .2s}
+.card__add:hover{transform:translateY(-0.125rem)}
+.card__add:disabled{opacity:.34;cursor:not-allowed;transform:none}
+.card__price.card__price--open{font-family:var(--ui);font-weight:500;font-size:max(12.5px,0.8438rem);letter-spacing:.02em;color:var(--cocoa)}
+
+/* ---------- Categories ---------- */
+.cats{background:#2C190F;color:#F1E6D3;padding:clamp(4.75rem,10vw,8.25rem) var(--pad)}
+.cats__head{max-width:77.5rem;margin:0 auto clamp(2.25rem,5vw,3.75rem);display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:1rem 2.5rem}
+.cats .eyebrow{color:var(--gold)}
+.cats h2{font-family:var(--display);font-weight:500;font-size:clamp(2.375rem,4.6vw,4.375rem);line-height:1;letter-spacing:-.01em;margin-top:0.75rem}
+.cats h2 em{font-weight:400}
+.cats__lede{max-width:34ch;color:#D9C7AC}
+.cats__row{max-width:77.5rem;margin-inline:auto;display:flex;gap:clamp(0.75rem,1.6vw,1.5rem);height:min(70vh,40rem);height:min(70svh,40rem);min-height:25rem}
+.cat{text-decoration:none;position:relative;flex:1 1 0;min-width:0;overflow:hidden;container-type:inline-size;border-radius:999px 999px 0.875rem 0.875rem;background:linear-gradient(180deg,var(--c),var(--e));color:var(--ink);
+  display:grid;grid-template-columns:minmax(0,1fr);grid-template-rows:minmax(0,1fr) auto;text-align:left;transition:flex-grow .7s cubic-bezier(.2,.7,.2,1)}
+.cat:hover,.cat:focus-visible{flex-grow:1.55}
+.cat__back{position:absolute;inset:0 0 15% 0;display:grid;place-items:center;pointer-events:none}
+.cat__word{font-family:var(--display);font-weight:900;font-stretch:62.5%;font-size:8.25rem;font-size:calc(var(--fit,24.5) * 1cqw);line-height:.8;text-transform:uppercase;white-space:nowrap;color:var(--word);}
+.cat__bottle{position:relative;z-index:1;min-height:0;display:grid;grid-template-rows:minmax(0,1fr);place-items:end center;padding-top:24%}
+.cat__bottle img{display:block;height:100%;height:min(100%,112cqw);width:auto;max-width:none;transition:transform .7s cubic-bezier(.2,.7,.2,1)}
+.cat:hover .cat__bottle img,.cat:focus-visible .cat__bottle img{transform:translateY(-3%) rotate(-5deg) scale(1.06)}
+.cat__foot{position:relative;z-index:1;display:flex;align-items:center;justify-content:space-between;gap:0.75rem;padding:1.125rem 1.5rem 1.5rem}
+.cat__name{font-family:var(--display);font-weight:500;font-size:2.25rem;line-height:1}
+.cat__go{display:flex;align-items:center;gap:0.75rem;font-size:max(10.5px,0.7188rem);font-weight:600;letter-spacing:.2em;text-transform:uppercase}
+.cat__go::after{content:"";width:2.75rem;height:2.75rem;border-radius:50%;border:1px solid currentColor;
+  background:linear-gradient(currentColor,currentColor) center/1rem 1px no-repeat;transition:background-size .4s}
+.cat:hover .cat__go::after,.cat:focus-visible .cat__go::after{background-size:1.625rem 1px}
+
+/* ---------- Discovery wheel ---------- */
+.wheel{background:var(--cream)}
+.wheel__stage{position:relative;--wc:#EFD3A8;--we:#D9AE78;--wink:#3A2113}
+.wheel__head{text-align:center;padding:calc(var(--head) + 1.125rem) var(--pad) 0}
+.wheel__head h2{font-family:var(--display);font-weight:500;font-size:clamp(2.125rem,4.2vw,4rem);line-height:1;letter-spacing:-.01em;margin-top:0.625rem}
+.wheel__item{height:min(34vh,22.5rem);height:min(34svh,22.5rem);aspect-ratio:482/1100;position:relative}
+.wheel__item img{display:block;height:100%;width:auto;max-width:none;position:relative;z-index:1}
+.wheel__item::after{content:"";position:absolute;left:-8%;right:-8%;bottom:-4.5%;height:9%;border-radius:50%;background:radial-gradient(closest-side,#3A2113,transparent);opacity:.3;filter:blur(0.4375rem)}
+.wheel__info,.wheel__disc,.wheel__count{display:none}
+/* Without the scroll wheel running, the bottles sit in a plain row */
+.wheel__ring{display:flex;flex-wrap:wrap;justify-content:center;gap:2rem 3.5rem;padding:2.75rem var(--pad) 5.25rem}
+/* Wheel running: one pinned screen, bottles standing on the rim of a large turning disc */
+.wheel.is-live .wheel__stage{height:100vh;height:100svh;min-height:29.375rem;overflow:hidden}
+.wheel.is-live .wheel__head{position:absolute;left:0;right:0;top:0;z-index:3}
+.wheel.is-live .wheel__disc{display:block;position:absolute;border-radius:50%;background:radial-gradient(47.5rem 21.25rem at 50% 0,var(--wc),var(--we))}
+.wheel.is-live .wheel__disc::before{content:"";position:absolute;inset:1.625rem;border-radius:50%;border:1px solid rgba(138,91,30,.32)}
+.wheel.is-live .wheel__ring{display:block;position:absolute;inset:0;z-index:2;padding:0;pointer-events:none}
+.wheel.is-live .wheel__item{position:absolute;left:0;top:0;will-change:transform}
+.wheel.is-live .wheel__info{display:block;position:absolute;left:0;right:0;z-index:3;text-align:center;color:var(--wink);padding-inline:var(--pad)}
+.wheel__infoin{display:grid;justify-items:center;gap:0.5rem}
+.wheel__name{font-family:var(--display);font-weight:500;font-size:clamp(1.875rem,3.1vw,3rem);line-height:1}
+.wheel__meta{font-size:max(10.5px,0.75rem);font-weight:500;letter-spacing:.18em;text-transform:uppercase}
+.wheel__info .btn{margin-top:0.5rem;height:3rem;background:var(--wink)}
+.wheel__info .btn:disabled{opacity:.34;cursor:not-allowed}
+.wheel.is-live .wheel__count{display:block;position:absolute;left:0;right:0;text-align:center;bottom:1.625rem;z-index:3;font-size:max(10.5px,0.75rem);letter-spacing:.2em;font-variant-numeric:tabular-nums;color:var(--wink)}
+.wheel__count b{font-family:var(--display);font-weight:600;font-size:1.5rem;letter-spacing:0;margin-right:0.25rem}
+
+/* ---------- Promise strip ---------- */
+.strip{background:var(--cream);border-block:1px solid rgba(43,24,16,.14);padding:clamp(1.375rem,3vw,2.625rem) 0;overflow:hidden}
+.strip__move{display:flex;width:max-content;animation:slide 42s linear infinite}
+.strip__set{display:flex;align-items:center;flex:none}
+.strip__set span{font-family:var(--display);font-weight:500;font-size:clamp(2.25rem,5.2vw,5.5rem);line-height:1.1;white-space:nowrap;padding:0 .32em}
+.strip__set span:nth-of-type(even){font-style:italic;font-weight:400;color:var(--bronze)}
+.strip__set img{height:clamp(1.875rem,3.6vw,3.75rem);width:auto;flex:none;opacity:.85}
+@keyframes slide{to{transform:translateX(-50%)}}
+
+/* ---------- Parallax banner ---------- */
+.banner{position:relative;display:grid;grid-template-rows:minmax(0,1fr) auto;justify-items:center;height:min(92vh,53.75rem);height:min(92svh,53.75rem);min-height:31.25rem;overflow:hidden;
+  padding:clamp(2.5rem,7vh,5.25rem) var(--pad) 0;text-align:center;color:#F6EAD6;background:radial-gradient(72% 86% at 50% 104%,#6A3F22 0%,#3A2113 46%,#2C190F 78%)}
+.banner__photo{position:absolute;inset:-8% 0;background-size:cover;background-position:center}   /* drop a lifestyle photo in here later */
+.banner__crest{position:absolute;inset:0;display:grid;place-items:center;pointer-events:none}
+.banner__crest img{width:min(58vw,74vh,40rem);height:auto;opacity:.13}
+.banner__copy{position:relative;z-index:2;align-self:center;display:grid;gap:1.125rem;justify-items:center}
+.banner .eyebrow{color:var(--gold)}
+.banner h2{font-family:var(--display);font-weight:500;font-size:clamp(2.625rem,7.2vw,7.5rem);line-height:.98;letter-spacing:-.015em;text-wrap:balance}
+.banner h2 em{font-weight:400;color:#E3C57A}
+.banner__bottles{position:relative;z-index:1;display:flex;align-items:flex-end;justify-content:center;gap:clamp(0.875rem,3.6vw,4rem)}
+.banner__bottles span{display:block;position:relative}
+.banner__bottles img{display:block;height:min(36vh,21.25rem);height:min(36svh,21.25rem);width:auto;max-width:none}
+.banner__bottles span:nth-child(1) img{height:min(30vh,17.75rem);height:min(30svh,17.75rem)}
+.banner__bottles span:nth-child(3) img{height:min(33vh,19.5rem);height:min(33svh,19.5rem)}
+.banner__bottles span:nth-child(4) img{height:min(28vh,16.5rem);height:min(28svh,16.5rem)}
+.banner__bottles span::after{content:"";position:absolute;left:-10%;right:-10%;bottom:-3%;height:8%;border-radius:50%;background:radial-gradient(closest-side,#000,transparent);opacity:.5;filter:blur(0.375rem)}
+
+/* ---------- Best sellers carousel ---------- */
+.best{padding:clamp(4.75rem,10vw,8.25rem) var(--pad) clamp(4rem,8vw,6.5rem);background:var(--cream);overflow:hidden}
+.best__head{max-width:77.5rem;margin:0 auto clamp(2rem,4.4vw,3.5rem);display:flex;align-items:flex-end;justify-content:space-between;gap:1rem 1.75rem}
+.best__head h2{font-family:var(--display);font-weight:500;font-size:clamp(2.375rem,4.6vw,4.375rem);line-height:1;letter-spacing:-.01em;margin-top:0.75rem}
+.best__nav{display:flex;gap:0.625rem;flex:none}
+.arrow{width:3.5rem;height:3.5rem;border-radius:50%;border:1px solid rgba(43,24,16,.32);display:grid;place-items:center;transition:background-color .25s,color .25s,opacity .25s}
+.arrow svg{width:1.25rem;height:1.25rem;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.arrow:hover:not(:disabled){background:var(--espresso);color:var(--cream)}
+.arrow:disabled{opacity:.3;cursor:default}
+.best__track{--gap:clamp(1rem,2.2vw,2.125rem);max-width:77.5rem;margin-inline:auto;display:grid;grid-auto-flow:column;grid-auto-columns:calc((100% - var(--gap) * 3) / 4);gap:var(--gap);
+  overflow-x:auto;overscroll-behavior-x:contain;scroll-snap-type:x mandatory;scrollbar-width:none}
+.best__track::-webkit-scrollbar{display:none}
+.best__track .card{scroll-snap-align:start}
+.best__bar{max-width:77.5rem;margin:clamp(1.75rem,3.6vw,2.75rem) auto 0;height:0.125rem;background:var(--sand);position:relative;overflow:hidden}
+.best__bar span{position:absolute;inset:0;background:var(--espresso);transform-origin:left;transform:scaleX(.5)}
+
+/* ---------- Reviews ---------- */
+.reviews{padding:clamp(4.75rem,10vw,8.25rem) var(--pad);background:var(--dune)}
+.reviews__head{max-width:77.5rem;margin:0 auto clamp(2rem,4.4vw,3.5rem);display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:1rem 2.5rem}
+.reviews__head h2{font-family:var(--display);font-weight:500;font-size:clamp(2.375rem,4.6vw,4.375rem);line-height:1;letter-spacing:-.01em;margin-top:0.75rem}
+.reviews__head h2 em{font-weight:400}
+.reviews__lede{max-width:36ch;color:var(--cocoa)}
+.reviews__grid{max-width:77.5rem;margin-inline:auto;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(1rem,2.2vw,1.875rem)}
+.review,.review blockquote{margin:0}
+.review{position:relative;display:grid;grid-template-rows:auto 1fr auto;gap:1.125rem;padding:2.125rem 1.875rem 1.625rem;background:var(--linen);border-radius:0.5rem}
+.review__mark{font-family:var(--display);font-weight:700;font-size:5.75rem;line-height:.62;height:2.75rem;color:var(--gold)}
+.review__text{font-family:var(--display);font-weight:400;font-size:clamp(1.25rem,1.7vw,1.5625rem);line-height:1.36}
+.review__who{display:flex;flex-wrap:wrap;justify-content:space-between;gap:0.375rem 1rem;padding-top:1rem;border-top:1px solid var(--sand);font-size:max(10.5px,0.75rem);font-weight:500;letter-spacing:.16em;text-transform:uppercase}
+.review__who span:last-child{color:var(--cocoa)}
+.review__tag{position:absolute;top:1.125rem;right:1.125rem;padding:0.25rem 0.75rem;border:1px dashed var(--bronze);border-radius:1.25rem;font-size:max(10.5px,0.6562rem);font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--bronze)}
+
+/* ---------- Instagram ---------- */
+.insta{padding:clamp(4.75rem,10vw,8.25rem) var(--pad);background:var(--cream)}
+.insta__head{max-width:77.5rem;margin:0 auto clamp(2rem,4.4vw,3.5rem);display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:1rem 1.75rem}
+.insta__head h2{font-family:var(--display);font-weight:500;font-size:clamp(2.125rem,4.2vw,4rem);line-height:1;letter-spacing:-.01em;margin-top:0.75rem}
+.insta__grid{max-width:77.5rem;margin-inline:auto;display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:clamp(0.5rem,1.1vw,1rem)}
+.insta__tile{position:relative;display:block;aspect-ratio:4/5;overflow:hidden;border-radius:0.375rem;background:var(--sand)}
+.insta__tile:nth-child(odd){border-radius:999px 999px 0.375rem 0.375rem}
+.insta__tile img{display:block;width:100%;height:100%;object-fit:cover;transition:transform .9s cubic-bezier(.2,.7,.2,1)}
+.insta__tile::after{content:"";position:absolute;inset:0;background:rgba(43,24,16,.34);opacity:0;transition:opacity .4s}
+.insta__tile:hover img,.insta__tile:focus-visible img{transform:scale(1.08)}
+.insta__tile:hover::after,.insta__tile:focus-visible::after{opacity:1}
+
+/* ---------- Footer ---------- */
+.foot{position:relative;overflow:hidden;background:#2C190F;color:#E9DCC7;padding:clamp(3.5rem,8vw,6.875rem) var(--pad) 0}
+.foot a{color:inherit;text-decoration:none}
+.foot__top{max-width:77.5rem;margin-inline:auto;display:grid;grid-template-columns:minmax(0,1.5fr) repeat(3,minmax(0,1fr));gap:clamp(1.75rem,4vw,4.5rem)}
+.foot__brand{display:grid;gap:1.375rem;justify-items:start;align-content:start}
+.foot__brand img{width:11rem;height:auto;display:block}
+.foot__brand p{max-width:30ch;color:#D9C7AC}
+.foot__pay{white-space:nowrap;display:inline-flex;align-items:center;gap:0.625rem;padding:0.5625rem 1rem;border:1px solid rgba(201,162,74,.5);border-radius:1.375rem;font-size:max(10.5px,0.7188rem);font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:#E3C57A}
+.foot__pay::before{content:"";width:0.4375rem;height:0.4375rem;border-radius:50%;background:var(--gold)}
+.foot__col h3{font-size:max(10.5px,0.7188rem);font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);margin-bottom:1.125rem}
+.foot__col ul{display:grid;gap:0.6875rem}
+.foot__col a,.foot__col button{font-family:var(--display);font-size:1.3125rem;line-height:1.2;background-image:linear-gradient(currentColor,currentColor);background-repeat:no-repeat;background-position:0 100%;background-size:0 1px;transition:background-size .35s}
+.foot__col a:hover,.foot__col button:hover{background-size:100% 1px}
+.foot__col small{display:block;margin-top:0.875rem;font-size:max(10.5px,0.8125rem);color:#BFAE94}
+.foot__word{margin-top:clamp(2.25rem,6vw,5.25rem);font-family:var(--display);font-weight:900;font-stretch:62.5%;font-size:24.4vw;line-height:.74;text-align:center;text-transform:uppercase;white-space:nowrap;
+  background:linear-gradient(180deg,#E3C57A 0%,#B0842D 46%,#4A2F14 92%);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-user-select:none;user-select:none;padding-bottom:.1em}
+.foot__base{position:relative;max-width:77.5rem;margin-inline:auto;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:0.75rem 1.5rem;
+  padding:1.125rem 0 calc(1.375rem + env(safe-area-inset-bottom,0px));border-top:1px solid rgba(233,220,199,.16);font-size:max(10.5px,0.75rem);letter-spacing:.14em;text-transform:uppercase;color:#BFAE94}
+.foot__up{display:inline-flex;align-items:center;gap:0.625rem;color:#E9DCC7;font-size:max(10.5px,0.75rem);letter-spacing:.2em;text-transform:uppercase}
+.foot__up::after{content:"";width:2.375rem;height:2.375rem;border-radius:50%;border:1px solid rgba(233,220,199,.4);background:linear-gradient(#E9DCC7,#E9DCC7) center/1px 0.875rem no-repeat}
+
+/* ---------- Drawer, scrim, toast ---------- */
+.scrim{position:fixed;inset:0;z-index:40;background:rgba(43,24,16,.38);opacity:0;visibility:hidden;transition:opacity .3s,visibility 0s .3s}
+.scrim.open{opacity:1;visibility:visible;transition-delay:0s}
+.drawer{position:fixed;top:0;right:0;bottom:0;z-index:41;width:min(26.25rem,100%);background:var(--linen);color:var(--espresso);display:flex;flex-direction:column;
+  padding:calc(1.375rem + env(safe-area-inset-top,0px)) 1.5rem calc(1.375rem + env(safe-area-inset-bottom,0px));
+  transform:translateX(102%);visibility:hidden;transition:transform .38s cubic-bezier(.2,.7,.2,1),visibility 0s .38s}
+.drawer.open{transform:none;visibility:visible;transition-delay:0s}
+.drawer__head{display:flex;align-items:center;justify-content:space-between;padding-bottom:1rem;border-bottom:1px solid var(--sand)}
+.drawer__head h2{font-family:var(--display);font-weight:500;font-size:1.875rem;line-height:1}
+.drawer__list{flex:1;overflow-y:auto;min-height:0}
+.line{display:grid;grid-template-columns:3.375rem minmax(0,1fr) auto;gap:0.875rem;align-items:center;padding:1rem 0;border-bottom:1px solid var(--sand)}
+.line__pic{width:3.375rem;height:4.75rem;border-radius:1.6875rem 1.6875rem 0.25rem 0.25rem;display:grid;place-items:center}
+.line__pic img{height:3.625rem;width:auto}
+.line__name{font-family:var(--display);font-weight:500;font-size:1.25rem;line-height:1.1}
+.line__meta{font-size:max(10.5px,0.75rem);letter-spacing:.12em;text-transform:uppercase;color:var(--cocoa)}
+.line__side{display:grid;gap:0.375rem;justify-items:end;font-variant-numeric:tabular-nums}
+.qty{display:flex;align-items:center;gap:0.125rem;margin-top:0.375rem}
+.qty button{width:1.875rem;height:1.875rem;border-radius:50%;border:1px solid var(--sand);line-height:1}
+.qty span{min-width:1.5rem;text-align:center;font-variant-numeric:tabular-nums}
+.link{font-size:max(10.5px,0.75rem);letter-spacing:.12em;text-transform:uppercase;text-decoration:underline;text-underline-offset:0.1875rem;color:var(--cocoa)}
+.drawer__empty{padding:2.5rem 0;color:var(--cocoa)}
+.drawer__foot{padding-top:1rem;border-top:1px solid var(--sand);display:grid;gap:0.5rem}
+.drawer__total{display:flex;justify-content:space-between;align-items:baseline;font-size:max(10.5px,0.8125rem);letter-spacing:.16em;text-transform:uppercase}
+.drawer__total b{font-family:var(--display);font-size:1.75rem;font-weight:600;letter-spacing:0;text-transform:none;font-variant-numeric:lining-nums tabular-nums}
+.drawer__note{font-size:max(10.5px,0.8125rem);color:var(--cocoa)}
+.toast{position:fixed;left:50%;bottom:calc(1.375rem + env(safe-area-inset-bottom,0px));z-index:50;transform:translate(-50%,1.25rem);max-width:calc(100% - 2rem);
+  background:var(--espresso);color:var(--cream);padding:0.75rem 1.25rem;border-radius:1.5rem;font-size:max(12.5px,0.875rem);opacity:0;visibility:hidden;transition:opacity .25s,transform .25s,visibility 0s .25s}
+.toast.show{opacity:1;visibility:visible;transform:translate(-50%,0);transition-delay:0s}
+
+/* ---------- Narrow screens ---------- */
+@media (max-width:1080px){
+  :root{--head:4rem}
+  .brand{gap:0.5625rem}.brand__crest{height:2.375rem}.brand__word{height:1.5rem}
+  .burger{display:grid}
+  .menu{position:absolute;top:calc(100% - 0.25rem);left:0.75rem;right:0.75rem;flex-direction:column;align-items:stretch;gap:0;padding:0.5rem 1.25rem;border-radius:0.875rem;background:var(--linen);
+    box-shadow:0 1.125rem 2.5rem rgba(43,24,16,.18);opacity:0;visibility:hidden;transform:translateY(-0.5rem);transition:opacity .2s,transform .2s,visibility 0s .2s}
+  .menu.open{opacity:1;visibility:visible;transform:none;transition-delay:0s}
+  .menu a,.menu button{padding:0.9375rem 0.125rem;text-align:left;border-bottom:1px solid var(--sand)}
+  .menu > :last-child{border-bottom:0}
+  .menu a::after,.menu button::after{display:none}
+}
+@media (max-width:900px){
+  .hero{grid-template-columns:minmax(0,1fr);grid-template-rows:auto 1fr;row-gap:1.625rem;padding-top:calc(var(--head) + 1.375rem);
+    background:radial-gradient(90% 46% at 50% 84%,#F4E6CE 0%,rgba(244,230,206,0) 74%),var(--cream)}
+  .hero__copy{padding-bottom:0;justify-items:center;text-align:center;gap:0.875rem}
+  .hero h1{font-size:clamp(2.625rem,12.4vw,4.5rem)}
+  .hero__cta{justify-content:center}
+  .arch{width:min(60vw,18.125rem);height:min(42vh,25rem);height:min(42svh,25rem)}
+  .arch::before{inset:-0.75rem -0.75rem 0}
+  .facts{position:static;flex-direction:column;align-items:center;gap:0.375rem;padding:1.25rem var(--pad);margin:0 calc(var(--pad) * -1);background:var(--dune);font-size:max(10.5px,0.6875rem)}
+  .facts li,.facts li:first-child{padding:0;border-left:0}
+  .spot{grid-template-columns:minmax(0,1fr);row-gap:0;min-height:0;padding-block:7.375rem 4.5rem;justify-items:center;text-align:center}
+  .halo{order:-1;width:min(64vw,18.75rem);margin-bottom:6.5rem}
+  .halo::before{inset:-1.375rem}.halo::after{inset:-3.125rem}
+  .spot__copy{justify-self:center;justify-items:center;max-width:36ch}
+  .spec{margin-top:2.25rem;max-width:26.25rem;text-align:left}
+  .cards{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:2.5rem}
+  .card{gap:0.875rem}
+  .card__desc{font-size:max(12.5px,0.8438rem)}
+  .card__buy{gap:0.625rem}
+  .card__acts{width:100%}
+  .card__add{flex:1;padding:0 0.625rem}
+  .strip__set span{padding:0 .26em}
+  .banner{height:auto;min-height:0;padding-top:4.5rem}
+  .banner__copy{padding-bottom:2.75rem}
+  .banner__bottles img,.banner__bottles span:nth-child(n) img{height:min(22vh,12.5rem);height:min(22svh,12.5rem)}
+  .banner__bottles span:nth-child(1) img,.banner__bottles span:nth-child(4) img{height:min(18vh,10.25rem);height:min(18svh,10.25rem)}
+  .best__nav{display:none}
+  .best__track{grid-auto-columns:64%;margin-inline:calc(var(--pad) * -1);padding-inline:var(--pad);scroll-padding-inline:var(--pad)}
+  .reviews__grid{grid-template-columns:minmax(0,1fr)}
+  .insta__grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .foot__top{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .foot__brand{grid-column:1/-1}
+  .foot__base{justify-content:center;text-align:center}
+  .cats__row{flex-direction:column;height:auto;min-height:0}
+  .cat,.cat:hover,.cat:focus-visible{flex:none;height:15.625rem;border-radius:1.625rem}
+  .cat__back{inset:0 0 22% 0}
+  .cat__bottle{padding-top:1.375rem}
+  .cat__foot{padding:0.75rem 1.125rem 1.125rem}
+  .cat__name{font-size:1.875rem}
+  .wheel__head h2{font-size:clamp(2.125rem,10vw,3.25rem)}
+}
+@media (max-width:420px){
+  .card__desc{display:none}
+  .card__price{font-size:1.375rem}
+  .card__add{font-size:max(10.5px,0.6562rem);letter-spacing:.14em}
+  .heart{width:2.75rem;height:2.75rem}
+}
+@media (prefers-reduced-motion:reduce){*{transition-duration:.01ms!important}.strip__move{animation:none}}
+</style>
+</head>
+<body>
+<header class="top" id="top">
+  <a class="brand" href="index.html" aria-label="Shafar Fragrances">
+    <img class="brand__crest" src="assets/crest.png" alt="" width="480" height="512">
+    <img class="brand__word" src="assets/wordmark.png" alt="" width="720" height="227">
+  </a>
+  <nav class="menu" id="menu" aria-label="Main">
+    <a href="index.html">Featured</a>
+    <a href="#home" aria-current="page">Home</a>
+    <a href="about.html">About</a>
+    <a href="shop.html">Shop</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+  <div class="tools">
+    <button class="icon" type="button" id="open-wish" aria-label="Wishlist">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.3s-7.5-4.4-7.5-10.1A4.2 4.2 0 0 1 12 7.6a4.2 4.2 0 0 1 7.5 2.6c0 5.7-7.5 10.1-7.5 10.1z"/></svg>
+      <span class="badge" id="wish-count" hidden>0</span>
+    </button>
+    <button class="icon" type="button" id="open-cart" aria-label="Cart">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5.5 8.5h13l-1 11.5h-11z"/><path d="M9 8.5V7a3 3 0 0 1 6 0v1.5"/></svg>
+      <span class="badge" id="cart-count" hidden>0</span>
+    </button>
+    <button class="icon burger" type="button" id="burger" aria-label="Menu" aria-expanded="false" aria-controls="menu">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8h16M4 16h16"/></svg>
+    </button>
+  </div>
+</header>
+
+<main id="home">
+  <!-- The one bottle that travels between the three resting places below -->
+  <div class="traveller" id="traveller" aria-hidden="true">
+    <div class="traveller__in"><img src="assets/halila.webp" alt="" width="482" height="1100"><span class="traveller__shadow"></span></div>
+  </div>
+
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="hero__copy">
+      <p class="eyebrow" data-rise>Affordable luxury perfumes</p>
+      <h1 id="hero-title" data-rise>Where every scent <em>tells a tale</em></h1>
+      <p class="hero__lede" data-rise>Long-lasting fragrances in Parfum and Eau de Parfum strength. Find the one that tells your story.</p>
+      <div class="hero__cta" data-rise>
+        <a class="btn" href="shop.html">Shop the collection</a>
+        <a class="more" href="#collection">See the featured collection</a>
+      </div>
+    </div>
+    <div class="hero__stage">
+      <div class="arch" id="arch">
+        <div class="slot slot--t" data-slot="hero"><img src="assets/halila.webp" alt="Shafar Halila Lane, frosted amber bottle with a black cap" width="482" height="1100"></div>
+      </div>
+    </div>
+    <ul class="facts" data-rise>
+      <li>Parfum and Eau de Parfum</li>
+      <li>Every bottle 50 ml</li>
+      <li>Cash on delivery across Pakistan</li>
+    </ul>
+  </section>
+
+  <section class="spot" aria-labelledby="spot-title">
+    <div class="spot__copy">
+      <p class="eyebrow" data-reveal>In the spotlight</p>
+      <h2 id="spot-title" data-reveal>Halila Lane</h2>
+      <p data-reveal>Deep, warm and unhurried. Made for evenings that run late and the people who stay for them.</p>
+      <button class="btn" type="button" data-add="halila" data-reveal>Add to cart</button>
+    </div>
+    <div class="halo" id="halo">
+      <div class="slot slot--t" data-slot="spot"><img src="assets/halila.webp" alt="" width="482" height="1100" loading="lazy"></div>
+    </div>
+    <dl class="spec" data-reveal>
+      <div><dt>Strength</dt><dd>Parfum</dd></div>
+      <div><dt>Size</dt><dd>50 ml</dd></div>
+      <div><dt>Price</dt><dd>Rs 2,800 for 50 ml</dd></div>
+    </dl>
+  </section>
+
+  <section class="shop" id="collection" aria-labelledby="shop-title">
+    <div class="shop__head">
+      <div>
+        <p class="eyebrow">Hand-picked</p>
+        <h2 id="shop-title">Featured collection</h2>
+      </div>
+      <a class="more" href="shop.html">View all fragrances</a>
+    </div>
+    <div class="cards" id="cards">
+      <article class="card card--lead" style="--c:#EFD3A8;--e:#D9AE78;--ink:#3A2113;--accent:#7A3F10">
+        <div class="card__frame"><div class="slot slot--t" data-slot="card"><img src="assets/halila.webp" alt="Shafar Halila Lane bottle" width="482" height="1100" loading="lazy"></div></div>
+        <div class="card__body">
+          <p class="card__kind">Parfum</p>
+          <h3 class="card__name"><a href="product.html#halila" style="text-decoration:none">Halila Lane</a></h3>
+          <p class="card__desc">Deep, warm and unhurried. Made for evenings that run late.</p>
+          <div class="card__buy">
+            <p class="card__price">Rs 2,800 <span>50 ml</span></p>
+            <div class="card__acts">
+              <button class="card__add" type="button" data-add="halila">Add to cart</button>
+              <button class="heart" type="button" data-wish="halila" aria-pressed="false" aria-label="Save Halila Lane to wishlist"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.3s-7.5-4.4-7.5-10.1A4.2 4.2 0 0 1 12 7.6a4.2 4.2 0 0 1 7.5 2.6c0 5.7-7.5 10.1-7.5 10.1z"/></svg></button>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="card" style="--c:#F5CFC0;--e:#E5A391;--ink:#4A1210;--accent:#A3160F">
+        <div class="card__frame"><div class="slot" style="aspect-ratio:498/1100"><img class="card__img" src="assets/belford.webp" alt="Shafar Belford bottle" width="498" height="1100" loading="lazy"></div></div>
+        <div class="card__body">
+          <p class="card__kind">Eau de Parfum</p>
+          <h3 class="card__name"><a href="product.html#belford" style="text-decoration:none">Belford</a></h3>
+          <p class="card__desc">Bold from the first spray. Rich, confident and made for the night.</p>
+          <div class="card__buy">
+            <p class="card__price">Rs 2,700 <span>50 ml</span></p>
+            <div class="card__acts">
+              <button class="card__add" type="button" data-add="belford">Add to cart</button>
+              <button class="heart" type="button" data-wish="belford" aria-pressed="false" aria-label="Save Belford to wishlist"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.3s-7.5-4.4-7.5-10.1A4.2 4.2 0 0 1 12 7.6a4.2 4.2 0 0 1 7.5 2.6c0 5.7-7.5 10.1-7.5 10.1z"/></svg></button>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="card" style="--c:#FADAE4;--e:#F0AEC6;--ink:#57112F;--accent:#B0144F">
+        <div class="card__frame"><div class="slot" style="aspect-ratio:497/1100"><img class="card__img" src="assets/charleston.webp" alt="Shafar Charleston bottle" width="497" height="1100" loading="lazy"></div></div>
+        <div class="card__body">
+          <p class="card__kind">Parfum</p>
+          <h3 class="card__name"><a href="product.html#charleston" style="text-decoration:none">Charleston</a></h3>
+          <p class="card__desc">Bright, sweet and full of life. A playful scent that gets remembered.</p>
+          <div class="card__buy">
+            <p class="card__price">Rs 2,600 <span>50 ml</span></p>
+            <div class="card__acts">
+              <button class="card__add" type="button" data-add="charleston">Add to cart</button>
+              <button class="heart" type="button" data-wish="charleston" aria-pressed="false" aria-label="Save Charleston to wishlist"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.3s-7.5-4.4-7.5-10.1A4.2 4.2 0 0 1 12 7.6a4.2 4.2 0 0 1 7.5 2.6c0 5.7-7.5 10.1-7.5 10.1z"/></svg></button>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="card" style="--c:#D6DFEC;--e:#AEBED6;--ink:#18223A;--accent:#2C3E63">
+        <div class="card__frame"><div class="slot" style="aspect-ratio:494/1100"><img class="card__img" src="assets/shawano.webp" alt="Shafar Shawano bottle" width="494" height="1100" loading="lazy"></div></div>
+        <div class="card__body">
+          <p class="card__kind">Parfum</p>
+          <h3 class="card__name"><a href="product.html#shawano" style="text-decoration:none">Shawano</a></h3>
+          <p class="card__desc">Cool, clean and sure of itself. For days that have to go well.</p>
+          <div class="card__buy">
+            <p class="card__price">Rs 2,200 <span>50 ml</span></p>
+            <div class="card__acts">
+              <button class="card__add" type="button" data-add="shawano">Add to cart</button>
+              <button class="heart" type="button" data-wish="shawano" aria-pressed="false" aria-label="Save Shawano to wishlist"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.3s-7.5-4.4-7.5-10.1A4.2 4.2 0 0 1 12 7.6a4.2 4.2 0 0 1 7.5 2.6c0 5.7-7.5 10.1-7.5 10.1z"/></svg></button>
+            </div>
+          </div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section class="cats" id="categories" aria-labelledby="cats-title">
+    <div class="cats__head">
+      <div>
+        <p class="eyebrow" data-reveal>Shop by category</p>
+        <h2 id="cats-title" data-reveal>For him, for her, <em>for everyone</em></h2>
+      </div>
+      <p class="cats__lede" data-reveal>Every Shafar fragrance sits in one of three families. Start where you feel at home.</p>
+    </div>
+    <div class="cats__row" id="cats-row">
+      <a class="cat" style="--c:#D6DFEC;--e:#AEBED6;--ink:#18223A" href="shop.html#men">
+        <span class="cat__back" aria-hidden="true"><span class="cat__word" style="--fit:40">Men</span></span>
+        <span class="cat__bottle"><img src="assets/shawano.webp" alt="" width="494" height="1100" loading="lazy"></span>
+        <span class="cat__foot"><span class="cat__name">Men</span><span class="cat__go">Explore</span></span>
+      </a>
+      <a class="cat" style="--c:#FADAE4;--e:#F0AEC6;--ink:#57112F" href="shop.html#women">
+        <span class="cat__back" aria-hidden="true"><span class="cat__word" style="--fit:24.5">Women</span></span>
+        <span class="cat__bottle"><img src="assets/charleston.webp" alt="" width="497" height="1100" loading="lazy"></span>
+        <span class="cat__foot"><span class="cat__name">Women</span><span class="cat__go">Explore</span></span>
+      </a>
+      <a class="cat" style="--c:#EFD3A8;--e:#D9AE78;--ink:#3A2113" href="shop.html#unisex">
+        <span class="cat__back" aria-hidden="true"><span class="cat__word" style="--fit:26">Unisex</span></span>
+        <span class="cat__bottle"><img src="assets/halila.webp" alt="" width="482" height="1100" loading="lazy"></span>
+        <span class="cat__foot"><span class="cat__name">Unisex</span><span class="cat__go">Explore</span></span>
+      </a>
+    </div>
+  </section>
+
+  <section class="wheel" id="discover" aria-labelledby="wheel-title">
+    <div class="wheel__stage" id="wheel-stage">
+      <div class="wheel__head">
+        <p class="eyebrow">The collection</p>
+        <h2 id="wheel-title">Scroll to discover</h2>
+      </div>
+      <div class="wheel__disc" id="wheel-disc" aria-hidden="true"></div>
+      <div class="wheel__ring" id="wheel-ring"></div>
+      <div class="wheel__info" id="wheel-info">
+        <div class="wheel__infoin" id="wheel-infoin" aria-live="polite">
+          <h3 class="wheel__name" id="wheel-name"></h3>
+          <p class="wheel__meta" id="wheel-meta"></p>
+          <button class="btn" type="button" id="wheel-add">Add to cart</button>
+        </div>
+      </div>
+      <p class="wheel__count" aria-hidden="true"><b id="wheel-count">01</b>/ <span id="wheel-total">04</span></p>
+    </div>
+  </section>
+
+  <section class="strip" aria-label="Why Shafar">
+    <div class="strip__in" id="strip-in">
+      <div class="strip__move">
+        <div class="strip__set"><span>Premium quality</span><img src="assets/crest.png" alt=""><span>Long lasting</span><img src="assets/crest.png" alt=""><span>Exquisite fragrances</span><img src="assets/crest.png" alt=""><span>Perfect gift</span><img src="assets/crest.png" alt=""></div>
+        <div class="strip__set" aria-hidden="true"><span>Premium quality</span><img src="assets/crest.png" alt=""><span>Long lasting</span><img src="assets/crest.png" alt=""><span>Exquisite fragrances</span><img src="assets/crest.png" alt=""><span>Perfect gift</span><img src="assets/crest.png" alt=""></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="banner" id="banner" aria-labelledby="banner-title">
+    <div class="banner__photo" id="banner-photo" aria-hidden="true"></div>
+    <div class="banner__crest" aria-hidden="true"><img id="banner-crest" src="assets/crest-gold.webp" alt="" width="420" height="447" loading="lazy"></div>
+    <div class="banner__copy" id="banner-copy">
+      <p class="eyebrow">Shafar Fragrances</p>
+      <h2 id="banner-title">Where every scent <em>tells a tale</em></h2>
+    </div>
+    <div class="banner__bottles" aria-hidden="true">
+      <span><img src="assets/shawano.webp" alt="" width="494" height="1100" loading="lazy"></span>
+      <span><img src="assets/halila.webp" alt="" width="482" height="1100" loading="lazy"></span>
+      <span><img src="assets/belford.webp" alt="" width="498" height="1100" loading="lazy"></span>
+      <span><img src="assets/charleston.webp" alt="" width="497" height="1100" loading="lazy"></span>
+    </div>
+  </section>
+
+  <section class="best" id="best-sellers" aria-labelledby="best-title">
+    <div class="best__head">
+      <div>
+        <p class="eyebrow" data-show>Most loved</p>
+        <h2 id="best-title" data-show>Best sellers</h2>
+      </div>
+      <div class="best__nav">
+        <button class="arrow" type="button" id="best-prev" aria-label="Previous fragrances"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></button>
+        <button class="arrow" type="button" id="best-next" aria-label="Next fragrances"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+      </div>
+    </div>
+    <div class="best__track" id="best-track" tabindex="0" aria-label="Best sellers, scroll sideways for more"></div>
+    <div class="best__bar" aria-hidden="true"><span id="best-bar"></span></div>
+  </section>
+
+  <section class="reviews" id="reviews" aria-labelledby="reviews-title">
+    <div class="reviews__head">
+      <div>
+        <p class="eyebrow" data-show>Reviews</p>
+        <h2 id="reviews-title" data-show>In their <em>own words</em></h2>
+      </div>
+      <p class="reviews__lede" data-show>Real words from people who wear Shafar.</p>
+    </div>
+    <div class="reviews__grid" id="reviews-grid">
+      <figure class="review">
+        <span class="review__tag">Sample</span>
+        <span class="review__mark" aria-hidden="true">&ldquo;</span>
+        <blockquote class="review__text">A real customer review goes here. Two or three lines about the scent and how long it lasted works best.</blockquote>
+        <figcaption class="review__who"><span>Customer name</span><span>Fragrance bought</span></figcaption>
+      </figure>
+      <figure class="review">
+        <span class="review__tag">Sample</span>
+        <span class="review__mark" aria-hidden="true">&ldquo;</span>
+        <blockquote class="review__text">A second real review goes here. Short and specific reads better than long and general.</blockquote>
+        <figcaption class="review__who"><span>Customer name</span><span>Fragrance bought</span></figcaption>
+      </figure>
+      <figure class="review">
+        <span class="review__tag">Sample</span>
+        <span class="review__mark" aria-hidden="true">&ldquo;</span>
+        <blockquote class="review__text">A third real review goes here. One from a gift buyer would back up the Perfect gift promise.</blockquote>
+        <figcaption class="review__who"><span>Customer name</span><span>Fragrance bought</span></figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="insta" id="instagram" aria-labelledby="insta-title">
+    <div class="insta__head">
+      <div>
+        <p class="eyebrow" data-show>On Instagram</p>
+        <h2 id="insta-title" data-show>@shafar.fragrances</h2>
+      </div>
+      <a class="btn" data-show href="https://www.instagram.com/shafar.fragrances/" target="_blank" rel="noopener">Follow us</a>
+    </div>
+    <div class="insta__grid" id="insta-grid">
+      <a class="insta__tile" href="https://www.instagram.com/shafar.fragrances/" target="_blank" rel="noopener" aria-label="Shafar on Instagram: Charleston post"><img src="assets/ig1.webp" alt="" loading="lazy"></a>
+      <a class="insta__tile" href="https://www.instagram.com/shafar.fragrances/" target="_blank" rel="noopener" aria-label="Shafar on Instagram: Discover your signature scent post"><img src="assets/ig2.webp" alt="" loading="lazy"></a>
+      <a class="insta__tile" href="https://www.instagram.com/shafar.fragrances/" target="_blank" rel="noopener" aria-label="Shafar on Instagram: Torrance post"><img src="assets/ig4.webp" alt="" loading="lazy"></a>
+      <a class="insta__tile" href="https://www.instagram.com/shafar.fragrances/" target="_blank" rel="noopener" aria-label="Shafar on Instagram: Eid Mubarak post"><img src="assets/ig5.webp" alt="" loading="lazy"></a>
+      <a class="insta__tile" href="https://www.instagram.com/shafar.fragrances/" target="_blank" rel="noopener" aria-label="Shafar on Instagram: lifestyle post"><img src="assets/ig6.webp" alt="" loading="lazy"></a>
+      <a class="insta__tile" href="https://www.instagram.com/shafar.fragrances/" target="_blank" rel="noopener" aria-label="Shafar on Instagram: billboard post"><img src="assets/ig3.webp" alt="" loading="lazy"></a>
+    </div>
+  </section>
+</main>
+
+<footer class="foot" id="footer">
+  <div class="foot__top">
+    <div class="foot__brand">
+      <img src="assets/logo-gold.png" alt="Shafar Fragrances" width="488" height="516" loading="lazy">
+      <p>Where every scent tells a tale. Affordable luxury perfumes in Parfum and Eau de Parfum strength.</p>
+      <span class="foot__pay">Cash on delivery across Pakistan</span>
+    </div>
+    <nav class="foot__col" aria-label="Shop">
+      <h3>Shop</h3>
+      <ul>
+        <li><a href="index.html">Featured</a></li>
+        <li><a href="#best-sellers">Best sellers</a></li>
+        <li><a href="shop.html#men">Men</a></li>
+        <li><a href="shop.html#women">Women</a></li>
+        <li><a href="shop.html#unisex">Unisex</a></li>
+      </ul>
+    </nav>
+    <nav class="foot__col" aria-label="Shafar">
+      <h3>Shafar</h3>
+      <ul>
+        <li><a href="about.html">Our story</a></li>
+        <li><a href="#reviews">Reviews</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+    <div class="foot__col">
+      <h3>Get in touch</h3>
+      <ul>
+        <li><a href="https://wa.me/923180250552" target="_blank" rel="noopener">WhatsApp</a></li>
+        <li><a href="https://www.instagram.com/shafar.fragrances/" target="_blank" rel="noopener">Instagram</a></li>
+      </ul>
+      <small>0318 0250552<br>shafarfragrances@gmail.com<br>www.shafarfragrances.com</small>
+    </div>
+  </div>
+  <div class="foot__word" id="foot-word" aria-hidden="true">Shafar</div>
+  <div class="foot__base">
+    <p>&copy; 2026 Shafar Fragrances</p>
+    <a class="foot__up" href="#home">Back to top</a>
+  </div>
+</footer>
+
+<div class="scrim" id="scrim"></div>
+<aside class="drawer" id="drawer" role="dialog" aria-modal="true" aria-labelledby="drawer-title">
+  <div class="drawer__head">
+    <h2 id="drawer-title">Cart</h2>
+    <button class="icon" type="button" id="drawer-close" aria-label="Close">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+  </div>
+  <div class="drawer__list" id="drawer-list"></div>
+  <div class="drawer__foot" id="drawer-foot" hidden>
+    <p class="drawer__total"><span>Subtotal</span><b id="drawer-total"></b></p>
+    <a class="btn" href="checkout.html" style="display:flex;align-items:center;justify-content:center;text-decoration:none;--ink:#2B1810;margin-top:6px">Checkout</a>
+    <p class="drawer__note">Cash on delivery across Pakistan.</p>
+  </div>
+</aside>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="js/catalog.js"></script>
+<script src="/api/catalog"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script>
+(function () {
+  'use strict';
+
+  /* ---------- Products (same data as the Featured page) ---------- */
+  var PRODUCTS = {
+    halila:     { name: 'Halila Lane',      kind: 'Parfum',        cat: 'unisex', best: true,  img: 'assets/halila.webp', tint: '#EFD3A8', deep: '#D9AE78', ink: '#3A2113', accent: '#7A3F10', desc: 'Deep, warm and unhurried. Made for evenings that run late.', prices: { 50: 2800 } },
+    belford:    { name: 'Belford',          kind: 'Eau de Parfum', cat: 'women',  best: true,  img: 'assets/belford.webp', tint: '#F5CFC0', deep: '#E5A391', ink: '#4A1210', accent: '#A3160F', desc: 'Bold from the first spray. Rich, confident and made for the night.', prices: { 50: 2700 } },
+    charleston: { name: 'Charleston',       kind: 'Parfum',        cat: 'women',  best: true,  img: 'assets/charleston.webp', tint: '#FADAE4', deep: '#F0AEC6', ink: '#57112F', accent: '#B0144F', desc: 'Bright, sweet and full of life. A playful scent that gets remembered.', prices: { 50: 2600 } },
+    shawano:    { name: 'Shawano',          kind: 'Parfum',        cat: 'men',    best: true,  img: 'assets/shawano.webp', tint: '#D6DFEC', deep: '#AEBED6', ink: '#18223A', accent: '#2C3E63', desc: 'Cool, clean and sure of itself. For days that have to go well.', prices: { 50: 2200 } },
+    argos:      { name: 'Argos',            kind: 'Eau de Parfum', cat: 'men',    best: true,  img: 'assets/argos.webp', tint: '#F0DAB6', deep: '#D9B480', ink: '#372412', accent: '#78400F', desc: 'An old name with a golden glow. Quietly grand.', prices: { 50: 2250 } },
+    southampton:{ name: 'Southampton',      kind: 'Parfum',        cat: 'men',    best: true,  img: 'assets/southampton.webp', tint: '#EDC8A9', deep: '#D59C73', ink: '#371E12', accent: '#782E0F', desc: 'Tailored and well travelled. Polished and always in place.', prices: { 50: 2700 } },
+    bradford:   { name: 'Bradford',         kind: 'Parfum',        cat: 'men',    best: true,  img: 'assets/bradford.webp', tint: '#EECFAE', deep: '#D7A578', ink: '#372112', accent: '#78350F', desc: 'Honest and dependable. A signature for the working week.', prices: { 50: 2600 } },
+    tobaccooudh:{ name: 'Tobacco Oudh',     kind: 'Parfum',        cat: 'unisex', best: true,  img: 'assets/tobaccooudh.webp', tint: '#EECAAA', deep: '#D69E74', ink: '#371F12', accent: '#78300F', desc: 'Tobacco and oudh, just as the name promises. Deep and made to linger.', prices: { 50: 2550 } },
+    jutland:    { name: 'Jutland',          kind: 'Eau de Parfum', cat: 'women',  best: true,  img: 'assets/jutland.webp', tint: '#F1C3B7', deep: '#DD8F80', ink: '#430E0A', accent: '#96130C', desc: 'Deep red and full of nerve. Made for the night.', prices: { 50: 2650 } },
+    elmira:     { name: 'Elmira',           kind: 'Parfum',        cat: 'women',  best: true,  img: 'assets/elmira.webp', tint: '#F6CDCB', deep: '#E69C9A', ink: '#4A0E12', accent: '#A8121C', desc: 'The red one. Vivid, confident and impossible to miss.', prices: { 50: 2450 } },
+    belleville: { name: 'Belle Ville',      kind: 'Parfum',        cat: 'men',    best: false, img: 'assets/belleville.webp', tint: '#EDC2A5', deep: '#D4946F', ink: '#371C12', accent: '#78290F', desc: 'A beautiful town after dark. Smooth, easy and quietly confident.', prices: { 50: 2450 } },
+    elko:       { name: 'Elko',             kind: 'Eau de Parfum', cat: 'men',    best: false, img: 'assets/elko.webp', tint: '#EFD0AF', deep: '#D7A779', ink: '#372112', accent: '#78360F', desc: 'Open road, clear sky. An easy pick for every day.', prices: { 50: 2600 } },
+    hudson:     { name: 'Hudson',           kind: 'Parfum',        cat: 'men',    best: false, img: 'assets/hudson.webp', tint: '#EDC1A5', deep: '#D4936F', ink: '#371C12', accent: '#78290F', desc: 'City nights and a sharp collar. Smooth and sure of itself.', prices: { 50: 2500 } },
+    inverlake:  { name: 'Inverlake Platos', kind: 'Eau de Parfum', cat: 'men',    best: false, img: 'assets/inverlake.webp', tint: '#EECCAC', deep: '#D6A175', ink: '#371F12', accent: '#78320F', desc: 'Still water and slow mornings. Calm, and close to the skin.', prices: { 50: 2600 } },
+    amesvelle:  { name: 'Amesvelle',        kind: 'Parfum',        cat: 'women',  best: false, img: 'assets/amesvelle.webp', tint: '#F4CCC2', deep: '#E4A195', ink: '#421610', accent: '#9C2211', desc: 'Graceful and a little regal. Made for evenings that matter.', prices: { 50: 2850 } },
+    liverpool:  { name: 'Liverpool',        kind: 'Eau de Parfum', cat: 'men',    best: false, img: 'assets/liverpool.webp', tint: '#EFD4B1', deep: '#D8AC7B', ink: '#372212', accent: '#783A0F', desc: 'Port-city spirit. Lively, sociable and easy to wear.', prices: { 50: 2700 } },
+    ofidow:     { name: 'Ofidow',           kind: 'Parfum',        cat: 'men',    best: false, img: 'assets/ofidow.webp', tint: '#EECDAD', deep: '#D6A377', ink: '#372012', accent: '#78330F', desc: 'Hard to place, easy to remember. A little mysterious.', prices: { 50: 2800 } },
+    torrance:   { name: 'Torrance',         kind: 'Eau de Parfum', cat: 'unisex', best: false, img: 'assets/torrance.webp', tint: '#ECC0A4', deep: '#D4916E', ink: '#371C12', accent: '#78270F', desc: 'Easy and laid-back. The one you reach for without thinking.', prices: { 50: 2600 } },
+    forthworth: { name: 'Forth Worth',      kind: 'Parfum',        cat: 'women',  best: false, img: 'assets/forthworth.webp', tint: '#F4CBC2', deep: '#E4A195', ink: '#421510', accent: '#9C2111', desc: 'Big-hearted and self-assured. A scent that walks in first.', prices: { 50: 2500 } },
+    exermont:   { name: 'Exermont',         kind: 'Parfum',        cat: 'men',    best: false, img: 'assets/exermont.webp', tint: '#EDC6A8', deep: '#D59A72', ink: '#371E12', accent: '#782D0F', desc: 'Bold and deliberate. Made for the nights that count.', prices: { 50: 2700 } },
+    cuba:       { name: 'Cuba',             kind: 'Parfum',        cat: 'unisex', best: false, img: 'assets/cuba.webp', tint: '#EDC4A7', deep: '#D49770', ink: '#371D12', accent: '#782B0F', desc: 'Slow evenings and loud laughter. Full of character.', prices: { 50: 2500 } },
+    moroni:     { name: 'Moroni',           kind: 'Parfum',        cat: 'men',    best: false, img: 'assets/moroni.webp', tint: '#F0DBB7', deep: '#D9B681', ink: '#372512', accent: '#78420F', desc: 'Island air and unhurried days. Easy to love.', prices: { 50: 2700 } },
+    whiteoudh:  { name: 'White Oudh',       kind: 'Eau de Parfum', cat: 'unisex', best: false, img: 'assets/whiteoudh.webp', tint: '#EDC5A7', deep: '#D59871', ink: '#371D12', accent: '#782C0F', desc: 'Oudh with a lighter hand, as the name promises. Refined and calm.', prices: { 50: 3200 } },
+    monastir:   { name: 'Monastir',         kind: 'Parfum',        cat: 'men',    best: false, img: 'assets/monastir.webp', tint: '#EFD6B3', deep: '#D8AF7D', ink: '#372312', accent: '#783C0F', desc: 'Named for a coast of sun and old stone. Made to travel well.', prices: { 50: null } },
+    elba:       { name: 'Elba',             kind: 'Eau de Parfum', cat: 'women',  best: false, img: 'assets/elba.webp', tint: '#F4CCC2', deep: '#E4A295', ink: '#421610', accent: '#9C2411', desc: 'An island name for sunny days. Light-hearted and easy to love.', prices: { 50: null } },
+    imperial:   { name: 'Imperial',         kind: 'Parfum',        cat: 'men',    best: false, img: 'assets/imperial.webp', tint: '#EFD3B0', deep: '#D7AA7B', ink: '#372212', accent: '#78390F', desc: 'Made to be noticed. Grand, and worn with confidence.', prices: { 50: null } },
+    auckland:   { name: 'Auckland',         kind: 'Eau de Parfum', cat: 'men',    best: false, img: 'assets/auckland.webp', tint: '#EDC6A8', deep: '#D59A72', ink: '#371E12', accent: '#782D0F', desc: 'Harbour light and a fresh start. Open and easy to wear.', prices: { 50: null } },
+    stromboli:  { name: 'Stromboli',        kind: 'Parfum',        cat: 'women',  best: false, img: 'assets/stromboli.webp', tint: '#F4CBC2', deep: '#E4A095', ink: '#421510', accent: '#9C2011', desc: 'Named for a volcano. Fiery, vivid and made to be noticed.', prices: { 50: null } },
+    hachita:    { name: 'Hachita',          kind: 'Parfum',        cat: 'men',    best: false, img: 'assets/hachita.webp', tint: '#EEC9AA', deep: '#D59D73', ink: '#371E12', accent: '#782F0F', desc: 'Desert roads and wide skies. Quiet and steady.', prices: { 50: null } }
+  };
+  var DEFAULT_SIZE = 50;
+  if (window.SHAFAR_ORDER && window.SHAFAR_CATALOG) PRODUCTS = window.SHAFAR_CATALOG;   // live list from the dashboard
+  var BEST = Object.keys(PRODUCTS).filter(function (id) { return PRODUCTS[id].best; });      // the carousel
+  var WHEEL = (window.SHAFAR_ORDER && window.SHAFAR_WHEEL && window.SHAFAR_WHEEL.length ? window.SHAFAR_WHEEL : ['halila', 'elmira', 'argos', 'charleston', 'tobaccooudh', 'jutland', 'shawano', 'belford']).filter(function (id) { return PRODUCTS[id]; });      // the wheel: a short pick, so the section passes quickly
+  var priced = function (id) { return PRODUCTS[id].prices[DEFAULT_SIZE] != null; };
+
+  var $ = function (s, el) { return (el || document).querySelector(s); };
+  var $$ = function (s, el) { return Array.prototype.slice.call((el || document).querySelectorAll(s)); };
+  var rupees = function (n) { return 'Rs ' + Number(n).toLocaleString('en-US'); };
+  var el = function (tag, cls, text) { var n = document.createElement(tag); if (cls) n.className = cls; if (text != null) n.textContent = text; return n; };
+  var root = document.documentElement;
+
+  /* ---------- Best sellers carousel: cards come from PRODUCTS ----------
+     With four fragrances the list is shown twice so there is something to slide. */
+  var HEART = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.3s-7.5-4.4-7.5-10.1A4.2 4.2 0 0 1 12 7.6a4.2 4.2 0 0 1 7.5 2.6c0 5.7-7.5 10.1-7.5 10.1z"/></svg>';
+  var bestTrack = $('#best-track');
+  (function () {
+    var ids = BEST, list = ids.length < 6 ? ids.concat(ids) : ids;
+    list.forEach(function (id) {
+      var p = PRODUCTS[id], card = el('article', 'card');
+      card.style.cssText = '--c:' + p.tint + ';--e:' + p.deep + ';--ink:' + p.ink + ';--accent:' + p.accent;
+      var frame = el('div', 'card__frame'), slot = el('div', 'slot'), im = el('img');
+      im.src = p.img; im.alt = 'Shafar ' + p.name + ' bottle'; im.loading = 'lazy';
+      slot.appendChild(im); frame.appendChild(slot);
+      var body = el('div', 'card__body');
+      body.appendChild(el('p', 'card__kind', p.kind));
+      var title = el('h3', 'card__name'), link = el('a', '', p.name);
+      link.href = 'product.html#' + id; link.style.textDecoration = 'none'; title.appendChild(link); body.appendChild(title);
+      body.appendChild(el('p', 'card__desc', p.desc));
+      var buy = el('div', 'card__buy'), price = el('p', 'card__price', rupees(p.prices[DEFAULT_SIZE]) + ' ');
+      price.appendChild(el('span', '', DEFAULT_SIZE + ' ml'));
+      var acts = el('div', 'card__acts'), add = el('button', 'card__add', 'Add to cart'), heart = el('button', 'heart');
+      add.type = 'button'; add.dataset.add = id;
+      heart.type = 'button'; heart.dataset.wish = id; heart.setAttribute('aria-pressed', 'false'); heart.setAttribute('aria-label', 'Save ' + p.name + ' to wishlist'); heart.innerHTML = HEART;
+      acts.appendChild(add); acts.appendChild(heart); buy.appendChild(price); buy.appendChild(acts); body.appendChild(buy);
+      card.appendChild(frame); card.appendChild(body); bestTrack.appendChild(card);
+    });
+  })();
+  var bestPrev = $('#best-prev'), bestNext = $('#best-next'), bestBar = $('#best-bar');
+  function bestSync() {
+    var max = bestTrack.scrollWidth - bestTrack.clientWidth, x = bestTrack.scrollLeft;
+    var share = bestTrack.clientWidth / bestTrack.scrollWidth;
+    bestBar.style.transform = 'translateX(' + ((max > 0 ? x / max : 0) * (1 - share) * 100) + '%) scaleX(' + share + ')';
+    bestPrev.disabled = x <= 2; bestNext.disabled = x >= max - 2;
+  }
+  function bestStep(dir) {
+    var card = $('.card', bestTrack), gap = parseFloat(getComputedStyle(bestTrack).columnGap) || 0;
+    bestTrack.scrollBy({ left: dir * (card.offsetWidth + gap), behavior: 'smooth' });
+  }
+  bestPrev.addEventListener('click', function () { bestStep(-1); });
+  bestNext.addEventListener('click', function () { bestStep(1); });
+  bestTrack.addEventListener('scroll', bestSync, { passive: true });
+  window.addEventListener('resize', bestSync);
+  bestSync();
+
+  /* ---------- Toast ---------- */
+  var toastEl = $('#toast'), toastTimer;
+  function toast(msg) {
+    toastEl.textContent = msg;
+    toastEl.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(function () { toastEl.classList.remove('show'); }, 2400);
+  }
+  $$('[data-soon]').forEach(function (b) {
+    b.addEventListener('click', function () { toast('The ' + b.dataset.soon + ' page is not built yet.'); closeMenu(); });
+  });
+
+  /* ---------- Mobile menu ---------- */
+  var menu = $('#menu'), burger = $('#burger');
+  function closeMenu() { menu.classList.remove('open'); burger.setAttribute('aria-expanded', 'false'); }
+  burger.addEventListener('click', function () {
+    var open = menu.classList.toggle('open');
+    burger.setAttribute('aria-expanded', String(open));
+  });
+  $$('a', menu).forEach(function (a) { a.addEventListener('click', closeMenu); });
+
+  /* ---------- Cart and wishlist (saved in this browser, shared by every page) ---------- */
+  var CAT = window.SHAFAR_CATALOG || PRODUCTS;      // every product, so the cart can show a bottle added on another page
+  var cart = [], wish = [];
+  try {
+    cart = JSON.parse(localStorage.getItem('shafar.cart') || '[]').filter(function (l) { return CAT[l.id] && CAT[l.id].prices[l.size] != null && l.qty > 0; });
+    wish = JSON.parse(localStorage.getItem('shafar.wish') || '[]').filter(function (id) { return CAT[id]; });
+  } catch (e) { cart = []; wish = []; }
+  function save() { try { localStorage.setItem('shafar.cart', JSON.stringify(cart)); localStorage.setItem('shafar.wish', JSON.stringify(wish)); } catch (e) {} }
+  var drawer = $('#drawer'), scrim = $('#scrim'), list = $('#drawer-list'), foot = $('#drawer-foot');
+  var drawerMode = 'cart', lastFocus = null;
+
+  function badge(node, n) { node.textContent = n; node.hidden = n === 0; }
+  function syncBadges() {
+    badge($('#cart-count'), cart.reduce(function (s, l) { return s + l.qty; }, 0));
+    badge($('#wish-count'), wish.length);
+    save();
+  }
+  function addToCart(id, size) {
+    var line = cart.filter(function (l) { return l.id === id && l.size === size; })[0];
+    if (line) line.qty += 1; else cart.push({ id: id, size: size, qty: 1 });
+    syncBadges();
+    if (drawer.classList.contains('open')) renderDrawer();
+  }
+  function pic(id) {
+    var box = el('div', 'line__pic');
+    box.style.background = CAT[id].tint;
+    var im = el('img'); im.src = CAT[id].img; im.alt = '';
+    box.appendChild(im);
+    return box;
+  }
+  function renderDrawer() {
+    $('#drawer-title').textContent = drawerMode === 'cart' ? 'Cart' : 'Wishlist';
+    list.textContent = '';
+    var total = 0;
+    if (drawerMode === 'cart') {
+      if (!cart.length) list.appendChild(el('p', 'drawer__empty', 'Your cart is empty. Add a bottle from the best sellers.'));
+      cart.forEach(function (l) {
+        var p = CAT[l.id], unit = p.prices[l.size];
+        total += unit * l.qty;
+        var row = el('div', 'line'), mid = el('div');
+        mid.appendChild(el('p', 'line__name', p.name));
+        mid.appendChild(el('p', 'line__meta', p.kind + ' · ' + l.size + ' ml'));
+        var q = el('div', 'qty');
+        var minus = el('button', '', '−'); minus.type = 'button'; minus.setAttribute('aria-label', 'One less ' + p.name);
+        var plus = el('button', '', '+'); plus.type = 'button'; plus.setAttribute('aria-label', 'One more ' + p.name);
+        minus.addEventListener('click', function () { l.qty -= 1; if (l.qty < 1) cart.splice(cart.indexOf(l), 1); syncBadges(); renderDrawer(); });
+        plus.addEventListener('click', function () { l.qty += 1; syncBadges(); renderDrawer(); });
+        q.appendChild(minus); q.appendChild(el('span', '', l.qty)); q.appendChild(plus);
+        mid.appendChild(q);
+        var side = el('div', 'line__side');
+        side.appendChild(el('b', '', rupees(unit * l.qty)));
+        var rm = el('button', 'link', 'Remove'); rm.type = 'button';
+        rm.addEventListener('click', function () { cart.splice(cart.indexOf(l), 1); syncBadges(); renderDrawer(); });
+        side.appendChild(rm);
+        row.appendChild(pic(l.id)); row.appendChild(mid); row.appendChild(side);
+        list.appendChild(row);
+      });
+      foot.hidden = !cart.length;
+      $('#drawer-total').textContent = rupees(total);
+    } else {
+      foot.hidden = true;
+      if (!wish.length) list.appendChild(el('p', 'drawer__empty', 'Nothing saved yet. Tap the heart on a bottle to keep it here.'));
+      wish.forEach(function (id) {
+        var p = CAT[id], row = el('div', 'line'), mid = el('div');
+        mid.appendChild(el('p', 'line__name', p.name));
+        var unit = p.prices[DEFAULT_SIZE];
+        mid.appendChild(el('p', 'line__meta', p.kind + ' · ' + (unit == null ? (p.soldout ? 'Sold out' : 'Price to be added') : rupees(unit) + ' for ' + DEFAULT_SIZE + ' ml')));
+        var side = el('div', 'line__side');
+        var add = el('button', 'link', 'Add to cart'); add.type = 'button';
+        add.addEventListener('click', function () { addToCart(id, DEFAULT_SIZE); toast(p.name + ', ' + DEFAULT_SIZE + ' ml added to cart.'); });
+        var rm = el('button', 'link', 'Remove'); rm.type = 'button';
+        rm.addEventListener('click', function () { setWish(id, false); renderDrawer(); });
+        if (unit != null) side.appendChild(add);
+        side.appendChild(rm);
+        row.appendChild(pic(id)); row.appendChild(mid); row.appendChild(side);
+        list.appendChild(row);
+      });
+    }
+  }
+  function openDrawer(mode, from) {
+    drawerMode = mode; lastFocus = from || null;
+    renderDrawer();
+    drawer.classList.add('open'); scrim.classList.add('open');
+    closeMenu();
+    $('#drawer-close').focus();
+  }
+  function closeDrawer() {
+    drawer.classList.remove('open'); scrim.classList.remove('open');
+    if (lastFocus) lastFocus.focus();
+  }
+  $('#open-cart').addEventListener('click', function () { openDrawer('cart', this); });
+  $('#open-wish').addEventListener('click', function () { openDrawer('wish', this); });
+  $('#drawer-close').addEventListener('click', closeDrawer);
+  scrim.addEventListener('click', closeDrawer);
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') { closeDrawer(); closeMenu(); } });
+
+  function setWish(id, on) {
+    var i = wish.indexOf(id);
+    if (on && i < 0) wish.push(id);
+    if (!on && i >= 0) wish.splice(i, 1);
+    $$('[data-wish="' + id + '"]').forEach(function (h) {
+      h.setAttribute('aria-pressed', String(on));
+      h.setAttribute('aria-label', on ? 'Remove ' + CAT[id].name + ' from wishlist' : 'Save ' + CAT[id].name + ' to wishlist');
+    });
+    syncBadges();
+  }
+  $$('[data-add]').forEach(function (b) {
+    b.addEventListener('click', function () {
+      var id = b.dataset.add;
+      if (CAT[id].prices[DEFAULT_SIZE] == null) { toast('The price for ' + CAT[id].name + ' is still to be added.'); return; }
+      addToCart(id, DEFAULT_SIZE);
+      toast(CAT[id].name + ', ' + DEFAULT_SIZE + ' ml added to cart.');
+    });
+  });
+  $$('[data-wish]').forEach(function (b) {
+    b.addEventListener('click', function () {
+      var id = b.dataset.wish, on = b.getAttribute('aria-pressed') !== 'true';
+      setWish(id, on);
+      toast(on ? CAT[id].name + ' saved to your wishlist.' : CAT[id].name + ' removed from your wishlist.');
+    });
+  });
+
+  // restore what was saved on other pages
+  wish.forEach(function (id) { $$('[data-wish="' + id + '"]').forEach(function (h) { h.setAttribute('aria-pressed', 'true'); }); });
+  syncBadges();
+
+  /* ---------- Header turns solid once you leave the top ---------- */
+  var topBar = $('#top');
+  function solid() { topBar.classList.toggle('is-solid', window.scrollY > 24); }
+  window.addEventListener('scroll', solid, { passive: true });
+  solid();
+
+  /* ---------- In-page links ---------- */
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var settleAt = 0;   // scroll position where the travelling bottle has landed in its card
+  $$('a[href^="#"]').forEach(function (a) {
+    a.addEventListener('click', function (e) {
+      var target = $(a.getAttribute('href'));
+      if (!target) return;
+      e.preventDefault();
+      var y = target.id === 'home' ? 0 : target.getBoundingClientRect().top + window.scrollY - topBar.offsetHeight + 8;
+      if (target.id === 'collection') y = Math.max(y, settleAt);
+      window.scrollTo({ top: y, behavior: reduce ? 'auto' : 'smooth' });
+    });
+  });
+
+  /* ==================================================================
+     THE TRAVELLING BOTTLE
+     One bottle, three resting places: the hero arch, the spotlight circle
+     and the first collection card. Its position is a pure function of how
+     far the page has scrolled, so it never drifts or lags:
+       rest in the hero  ->  fly  ->  rest in the spotlight  ->  fly  ->  rest in the card (and stay)
+     While resting it is part of the page and scrolls with it. While flying
+     it is pinned to the screen and glides along a curved path.
+     Without GSAP, or with reduced motion on, each place shows its own
+     static bottle instead.
+     ================================================================== */
+  /* ---------- Discovery wheel: the bottles ----------
+     To add a fragrance to the wheel, add it to PRODUCTS and to WHEEL above. */
+  var wheel = $('#discover'), wStage = $('#wheel-stage'), wRing = $('#wheel-ring');
+  var WIDS = WHEEL, WP = WIDS.length, wItems = [];
+  function buildWheel(from, to) {
+    wRing.textContent = ''; wItems = [];
+    for (var i = from; i <= to; i++) {
+      var id = WIDS[((i % WP) + WP) % WP];
+      var box = el('div', 'wheel__item'), im = el('img');
+      im.src = PRODUCTS[id].img; im.alt = 'Shafar ' + PRODUCTS[id].name + ' bottle';
+      box.appendChild(im); wRing.appendChild(box);
+      wItems.push({ el: box, i: i, id: id });
+    }
+  }
+  buildWheel(0, WP - 1);
+
+  if (!window.gsap || reduce) return;
+  var hasST = !!window.ScrollTrigger;
+  if (hasST) gsap.registerPlugin(ScrollTrigger);
+
+  var main = $('main'), bottle = $('#traveller'), inner = $('.traveller__in', bottle), shadow = $('.traveller__shadow', bottle);
+  var slots = { hero: $('[data-slot="hero"]'), spot: $('[data-slot="spot"]'), card: $('[data-slot="card"]') };
+  root.classList.add('travel');
+
+  // Where on screen (as a share of its height) the bottle's centre is when it lands or takes off
+  var LAND_SPOT = 0.56, LEAVE_SPOT = 0.34, LAND_CARD = 0.7;
+  var easeMove = gsap.parseEase('power2.inOut'), easeFall = gsap.parseEase('sine.inOut');
+  var lerp = function (a, b, t) { return a + (b - a) * t; };
+
+  var R = {}, base = { w: 0, h: 0 }, off = { x: 0, y: 0 }, T = { a1: 1, b0: 2, b1: 3 }, lastY = -1, lastH = 0;
+
+  function measure() {
+    var m = main.getBoundingClientRect();
+    off.x = m.left + window.scrollX; off.y = m.top + window.scrollY;      // where <main> starts on the page
+    Object.keys(slots).forEach(function (k) {
+      var r = slots[k].getBoundingClientRect();
+      R[k] = { x: r.left - m.left + r.width / 2, y: r.top - m.top + r.height / 2, h: r.height };
+    });
+    var hero = slots.hero.getBoundingClientRect();
+    base.w = hero.width; base.h = hero.height;
+    bottle.style.width = base.w + 'px'; bottle.style.height = base.h + 'px';
+    var vh = window.innerHeight;
+    T.a1 = Math.max(1, R.spot.y + off.y - LAND_SPOT * vh);               // scroll position: landed in the spotlight
+    T.b0 = Math.max(T.a1, R.spot.y + off.y - LEAVE_SPOT * vh);           // scroll position: leaves the spotlight
+    T.b1 = Math.max(T.b0 + 1, R.card.y + off.y - LAND_CARD * vh);        // scroll position: landed in the card
+    settleAt = Math.ceil(T.b1) + 2;
+    lastY = -1;
+    place();
+  }
+
+  function rest(k) { return { fly: false, x: R[k].x, y: R[k].y, s: R[k].h / base.h, rot: 0, lift: 0 }; }
+
+  function place() {
+    var s = window.scrollY, vh = window.innerHeight;
+    if (s === lastY && vh === lastH) return;
+    lastY = s; lastH = vh;
+    var p, lift, st;
+    if (s <= 0) {
+      st = rest('hero');
+    } else if (s < T.a1) {                                                // hero -> spotlight
+      p = s / T.a1; lift = Math.sin(Math.PI * p);
+      st = { fly: true,
+        x: lerp(R.hero.x, R.spot.x, easeMove(p)) + off.x,
+        y: lerp(R.hero.y + off.y, LAND_SPOT * vh, easeFall(p)) + 0.05 * vh * lift,
+        s: lerp(1, R.spot.h / base.h, easeMove(p)), rot: -9 * lift, lift: lift };
+    } else if (s <= T.b0) {
+      st = rest('spot');
+    } else if (s < T.b1) {                                                // spotlight -> card
+      p = (s - T.b0) / (T.b1 - T.b0); lift = Math.sin(Math.PI * p);
+      st = { fly: true,
+        x: lerp(R.spot.x, R.card.x, easeMove(p)) + off.x,
+        y: lerp(LEAVE_SPOT * vh, LAND_CARD * vh, easeFall(p)),
+        s: lerp(R.spot.h / base.h, R.card.h / base.h, easeMove(p)), rot: 8 * lift, lift: lift };
+    } else {
+      st = rest('card');
+    }
+    bottle.classList.toggle('is-flying', st.fly);
+    gsap.set(bottle, { x: st.x - base.w / 2, y: st.y - base.h / 2, scale: st.s, rotation: st.rot });
+    shadow.style.opacity = 0.32 * (1 - st.lift);
+  }
+
+  measure();
+  gsap.ticker.add(place);
+  window.addEventListener('resize', measure);
+  window.addEventListener('load', measure);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(measure);
+  if (window.ResizeObserver) new ResizeObserver(measure).observe(main);
+
+  /* ---------- Entrances ---------- */
+  gsap.from('.hero [data-rise]', { y: 30, autoAlpha: 0, duration: 1, ease: 'power3.out', stagger: 0.09, delay: 0.1 });
+  gsap.fromTo('#arch', { clipPath: 'inset(100% 0% 0% 0%)' }, { clipPath: 'inset(0% 0% 0% 0%)', duration: 1.2, ease: 'power3.out', clearProps: 'clipPath' });
+  gsap.from(inner, { y: 46, autoAlpha: 0, scale: 0.94, duration: 1.2, ease: 'power3.out', delay: 0.35 });
+
+  if (hasST) {
+    $$('[data-reveal]').forEach(function (n, i) {
+      gsap.from(n, { y: 28, autoAlpha: 0, duration: 0.9, ease: 'power3.out', delay: (i % 4) * 0.07, scrollTrigger: { trigger: n, start: 'top 88%' } });
+    });
+    gsap.from('#halo', { autoAlpha: 0, duration: 1.1, ease: 'power2.out', scrollTrigger: { trigger: '#halo', start: 'top 92%' } });
+    gsap.from('.card:not(.card--lead) .slot', { y: 54, autoAlpha: 0, duration: 1, ease: 'power3.out', stagger: 0.12, scrollTrigger: { trigger: '#cards', start: 'top 76%' } });
+    gsap.from('.card__body', { y: 24, autoAlpha: 0, duration: 0.9, ease: 'power3.out', stagger: 0.08, scrollTrigger: { trigger: '#cards', start: 'top 62%' } });
+  }
+
+  /* ---------- Categories: panels rise in, bottle and word drift at different speeds ---------- */
+  if (hasST) {
+    gsap.fromTo('.cat', { clipPath: 'inset(100% 0% 0% 0%)' }, { clipPath: 'inset(0% 0% 0% 0%)', duration: 1.15, ease: 'power3.out', stagger: 0.13, clearProps: 'clipPath',
+      scrollTrigger: { trigger: '#cats-row', start: 'top 82%' } });
+    $$('.cat').forEach(function (c) {
+      var st = { trigger: '#cats-row', start: 'top bottom', end: 'bottom top', scrub: 0.6 };
+      gsap.fromTo($('.cat__bottle', c), { yPercent: 9 }, { yPercent: -5, ease: 'none', scrollTrigger: st });
+      gsap.fromTo($('.cat__word', c), { yPercent: -22 }, { yPercent: 22, ease: 'none', scrollTrigger: st });
+    });
+  }
+
+  /* ==================================================================
+     THE DISCOVERY WHEEL
+     Bottles stand on the rim of a very large disc whose centre is far
+     below the screen. Scrolling turns the disc one bottle at a time; the
+     bottle at the top is the selected one and its details show beneath it.
+     ================================================================== */
+  if (hasST) {
+    var STEPS = WP >= 6 ? WP - 1 : 2 * WP - 1;      // how many turns the scroll makes
+    var SIDE = 5;                                    // spare bottles on each side so the arc is never empty
+    var wDisc = $('#wheel-disc'), wInfo = $('#wheel-info'), wInfoIn = $('#wheel-infoin');
+    var wName = $('#wheel-name'), wMeta = $('#wheel-meta'), wCount = $('#wheel-count');
+    var G = { W: 0, H: 0, bw: 0, bh: 0, R: 0, th: 0, cx: 0, top: 0 }, turn = { pos: 0 }, wActive = -1, wSwap = 0;
+    var tintsC = WIDS.map(function (id) { return PRODUCTS[id].tint; });
+    var tintsE = WIDS.map(function (id) { return PRODUCTS[id].deep; });
+    var mod = function (n) { return ((n % WP) + WP) % WP; };
+
+    wheel.classList.add('is-live');
+    buildWheel(-SIDE, STEPS + SIDE);
+    $('#wheel-total').textContent = ('0' + WP).slice(-2);
+
+    function wheelText(n) {
+      var p = PRODUCTS[WIDS[mod(n)]];
+      wName.textContent = p.name;
+      var unit = p.prices[DEFAULT_SIZE];
+      wMeta.textContent = p.kind + ' · ' + (unit == null ? (p.soldout ? 'Sold out' : 'Price to be added') : rupees(unit) + ' for ' + DEFAULT_SIZE + ' ml');
+      $('#wheel-add').disabled = unit == null;
+      wCount.textContent = ('0' + (mod(n) + 1)).slice(-2);
+      wStage.style.setProperty('--wink', p.ink);
+    }
+    function wheelDraw() {
+      var pos = turn.pos;
+      wItems.forEach(function (it) {
+        var a = (it.i - pos) * G.th, x = G.cx + G.R * Math.sin(a), y = G.top + G.R * (1 - Math.cos(a));
+        if (Math.abs(a) > 1.4 || Math.abs(x - G.cx) > G.W / 2 + G.bw) { it.el.style.visibility = 'hidden'; return; }
+        var d = Math.min(1, Math.abs(it.i - pos));
+        it.el.style.visibility = 'visible';
+        it.el.style.transform = 'translate(' + (x - G.bw / 2).toFixed(2) + 'px,' + (y - G.bh / 2).toFixed(2) + 'px) rotate(' + a.toFixed(4) + 'rad) scale(' + (1.1 - 0.2 * d).toFixed(3) + ')';
+      });
+      var f = Math.floor(pos), t = gsap.utils.clamp(0, 1, (pos - f - 0.15) / 0.7);
+      t = t * t * (3 - 2 * t);
+      wStage.style.setProperty('--wc', gsap.utils.interpolate(tintsC[mod(f)], tintsC[mod(f + 1)], t));
+      wStage.style.setProperty('--we', gsap.utils.interpolate(tintsE[mod(f)], tintsE[mod(f + 1)], t));
+      var now = Math.round(pos);
+      if (now !== wActive) {
+        var first = wActive < 0, token = ++wSwap;
+        wActive = now;
+        if (first) { wheelText(now); return; }
+        gsap.to(wInfoIn, { y: -10, autoAlpha: 0, duration: 0.16, ease: 'power1.in', overwrite: true, onComplete: function () {
+          if (token !== wSwap) return;
+          wheelText(now);
+          gsap.fromTo(wInfoIn, { y: 12, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 0.32, ease: 'power2.out', overwrite: true });
+        } });
+      }
+    }
+    function wheelMeasure() {
+      var probe = wItems[0].el, box = wStage.getBoundingClientRect(), head = $('.wheel__head', wStage).getBoundingClientRect();
+      G.W = wStage.clientWidth; G.H = wStage.clientHeight; G.bw = probe.offsetWidth; G.bh = probe.offsetHeight;
+      G.R = gsap.utils.clamp(430, 2600, G.W * 1.25);                 // wheel radius
+      G.th = (G.bw * (G.W < 700 ? 1.55 : 2.3)) / G.R;                                   // angle between neighbouring bottles
+      G.cx = G.W / 2;
+      G.top = Math.max(G.H * 0.47, head.bottom - box.top + G.bh * 0.56 + 20);   // centre of the selected bottle
+      var rd = G.R - G.bh / 2 + 6;                                  // disc edge runs just under the bottles' bases
+      wDisc.style.width = wDisc.style.height = (rd * 2) + 'px';
+      wDisc.style.left = (G.cx - rd) + 'px';
+      wDisc.style.top = (G.top + G.R - rd) + 'px';
+      wInfo.style.top = (G.top + G.bh / 2 + 26) + 'px';
+      wheelDraw();
+    }
+    $('#wheel-add').addEventListener('click', function () {
+      var id = WIDS[mod(wActive)];
+      if (!priced(id)) return;
+      addToCart(id, DEFAULT_SIZE);
+      toast(PRODUCTS[id].name + ', ' + DEFAULT_SIZE + ' ml added to cart.');
+    });
+
+    wheelMeasure();
+    gsap.to(turn, { pos: STEPS, ease: 'none', onUpdate: wheelDraw,
+      scrollTrigger: {
+        trigger: wStage, start: 'top top',
+        end: function () { return '+=' + STEPS * wStage.offsetHeight * Math.min(0.3, 5 / STEPS); },
+        pin: true, scrub: 0.6,
+        snap: { snapTo: 1 / STEPS, directional: true, inertia: false, duration: { min: 0.3, max: 0.7 }, delay: 0.05, ease: 'power2.inOut' },
+        invalidateOnRefresh: true, onRefresh: wheelMeasure
+      } });
+    window.addEventListener('resize', wheelMeasure);
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(wheelMeasure);
+  }
+
+  /* ---------- Lower sections: strip, banner, carousel, reviews, Instagram, footer ---------- */
+  if (hasST) {
+    // the promise strip drifts on its own; scrolling nudges it further
+    gsap.fromTo('#strip-in', { xPercent: 0 }, { xPercent: -7, ease: 'none', scrollTrigger: { trigger: '.strip', start: 'top bottom', end: 'bottom top', scrub: 0.8 } });
+
+    // banner: crest, tagline and bottles all move at their own speed
+    var bst = function () { return { trigger: '#banner', start: 'top bottom', end: 'bottom top', scrub: 0.6 }; };
+    gsap.fromTo('#banner-photo', { yPercent: -6 }, { yPercent: 6, ease: 'none', scrollTrigger: bst() });
+    gsap.fromTo('#banner-crest', { yPercent: -18, rotation: -6 }, { yPercent: 18, rotation: 6, ease: 'none', scrollTrigger: bst() });
+    gsap.fromTo('#banner-copy', { y: function () { return window.innerHeight * 0.16; } }, { y: function () { return -window.innerHeight * 0.1; }, ease: 'none', scrollTrigger: bst() });
+    $$('.banner__bottles span').forEach(function (b, i) {
+      gsap.fromTo(b, { yPercent: [34, 18, 46, 26][i % 4] }, { yPercent: 0, ease: 'none',
+        scrollTrigger: { trigger: '#banner', start: 'top bottom', end: 'bottom bottom', scrub: 0.6 } });
+    });
+
+    $$('[data-show]').forEach(function (n, i) {
+      gsap.from(n, { y: 28, autoAlpha: 0, duration: 0.9, ease: 'power3.out', delay: (i % 3) * 0.07, scrollTrigger: { trigger: n, start: 'top 90%' } });
+    });
+    gsap.from('#best-track .card', { x: 70, autoAlpha: 0, duration: 1, ease: 'power3.out', stagger: 0.09, scrollTrigger: { trigger: '#best-track', start: 'top 82%' } });
+    gsap.from('#reviews-grid .review', { y: 46, autoAlpha: 0, duration: 1, ease: 'power3.out', stagger: 0.12, scrollTrigger: { trigger: '#reviews-grid', start: 'top 84%' } });
+    gsap.fromTo('#insta-grid .insta__tile', { clipPath: 'inset(100% 0% 0% 0%)' }, { clipPath: 'inset(0% 0% 0% 0%)', duration: 1, ease: 'power3.out', stagger: 0.08, clearProps: 'clipPath',
+      scrollTrigger: { trigger: '#insta-grid', start: 'top 86%' } });
+    gsap.from('.foot__top > *', { y: 30, autoAlpha: 0, duration: 0.9, ease: 'power3.out', stagger: 0.08, scrollTrigger: { trigger: '.foot', start: 'top 82%' } });
+    gsap.fromTo('#foot-word', { yPercent: 42 }, { yPercent: 0, ease: 'none', scrollTrigger: { trigger: '#foot-word', start: 'top bottom', end: 'bottom bottom', scrub: 0.6 } });
+
+    ScrollTrigger.sort();
+    ScrollTrigger.refresh();
+  }
+})();
+</script>
+<script>
+/* Arriving with #section in the address (for example home.html#reviews): scroll there once the page has settled. */
+window.addEventListener('load', function () {
+  var id = (location.hash || '').slice(1); if (!id) return;
+  var target = document.getElementById(id), bar = document.getElementById('top');
+  if (!target || target === document.querySelector('main')) return;
+  setTimeout(function () {
+    if (window.ScrollTrigger) ScrollTrigger.refresh();
+    window.scrollTo(0, target.getBoundingClientRect().top + window.scrollY - (bar ? bar.offsetHeight : 0) + 2);
+  }, 350);
+});
+</script>
+<script>
+/* Home's hand-placed Featured collection cards and spotlight: live prices from the dashboard. */
+(function () {
+  var C = window.SHAFAR_CATALOG; if (!window.SHAFAR_ORDER || !C) return;
+  var rs = function (n) { return 'Rs ' + Number(n).toLocaleString('en-US'); };
+  document.querySelectorAll('#cards [data-add]').forEach(function (b) {
+    var p = C[b.dataset.add], card = b.closest('.card'), el = card && card.querySelector('.card__price');
+    if (!p || !el) return;
+    var v = p.prices[50];
+    if (v == null) { el.textContent = p.soldout ? 'Sold out' : 'Price to be added'; el.classList.add('card__price--open'); b.disabled = true; }
+    else el.firstChild.nodeValue = rs(v) + ' ';
+  });
+  var h = C.halila;
+  document.querySelectorAll('.spot dt').forEach(function (dt) { if (dt.textContent === 'Price' && h) dt.nextElementSibling.textContent = h.prices[50] == null ? (h.soldout ? 'Sold out' : 'Price to be added') : rs(h.prices[50]) + ' for 50 ml'; });
+})();
+</script>
+<script>
+/* Visitor count for the dashboard: a random id kept in this browser, no personal data. */
+(function () {
+  try {
+    var k = 'shafar.vid', v = localStorage.getItem(k);
+    if (!v) { v = Math.random().toString(36).slice(2) + Date.now().toString(36); localStorage.setItem(k, v); }
+    var data = JSON.stringify({ vid: v, path: location.pathname, ref: document.referrer });
+    if (navigator.sendBeacon) navigator.sendBeacon('/api/track', data);
+    else fetch('/api/track', { method: 'POST', body: data, keepalive: true });
+  } catch (e) {}
+})();
+</script>
+</body>
+</html>

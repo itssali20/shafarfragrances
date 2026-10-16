@@ -1,0 +1,759 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Contact | Shafar Fragrances</title>
+<meta name="description" content="Talk to Shafar Fragrances on WhatsApp, by phone, email or Instagram.">
+<meta name="robots" content="noindex">   <!-- preview build with sample content: remove this line at launch -->
+<meta name="theme-color" content="#F6EFE4">
+<link rel="icon" type="image/png" href="assets/favicon.png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600&family=Noto+Serif+Display:ital,wdth,wght@0,62.5..100,400..900;1,62.5..100,400..900&display=swap">
+<style>
+/* base rules every page relies on */
+:root{color-scheme:light}
+html{-webkit-text-size-adjust:100%}
+body{margin:0}
+img{max-width:100%}
+[hidden]{display:none!important}
+</style>
+<style>
+/* Layout: a greeting on the left and the message form inside a tall brown arch on the right;
+   then the ways to reach Shafar as large rows, then questions that open in place. */
+:root{
+  --cream:#F6EFE4;      /* page ground */
+  --linen:#FBF7F0;      /* raised surfaces: drawer, menu */
+  --sand:#E8DAC3;       /* hairlines and quiet fills */
+  --dune:#EBDDC6;       /* spotlight band */
+  --espresso:#2B1810;   /* brand brown: header, primary text */
+  --cocoa:#6B4A36;      /* secondary text */
+  --bronze:#8A5B1E;     /* small accents on light grounds */
+  --gold:#C9A24A;       /* logo gold, on brown only */
+  --amber-1:#F1D9B2;    /* Halila Lane arch, top */
+  --amber-2:#DDB684;    /* Halila Lane arch, base */
+  --word:#FFFBF4;
+  --display:"Noto Serif Display","Bodoni 72",Didot,"Playfair Display",Georgia,serif;
+  --ui:"Jost","Century Gothic","Avenir Next",Avenir,"Segoe UI",system-ui,sans-serif;
+  --pad:clamp(1.125rem,5vw,4.75rem);
+  --head:4.875rem;
+  color-scheme:light;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{font-size:clamp(12px,0.9467vw,18px)}   /*root*/
+@media (max-width:1080px){html{font-size:16px}}   /*root*/
+body{margin:0;background:var(--cream);color:var(--espresso);font-family:var(--ui);font-size:max(12.5px,1rem);line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+h1,h2,h3,p,ol,ul,dl,dd{margin:0}
+ol,ul{padding:0;list-style:none}
+button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:pointer}
+a{color:inherit}
+:focus-visible{outline:0.125rem solid currentColor;outline-offset:0.1875rem;border-radius:0.125rem}
+
+/* ---------- Header ---------- */
+.top{position:fixed;inset:0 0 auto 0;z-index:30;display:flex;align-items:center;justify-content:space-between;gap:1.25rem;
+  height:calc(var(--head) + env(safe-area-inset-top,0px));padding:env(safe-area-inset-top,0px) var(--pad) 0;
+  color:var(--espresso);transition:background-color .3s,box-shadow .3s}
+.top.is-solid{background:rgba(246,239,228,.9);-webkit-backdrop-filter:blur(0.75rem);backdrop-filter:blur(0.75rem);box-shadow:0 1px 0 rgba(43,24,16,.1)}
+.brand{display:flex;align-items:center;gap:0.75rem;text-decoration:none;flex:none}
+.brand img{display:block;width:auto;max-width:none}
+.brand__crest{height:3rem}
+.brand__word{height:1.9375rem}
+.menu{display:flex;align-items:center;gap:clamp(1.125rem,3vw,2.5rem)}
+.menu a,.menu button{font-size:max(10.5px,0.75rem);font-weight:500;letter-spacing:.2em;text-transform:uppercase;text-decoration:none;padding:0.625rem 0.125rem;position:relative}
+.menu a::after,.menu button::after{content:"";position:absolute;left:0.125rem;right:0.125rem;bottom:0.25rem;height:1px;background:currentColor;transform:scaleX(0);transform-origin:left;transition:transform .3s}
+.menu a:hover::after,.menu button:hover::after,.menu [aria-current]::after{transform:scaleX(1)}
+.tools{display:flex;align-items:center;gap:0.375rem;flex:none}
+.icon{position:relative;width:2.75rem;height:2.75rem;display:grid;place-items:center;border-radius:50%;transition:background-color .2s}
+.icon:hover{background:rgba(43,24,16,.08)}
+.icon svg{width:1.3125rem;height:1.3125rem;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.badge{position:absolute;top:0.1875rem;right:1px;min-width:1.125rem;height:1.125rem;padding:0 0.3125rem;border-radius:0.5625rem;background:var(--espresso);color:var(--cream);
+  font-size:max(10.5px,0.6562rem);font-weight:600;line-height:1.125rem;text-align:center;font-variant-numeric:tabular-nums}
+.burger{display:none}
+
+/* ---------- Shared pieces ---------- */
+main{position:relative}
+.eyebrow{font-size:max(10.5px,0.7188rem);font-weight:600;letter-spacing:.26em;text-transform:uppercase;color:var(--bronze)}
+.btn{display:inline-flex;align-items:center;justify-content:center;height:3.375rem;padding:0 1.875rem;border-radius:1.6875rem;background:var(--espresso);color:var(--word);
+  font-size:max(10.5px,0.75rem);font-weight:600;letter-spacing:.2em;text-transform:uppercase;text-decoration:none;transition:transform .2s}
+.btn:hover{transform:translateY(-0.125rem)}
+.more{display:inline-flex;align-items:center;gap:0.75rem;font-size:max(10.5px,0.75rem);font-weight:600;letter-spacing:.2em;text-transform:uppercase;text-decoration:none;padding:0.625rem 0}
+.more::after{content:"";width:2.125rem;height:1px;background:currentColor;transition:width .3s}
+.more:hover::after{width:3.25rem}
+.heart{flex:none;width:2.875rem;height:2.875rem;border-radius:50%;display:grid;place-items:center;border:1px solid rgba(43,24,16,.3);transition:border-color .2s}
+.heart:hover{border-color:currentColor}
+.heart svg{width:1.1875rem;height:1.1875rem;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linejoin:round;transition:fill .2s}
+.heart[aria-pressed="true"] svg{fill:currentColor}
+.slot{aspect-ratio:482/1100;position:relative}
+.slot img{display:block;height:100%;width:auto;max-width:none;position:relative;z-index:1}
+.slot::after,.traveller__shadow{content:"";position:absolute;left:-8%;right:-8%;bottom:-4.5%;height:9%;border-radius:50%;
+  background:radial-gradient(closest-side,#3A2113,transparent);opacity:.32;filter:blur(0.4375rem)}
+/* With the travelling bottle running, its three resting places stay empty */
+.travel .slot--t img,.travel .slot--t::after{visibility:hidden}
+
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+.sec-h{font-family:var(--display);font-weight:500;font-size:clamp(2.375rem,4.6vw,4.375rem);line-height:1.02;letter-spacing:-.01em;text-wrap:balance}
+.sec-h em{font-weight:400}
+.draft{display:inline-flex;align-items:center;padding:0.25rem 0.75rem;border:1px dashed var(--bronze);border-radius:1.25rem;font-size:max(10.5px,0.6562rem);font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--bronze);white-space:nowrap}
+.pill{display:inline-flex;align-items:center;gap:0.5625rem;height:2.875rem;padding:0 1.25rem;border-radius:1.4375rem;border:1px solid rgba(43,24,16,.32);font-size:max(10.5px,0.7188rem);font-weight:600;letter-spacing:.16em;text-transform:uppercase;text-decoration:none;white-space:nowrap;
+  transition:background-color .25s,color .25s,border-color .25s}
+.pill:hover{border-color:var(--espresso)}
+.pill--solid{background:var(--espresso);border-color:var(--espresso);color:var(--cream)}
+.pill svg{width:1rem;height:1rem;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+
+/* ---------- Opening: greeting and the arch form ---------- */
+.chero{position:relative;overflow:hidden;padding:calc(var(--head) + clamp(1.625rem,5vh,3.75rem)) var(--pad) clamp(4rem,8vw,7.25rem);
+  background:radial-gradient(56% 64% at 80% 46%,#F4E6CE 0%,rgba(244,230,206,0) 72%),var(--cream)}
+.chero__ghost{position:absolute;left:calc(var(--pad) - 0.375rem);top:calc(var(--head) + clamp(7.5rem,24vh,16.25rem));z-index:0;font-family:var(--display);font-weight:900;font-stretch:62.5%;font-size:clamp(9.375rem,27vw,27.5rem);line-height:.8;
+  text-transform:uppercase;white-space:nowrap;color:var(--word);pointer-events:none;-webkit-user-select:none;user-select:none}
+.chero__in{position:relative;z-index:1;max-width:77.5rem;margin-inline:auto;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.84fr);gap:clamp(2.25rem,6vw,6.5rem);align-items:start}
+.chero__copy{display:grid;gap:1.375rem;justify-items:start;padding-top:clamp(1rem,7vh,5.625rem)}
+.chero h1{font-family:var(--display);font-weight:500;font-size:clamp(3.125rem,7vw,7.25rem);line-height:.96;letter-spacing:-.02em;text-wrap:balance}
+.chero h1 em{font-weight:400}
+.chero__lede{max-width:38ch;color:var(--cocoa);font-size:1.0625rem}
+.chero__cta{display:flex;flex-wrap:wrap;align-items:center;gap:0.875rem 1.75rem;margin-top:0.375rem}
+
+.cform{container-type:inline-size;position:relative;border-radius:999px 999px 0.875rem 0.875rem;background:#2C190F;color:#F1E6D3;padding:0 clamp(1.5rem,3.4vw,3.125rem) clamp(1.75rem,3vw,2.75rem);display:grid;gap:1.5rem}
+.cform__dome{display:grid;justify-items:center;gap:0.875rem;padding-top:3.5rem;padding-top:11cqw;text-align:center}
+.cform__dome img{width:4.75rem;width:15cqw;height:auto;opacity:.92}
+.cform__dome h2{font-family:var(--display);font-weight:500;font-size:clamp(1.875rem,3vw,2.875rem);line-height:1}
+.cform__dome h2 em{font-weight:400;color:#E3C57A}
+.cform__dome p{max-width:30ch;font-size:max(12.5px,0.9375rem);color:#D9C7AC}
+.field{position:relative;display:block}
+.field input,.field textarea{display:block;width:100%;background:none;border:0;border-bottom:1px solid rgba(241,230,211,.34);border-radius:0;color:inherit;font:inherit;font-size:1.0625rem;padding:1.5rem 0 0.625rem;outline:none}
+.field textarea{resize:vertical;min-height:7rem;line-height:1.5}
+.field label{position:absolute;left:0;top:1.5rem;font-size:1.0625rem;color:#BFAE94;pointer-events:none;transform-origin:left top;transition:transform .25s,color .25s}
+.field input:focus + label,.field input:not(:placeholder-shown) + label,.field textarea:focus + label,.field textarea:not(:placeholder-shown) + label{transform:translateY(-1.375rem) scale(.72);color:#E3C57A}
+.field::after{content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background:#E3C57A;transform:scaleX(0);transform-origin:left;transition:transform .45s cubic-bezier(.2,.7,.2,1)}
+.field:focus-within::after{transform:scaleX(1)}
+.topic{display:grid;gap:0.75rem}
+.topic__label{font-size:max(10.5px,0.7188rem);font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:#BFAE94}
+.topic__set{display:flex;flex-wrap:wrap;gap:0.5rem}
+.topic input{position:absolute;opacity:0;pointer-events:none}
+.topic label{display:inline-flex;align-items:center;height:2.375rem;padding:0 1rem;border-radius:1.1875rem;border:1px solid rgba(241,230,211,.36);font-size:max(10.5px,0.8125rem);cursor:pointer;transition:background-color .25s,color .25s,border-color .25s}
+.topic label:hover{border-color:#E3C57A}
+.topic input:checked + label{background:#E3C57A;border-color:#E3C57A;color:#2C190F}
+.topic input:focus-visible + label{outline:0.125rem solid #E3C57A;outline-offset:0.1875rem}
+.cform__err{min-height:1.25rem;font-size:max(12.5px,0.875rem);color:#F0B49A}
+.send{display:flex;align-items:center;justify-content:center;gap:0.75rem;height:3.625rem;border-radius:1.8125rem;background:linear-gradient(180deg,#E9CD86,#C9A24A);color:#2C190F;
+  font-size:max(10.5px,0.7812rem);font-weight:600;letter-spacing:.2em;text-transform:uppercase;text-decoration:none;transition:transform .2s,filter .2s}
+.send:hover{transform:translateY(-0.125rem);filter:brightness(1.05)}
+.send svg{width:1.1875rem;height:1.1875rem;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.cform__note{text-align:center;font-size:max(10.5px,0.8125rem);color:#BFAE94}
+.cform :focus-visible{outline-color:#E3C57A}
+
+/* ---------- Ways to reach us ---------- */
+.ways{padding:clamp(4.75rem,10vw,8.25rem) var(--pad);background:var(--cream)}
+.ways__head{max-width:77.5rem;margin:0 auto clamp(1.75rem,4vw,3.25rem);display:grid;gap:0.75rem;justify-items:start}
+.ways__list{max-width:77.5rem;margin-inline:auto;border-top:1px solid rgba(43,24,16,.18)}
+.way{display:grid;grid-template-columns:minmax(0,.86fr) minmax(0,1.14fr) auto;align-items:center;gap:0.875rem 1.5rem;padding:clamp(1.25rem,2.8vw,2.375rem) 0;border-bottom:1px solid rgba(43,24,16,.18);
+  transition:background-color .5s,padding .5s cubic-bezier(.2,.7,.2,1)}
+.way:hover,.way:focus-within{background:var(--tint);padding-inline:clamp(0.875rem,2.4vw,2.25rem)}
+.way__name{font-family:var(--display);font-weight:500;font-size:clamp(2.125rem,4.6vw,4.5rem);line-height:1;letter-spacing:-.01em}
+.way__value{font-size:clamp(1.0625rem,1.6vw,1.4375rem);color:var(--espresso);text-decoration:none;-webkit-user-select:all;user-select:all;overflow-wrap:anywhere}
+.way__acts{display:flex;flex-wrap:wrap;gap:0.625rem;justify-content:flex-end}
+
+/* ---------- Questions ---------- */
+.faq{padding:clamp(4.75rem,10vw,8.25rem) var(--pad);background:var(--dune)}
+.faq__in{max-width:77.5rem;margin-inline:auto;display:grid;grid-template-columns:minmax(0,.66fr) minmax(0,1.34fr);gap:clamp(2rem,6vw,6.5rem);align-items:start}
+.faq__head{position:sticky;top:calc(var(--head) + 1.75rem);display:grid;gap:0.875rem;justify-items:start}
+.faq__head p:not(.eyebrow){color:var(--cocoa);max-width:30ch}
+.faq__list{border-top:1px solid rgba(43,24,16,.18)}
+.qa{border-bottom:1px solid rgba(43,24,16,.18)}
+.qa__q{display:flex;align-items:center;justify-content:space-between;gap:1.375rem;width:100%;padding:1.5rem 0;text-align:left;font-family:var(--display);font-weight:500;font-size:clamp(1.375rem,2.2vw,2rem);line-height:1.15}
+.qa__q::after{content:"";flex:none;width:2.375rem;height:2.375rem;border-radius:50%;border:1px solid rgba(43,24,16,.32);
+  background:linear-gradient(var(--espresso),var(--espresso)) center/0.875rem 1px no-repeat,linear-gradient(var(--espresso),var(--espresso)) center/1px 0.875rem no-repeat;transition:transform .45s cubic-bezier(.2,.7,.2,1),background-size .3s}
+.qa__q[aria-expanded="true"]::after{transform:rotate(180deg);background-size:0.875rem 1px,1px 0}
+.qa__a > div{display:grid;gap:0.75rem;justify-items:start;padding:0 3.75rem 1.625rem 0;color:var(--cocoa);max-width:62ch}
+.faq--js .qa__a{height:0;overflow:hidden}
+
+/* ---------- Footer ---------- */
+.foot{position:relative;overflow:hidden;background:#2C190F;color:#E9DCC7;padding:clamp(3.5rem,8vw,6.875rem) var(--pad) 0}
+.foot a{color:inherit;text-decoration:none}
+.foot__top{max-width:77.5rem;margin-inline:auto;display:grid;grid-template-columns:minmax(0,1.5fr) repeat(3,minmax(0,1fr));gap:clamp(1.75rem,4vw,4.5rem)}
+.foot__brand{display:grid;gap:1.375rem;justify-items:start;align-content:start}
+.foot__brand img{width:11rem;height:auto;display:block}
+.foot__brand p{max-width:30ch;color:#D9C7AC}
+.foot__pay{white-space:nowrap;display:inline-flex;align-items:center;gap:0.625rem;padding:0.5625rem 1rem;border:1px solid rgba(201,162,74,.5);border-radius:1.375rem;font-size:max(10.5px,0.7188rem);font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:#E3C57A}
+.foot__pay::before{content:"";width:0.4375rem;height:0.4375rem;border-radius:50%;background:var(--gold)}
+.foot__col h3{font-size:max(10.5px,0.7188rem);font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);margin-bottom:1.125rem}
+.foot__col ul{display:grid;gap:0.6875rem}
+.foot__col a,.foot__col button{font-family:var(--display);font-size:1.3125rem;line-height:1.2;background-image:linear-gradient(currentColor,currentColor);background-repeat:no-repeat;background-position:0 100%;background-size:0 1px;transition:background-size .35s}
+.foot__col a:hover,.foot__col button:hover{background-size:100% 1px}
+.foot__col small{display:block;margin-top:0.875rem;font-size:max(10.5px,0.8125rem);color:#BFAE94}
+.foot__word{margin-top:clamp(2.25rem,6vw,5.25rem);font-family:var(--display);font-weight:900;font-stretch:62.5%;font-size:24.4vw;line-height:.74;text-align:center;text-transform:uppercase;white-space:nowrap;
+  background:linear-gradient(180deg,#E3C57A 0%,#B0842D 46%,#4A2F14 92%);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-user-select:none;user-select:none;padding-bottom:.1em}
+.foot__base{position:relative;max-width:77.5rem;margin-inline:auto;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:0.75rem 1.5rem;
+  padding:1.125rem 0 calc(1.375rem + env(safe-area-inset-bottom,0px));border-top:1px solid rgba(233,220,199,.16);font-size:max(10.5px,0.75rem);letter-spacing:.14em;text-transform:uppercase;color:#BFAE94}
+.foot__up{display:inline-flex;align-items:center;gap:0.625rem;color:#E9DCC7;font-size:max(10.5px,0.75rem);letter-spacing:.2em;text-transform:uppercase}
+.foot__up::after{content:"";width:2.375rem;height:2.375rem;border-radius:50%;border:1px solid rgba(233,220,199,.4);background:linear-gradient(#E9DCC7,#E9DCC7) center/1px 0.875rem no-repeat}
+
+/* ---------- Drawer, scrim, toast ---------- */
+.scrim{position:fixed;inset:0;z-index:40;background:rgba(43,24,16,.38);opacity:0;visibility:hidden;transition:opacity .3s,visibility 0s .3s}
+.scrim.open{opacity:1;visibility:visible;transition-delay:0s}
+.drawer{position:fixed;top:0;right:0;bottom:0;z-index:41;width:min(26.25rem,100%);background:var(--linen);color:var(--espresso);display:flex;flex-direction:column;
+  padding:calc(1.375rem + env(safe-area-inset-top,0px)) 1.5rem calc(1.375rem + env(safe-area-inset-bottom,0px));
+  transform:translateX(102%);visibility:hidden;transition:transform .38s cubic-bezier(.2,.7,.2,1),visibility 0s .38s}
+.drawer.open{transform:none;visibility:visible;transition-delay:0s}
+.drawer__head{display:flex;align-items:center;justify-content:space-between;padding-bottom:1rem;border-bottom:1px solid var(--sand)}
+.drawer__head h2{font-family:var(--display);font-weight:500;font-size:1.875rem;line-height:1}
+.drawer__list{flex:1;overflow-y:auto;min-height:0}
+.line{display:grid;grid-template-columns:3.375rem minmax(0,1fr) auto;gap:0.875rem;align-items:center;padding:1rem 0;border-bottom:1px solid var(--sand)}
+.line__pic{width:3.375rem;height:4.75rem;border-radius:1.6875rem 1.6875rem 0.25rem 0.25rem;display:grid;place-items:center}
+.line__pic img{height:3.625rem;width:auto}
+.line__name{font-family:var(--display);font-weight:500;font-size:1.25rem;line-height:1.1}
+.line__meta{font-size:max(10.5px,0.75rem);letter-spacing:.12em;text-transform:uppercase;color:var(--cocoa)}
+.line__side{display:grid;gap:0.375rem;justify-items:end;font-variant-numeric:tabular-nums}
+.qty{display:flex;align-items:center;gap:0.125rem;margin-top:0.375rem}
+.qty button{width:1.875rem;height:1.875rem;border-radius:50%;border:1px solid var(--sand);line-height:1}
+.qty span{min-width:1.5rem;text-align:center;font-variant-numeric:tabular-nums}
+.link{font-size:max(10.5px,0.75rem);letter-spacing:.12em;text-transform:uppercase;text-decoration:underline;text-underline-offset:0.1875rem;color:var(--cocoa)}
+.drawer__empty{padding:2.5rem 0;color:var(--cocoa)}
+.drawer__foot{padding-top:1rem;border-top:1px solid var(--sand);display:grid;gap:0.5rem}
+.drawer__total{display:flex;justify-content:space-between;align-items:baseline;font-size:max(10.5px,0.8125rem);letter-spacing:.16em;text-transform:uppercase}
+.drawer__total b{font-family:var(--display);font-size:1.75rem;font-weight:600;letter-spacing:0;text-transform:none;font-variant-numeric:lining-nums tabular-nums}
+.drawer__note{font-size:max(10.5px,0.8125rem);color:var(--cocoa)}
+.toast{position:fixed;left:50%;bottom:calc(1.375rem + env(safe-area-inset-bottom,0px));z-index:50;transform:translate(-50%,1.25rem);max-width:calc(100% - 2rem);
+  background:var(--espresso);color:var(--cream);padding:0.75rem 1.25rem;border-radius:1.5rem;font-size:max(12.5px,0.875rem);opacity:0;visibility:hidden;transition:opacity .25s,transform .25s,visibility 0s .25s}
+.toast.show{opacity:1;visibility:visible;transform:translate(-50%,0);transition-delay:0s}
+
+/* ---------- Narrow screens ---------- */
+@media (max-width:1080px){
+  :root{--head:4rem}
+  .brand{gap:0.5625rem}.brand__crest{height:2.375rem}.brand__word{height:1.5rem}
+  .burger{display:grid}
+  .menu{position:absolute;top:calc(100% - 0.25rem);left:0.75rem;right:0.75rem;flex-direction:column;align-items:stretch;gap:0;padding:0.5rem 1.25rem;border-radius:0.875rem;background:var(--linen);
+    box-shadow:0 1.125rem 2.5rem rgba(43,24,16,.18);opacity:0;visibility:hidden;transform:translateY(-0.5rem);transition:opacity .2s,transform .2s,visibility 0s .2s}
+  .menu.open{opacity:1;visibility:visible;transform:none;transition-delay:0s}
+  .menu a,.menu button{padding:0.9375rem 0.125rem;text-align:left;border-bottom:1px solid var(--sand)}
+  .menu > :last-child{border-bottom:0}
+  .menu a::after,.menu button::after{display:none}
+}
+@media (max-width:900px){
+  .chero__in{grid-template-columns:minmax(0,1fr)}
+  .chero__copy{padding-top:0.5rem}
+  .chero__ghost{font-size:46vw;top:calc(var(--head) + 5.625rem)}
+  .cform{max-width:32.5rem;width:100%;justify-self:center}
+  .way{grid-template-columns:minmax(0,1fr)}
+  .way__acts{justify-content:flex-start}
+  .faq__in{grid-template-columns:minmax(0,1fr)}
+  .faq__head{position:static}
+  .qa__a > div{padding-right:0}
+  .foot__top{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .foot__brand{grid-column:1/-1}
+  .foot__base{justify-content:center;text-align:center}
+}
+@media (prefers-reduced-motion:reduce){*{transition-duration:.01ms!important}}
+</style>
+</head>
+<body>
+<header class="top" id="top">
+  <a class="brand" href="index.html" aria-label="Shafar Fragrances">
+    <img class="brand__crest" src="assets/crest.png" alt="" width="480" height="512">
+    <img class="brand__word" src="assets/wordmark.png" alt="" width="720" height="227">
+  </a>
+  <nav class="menu" id="menu" aria-label="Main">
+    <a href="index.html">Featured</a>
+    <a href="home.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="shop.html">Shop</a>
+    <a href="#contact" aria-current="page">Contact</a>
+  </nav>
+  <div class="tools">
+    <button class="icon" type="button" id="open-wish" aria-label="Wishlist">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.3s-7.5-4.4-7.5-10.1A4.2 4.2 0 0 1 12 7.6a4.2 4.2 0 0 1 7.5 2.6c0 5.7-7.5 10.1-7.5 10.1z"/></svg>
+      <span class="badge" id="wish-count" hidden>0</span>
+    </button>
+    <button class="icon" type="button" id="open-cart" aria-label="Cart">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5.5 8.5h13l-1 11.5h-11z"/><path d="M9 8.5V7a3 3 0 0 1 6 0v1.5"/></svg>
+      <span class="badge" id="cart-count" hidden>0</span>
+    </button>
+    <button class="icon burger" type="button" id="burger" aria-label="Menu" aria-expanded="false" aria-controls="menu">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8h16M4 16h16"/></svg>
+    </button>
+  </div>
+</header>
+
+<main id="contact">
+  <section class="chero" aria-labelledby="contact-title">
+    <span class="chero__ghost" id="ghost" aria-hidden="true">Hello</span>
+    <div class="chero__in">
+      <div class="chero__copy">
+        <p class="eyebrow" data-rise>Contact</p>
+        <h1 id="contact-title" data-rise>Let's talk <em>scent</em></h1>
+        <p class="chero__lede" data-rise>A question about a fragrance, an order, or a gift for someone? Write to us. We read every message.</p>
+        <div class="chero__cta" data-rise>
+          <a class="btn" href="https://wa.me/923180250552" target="_blank" rel="noopener">Chat on WhatsApp</a>
+          <a class="more" href="#ways">More ways to reach us</a>
+        </div>
+      </div>
+
+      <form class="cform" id="cform" novalidate>
+        <div class="cform__dome">
+          <img src="assets/crest-gold.webp" alt="" width="420" height="447">
+          <h2>Write <em>to us</em></h2>
+          <p>Fill this in and it opens WhatsApp with your message ready to send.</p>
+        </div>
+        <div class="field"><input type="text" id="f-name" name="name" placeholder=" " autocomplete="name" required><label for="f-name">Your name</label></div>
+        <div class="field"><input type="tel" id="f-phone" name="phone" placeholder=" " autocomplete="tel" inputmode="tel"><label for="f-phone">Phone number (optional)</label></div>
+        <div class="topic" role="radiogroup" aria-labelledby="topic-label">
+          <span class="topic__label" id="topic-label">What is it about?</span>
+          <div class="topic__set">
+            <input type="radio" name="topic" id="t-order" value="An order" checked><label for="t-order">An order</label>
+            <input type="radio" name="topic" id="t-scent" value="A fragrance"><label for="t-scent">A fragrance</label>
+            <input type="radio" name="topic" id="t-gift" value="Gifting or bulk"><label for="t-gift">Gifting or bulk</label>
+            <input type="radio" name="topic" id="t-other" value="Something else"><label for="t-other">Something else</label>
+          </div>
+        </div>
+        <div class="field"><textarea id="f-msg" name="message" placeholder=" " rows="4" required></textarea><label for="f-msg">Your message</label></div>
+        <p class="cform__err" id="f-err" role="alert"></p>
+        <a class="send" id="send" href="https://wa.me/923180250552" target="_blank" rel="noopener">Send on WhatsApp <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20l1.3-4.2A8 8 0 1 1 8.4 19z"/><path d="M9.2 8.6c-.5 2.6 3 6 5.8 5.6l.9-1.4-1.9-1-0.9.8c-.9-.3-1.8-1.2-2.1-2.1l.8-.9-1-1.9z"/></svg></a>
+        <p class="cform__note">Prefer email? Write to <span style="-webkit-user-select:all;user-select:all;color:#E3C57A">shafarfragrances@gmail.com</span></p>
+      </form>
+    </div>
+  </section>
+
+  <section class="ways" id="ways" aria-labelledby="ways-title">
+    <div class="ways__head">
+      <p class="eyebrow" data-show>Reach us</p>
+      <h2 class="sec-h" id="ways-title" data-show>Pick the way <em>that suits you</em></h2>
+    </div>
+    <div class="ways__list" id="ways-list">
+      <div class="way" style="--tint:#DFEBDD">
+        <h3 class="way__name">WhatsApp</h3>
+        <span class="way__value" id="v-wa">+92 318 0250552</span>
+        <div class="way__acts">
+          <a class="pill pill--solid" href="https://wa.me/923180250552" target="_blank" rel="noopener">Open chat <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg></a>
+          <button class="pill" type="button" data-copy="v-wa" data-what="Number">Copy <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V6a2 2 0 0 1 2-2h8"/></svg></button>
+        </div>
+      </div>
+      <div class="way" style="--tint:#F3E0BE">
+        <h3 class="way__name">Call</h3>
+        <a class="way__value" id="v-tel" href="tel:+923180250552">0318 0250552</a>
+        <div class="way__acts">
+          <button class="pill" type="button" data-copy="v-tel" data-what="Number">Copy <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V6a2 2 0 0 1 2-2h8"/></svg></button>
+        </div>
+      </div>
+      <div class="way" style="--tint:#E1E9F4">
+        <h3 class="way__name">Email</h3>
+        <a class="way__value" id="v-mail" href="mailto:shafarfragrances@gmail.com">shafarfragrances@gmail.com</a>
+        <div class="way__acts">
+          <button class="pill" type="button" data-copy="v-mail" data-what="Email address">Copy <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V6a2 2 0 0 1 2-2h8"/></svg></button>
+        </div>
+      </div>
+      <div class="way" style="--tint:#FAE2EA">
+        <h3 class="way__name">Instagram</h3>
+        <span class="way__value" id="v-ig">@shafar.fragrances</span>
+        <div class="way__acts">
+          <a class="pill pill--solid" href="https://www.instagram.com/shafar.fragrances/" target="_blank" rel="noopener">Open Instagram <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="faq" id="faq" aria-labelledby="faq-title">
+    <div class="faq__in">
+      <div class="faq__head">
+        <p class="eyebrow" data-show>Before you write</p>
+        <h2 class="sec-h" id="faq-title" data-show>Quick <em>answers</em></h2>
+        <p data-show>The things people ask us most. If yours is not here, send it over.</p>
+      </div>
+      <div class="faq__list" id="faq-list">
+        <div class="qa">
+          <h3><button class="qa__q" type="button" aria-expanded="false" aria-controls="a1" id="q1">Do you offer cash on delivery?</button></h3>
+          <div class="qa__a" id="a1" role="region" aria-labelledby="q1"><div><p>Yes. Every order is cash on delivery, anywhere in Pakistan. You pay when the parcel reaches you.</p></div></div>
+        </div>
+        <div class="qa">
+          <h3><button class="qa__q" type="button" aria-expanded="false" aria-controls="a2" id="q2">Which sizes can I order?</button></h3>
+          <div class="qa__a" id="a2" role="region" aria-labelledby="q2"><div><p>Every Shafar fragrance comes in a 50 ml bottle.</p></div></div>
+        </div>
+        <div class="qa">
+          <h3><button class="qa__q" type="button" aria-expanded="false" aria-controls="a3" id="q3">What is the difference between Parfum and Eau de Parfum?</button></h3>
+          <div class="qa__a" id="a3" role="region" aria-labelledby="q3"><div><p>Parfum carries a higher share of fragrance oil than Eau de Parfum, so it is usually richer and stays on the skin longer. Every product shows which one it is.</p></div></div>
+        </div>
+        <div class="qa">
+          <h3><button class="qa__q" type="button" aria-expanded="false" aria-controls="a4" id="q4">How do I place an order?</button></h3>
+          <div class="qa__a" id="a4" role="region" aria-labelledby="q4"><div><p>Add a bottle to your cart and check out, or send us the fragrance and size on WhatsApp and we will take it from there.</p></div></div>
+        </div>
+        <div class="qa">
+          <h3><button class="qa__q" type="button" aria-expanded="false" aria-controls="a5" id="q5">How long does delivery take?</button></h3>
+          <div class="qa__a" id="a5" role="region" aria-labelledby="q5"><div><span class="draft">Answer needed</span><p>Delivery times by city go here once you share them.</p></div></div>
+        </div>
+        <div class="qa">
+          <h3><button class="qa__q" type="button" aria-expanded="false" aria-controls="a6" id="q6">Can I return or exchange a bottle?</button></h3>
+          <div class="qa__a" id="a6" role="region" aria-labelledby="q6"><div><span class="draft">Answer needed</span><p>Your return and exchange policy goes here.</p></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="foot" id="footer">
+  <div class="foot__top">
+    <div class="foot__brand">
+      <img src="assets/logo-gold.png" alt="Shafar Fragrances" width="488" height="516" loading="lazy">
+      <p>Where every scent tells a tale. Affordable luxury perfumes in Parfum and Eau de Parfum strength.</p>
+      <span class="foot__pay">Cash on delivery across Pakistan</span>
+    </div>
+    <nav class="foot__col" aria-label="Shop">
+      <h3>Shop</h3>
+      <ul>
+        <li><a href="index.html">Featured</a></li>
+        <li><a href="home.html#best-sellers">Best sellers</a></li>
+        <li><a href="shop.html#men">Men</a></li>
+        <li><a href="shop.html#women">Women</a></li>
+        <li><a href="shop.html#unisex">Unisex</a></li>
+      </ul>
+    </nav>
+    <nav class="foot__col" aria-label="Shafar">
+      <h3>Shafar</h3>
+      <ul>
+        <li><a href="about.html">Our story</a></li>
+        <li><a href="home.html#reviews">Reviews</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+    <div class="foot__col">
+      <h3>Get in touch</h3>
+      <ul>
+        <li><a href="https://wa.me/923180250552" target="_blank" rel="noopener">WhatsApp</a></li>
+        <li><a href="https://www.instagram.com/shafar.fragrances/" target="_blank" rel="noopener">Instagram</a></li>
+      </ul>
+      <small>0318 0250552<br>shafarfragrances@gmail.com<br>www.shafarfragrances.com</small>
+    </div>
+  </div>
+  <div class="foot__word" id="foot-word" aria-hidden="true">Shafar</div>
+  <div class="foot__base">
+    <p>&copy; 2026 Shafar Fragrances</p>
+    <a class="foot__up" href="#contact">Back to top</a>
+  </div>
+</footer>
+
+<div class="scrim" id="scrim"></div>
+<aside class="drawer" id="drawer" role="dialog" aria-modal="true" aria-labelledby="drawer-title">
+  <div class="drawer__head">
+    <h2 id="drawer-title">Cart</h2>
+    <button class="icon" type="button" id="drawer-close" aria-label="Close">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+  </div>
+  <div class="drawer__list" id="drawer-list"></div>
+  <div class="drawer__foot" id="drawer-foot" hidden>
+    <p class="drawer__total"><span>Subtotal</span><b id="drawer-total"></b></p>
+    <a class="btn" href="checkout.html" style="display:flex;align-items:center;justify-content:center;text-decoration:none;--ink:#2B1810;margin-top:6px">Checkout</a>
+    <p class="drawer__note">Cash on delivery across Pakistan.</p>
+  </div>
+</aside>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="js/catalog.js"></script>
+<script src="/api/catalog"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script>
+(function () {
+  'use strict';
+
+  /* ---------- Products (the cart drawer needs them) ---------- */
+  var PRODUCTS = {
+    halila:     { name: 'Halila Lane',      kind: 'Parfum',        cat: 'unisex', best: true,  img: 'assets/halila.webp', tint: '#EFD3A8', deep: '#D9AE78', ink: '#3A2113', accent: '#7A3F10', desc: 'Deep, warm and unhurried. Made for evenings that run late.', prices: { 50: 2800 } },
+    belford:    { name: 'Belford',          kind: 'Eau de Parfum', cat: 'women',  best: true,  img: 'assets/belford.webp', tint: '#F5CFC0', deep: '#E5A391', ink: '#4A1210', accent: '#A3160F', desc: 'Bold from the first spray. Rich, confident and made for the night.', prices: { 50: 2700 } },
+    charleston: { name: 'Charleston',       kind: 'Parfum',        cat: 'women',  best: true,  img: 'assets/charleston.webp', tint: '#FADAE4', deep: '#F0AEC6', ink: '#57112F', accent: '#B0144F', desc: 'Bright, sweet and full of life. A playful scent that gets remembered.', prices: { 50: 2600 } },
+    shawano:    { name: 'Shawano',          kind: 'Parfum',        cat: 'men',    best: true,  img: 'assets/shawano.webp', tint: '#D6DFEC', deep: '#AEBED6', ink: '#18223A', accent: '#2C3E63', desc: 'Cool, clean and sure of itself. For days that have to go well.', prices: { 50: 2200 } },
+    argos:      { name: 'Argos',            kind: 'Eau de Parfum', cat: 'men',    best: true,  img: 'assets/argos.webp', tint: '#F0DAB6', deep: '#D9B480', ink: '#372412', accent: '#78400F', desc: 'An old name with a golden glow. Quietly grand.', prices: { 50: 2250 } },
+    southampton:{ name: 'Southampton',      kind: 'Parfum',        cat: 'men',    best: true,  img: 'assets/southampton.webp', tint: '#EDC8A9', deep: '#D59C73', ink: '#371E12', accent: '#782E0F', desc: 'Tailored and well travelled. Polished and always in place.', prices: { 50: 2700 } },
+    bradford:   { name: 'Bradford',         kind: 'Parfum',        cat: 'men',    best: true,  img: 'assets/bradford.webp', tint: '#EECFAE', deep: '#D7A578', ink: '#372112', accent: '#78350F', desc: 'Honest and dependable. A signature for the working week.', prices: { 50: 2600 } },
+    tobaccooudh:{ name: 'Tobacco Oudh',     kind: 'Parfum',        cat: 'unisex', best: true,  img: 'assets/tobaccooudh.webp', tint: '#EECAAA', deep: '#D69E74', ink: '#371F12', accent: '#78300F', desc: 'Tobacco and oudh, just as the name promises. Deep and made to linger.', prices: { 50: 2550 } },
+    jutland:    { name: 'Jutland',          kind: 'Eau de Parfum', cat: 'women',  best: true,  img: 'assets/jutland.webp', tint: '#F1C3B7', deep: '#DD8F80', ink: '#430E0A', accent: '#96130C', desc: 'Deep red and full of nerve. Made for the night.', prices: { 50: 2650 } },
+    elmira:     { name: 'Elmira',           kind: 'Parfum',        cat: 'women',  best: true,  img: 'assets/elmira.webp', tint: '#F6CDCB', deep: '#E69C9A', ink: '#4A0E12', accent: '#A8121C', desc: 'The red one. Vivid, confident and impossible to miss.', prices: { 50: 2450 } },
+    belleville: { name: 'Belle Ville',      kind: 'Parfum',        cat: 'men',    best: false, img: 'assets/belleville.webp', tint: '#EDC2A5', deep: '#D4946F', ink: '#371C12', accent: '#78290F', desc: 'A beautiful town after dark. Smooth, easy and quietly confident.', prices: { 50: 2450 } },
+    elko:       { name: 'Elko',             kind: 'Eau de Parfum', cat: 'men',    best: false, img: 'assets/elko.webp', tint: '#EFD0AF', deep: '#D7A779', ink: '#372112', accent: '#78360F', desc: 'Open road, clear sky. An easy pick for every day.', prices: { 50: 2600 } },
+    hudson:     { name: 'Hudson',           kind: 'Parfum',        cat: 'men',    best: false, img: 'assets/hudson.webp', tint: '#EDC1A5', deep: '#D4936F', ink: '#371C12', accent: '#78290F', desc: 'City nights and a sharp collar. Smooth and sure of itself.', prices: { 50: 2500 } },
+    inverlake:  { name: 'Inverlake Platos', kind: 'Eau de Parfum', cat: 'men',    best: false, img: 'assets/inverlake.webp', tint: '#EECCAC', deep: '#D6A175', ink: '#371F12', accent: '#78320F', desc: 'Still water and slow mornings. Calm, and close to the skin.', prices: { 50: 2600 } },
+    amesvelle:  { name: 'Amesvelle',        kind: 'Parfum',        cat: 'women',  best: false, img: 'assets/amesvelle.webp', tint: '#F4CCC2', deep: '#E4A195', ink: '#421610', accent: '#9C2211', desc: 'Graceful and a little regal. Made for evenings that matter.', prices: { 50: 2850 } },
+    liverpool:  { name: 'Liverpool',        kind: 'Eau de Parfum', cat: 'men',    best: false, img: 'assets/liverpool.webp', tint: '#EFD4B1', deep: '#D8AC7B', ink: '#372212', accent: '#783A0F', desc: 'Port-city spirit. Lively, sociable and easy to wear.', prices: { 50: 2700 } },
+    ofidow:     { name: 'Ofidow',           kind: 'Parfum',        cat: 'men',    best: false, img: 'assets/ofidow.webp', tint: '#EECDAD', deep: '#D6A377', ink: '#372012', accent: '#78330F', desc: 'Hard to place, easy to remember. A little mysterious.', prices: { 50: 2800 } },
+    torrance:   { name: 'Torrance',         kind: 'Eau de Parfum', cat: 'unisex', best: false, img: 'assets/torrance.webp', tint: '#ECC0A4', deep: '#D4916E', ink: '#371C12', accent: '#78270F', desc: 'Easy and laid-back. The one you reach for without thinking.', prices: { 50: 2600 } },
+    forthworth: { name: 'Forth Worth',      kind: 'Parfum',        cat: 'women',  best: false, img: 'assets/forthworth.webp', tint: '#F4CBC2', deep: '#E4A195', ink: '#421510', accent: '#9C2111', desc: 'Big-hearted and self-assured. A scent that walks in first.', prices: { 50: 2500 } },
+    exermont:   { name: 'Exermont',         kind: 'Parfum',        cat: 'men',    best: false, img: 'assets/exermont.webp', tint: '#EDC6A8', deep: '#D59A72', ink: '#371E12', accent: '#782D0F', desc: 'Bold and deliberate. Made for the nights that count.', prices: { 50: 2700 } },
+    cuba:       { name: 'Cuba',             kind: 'Parfum',        cat: 'unisex', best: false, img: 'assets/cuba.webp', tint: '#EDC4A7', deep: '#D49770', ink: '#371D12', accent: '#782B0F', desc: 'Slow evenings and loud laughter. Full of character.', prices: { 50: 2500 } },
+    moroni:     { name: 'Moroni',           kind: 'Parfum',        cat: 'men',    best: false, img: 'assets/moroni.webp', tint: '#F0DBB7', deep: '#D9B681', ink: '#372512', accent: '#78420F', desc: 'Island air and unhurried days. Easy to love.', prices: { 50: 2700 } },
+    whiteoudh:  { name: 'White Oudh',       kind: 'Eau de Parfum', cat: 'unisex', best: false, img: 'assets/whiteoudh.webp', tint: '#EDC5A7', deep: '#D59871', ink: '#371D12', accent: '#782C0F', desc: 'Oudh with a lighter hand, as the name promises. Refined and calm.', prices: { 50: 3200 } },
+    monastir:   { name: 'Monastir',         kind: 'Parfum',        cat: 'men',    best: false, img: 'assets/monastir.webp', tint: '#EFD6B3', deep: '#D8AF7D', ink: '#372312', accent: '#783C0F', desc: 'Named for a coast of sun and old stone. Made to travel well.', prices: { 50: null } },
+    elba:       { name: 'Elba',             kind: 'Eau de Parfum', cat: 'women',  best: false, img: 'assets/elba.webp', tint: '#F4CCC2', deep: '#E4A295', ink: '#421610', accent: '#9C2411', desc: 'An island name for sunny days. Light-hearted and easy to love.', prices: { 50: null } },
+    imperial:   { name: 'Imperial',         kind: 'Parfum',        cat: 'men',    best: false, img: 'assets/imperial.webp', tint: '#EFD3B0', deep: '#D7AA7B', ink: '#372212', accent: '#78390F', desc: 'Made to be noticed. Grand, and worn with confidence.', prices: { 50: null } },
+    auckland:   { name: 'Auckland',         kind: 'Eau de Parfum', cat: 'men',    best: false, img: 'assets/auckland.webp', tint: '#EDC6A8', deep: '#D59A72', ink: '#371E12', accent: '#782D0F', desc: 'Harbour light and a fresh start. Open and easy to wear.', prices: { 50: null } },
+    stromboli:  { name: 'Stromboli',        kind: 'Parfum',        cat: 'women',  best: false, img: 'assets/stromboli.webp', tint: '#F4CBC2', deep: '#E4A095', ink: '#421510', accent: '#9C2011', desc: 'Named for a volcano. Fiery, vivid and made to be noticed.', prices: { 50: null } },
+    hachita:    { name: 'Hachita',          kind: 'Parfum',        cat: 'men',    best: false, img: 'assets/hachita.webp', tint: '#EEC9AA', deep: '#D59D73', ink: '#371E12', accent: '#782F0F', desc: 'Desert roads and wide skies. Quiet and steady.', prices: { 50: null } }
+  };
+  var DEFAULT_SIZE = 50;
+  var BEST = Object.keys(PRODUCTS).filter(function (id) { return PRODUCTS[id].best; });      // the carousel
+  var WHEEL = ['halila', 'elmira', 'argos', 'charleston', 'tobaccooudh', 'jutland', 'shawano', 'belford'];      // the wheel: a short pick, so the section passes quickly
+  var priced = function (id) { return PRODUCTS[id].prices[DEFAULT_SIZE] != null; };
+
+  var $ = function (s, el) { return (el || document).querySelector(s); };
+  var $$ = function (s, el) { return Array.prototype.slice.call((el || document).querySelectorAll(s)); };
+  var rupees = function (n) { return 'Rs ' + Number(n).toLocaleString('en-US'); };
+  var el = function (tag, cls, text) { var n = document.createElement(tag); if (cls) n.className = cls; if (text != null) n.textContent = text; return n; };
+  var root = document.documentElement;
+
+  /* ---------- Toast ---------- */
+  var toastEl = $('#toast'), toastTimer;
+  function toast(msg) {
+    toastEl.textContent = msg;
+    toastEl.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(function () { toastEl.classList.remove('show'); }, 2400);
+  }
+  $$('[data-soon]').forEach(function (b) {
+    b.addEventListener('click', function () { toast('The ' + b.dataset.soon + ' page is not built yet.'); closeMenu(); });
+  });
+
+  /* ---------- Mobile menu ---------- */
+  var menu = $('#menu'), burger = $('#burger');
+  function closeMenu() { menu.classList.remove('open'); burger.setAttribute('aria-expanded', 'false'); }
+  burger.addEventListener('click', function () {
+    var open = menu.classList.toggle('open');
+    burger.setAttribute('aria-expanded', String(open));
+  });
+  $$('a', menu).forEach(function (a) { a.addEventListener('click', closeMenu); });
+
+  /* ---------- Cart and wishlist (saved in this browser, shared by every page) ---------- */
+  var CAT = window.SHAFAR_CATALOG || PRODUCTS;      // every product, so the cart can show a bottle added on another page
+  var cart = [], wish = [];
+  try {
+    cart = JSON.parse(localStorage.getItem('shafar.cart') || '[]').filter(function (l) { return CAT[l.id] && CAT[l.id].prices[l.size] != null && l.qty > 0; });
+    wish = JSON.parse(localStorage.getItem('shafar.wish') || '[]').filter(function (id) { return CAT[id]; });
+  } catch (e) { cart = []; wish = []; }
+  function save() { try { localStorage.setItem('shafar.cart', JSON.stringify(cart)); localStorage.setItem('shafar.wish', JSON.stringify(wish)); } catch (e) {} }
+  var drawer = $('#drawer'), scrim = $('#scrim'), list = $('#drawer-list'), foot = $('#drawer-foot');
+  var drawerMode = 'cart', lastFocus = null;
+
+  function badge(node, n) { node.textContent = n; node.hidden = n === 0; }
+  function syncBadges() {
+    badge($('#cart-count'), cart.reduce(function (s, l) { return s + l.qty; }, 0));
+    badge($('#wish-count'), wish.length);
+    save();
+  }
+  function addToCart(id, size) {
+    var line = cart.filter(function (l) { return l.id === id && l.size === size; })[0];
+    if (line) line.qty += 1; else cart.push({ id: id, size: size, qty: 1 });
+    syncBadges();
+    if (drawer.classList.contains('open')) renderDrawer();
+  }
+  function pic(id) {
+    var box = el('div', 'line__pic');
+    box.style.background = CAT[id].tint;
+    var im = el('img'); im.src = CAT[id].img; im.alt = '';
+    box.appendChild(im);
+    return box;
+  }
+  function renderDrawer() {
+    $('#drawer-title').textContent = drawerMode === 'cart' ? 'Cart' : 'Wishlist';
+    list.textContent = '';
+    var total = 0;
+    if (drawerMode === 'cart') {
+      if (!cart.length) list.appendChild(el('p', 'drawer__empty', 'Your cart is empty. Add a bottle from the Shop.'));
+      cart.forEach(function (l) {
+        var p = CAT[l.id], unit = p.prices[l.size];
+        total += unit * l.qty;
+        var row = el('div', 'line'), mid = el('div');
+        mid.appendChild(el('p', 'line__name', p.name));
+        mid.appendChild(el('p', 'line__meta', p.kind + ' · ' + l.size + ' ml'));
+        var q = el('div', 'qty');
+        var minus = el('button', '', '−'); minus.type = 'button'; minus.setAttribute('aria-label', 'One less ' + p.name);
+        var plus = el('button', '', '+'); plus.type = 'button'; plus.setAttribute('aria-label', 'One more ' + p.name);
+        minus.addEventListener('click', function () { l.qty -= 1; if (l.qty < 1) cart.splice(cart.indexOf(l), 1); syncBadges(); renderDrawer(); });
+        plus.addEventListener('click', function () { l.qty += 1; syncBadges(); renderDrawer(); });
+        q.appendChild(minus); q.appendChild(el('span', '', l.qty)); q.appendChild(plus);
+        mid.appendChild(q);
+        var side = el('div', 'line__side');
+        side.appendChild(el('b', '', rupees(unit * l.qty)));
+        var rm = el('button', 'link', 'Remove'); rm.type = 'button';
+        rm.addEventListener('click', function () { cart.splice(cart.indexOf(l), 1); syncBadges(); renderDrawer(); });
+        side.appendChild(rm);
+        row.appendChild(pic(l.id)); row.appendChild(mid); row.appendChild(side);
+        list.appendChild(row);
+      });
+      foot.hidden = !cart.length;
+      $('#drawer-total').textContent = rupees(total);
+    } else {
+      foot.hidden = true;
+      if (!wish.length) list.appendChild(el('p', 'drawer__empty', 'Nothing saved yet. Tap the heart on a bottle to keep it here.'));
+      wish.forEach(function (id) {
+        var p = CAT[id], row = el('div', 'line'), mid = el('div');
+        mid.appendChild(el('p', 'line__name', p.name));
+        var unit = p.prices[DEFAULT_SIZE];
+        mid.appendChild(el('p', 'line__meta', p.kind + ' · ' + (unit == null ? (p.soldout ? 'Sold out' : 'Price to be added') : rupees(unit) + ' for ' + DEFAULT_SIZE + ' ml')));
+        var side = el('div', 'line__side');
+        var add = el('button', 'link', 'Add to cart'); add.type = 'button';
+        add.addEventListener('click', function () { addToCart(id, DEFAULT_SIZE); toast(p.name + ', ' + DEFAULT_SIZE + ' ml added to cart.'); });
+        var rm = el('button', 'link', 'Remove'); rm.type = 'button';
+        rm.addEventListener('click', function () { setWish(id, false); renderDrawer(); });
+        if (unit != null) side.appendChild(add);
+        side.appendChild(rm);
+        row.appendChild(pic(id)); row.appendChild(mid); row.appendChild(side);
+        list.appendChild(row);
+      });
+    }
+  }
+  function openDrawer(mode, from) {
+    drawerMode = mode; lastFocus = from || null;
+    renderDrawer();
+    drawer.classList.add('open'); scrim.classList.add('open');
+    closeMenu();
+    $('#drawer-close').focus();
+  }
+  function closeDrawer() {
+    drawer.classList.remove('open'); scrim.classList.remove('open');
+    if (lastFocus) lastFocus.focus();
+  }
+  $('#open-cart').addEventListener('click', function () { openDrawer('cart', this); });
+  $('#open-wish').addEventListener('click', function () { openDrawer('wish', this); });
+  $('#drawer-close').addEventListener('click', closeDrawer);
+  scrim.addEventListener('click', closeDrawer);
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') { closeDrawer(); closeMenu(); } });
+
+  function setWish(id, on) {
+    var i = wish.indexOf(id);
+    if (on && i < 0) wish.push(id);
+    if (!on && i >= 0) wish.splice(i, 1);
+    $$('[data-wish="' + id + '"]').forEach(function (h) {
+      h.setAttribute('aria-pressed', String(on));
+      h.setAttribute('aria-label', on ? 'Remove ' + CAT[id].name + ' from wishlist' : 'Save ' + CAT[id].name + ' to wishlist');
+    });
+    syncBadges();
+  }
+  $$('[data-add]').forEach(function (b) {
+    b.addEventListener('click', function () {
+      var id = b.dataset.add;
+      if (CAT[id].prices[DEFAULT_SIZE] == null) { toast('The price for ' + CAT[id].name + ' is still to be added.'); return; }
+      addToCart(id, DEFAULT_SIZE);
+      toast(CAT[id].name + ', ' + DEFAULT_SIZE + ' ml added to cart.');
+    });
+  });
+  $$('[data-wish]').forEach(function (b) {
+    b.addEventListener('click', function () {
+      var id = b.dataset.wish, on = b.getAttribute('aria-pressed') !== 'true';
+      setWish(id, on);
+      toast(on ? CAT[id].name + ' saved to your wishlist.' : CAT[id].name + ' removed from your wishlist.');
+    });
+  });
+
+  // restore what was saved on other pages
+  wish.forEach(function (id) { $$('[data-wish="' + id + '"]').forEach(function (h) { h.setAttribute('aria-pressed', 'true'); }); });
+  syncBadges();
+
+  /* ---------- Header turns solid once you leave the top ---------- */
+  var topBar = $('#top');
+  function solid() { topBar.classList.toggle('is-solid', window.scrollY > 24); }
+  window.addEventListener('scroll', solid, { passive: true });
+  solid();
+
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  $$('a[href^="#"]').forEach(function (a) {
+    a.addEventListener('click', function (e) {
+      var target = $(a.getAttribute('href'));
+      if (!target) return;
+      e.preventDefault();
+      var y = target.id === 'contact' ? 0 : target.getBoundingClientRect().top + window.scrollY - topBar.offsetHeight + 2;
+      window.scrollTo({ top: y, behavior: reduce ? 'auto' : 'smooth' });
+    });
+  });
+
+  /* ---------- The form writes a WhatsApp message ----------
+     The Send button is a real link whose address is rebuilt as you type, so it
+     opens WhatsApp with the message already written. Nothing is stored here.
+     In the final site the same form can also save the message to the dashboard. */
+  var WA = 'https://wa.me/923180250552', form = $('#cform'), send = $('#send'), err = $('#f-err');
+  function compose() {
+    var name = form.elements.name.value.trim(), phone = form.elements.phone.value.trim(), msg = form.elements.message.value.trim();
+    var lines = ['Hello Shafar, this is ' + (name || '...') + '.', 'About: ' + form.elements.topic.value, '', msg];
+    if (phone) lines.push('', 'My number: ' + phone);
+    send.href = WA + '?text=' + encodeURIComponent(lines.join('\n'));
+    return { name: name, msg: msg };
+  }
+  form.addEventListener('input', function () { compose(); err.textContent = ''; });
+  form.addEventListener('submit', function (e) { e.preventDefault(); send.click(); });
+  send.addEventListener('click', function (e) {
+    var v = compose();
+    if (!v.name || !v.msg) {
+      e.preventDefault();
+      err.textContent = !v.name ? 'Add your name so we know who is writing.' : 'Write your message first.';
+      (!v.name ? form.elements.name : form.elements.message).focus();
+    }
+  });
+  compose();
+
+  /* ---------- Copy buttons ---------- */
+  $$('[data-copy]').forEach(function (b) {
+    b.addEventListener('click', function () {
+      var node = $('#' + b.dataset.copy), text = node.textContent.trim();
+      var done = function () { toast(b.dataset.what + ' copied.'); };
+      var pick = function () { var r = document.createRange(); r.selectNodeContents(node); var s = window.getSelection(); s.removeAllRanges(); s.addRange(r); toast('Selected. Press copy.'); };
+      if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(text).then(done).catch(pick); else pick();
+    });
+  });
+
+  /* ---------- Questions open in place ---------- */
+  var hasGsap = !!window.gsap && !reduce;
+  $('#faq').classList.add('faq--js');
+  $$('.qa__q').forEach(function (q) {
+    var panel = $('#' + q.getAttribute('aria-controls'));
+    q.addEventListener('click', function () {
+      var open = q.getAttribute('aria-expanded') !== 'true';
+      q.setAttribute('aria-expanded', String(open));
+      if (hasGsap) gsap.to(panel, { height: open ? 'auto' : 0, duration: 0.55, ease: 'power3.inOut', overwrite: true });
+      else panel.style.height = open ? 'auto' : '0';
+    });
+  });
+  // the first answer starts open so the section never looks empty
+  (function () { var q = $('.qa__q'), p = $('#' + q.getAttribute('aria-controls')); q.setAttribute('aria-expanded', 'true'); p.style.height = 'auto'; })();
+
+  /* ---------- Motion ---------- */
+  if (!hasGsap) return;
+  var hasST = !!window.ScrollTrigger;
+  if (hasST) gsap.registerPlugin(ScrollTrigger);
+  gsap.from('.chero [data-rise]', { y: 30, autoAlpha: 0, duration: 1, ease: 'power3.out', stagger: 0.09, delay: 0.1 });
+  gsap.from('#ghost', { xPercent: -6, autoAlpha: 0, duration: 1.5, ease: 'power3.out' });
+  gsap.fromTo('#cform', { clipPath: 'inset(100% 0% 0% 0%)' }, { clipPath: 'inset(0% 0% 0% 0%)', duration: 1.3, ease: 'power3.out', delay: 0.15, clearProps: 'clipPath' });
+  gsap.from('#cform > *', { y: 26, autoAlpha: 0, duration: 0.8, ease: 'power3.out', stagger: 0.07, delay: 0.6 });
+  if (hasST) {
+    gsap.to('#ghost', { yPercent: 38, ease: 'none', scrollTrigger: { trigger: '.chero', start: 'top top', end: 'bottom top', scrub: 0.6 } });
+    $$('[data-show]').forEach(function (n, i) {
+      gsap.from(n, { y: 28, autoAlpha: 0, duration: 0.9, ease: 'power3.out', delay: (i % 3) * 0.07, scrollTrigger: { trigger: n, start: 'top 90%' } });
+    });
+    gsap.from('#ways-list .way', { y: 40, autoAlpha: 0, duration: 0.9, ease: 'power3.out', stagger: 0.1, scrollTrigger: { trigger: '#ways-list', start: 'top 84%' } });
+    gsap.from('#faq-list .qa', { y: 30, autoAlpha: 0, duration: 0.8, ease: 'power3.out', stagger: 0.07, scrollTrigger: { trigger: '#faq-list', start: 'top 86%' } });
+    gsap.from('.foot__top > *', { y: 30, autoAlpha: 0, duration: 0.9, ease: 'power3.out', stagger: 0.08, scrollTrigger: { trigger: '.foot', start: 'top 85%' } });
+    gsap.fromTo('#foot-word', { yPercent: 42 }, { yPercent: 0, ease: 'none', scrollTrigger: { trigger: '#foot-word', start: 'top bottom', end: 'bottom bottom', scrub: 0.6 } });
+  }
+})();
+</script>
+<script>
+/* Arriving with #section in the address (for example home.html#reviews): scroll there once the page has settled. */
+window.addEventListener('load', function () {
+  var id = (location.hash || '').slice(1); if (!id) return;
+  var target = document.getElementById(id), bar = document.getElementById('top');
+  if (!target || target === document.querySelector('main')) return;
+  setTimeout(function () {
+    if (window.ScrollTrigger) ScrollTrigger.refresh();
+    window.scrollTo(0, target.getBoundingClientRect().top + window.scrollY - (bar ? bar.offsetHeight : 0) + 2);
+  }, 350);
+});
+</script>
+<script>
+/* Visitor count for the dashboard: a random id kept in this browser, no personal data. */
+(function () {
+  try {
+    var k = 'shafar.vid', v = localStorage.getItem(k);
+    if (!v) { v = Math.random().toString(36).slice(2) + Date.now().toString(36); localStorage.setItem(k, v); }
+    var data = JSON.stringify({ vid: v, path: location.pathname, ref: document.referrer });
+    if (navigator.sendBeacon) navigator.sendBeacon('/api/track', data);
+    else fetch('/api/track', { method: 'POST', body: data, keepalive: true });
+  } catch (e) {}
+})();
+</script>
+</body>
+</html>

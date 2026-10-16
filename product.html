@@ -1,0 +1,985 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Fragrance | Shafar Fragrances</title>
+<meta name="description" content="Notes, sizes and price for this Shafar fragrance. Cash on delivery across Pakistan.">
+<meta name="robots" content="noindex">   <!-- preview build with sample content: remove this line at launch -->
+<meta name="theme-color" content="#F6EFE4">
+<link rel="icon" type="image/png" href="assets/favicon.png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600&family=Noto+Serif+Display:ital,wdth,wght@0,62.5..100,400..900;1,62.5..100,400..900&display=swap">
+<style>
+/* base rules every page relies on */
+:root{color-scheme:light}
+html{-webkit-text-size-adjust:100%}
+body{margin:0}
+img{max-width:100%}
+[hidden]{display:none!important}
+</style>
+<style>
+/* Layout: a two-column stage in the product's own colour. Left: the bottle, pinned, with its name in giant letters behind it.
+   Right: everything needed to buy, then notes and details, scrolling past. A slim buy bar follows once the buy box is out of view. */
+:root{
+  --cream:#F6EFE4;      /* page ground */
+  --linen:#FBF7F0;      /* raised surfaces: drawer, menu */
+  --sand:#E8DAC3;       /* hairlines and quiet fills */
+  --dune:#EBDDC6;       /* spotlight band */
+  --espresso:#2B1810;   /* brand brown: header, primary text */
+  --cocoa:#6B4A36;      /* secondary text */
+  --bronze:#8A5B1E;     /* small accents on light grounds */
+  --gold:#C9A24A;       /* logo gold, on brown only */
+  --amber-1:#F1D9B2;    /* Halila Lane arch, top */
+  --amber-2:#DDB684;    /* Halila Lane arch, base */
+  --word:#FFFBF4;
+  --display:"Noto Serif Display","Bodoni 72",Didot,"Playfair Display",Georgia,serif;
+  --ui:"Jost","Century Gothic","Avenir Next",Avenir,"Segoe UI",system-ui,sans-serif;
+  --pad:clamp(1.125rem,5vw,4.75rem);
+  --head:4.875rem;
+  color-scheme:light;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{font-size:clamp(12px,0.9467vw,18px)}   /*root*/
+@media (max-width:1080px){html{font-size:16px}}   /*root*/
+body{margin:0;background:var(--cream);color:var(--espresso);font-family:var(--ui);font-size:max(12.5px,1rem);line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+h1,h2,h3,p,ol,ul,dl,dd{margin:0}
+ol,ul{padding:0;list-style:none}
+button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:pointer}
+a{color:inherit}
+:focus-visible{outline:0.125rem solid currentColor;outline-offset:0.1875rem;border-radius:0.125rem}
+
+/* ---------- Header ---------- */
+.top{position:fixed;inset:0 0 auto 0;z-index:30;display:flex;align-items:center;justify-content:space-between;gap:1.25rem;
+  height:calc(var(--head) + env(safe-area-inset-top,0px));padding:env(safe-area-inset-top,0px) var(--pad) 0;
+  color:var(--espresso);transition:background-color .3s,box-shadow .3s}
+.top.is-solid{background:rgba(246,239,228,.9);-webkit-backdrop-filter:blur(0.75rem);backdrop-filter:blur(0.75rem);box-shadow:0 1px 0 rgba(43,24,16,.1)}
+.brand{display:flex;align-items:center;gap:0.75rem;text-decoration:none;flex:none}
+.brand img{display:block;width:auto;max-width:none}
+.brand__crest{height:3rem}
+.brand__word{height:1.9375rem}
+.menu{display:flex;align-items:center;gap:clamp(1.125rem,3vw,2.5rem)}
+.menu a,.menu button{font-size:max(10.5px,0.75rem);font-weight:500;letter-spacing:.2em;text-transform:uppercase;text-decoration:none;padding:0.625rem 0.125rem;position:relative}
+.menu a::after,.menu button::after{content:"";position:absolute;left:0.125rem;right:0.125rem;bottom:0.25rem;height:1px;background:currentColor;transform:scaleX(0);transform-origin:left;transition:transform .3s}
+.menu a:hover::after,.menu button:hover::after,.menu [aria-current]::after{transform:scaleX(1)}
+.tools{display:flex;align-items:center;gap:0.375rem;flex:none}
+.icon{position:relative;width:2.75rem;height:2.75rem;display:grid;place-items:center;border-radius:50%;transition:background-color .2s}
+.icon:hover{background:rgba(43,24,16,.08)}
+.icon svg{width:1.3125rem;height:1.3125rem;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.badge{position:absolute;top:0.1875rem;right:1px;min-width:1.125rem;height:1.125rem;padding:0 0.3125rem;border-radius:0.5625rem;background:var(--espresso);color:var(--cream);
+  font-size:max(10.5px,0.6562rem);font-weight:600;line-height:1.125rem;text-align:center;font-variant-numeric:tabular-nums}
+.burger{display:none}
+
+/* ---------- Shared pieces ---------- */
+main{position:relative}
+.eyebrow{font-size:max(10.5px,0.7188rem);font-weight:600;letter-spacing:.26em;text-transform:uppercase;color:var(--bronze)}
+.btn{display:inline-flex;align-items:center;justify-content:center;height:3.375rem;padding:0 1.875rem;border-radius:1.6875rem;background:var(--espresso);color:var(--word);
+  font-size:max(10.5px,0.75rem);font-weight:600;letter-spacing:.2em;text-transform:uppercase;text-decoration:none;transition:transform .2s}
+.btn:hover{transform:translateY(-0.125rem)}
+.more{display:inline-flex;align-items:center;gap:0.75rem;font-size:max(10.5px,0.75rem);font-weight:600;letter-spacing:.2em;text-transform:uppercase;text-decoration:none;padding:0.625rem 0}
+.more::after{content:"";width:2.125rem;height:1px;background:currentColor;transition:width .3s}
+.more:hover::after{width:3.25rem}
+.heart{flex:none;width:2.875rem;height:2.875rem;border-radius:50%;display:grid;place-items:center;border:1px solid rgba(43,24,16,.3);transition:border-color .2s}
+.heart:hover{border-color:currentColor}
+.heart svg{width:1.1875rem;height:1.1875rem;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linejoin:round;transition:fill .2s}
+.heart[aria-pressed="true"] svg{fill:currentColor}
+.slot{aspect-ratio:482/1100;position:relative}
+.slot img{display:block;height:100%;width:auto;max-width:none;position:relative;z-index:1}
+.slot::after,.traveller__shadow{content:"";position:absolute;left:-8%;right:-8%;bottom:-4.5%;height:9%;border-radius:50%;
+  background:radial-gradient(closest-side,#3A2113,transparent);opacity:.32;filter:blur(0.4375rem)}
+/* With the travelling bottle running, its three resting places stay empty */
+.travel .slot--t img,.travel .slot--t::after{visibility:hidden}
+
+/* ---------- Product cards (same component as Home and Shop) ---------- */
+.shop{padding:clamp(4.75rem,10vw,8.25rem) var(--pad) clamp(4.75rem,10vw,7.75rem);background:var(--cream)}
+.shop__head{position:relative;z-index:7;max-width:77.5rem;margin:0 auto clamp(2.25rem,5vw,3.875rem);display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:0.875rem 1.75rem}
+.shop__head h2{font-family:var(--display);font-weight:500;font-size:clamp(2.375rem,4.6vw,4.375rem);line-height:1;letter-spacing:-.01em;margin-top:0.75rem}
+.cards{max-width:77.5rem;margin-inline:auto;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(1rem,2.2vw,2.125rem)}
+.card{display:grid;grid-template-columns:minmax(0,1fr);grid-template-rows:auto 1fr;gap:1.25rem;color:var(--ink);min-width:0}
+.card__frame{aspect-ratio:4/5;border-radius:999px 999px 0.5rem 0.5rem;background:linear-gradient(180deg,var(--c),var(--e));display:grid;grid-template-rows:minmax(0,1fr);place-items:end center;padding-bottom:9%}
+.card__frame .slot{height:71%}
+.card__body{display:grid;grid-template-rows:auto auto 1fr auto;gap:0.5rem;min-width:0}
+.card__kind{font-size:max(10.5px,0.6875rem);font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:var(--accent)}
+.card__name{font-family:var(--display);font-weight:500;font-size:clamp(1.5625rem,2.3vw,2rem);line-height:1.05}
+.card__desc{font-size:max(12.5px,0.9062rem);line-height:1.5;color:var(--cocoa)}
+.card__buy{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:0.75rem;margin-top:0.625rem;padding-top:0.875rem;border-top:1px solid var(--sand)}
+.card__price{display:flex;align-items:baseline;gap:0.5rem;font-family:var(--display);font-weight:600;font-size:1.5625rem;line-height:1;font-variant-numeric:lining-nums tabular-nums;white-space:nowrap}
+.card__price span{font-family:var(--ui);font-weight:500;font-size:max(10.5px,0.7188rem);letter-spacing:.14em;text-transform:uppercase;color:var(--cocoa)}
+.card__acts{display:flex;gap:0.5rem;align-items:center}
+.card__add{height:2.875rem;padding:0 1.25rem;border-radius:1.4375rem;background:var(--ink);color:var(--word);font-size:max(10.5px,0.6875rem);font-weight:600;letter-spacing:.18em;text-transform:uppercase;white-space:nowrap;transition:transform .2s}
+.card__add:hover{transform:translateY(-0.125rem)}
+.card__add:disabled{opacity:.34;cursor:not-allowed;transform:none}
+.card__price.card__price--open{font-family:var(--ui);font-weight:500;font-size:max(12.5px,0.8438rem);letter-spacing:.02em;color:var(--cocoa)}
+
+/* ---------- Reviews ---------- */
+.reviews{padding:clamp(4.75rem,10vw,8.25rem) var(--pad);background:var(--dune)}
+.reviews__head{max-width:77.5rem;margin:0 auto clamp(2rem,4.4vw,3.5rem);display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:1rem 2.5rem}
+.reviews__head h2{font-family:var(--display);font-weight:500;font-size:clamp(2.375rem,4.6vw,4.375rem);line-height:1;letter-spacing:-.01em;margin-top:0.75rem}
+.reviews__head h2 em{font-weight:400}
+.reviews__lede{max-width:36ch;color:var(--cocoa)}
+.reviews__grid{max-width:77.5rem;margin-inline:auto;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(1rem,2.2vw,1.875rem)}
+.review,.review blockquote{margin:0}
+.review{position:relative;display:grid;grid-template-rows:auto 1fr auto;gap:1.125rem;padding:2.125rem 1.875rem 1.625rem;background:var(--linen);border-radius:0.5rem}
+.review__mark{font-family:var(--display);font-weight:700;font-size:5.75rem;line-height:.62;height:2.75rem;color:var(--gold)}
+.review__text{font-family:var(--display);font-weight:400;font-size:clamp(1.25rem,1.7vw,1.5625rem);line-height:1.36}
+.review__who{display:flex;flex-wrap:wrap;justify-content:space-between;gap:0.375rem 1rem;padding-top:1rem;border-top:1px solid var(--sand);font-size:max(10.5px,0.75rem);font-weight:500;letter-spacing:.16em;text-transform:uppercase}
+.review__who span:last-child{color:var(--cocoa)}
+.review__tag{position:absolute;top:1.125rem;right:1.125rem;padding:0.25rem 0.75rem;border:1px dashed var(--bronze);border-radius:1.25rem;font-size:max(10.5px,0.6562rem);font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--bronze)}
+
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+.sec-h{font-family:var(--display);font-weight:500;font-size:clamp(2.375rem,4.6vw,4.375rem);line-height:1.02;letter-spacing:-.01em;text-wrap:balance}
+.sec-h em{font-weight:400}
+.draft{display:inline-flex;align-items:center;padding:0.25rem 0.75rem;border:1px dashed currentColor;border-radius:1.25rem;font-size:max(10.5px,0.6562rem);font-weight:600;letter-spacing:.2em;text-transform:uppercase;white-space:nowrap}
+:root{--wash:#EFD3A8}
+.top.is-solid{background:var(--wash);background:color-mix(in srgb,var(--wash) 90%,transparent)}
+
+/* ---------- Stage ---------- */
+.pstage{position:relative;display:grid;grid-template-columns:minmax(0,1.04fr) minmax(0,.96fr);--pc:#EFD3A8;--pe:#D9AE78;--ink:#3A2113;--accent:#7A3F10;color:var(--ink);
+  background:var(--pe);background:color-mix(in srgb,var(--pc) 42%,var(--pe))}
+.pvis{position:sticky;top:0;align-self:start;height:100vh;height:100svh;min-height:30rem;overflow:hidden;display:grid;place-items:center;
+  background:radial-gradient(ellipse 66% 60% at 50% 54%,var(--pc) 0%,transparent 74%)}
+.pvis__word{position:absolute;inset:0;display:grid;place-items:center;pointer-events:none;-webkit-user-select:none;user-select:none}
+.pvis__word span{display:block;font-family:var(--display);font-weight:900;font-stretch:62.5%;font-size:12.5rem;line-height:.8;text-transform:uppercase;white-space:nowrap;color:var(--word);will-change:transform}
+.pvis__bottle{position:relative;z-index:1;height:min(64vh,40rem);height:min(64svh,40rem);margin-top:calc(var(--head) * .5)}
+.pvis__bottle div{height:100%;position:relative}
+.pvis__bottle img{display:block;height:100%;width:auto;max-width:none;position:relative;z-index:1}
+.pvis__shadow{position:absolute;left:-8%;right:-8%;bottom:-4.5%;height:9%;border-radius:50%;background:radial-gradient(closest-side,var(--ink),transparent);opacity:.32;filter:blur(0.4375rem)}
+
+.pinfo{position:relative;z-index:1;display:grid;grid-template-columns:minmax(0,1fr);gap:clamp(4.5rem,13vh,8.25rem);justify-items:start;max-width:41.25rem;
+  padding:calc(var(--head) + clamp(0.875rem,4vh,2.75rem)) var(--pad) clamp(5.25rem,14vh,9.375rem) clamp(0.5rem,2vw,2.125rem)}
+.buy{display:grid;grid-template-columns:minmax(0,1fr);gap:1.125rem;justify-items:start;align-content:center;min-height:calc(100vh - var(--head) - 5.625rem);min-height:calc(100svh - var(--head) - 5.625rem);width:100%}
+.crumbs{display:flex;flex-wrap:wrap;gap:0.5rem;font-size:max(10.5px,0.7188rem);font-weight:500;letter-spacing:.16em;text-transform:uppercase}
+.crumbs a{text-decoration:none;opacity:.7}
+.crumbs a:hover{opacity:1}
+.crumbs span[aria-hidden]{opacity:.45}
+.flags{display:flex;gap:0.5rem;min-height:1.625rem}
+.flag{padding:0.3125rem 0.6875rem;border-radius:0.875rem;background:var(--ink);color:var(--word);font-size:max(10.5px,0.6562rem);font-weight:600;letter-spacing:.16em;text-transform:uppercase}
+.flag--sample{background:none;border:1px dashed var(--ink);color:var(--ink)}
+.buy__kind{font-size:max(10.5px,0.7188rem);font-weight:600;letter-spacing:.26em;text-transform:uppercase;color:var(--accent)}
+.buy h1{font-family:var(--display);font-weight:500;font-size:clamp(2.875rem,5.6vw,5.875rem);line-height:.96;letter-spacing:-.02em}
+.buy h1 .w{display:inline-block;white-space:nowrap}
+.buy h1 .w span{display:inline-block}
+.buy__desc{max-width:40ch;font-size:1.0625rem;color:var(--ink);color:color-mix(in srgb,var(--ink) 84%,transparent)}
+.label{font-size:max(10.5px,0.7188rem);font-weight:500;letter-spacing:.22em;text-transform:uppercase}
+.sizes{display:flex;gap:0.625rem}
+.sizes input{position:absolute;opacity:0;pointer-events:none}
+.sizes label{width:3.75rem;height:3.75rem;border-radius:50%;display:grid;place-content:center;justify-items:center;cursor:pointer;border:1px solid var(--ink);border-color:color-mix(in srgb,var(--ink) 38%,transparent);
+  font-size:max(10.5px,0.625rem);font-weight:500;letter-spacing:.12em;text-transform:uppercase;line-height:1.1;transition:background-color .25s,color .25s,border-color .25s,transform .25s}
+.sizes label b{font-size:1.0625rem;font-weight:600;letter-spacing:0}
+.sizes label:hover{border-color:var(--ink);transform:translateY(-0.125rem)}
+.sizes input:checked+label{background:var(--ink);border-color:var(--ink);color:var(--word)}
+.sizes input:focus-visible+label{outline:0.125rem solid var(--ink);outline-offset:0.1875rem}
+.buy__price{display:flex;align-items:baseline;gap:0.75rem;min-height:3.125rem}
+.buy__amt{font-family:var(--display);font-weight:600;font-size:2.875rem;line-height:1;font-variant-numeric:lining-nums tabular-nums}
+.buy__amt.is-open{font-family:var(--ui);font-size:max(12.5px,0.9375rem);font-weight:500}
+.buy__for{font-size:max(10.5px,0.75rem);letter-spacing:.14em;text-transform:uppercase;opacity:.8}
+.buy__row{display:flex;flex-wrap:wrap;align-items:center;gap:0.625rem}
+.qty{display:flex;align-items:center;height:3.5rem;padding:0 0.375rem;border-radius:1.75rem;border:1px solid var(--ink);border-color:color-mix(in srgb,var(--ink) 38%,transparent)}
+.qty button{width:2.625rem;height:2.625rem;border-radius:50%;font-size:1.25rem;line-height:1;transition:background-color .2s}
+.qty button:hover{background:rgba(255,255,255,.4)}
+.qty span{min-width:1.75rem;text-align:center;font-weight:600;font-variant-numeric:tabular-nums}
+.buy__add{height:3.5rem;padding:0 2.25rem;border-radius:1.75rem;background:var(--ink);color:var(--word);font-size:max(10.5px,0.75rem);font-weight:600;letter-spacing:.2em;text-transform:uppercase;transition:transform .2s,opacity .2s}
+.buy__add:hover{transform:translateY(-0.125rem)}
+.buy__add:disabled{opacity:.4;cursor:not-allowed;transform:none}
+.buy .heart{width:3.5rem;height:3.5rem;border-color:var(--ink);border-color:color-mix(in srgb,var(--ink) 38%,transparent)}
+.buy__lines{display:grid;gap:0.5rem;margin-top:0.25rem;font-size:max(12.5px,0.875rem)}
+.buy__lines li{display:flex;align-items:center;gap:0.625rem}
+.buy__lines li::before{content:"";width:0.375rem;height:0.375rem;border-radius:50%;background:var(--accent);flex:none}
+.buy__lines a{text-underline-offset:0.25rem}
+
+.pblock{display:grid;gap:1.375rem;justify-items:start;width:100%}
+.pblock__head{display:flex;flex-wrap:wrap;align-items:center;gap:0.75rem 1.125rem}
+.pblock h2{font-family:var(--display);font-weight:500;font-size:clamp(2rem,3.4vw,3.375rem);line-height:1.02;letter-spacing:-.01em}
+.pblock h2 em{font-weight:400}
+.notes{width:100%;border-top:1px solid var(--ink);border-color:color-mix(in srgb,var(--ink) 24%,transparent)}
+.note{display:grid;grid-template-columns:8.125rem minmax(0,1fr);gap:1rem;align-items:baseline;padding:1.25rem 0;border-bottom:1px solid var(--ink);border-color:color-mix(in srgb,var(--ink) 24%,transparent)}
+.note__tier{display:grid;gap:0.1875rem;font-size:max(10.5px,0.7188rem);font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--accent)}
+.note__tier small{font-size:max(10.5px,0.75rem);font-weight:400;letter-spacing:0;text-transform:none;color:var(--ink);opacity:.75}
+.note__names{font-family:var(--display);font-weight:500;font-size:clamp(1.5rem,2.5vw,2.375rem);line-height:1.1}
+.wear{width:100%}
+.wear li{position:relative;padding:0 0 1.75rem 2.375rem}
+.wear li:last-child{padding-bottom:0}
+.wear li::before{content:"";position:absolute;left:0;top:0.4375rem;width:0.8125rem;height:0.8125rem;border-radius:50%;border:1px solid var(--ink);background:var(--word)}
+.wear li::after{content:"";position:absolute;left:0.375rem;top:1.375rem;bottom:-0.3125rem;width:1px;background:var(--ink);opacity:.3}
+.wear li:last-child::after{display:none}
+.wear b{display:block;font-family:var(--display);font-weight:500;font-size:1.5625rem;line-height:1.15}
+.wear span{display:block;margin-top:0.25rem;max-width:40ch;color:var(--ink);opacity:.82}
+.facts{width:100%}
+.facts div{display:flex;align-items:baseline;justify-content:space-between;gap:1.25rem;padding:1rem 0;border-top:1px solid var(--ink);border-color:color-mix(in srgb,var(--ink) 24%,transparent)}
+.facts div:last-child{border-bottom:1px solid var(--ink);border-bottom-color:color-mix(in srgb,var(--ink) 24%,transparent)}
+.facts dt{font-size:max(10.5px,0.7188rem);font-weight:500;letter-spacing:.2em;text-transform:uppercase;opacity:.8}
+.facts dd{font-family:var(--display);font-weight:500;font-size:1.375rem;text-align:right;font-variant-numeric:lining-nums}
+
+/* ---------- You may also like ---------- */
+.also{padding:clamp(4.75rem,10vw,8.25rem) var(--pad);background:var(--cream)}
+.also__head{max-width:77.5rem;margin:0 auto clamp(2rem,4.4vw,3.5rem);display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:1rem 1.75rem}
+.also__grid{max-width:77.5rem;margin-inline:auto;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(1rem,2.2vw,2.125rem)}
+.also__grid .is-out{display:none}
+.also__grid .card__frame{position:relative;width:100%;cursor:pointer}
+.also__grid .card .slot img{transition:transform .7s cubic-bezier(.2,.7,.2,1)}
+.also__grid .card:hover .slot img,.also__grid .card__frame:focus-visible .slot img{transform:translateY(-3%) rotate(-5deg) scale(1.05)}
+
+/* ---------- Buy bar that follows ---------- */
+.buybar{position:fixed;left:0;right:0;bottom:0;z-index:25;display:flex;align-items:center;gap:0.875rem;padding:0.625rem var(--pad) calc(0.625rem + env(safe-area-inset-bottom,0px));color:var(--espresso);
+  background:rgba(251,247,240,.95);-webkit-backdrop-filter:blur(0.75rem);backdrop-filter:blur(0.75rem);box-shadow:0 -1px 0 rgba(43,24,16,.12);transform:translateY(106%);visibility:hidden;transition:transform .45s cubic-bezier(.2,.7,.2,1),visibility 0s .45s}
+.buybar.show{transform:none;visibility:visible;transition-delay:0s}
+.buybar__pic{flex:none;width:2.75rem;height:3.625rem;border-radius:1.375rem 1.375rem 0.25rem 0.25rem;display:grid;place-items:center;background:var(--wash)}
+.buybar__pic img{height:2.875rem;width:auto}
+.buybar__text{display:grid;min-width:0}
+.buybar__name{font-family:var(--display);font-weight:500;font-size:1.375rem;line-height:1.1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.buybar__meta{font-size:max(10.5px,0.7188rem);letter-spacing:.14em;text-transform:uppercase;color:var(--cocoa)}
+.buybar__price{margin-left:auto;font-family:var(--display);font-weight:600;font-size:1.5rem;white-space:nowrap;font-variant-numeric:lining-nums tabular-nums}
+.buybar__add{flex:none;height:2.875rem;padding:0 1.5rem;border-radius:1.4375rem;background:var(--espresso);color:var(--cream);font-size:max(10.5px,0.7188rem);font-weight:600;letter-spacing:.18em;text-transform:uppercase}
+.buybar__add:disabled{opacity:.4}
+.buybar.show ~ .toast{bottom:calc(5.75rem + env(safe-area-inset-bottom,0px))}
+.fly{position:fixed;z-index:60;pointer-events:none;max-width:none}
+
+/* ---------- Footer ---------- */
+.foot{position:relative;overflow:hidden;background:#2C190F;color:#E9DCC7;padding:clamp(3.5rem,8vw,6.875rem) var(--pad) 0}
+.foot a{color:inherit;text-decoration:none}
+.foot__top{max-width:77.5rem;margin-inline:auto;display:grid;grid-template-columns:minmax(0,1.5fr) repeat(3,minmax(0,1fr));gap:clamp(1.75rem,4vw,4.5rem)}
+.foot__brand{display:grid;gap:1.375rem;justify-items:start;align-content:start}
+.foot__brand img{width:11rem;height:auto;display:block}
+.foot__brand p{max-width:30ch;color:#D9C7AC}
+.foot__pay{white-space:nowrap;display:inline-flex;align-items:center;gap:0.625rem;padding:0.5625rem 1rem;border:1px solid rgba(201,162,74,.5);border-radius:1.375rem;font-size:max(10.5px,0.7188rem);font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:#E3C57A}
+.foot__pay::before{content:"";width:0.4375rem;height:0.4375rem;border-radius:50%;background:var(--gold)}
+.foot__col h3{font-size:max(10.5px,0.7188rem);font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);margin-bottom:1.125rem}
+.foot__col ul{display:grid;gap:0.6875rem}
+.foot__col a,.foot__col button{font-family:var(--display);font-size:1.3125rem;line-height:1.2;background-image:linear-gradient(currentColor,currentColor);background-repeat:no-repeat;background-position:0 100%;background-size:0 1px;transition:background-size .35s}
+.foot__col a:hover,.foot__col button:hover{background-size:100% 1px}
+.foot__col small{display:block;margin-top:0.875rem;font-size:max(10.5px,0.8125rem);color:#BFAE94}
+.foot__word{margin-top:clamp(2.25rem,6vw,5.25rem);font-family:var(--display);font-weight:900;font-stretch:62.5%;font-size:24.4vw;line-height:.74;text-align:center;text-transform:uppercase;white-space:nowrap;
+  background:linear-gradient(180deg,#E3C57A 0%,#B0842D 46%,#4A2F14 92%);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-user-select:none;user-select:none;padding-bottom:.1em}
+.foot__base{position:relative;max-width:77.5rem;margin-inline:auto;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:0.75rem 1.5rem;
+  padding:1.125rem 0 calc(1.375rem + env(safe-area-inset-bottom,0px));border-top:1px solid rgba(233,220,199,.16);font-size:max(10.5px,0.75rem);letter-spacing:.14em;text-transform:uppercase;color:#BFAE94}
+.foot__up{display:inline-flex;align-items:center;gap:0.625rem;color:#E9DCC7;font-size:max(10.5px,0.75rem);letter-spacing:.2em;text-transform:uppercase}
+.foot__up::after{content:"";width:2.375rem;height:2.375rem;border-radius:50%;border:1px solid rgba(233,220,199,.4);background:linear-gradient(#E9DCC7,#E9DCC7) center/1px 0.875rem no-repeat}
+
+/* ---------- Drawer, scrim, toast ---------- */
+.scrim{position:fixed;inset:0;z-index:40;background:rgba(43,24,16,.38);opacity:0;visibility:hidden;transition:opacity .3s,visibility 0s .3s}
+.scrim.open{opacity:1;visibility:visible;transition-delay:0s}
+.drawer{position:fixed;top:0;right:0;bottom:0;z-index:41;width:min(26.25rem,100%);background:var(--linen);color:var(--espresso);display:flex;flex-direction:column;
+  padding:calc(1.375rem + env(safe-area-inset-top,0px)) 1.5rem calc(1.375rem + env(safe-area-inset-bottom,0px));
+  transform:translateX(102%);visibility:hidden;transition:transform .38s cubic-bezier(.2,.7,.2,1),visibility 0s .38s}
+.drawer.open{transform:none;visibility:visible;transition-delay:0s}
+.drawer__head{display:flex;align-items:center;justify-content:space-between;padding-bottom:1rem;border-bottom:1px solid var(--sand)}
+.drawer__head h2{font-family:var(--display);font-weight:500;font-size:1.875rem;line-height:1}
+.drawer__list{flex:1;overflow-y:auto;min-height:0}
+.line{display:grid;grid-template-columns:3.375rem minmax(0,1fr) auto;gap:0.875rem;align-items:center;padding:1rem 0;border-bottom:1px solid var(--sand)}
+.line__pic{width:3.375rem;height:4.75rem;border-radius:1.6875rem 1.6875rem 0.25rem 0.25rem;display:grid;place-items:center}
+.line__pic img{height:3.625rem;width:auto}
+.line__name{font-family:var(--display);font-weight:500;font-size:1.25rem;line-height:1.1}
+.line__meta{font-size:max(10.5px,0.75rem);letter-spacing:.12em;text-transform:uppercase;color:var(--cocoa)}
+.line__side{display:grid;gap:0.375rem;justify-items:end;font-variant-numeric:tabular-nums}
+.qty{display:flex;align-items:center;gap:0.125rem;margin-top:0.375rem}
+.qty button{width:1.875rem;height:1.875rem;border-radius:50%;border:1px solid var(--sand);line-height:1}
+.qty span{min-width:1.5rem;text-align:center;font-variant-numeric:tabular-nums}
+.link{font-size:max(10.5px,0.75rem);letter-spacing:.12em;text-transform:uppercase;text-decoration:underline;text-underline-offset:0.1875rem;color:var(--cocoa)}
+.drawer__empty{padding:2.5rem 0;color:var(--cocoa)}
+.drawer__foot{padding-top:1rem;border-top:1px solid var(--sand);display:grid;gap:0.5rem}
+.drawer__total{display:flex;justify-content:space-between;align-items:baseline;font-size:max(10.5px,0.8125rem);letter-spacing:.16em;text-transform:uppercase}
+.drawer__total b{font-family:var(--display);font-size:1.75rem;font-weight:600;letter-spacing:0;text-transform:none;font-variant-numeric:lining-nums tabular-nums}
+.drawer__note{font-size:max(10.5px,0.8125rem);color:var(--cocoa)}
+.toast{position:fixed;left:50%;bottom:calc(1.375rem + env(safe-area-inset-bottom,0px));z-index:50;transform:translate(-50%,1.25rem);max-width:calc(100% - 2rem);
+  background:var(--espresso);color:var(--cream);padding:0.75rem 1.25rem;border-radius:1.5rem;font-size:max(12.5px,0.875rem);opacity:0;visibility:hidden;transition:opacity .25s,transform .25s,visibility 0s .25s}
+.toast.show{opacity:1;visibility:visible;transform:translate(-50%,0);transition-delay:0s}
+
+/* ---------- Narrow screens ---------- */
+@media (max-width:1080px){
+  :root{--head:4rem}
+  .brand{gap:0.5625rem}.brand__crest{height:2.375rem}.brand__word{height:1.5rem}
+  .burger{display:grid}
+  .menu{position:absolute;top:calc(100% - 0.25rem);left:0.75rem;right:0.75rem;flex-direction:column;align-items:stretch;gap:0;padding:0.5rem 1.25rem;border-radius:0.875rem;background:var(--linen);
+    box-shadow:0 1.125rem 2.5rem rgba(43,24,16,.18);opacity:0;visibility:hidden;transform:translateY(-0.5rem);transition:opacity .2s,transform .2s,visibility 0s .2s}
+  .menu.open{opacity:1;visibility:visible;transform:none;transition-delay:0s}
+  .menu a,.menu button{padding:0.9375rem 0.125rem;text-align:left;border-bottom:1px solid var(--sand)}
+  .menu > :last-child{border-bottom:0}
+  .menu a::after,.menu button::after{display:none}
+}
+@media (max-width:900px){
+  .pstage{grid-template-columns:minmax(0,1fr)}
+  .pvis{position:relative;height:62vh;height:62svh;min-height:23.75rem}
+  .pvis__bottle{height:min(44vh,25rem);height:min(44svh,25rem);margin-top:var(--head)}
+  .pinfo{max-width:none;padding:0.5rem 1.25rem 6rem;gap:4rem}
+  .buy{min-height:0}
+  .note{grid-template-columns:minmax(0,1fr);gap:0.375rem}
+  .reviews__grid{grid-template-columns:minmax(0,1fr)}
+  .also__grid{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:2.375rem}
+  .card{gap:0.875rem}
+  .card__desc{display:none}
+  .card__buy{gap:0.625rem}
+  .card__acts{width:100%}
+  .card__add{flex:1;padding:0 0.625rem}
+  .buy__row{flex-wrap:nowrap;width:100%}
+  .buy__add{flex:1;padding:0 0.875rem}
+  .buybar{gap:0.625rem;padding-inline:0.875rem}
+  .buybar__price{font-size:1.25rem}
+  .buybar__add{padding:0 1rem}
+  .foot__top{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .foot__brand{grid-column:1/-1}
+  .foot__base{justify-content:center;text-align:center}
+}
+@media (max-width:420px){
+  .buybar__pic{display:none}
+  .card__price{font-size:1.375rem}
+  .card__add{font-size:max(10.5px,0.6562rem);letter-spacing:.14em}
+}
+@media (prefers-reduced-motion:reduce){*{transition-duration:.01ms!important}}
+</style>
+</head>
+<body>
+<header class="top" id="top">
+  <a class="brand" href="index.html" aria-label="Shafar Fragrances">
+    <img class="brand__crest" src="assets/crest.png" alt="" width="480" height="512">
+    <img class="brand__word" src="assets/wordmark.png" alt="" width="720" height="227">
+  </a>
+  <nav class="menu" id="menu" aria-label="Main">
+    <a href="index.html">Featured</a>
+    <a href="home.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="shop.html">Shop</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+  <div class="tools">
+    <button class="icon" type="button" id="open-wish" aria-label="Wishlist">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.3s-7.5-4.4-7.5-10.1A4.2 4.2 0 0 1 12 7.6a4.2 4.2 0 0 1 7.5 2.6c0 5.7-7.5 10.1-7.5 10.1z"/></svg>
+      <span class="badge" id="wish-count" hidden>0</span>
+    </button>
+    <button class="icon" type="button" id="open-cart" aria-label="Cart">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5.5 8.5h13l-1 11.5h-11z"/><path d="M9 8.5V7a3 3 0 0 1 6 0v1.5"/></svg>
+      <span class="badge" id="cart-count" hidden>0</span>
+    </button>
+    <button class="icon burger" type="button" id="burger" aria-label="Menu" aria-expanded="false" aria-controls="menu">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8h16M4 16h16"/></svg>
+    </button>
+  </div>
+</header>
+
+<main id="product">
+  <section class="pstage" id="stage" aria-labelledby="p-name">
+    <div class="pvis" id="vis">
+      <div class="pvis__word" aria-hidden="true"><span id="p-word">Halila</span></div>
+      <div class="pvis__bottle"><div id="b-size"><div id="b-tilt"><div id="b-move"><div id="b-swap">
+        <img id="p-img" src="assets/halila.webp" alt="Shafar Halila Lane bottle" width="482" height="1100">
+        <span class="pvis__shadow"></span>
+      </div></div></div></div></div>
+    </div>
+
+    <div class="pinfo">
+      <form class="buy" id="buy">
+        <nav class="crumbs" aria-label="Breadcrumb" data-in>
+          <a href="shop.html">Shop</a><span aria-hidden="true">/</span>
+          <a id="p-cat" href="shop.html#men">Men</a><span aria-hidden="true">/</span>
+          <span id="p-crumb">Halila Lane</span>
+        </nav>
+        <div class="flags" id="p-flags" data-in></div>
+        <p class="buy__kind" id="p-kind" data-in>Parfum</p>
+        <h1 id="p-name" data-in>Halila Lane</h1>
+        <p class="buy__desc" id="p-desc" data-in></p>
+        <p class="label" id="size-label" data-in>Size</p>
+        <div class="sizes" role="radiogroup" aria-labelledby="size-label" data-in>
+          <input type="radio" name="size" id="s-50" value="50" checked><label for="s-50"><b>50</b>ml</label>
+        </div>
+        <p class="buy__price" aria-live="polite" data-in><span class="buy__amt" id="p-amt"></span><span class="buy__for" id="p-for"></span></p>
+        <div class="buy__row" data-in>
+          <div class="qty" role="group" aria-label="Quantity">
+            <button type="button" id="q-less" aria-label="One less">&minus;</button>
+            <span id="q-val" aria-live="polite">1</span>
+            <button type="button" id="q-more" aria-label="One more">+</button>
+          </div>
+          <button class="buy__add" type="submit" id="p-add">Add to cart</button>
+          <button class="heart" type="button" id="p-heart" data-wish="halila" aria-pressed="false" aria-label="Save to wishlist"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.3s-7.5-4.4-7.5-10.1A4.2 4.2 0 0 1 12 7.6a4.2 4.2 0 0 1 7.5 2.6c0 5.7-7.5 10.1-7.5 10.1z"/></svg></button>
+        </div>
+        <ul class="buy__lines" data-in>
+          <li>Cash on delivery across Pakistan</li>
+          <li><a id="p-wa" href="https://wa.me/923180250552" target="_blank" rel="noopener">Order this on WhatsApp</a></li>
+        </ul>
+      </form>
+
+      <section class="pblock" aria-labelledby="notes-title">
+        <div class="pblock__head"><h2 id="notes-title">The <em>notes</em></h2><span class="draft" id="notes-draft">Sample notes</span></div>
+        <div class="notes" id="notes">
+          <div class="note"><p class="note__tier">Top<small>The first minutes</small></p><p class="note__names" id="n-top"></p></div>
+          <div class="note"><p class="note__tier">Heart<small>An hour in</small></p><p class="note__names" id="n-heart"></p></div>
+          <div class="note"><p class="note__tier">Base<small>What stays</small></p><p class="note__names" id="n-base"></p></div>
+        </div>
+      </section>
+
+      <section class="pblock" aria-labelledby="wear-title">
+        <h2 id="wear-title">How it <em>wears</em></h2>
+        <ol class="wear" id="wear">
+          <li><b>First spray</b><span>The top notes arrive first, bright and clear.</span></li>
+          <li><b>An hour in</b><span>The heart takes over and the scent settles into your skin.</span></li>
+          <li><b>End of the day</b><span>The base stays close, soft and warm.</span></li>
+        </ol>
+      </section>
+
+      <section class="pblock" aria-labelledby="facts-title">
+        <h2 id="facts-title">The <em>details</em></h2>
+        <dl class="facts" id="facts">
+          <div><dt>Strength</dt><dd id="f-kind">Parfum</dd></div>
+          <div><dt>Size</dt><dd>50 ml</dd></div>
+          <div><dt>Payment</dt><dd>Cash on delivery</dd></div>
+          <div><dt>Delivery</dt><dd>Across Pakistan</dd></div>
+        </dl>
+      </section>
+    </div>
+  </section>
+
+  <section class="reviews" id="reviews" aria-labelledby="reviews-title">
+    <div class="reviews__head">
+      <div>
+        <p class="eyebrow">Reviews</p>
+        <h2 id="reviews-title">What wearers <em>say</em></h2>
+      </div>
+      <p class="reviews__lede">Reviews for this fragrance show here.</p>
+    </div>
+    <div class="reviews__grid" id="reviews-grid">
+      <figure class="review"><span class="review__tag">Sample</span><span class="review__mark" aria-hidden="true">&ldquo;</span>
+        <blockquote class="review__text">A real review of this fragrance goes here. Two or three lines works best.</blockquote>
+        <figcaption class="review__who"><span>Customer name</span><span>Size bought</span></figcaption></figure>
+      <figure class="review"><span class="review__tag">Sample</span><span class="review__mark" aria-hidden="true">&ldquo;</span>
+        <blockquote class="review__text">A second real review goes here. One about how long it lasted is the most useful.</blockquote>
+        <figcaption class="review__who"><span>Customer name</span><span>Size bought</span></figcaption></figure>
+      <figure class="review"><span class="review__tag">Sample</span><span class="review__mark" aria-hidden="true">&ldquo;</span>
+        <blockquote class="review__text">A third real review goes here. One from someone who received it as a gift fits well.</blockquote>
+        <figcaption class="review__who"><span>Customer name</span><span>Size bought</span></figcaption></figure>
+    </div>
+  </section>
+
+  <section class="also" aria-labelledby="also-title">
+    <div class="also__head">
+      <div>
+        <p class="eyebrow">Keep exploring</p>
+        <h2 class="sec-h" id="also-title">You may <em>also like</em></h2>
+      </div>
+      <a class="more" href="shop.html">View all fragrances</a>
+    </div>
+    <div class="also__grid" id="also"></div>
+  </section>
+</main>
+
+<footer class="foot" id="footer">
+  <div class="foot__top">
+    <div class="foot__brand">
+      <img src="assets/logo-gold.png" alt="Shafar Fragrances" width="488" height="516" loading="lazy">
+      <p>Where every scent tells a tale. Affordable luxury perfumes in Parfum and Eau de Parfum strength.</p>
+      <span class="foot__pay">Cash on delivery across Pakistan</span>
+    </div>
+    <nav class="foot__col" aria-label="Shop">
+      <h3>Shop</h3>
+      <ul>
+        <li><a href="index.html">Featured</a></li>
+        <li><a href="home.html#best-sellers">Best sellers</a></li>
+        <li><a href="shop.html#men">Men</a></li>
+        <li><a href="shop.html#women">Women</a></li>
+        <li><a href="shop.html#unisex">Unisex</a></li>
+      </ul>
+    </nav>
+    <nav class="foot__col" aria-label="Shafar">
+      <h3>Shafar</h3>
+      <ul>
+        <li><a href="about.html">Our story</a></li>
+        <li><a href="home.html#reviews">Reviews</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+    <div class="foot__col">
+      <h3>Get in touch</h3>
+      <ul>
+        <li><a href="https://wa.me/923180250552" target="_blank" rel="noopener">WhatsApp</a></li>
+        <li><a href="https://www.instagram.com/shafar.fragrances/" target="_blank" rel="noopener">Instagram</a></li>
+      </ul>
+      <small>0318 0250552<br>shafarfragrances@gmail.com<br>www.shafarfragrances.com</small>
+    </div>
+  </div>
+  <div class="foot__word" id="foot-word" aria-hidden="true">Shafar</div>
+  <div class="foot__base">
+    <p>&copy; 2026 Shafar Fragrances</p>
+    <a class="foot__up" href="#product">Back to top</a>
+  </div>
+</footer>
+
+<div class="scrim" id="scrim"></div>
+<aside class="drawer" id="drawer" role="dialog" aria-modal="true" aria-labelledby="drawer-title">
+  <div class="drawer__head">
+    <h2 id="drawer-title">Cart</h2>
+    <button class="icon" type="button" id="drawer-close" aria-label="Close">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+  </div>
+  <div class="drawer__list" id="drawer-list"></div>
+  <div class="drawer__foot" id="drawer-foot" hidden>
+    <p class="drawer__total"><span>Subtotal</span><b id="drawer-total"></b></p>
+    <a class="btn" href="checkout.html" style="display:flex;align-items:center;justify-content:center;text-decoration:none;--ink:#2B1810;margin-top:6px">Checkout</a>
+    <p class="drawer__note">Cash on delivery across Pakistan.</p>
+  </div>
+</aside>
+<div class="buybar" id="buybar" aria-hidden="true">
+  <span class="buybar__pic"><img id="bar-img" src="assets/halila.webp" alt=""></span>
+  <div class="buybar__text"><span class="buybar__name" id="bar-name">Halila Lane</span><span class="buybar__meta" id="bar-meta">Parfum</span></div>
+  <span class="buybar__price" id="bar-price"></span>
+  <button class="buybar__add" type="button" id="bar-add" tabindex="-1">Add to cart</button>
+</div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="js/catalog.js"></script>
+<script src="/api/catalog"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script>
+(function () {
+  'use strict';
+
+  /* ------------------------------------------------------------------
+     PRODUCTS. Every bottle here is a real Shafar fragrance.
+     cat: men | women | unisex. null would mean no category yet:
+     such a product shows under "All" only.
+     A size with null has no price yet: it shows "Price to be added"
+     and cannot go in the cart.
+     ------------------------------------------------------------------ */
+  var PRODUCTS = {
+    halila:     { name: 'Halila Lane',      kind: 'Parfum',        cat: 'unisex', best: true,  img: 'assets/halila.webp', tint: '#EFD3A8', deep: '#D9AE78', ink: '#3A2113', accent: '#7A3F10', desc: 'Deep, warm and unhurried. Made for evenings that run late.', prices: { 50: 2800 } },
+    belford:    { name: 'Belford',          kind: 'Eau de Parfum', cat: 'women',  best: true,  img: 'assets/belford.webp', tint: '#F5CFC0', deep: '#E5A391', ink: '#4A1210', accent: '#A3160F', desc: 'Bold from the first spray. Rich, confident and made for the night.', prices: { 50: 2700 } },
+    charleston: { name: 'Charleston',       kind: 'Parfum',        cat: 'women',  best: true,  img: 'assets/charleston.webp', tint: '#FADAE4', deep: '#F0AEC6', ink: '#57112F', accent: '#B0144F', desc: 'Bright, sweet and full of life. A playful scent that gets remembered.', prices: { 50: 2600 } },
+    shawano:    { name: 'Shawano',          kind: 'Parfum',        cat: 'men',    best: true,  img: 'assets/shawano.webp', tint: '#D6DFEC', deep: '#AEBED6', ink: '#18223A', accent: '#2C3E63', desc: 'Cool, clean and sure of itself. For days that have to go well.', prices: { 50: 2200 } },
+    argos:      { name: 'Argos',            kind: 'Eau de Parfum', cat: 'men',    best: true,  img: 'assets/argos.webp', tint: '#F0DAB6', deep: '#D9B480', ink: '#372412', accent: '#78400F', desc: 'An old name with a golden glow. Quietly grand.', prices: { 50: 2250 } },
+    southampton:{ name: 'Southampton',      kind: 'Parfum',        cat: 'men',    best: true,  img: 'assets/southampton.webp', tint: '#EDC8A9', deep: '#D59C73', ink: '#371E12', accent: '#782E0F', desc: 'Tailored and well travelled. Polished and always in place.', prices: { 50: 2700 } },
+    bradford:   { name: 'Bradford',         kind: 'Parfum',        cat: 'men',    best: true,  img: 'assets/bradford.webp', tint: '#EECFAE', deep: '#D7A578', ink: '#372112', accent: '#78350F', desc: 'Honest and dependable. A signature for the working week.', prices: { 50: 2600 } },
+    tobaccooudh:{ name: 'Tobacco Oudh',     kind: 'Parfum',        cat: 'unisex', best: true,  img: 'assets/tobaccooudh.webp', tint: '#EECAAA', deep: '#D69E74', ink: '#371F12', accent: '#78300F', desc: 'Tobacco and oudh, just as the name promises. Deep and made to linger.', prices: { 50: 2550 } },
+    jutland:    { name: 'Jutland',          kind: 'Eau de Parfum', cat: 'women',  best: true,  img: 'assets/jutland.webp', tint: '#F1C3B7', deep: '#DD8F80', ink: '#430E0A', accent: '#96130C', desc: 'Deep red and full of nerve. Made for the night.', prices: { 50: 2650 } },
+    elmira:     { name: 'Elmira',           kind: 'Parfum',        cat: 'women',  best: true,  img: 'assets/elmira.webp', tint: '#F6CDCB', deep: '#E69C9A', ink: '#4A0E12', accent: '#A8121C', desc: 'The red one. Vivid, confident and impossible to miss.', prices: { 50: 2450 } },
+    belleville: { name: 'Belle Ville',      kind: 'Parfum',        cat: 'men',    best: false, img: 'assets/belleville.webp', tint: '#EDC2A5', deep: '#D4946F', ink: '#371C12', accent: '#78290F', desc: 'A beautiful town after dark. Smooth, easy and quietly confident.', prices: { 50: 2450 } },
+    elko:       { name: 'Elko',             kind: 'Eau de Parfum', cat: 'men',    best: false, img: 'assets/elko.webp', tint: '#EFD0AF', deep: '#D7A779', ink: '#372112', accent: '#78360F', desc: 'Open road, clear sky. An easy pick for every day.', prices: { 50: 2600 } },
+    hudson:     { name: 'Hudson',           kind: 'Parfum',        cat: 'men',    best: false, img: 'assets/hudson.webp', tint: '#EDC1A5', deep: '#D4936F', ink: '#371C12', accent: '#78290F', desc: 'City nights and a sharp collar. Smooth and sure of itself.', prices: { 50: 2500 } },
+    inverlake:  { name: 'Inverlake Platos', kind: 'Eau de Parfum', cat: 'men',    best: false, img: 'assets/inverlake.webp', tint: '#EECCAC', deep: '#D6A175', ink: '#371F12', accent: '#78320F', desc: 'Still water and slow mornings. Calm, and close to the skin.', prices: { 50: 2600 } },
+    amesvelle:  { name: 'Amesvelle',        kind: 'Parfum',        cat: 'women',  best: false, img: 'assets/amesvelle.webp', tint: '#F4CCC2', deep: '#E4A195', ink: '#421610', accent: '#9C2211', desc: 'Graceful and a little regal. Made for evenings that matter.', prices: { 50: 2850 } },
+    liverpool:  { name: 'Liverpool',        kind: 'Eau de Parfum', cat: 'men',    best: false, img: 'assets/liverpool.webp', tint: '#EFD4B1', deep: '#D8AC7B', ink: '#372212', accent: '#783A0F', desc: 'Port-city spirit. Lively, sociable and easy to wear.', prices: { 50: 2700 } },
+    ofidow:     { name: 'Ofidow',           kind: 'Parfum',        cat: 'men',    best: false, img: 'assets/ofidow.webp', tint: '#EECDAD', deep: '#D6A377', ink: '#372012', accent: '#78330F', desc: 'Hard to place, easy to remember. A little mysterious.', prices: { 50: 2800 } },
+    torrance:   { name: 'Torrance',         kind: 'Eau de Parfum', cat: 'unisex', best: false, img: 'assets/torrance.webp', tint: '#ECC0A4', deep: '#D4916E', ink: '#371C12', accent: '#78270F', desc: 'Easy and laid-back. The one you reach for without thinking.', prices: { 50: 2600 } },
+    forthworth: { name: 'Forth Worth',      kind: 'Parfum',        cat: 'women',  best: false, img: 'assets/forthworth.webp', tint: '#F4CBC2', deep: '#E4A195', ink: '#421510', accent: '#9C2111', desc: 'Big-hearted and self-assured. A scent that walks in first.', prices: { 50: 2500 } },
+    exermont:   { name: 'Exermont',         kind: 'Parfum',        cat: 'men',    best: false, img: 'assets/exermont.webp', tint: '#EDC6A8', deep: '#D59A72', ink: '#371E12', accent: '#782D0F', desc: 'Bold and deliberate. Made for the nights that count.', prices: { 50: 2700 } },
+    cuba:       { name: 'Cuba',             kind: 'Parfum',        cat: 'unisex', best: false, img: 'assets/cuba.webp', tint: '#EDC4A7', deep: '#D49770', ink: '#371D12', accent: '#782B0F', desc: 'Slow evenings and loud laughter. Full of character.', prices: { 50: 2500 } },
+    moroni:     { name: 'Moroni',           kind: 'Parfum',        cat: 'men',    best: false, img: 'assets/moroni.webp', tint: '#F0DBB7', deep: '#D9B681', ink: '#372512', accent: '#78420F', desc: 'Island air and unhurried days. Easy to love.', prices: { 50: 2700 } },
+    whiteoudh:  { name: 'White Oudh',       kind: 'Eau de Parfum', cat: 'unisex', best: false, img: 'assets/whiteoudh.webp', tint: '#EDC5A7', deep: '#D59871', ink: '#371D12', accent: '#782C0F', desc: 'Oudh with a lighter hand, as the name promises. Refined and calm.', prices: { 50: 3200 } },
+    monastir:   { name: 'Monastir',         kind: 'Parfum',        cat: 'men',    best: false, img: 'assets/monastir.webp', tint: '#EFD6B3', deep: '#D8AF7D', ink: '#372312', accent: '#783C0F', desc: 'Named for a coast of sun and old stone. Made to travel well.', prices: { 50: null } },
+    elba:       { name: 'Elba',             kind: 'Eau de Parfum', cat: 'women',  best: false, img: 'assets/elba.webp', tint: '#F4CCC2', deep: '#E4A295', ink: '#421610', accent: '#9C2411', desc: 'An island name for sunny days. Light-hearted and easy to love.', prices: { 50: null } },
+    imperial:   { name: 'Imperial',         kind: 'Parfum',        cat: 'men',    best: false, img: 'assets/imperial.webp', tint: '#EFD3B0', deep: '#D7AA7B', ink: '#372212', accent: '#78390F', desc: 'Made to be noticed. Grand, and worn with confidence.', prices: { 50: null } },
+    auckland:   { name: 'Auckland',         kind: 'Eau de Parfum', cat: 'men',    best: false, img: 'assets/auckland.webp', tint: '#EDC6A8', deep: '#D59A72', ink: '#371E12', accent: '#782D0F', desc: 'Harbour light and a fresh start. Open and easy to wear.', prices: { 50: null } },
+    stromboli:  { name: 'Stromboli',        kind: 'Parfum',        cat: 'women',  best: false, img: 'assets/stromboli.webp', tint: '#F4CBC2', deep: '#E4A095', ink: '#421510', accent: '#9C2011', desc: 'Named for a volcano. Fiery, vivid and made to be noticed.', prices: { 50: null } },
+    hachita:    { name: 'Hachita',          kind: 'Parfum',        cat: 'men',    best: false, img: 'assets/hachita.webp', tint: '#EEC9AA', deep: '#D59D73', ink: '#371E12', accent: '#782F0F', desc: 'Desert roads and wide skies. Quiet and steady.', prices: { 50: null } }
+  };
+  var DEFAULT_SIZE = 50;
+  var ORDER = ['halila', 'belford', 'charleston', 'shawano', 'argos', 'southampton', 'bradford', 'tobaccooudh', 'jutland', 'elmira', 'belleville', 'elko', 'hudson', 'inverlake', 'amesvelle', 'liverpool', 'ofidow', 'torrance', 'forthworth', 'exermont', 'cuba', 'moroni', 'whiteoudh', 'monastir', 'elba', 'imperial', 'auckland', 'stromboli', 'hachita'];   // "Best sellers first"
+  if (window.SHAFAR_ORDER && window.SHAFAR_CATALOG) { PRODUCTS = window.SHAFAR_CATALOG; ORDER = window.SHAFAR_ORDER.filter(function (id) { return PRODUCTS[id]; }); }   // live list from the dashboard
+  var CATS = { all: { wash: '#F6EFE4', word: 'Shop' }, men: { wash: '#E4EBF4', word: 'Men' }, women: { wash: '#FAE5EC', word: 'Women' }, unisex: { wash: '#F5E6CB', word: 'Unisex' } };
+
+  var $ = function (s, el) { return (el || document).querySelector(s); };
+  var $$ = function (s, el) { return Array.prototype.slice.call((el || document).querySelectorAll(s)); };
+  var rupees = function (n) { return 'Rs ' + Number(n).toLocaleString('en-US'); };
+  var el = function (tag, cls, text) { var n = document.createElement(tag); if (cls) n.className = cls; if (text != null) n.textContent = text; return n; };
+  var root = document.documentElement;
+  var HEART = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.3s-7.5-4.4-7.5-10.1A4.2 4.2 0 0 1 12 7.6a4.2 4.2 0 0 1 7.5 2.6c0 5.7-7.5 10.1-7.5 10.1z"/></svg>';
+
+  /* ---------- Notes. These are samples: each fragrance needs its real notes. ---------- */
+  var NOTE_SETS = {
+    warm:  { top: 'Bergamot, Saffron',   heart: 'Rose, Oud',           base: 'Amber, Vanilla' },
+    fresh: { top: 'Lemon, Mint',         heart: 'Lavender, Sea salt',  base: 'Cedar, Musk' },
+    bold:  { top: 'Pink pepper, Plum',   heart: 'Leather, Jasmine',    base: 'Patchouli, Tonka' },
+    sweet: { top: 'Pear, Peony',         heart: 'Rose, Raspberry',     base: 'Vanilla, White musk' },
+    smoke: { top: 'Bergamot, Spice',     heart: 'Tobacco leaf, Oudh',  base: 'Amber, Leather' },
+    oud:   { top: 'Saffron, Bergamot',   heart: 'Oudh, Rose',          base: 'White musk, Amber' }
+  };
+  var NOTES = { halila: 'warm', shawano: 'fresh', belford: 'bold', charleston: 'sweet',
+    torrance: 'warm', monastir: 'fresh', hudson: 'bold', elmira: 'sweet', cuba: 'bold', elko: 'fresh', argos: 'warm', tobaccooudh: 'smoke',
+    moroni: 'fresh', jutland: 'bold', southampton: 'fresh', inverlake: 'fresh', bradford: 'warm', imperial: 'warm', auckland: 'fresh', ofidow: 'warm',
+    belleville: 'warm', liverpool: 'fresh', exermont: 'bold', whiteoudh: 'oud', hachita: 'warm', forthworth: 'sweet', amesvelle: 'sweet', elba: 'sweet', stromboli: 'bold' };
+  var SIZE_SCALE = { 30: 0.86, 50: 1, 100: 1.13 };     // the bottle grows and shrinks with the chosen size
+  var CAT_NAME = { men: 'Men', women: 'Women', unisex: 'Unisex' };
+
+  /* ---------- "You may also like" cards: one per product, shown four at a time ---------- */
+  var also = $('#also'), alsoCards = {};
+  ORDER.forEach(function (id) {
+    var p = PRODUCTS[id], card = el('article', 'card');
+    card.style.cssText = '--c:' + p.tint + ';--e:' + p.deep + ';--ink:' + p.ink + ';--accent:' + p.accent;
+    var frame = el('button', 'card__frame'), slot = el('div', 'slot'), im = el('img');
+    frame.type = 'button'; frame.dataset.go = id; frame.setAttribute('aria-label', 'View ' + p.name);
+    im.src = p.img; im.alt = 'Shafar ' + p.name + ' bottle'; im.loading = 'lazy';
+    slot.appendChild(im); frame.appendChild(slot);
+    var body = el('div', 'card__body');
+    body.appendChild(el('p', 'card__kind', p.kind));
+    body.appendChild(el('h3', 'card__name', p.name));
+    body.appendChild(el('p', 'card__desc', p.desc));
+    var unit = p.prices[DEFAULT_SIZE], buy = el('div', 'card__buy');
+    var price = el('p', 'card__price' + (unit == null ? ' card__price--open' : ''), unit == null ? (p.soldout ? 'Sold out' : 'Price to be added') : rupees(unit) + ' ');
+    if (unit != null) price.appendChild(el('span', '', DEFAULT_SIZE + ' ml'));
+    var acts = el('div', 'card__acts'), add = el('button', 'card__add', 'Add to cart'), heart = el('button', 'heart');
+    add.type = 'button'; add.dataset.add = id; add.disabled = unit == null;
+    heart.type = 'button'; heart.dataset.wish = id; heart.setAttribute('aria-pressed', 'false'); heart.setAttribute('aria-label', 'Save ' + p.name + ' to wishlist'); heart.innerHTML = HEART;
+    acts.appendChild(add); acts.appendChild(heart); buy.appendChild(price); buy.appendChild(acts); body.appendChild(buy);
+    card.appendChild(frame); card.appendChild(body); also.appendChild(card);
+    alsoCards[id] = card;
+  });
+
+  /* ---------- Toast ---------- */
+  var toastEl = $('#toast'), toastTimer;
+  function toast(msg) {
+    toastEl.textContent = msg;
+    toastEl.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(function () { toastEl.classList.remove('show'); }, 2400);
+  }
+  $$('[data-soon]').forEach(function (b) {
+    b.addEventListener('click', function () { toast('The ' + b.dataset.soon + ' page is not built yet.'); closeMenu(); });
+  });
+
+  /* ---------- Mobile menu ---------- */
+  var menu = $('#menu'), burger = $('#burger');
+  function closeMenu() { menu.classList.remove('open'); burger.setAttribute('aria-expanded', 'false'); }
+  burger.addEventListener('click', function () {
+    var open = menu.classList.toggle('open');
+    burger.setAttribute('aria-expanded', String(open));
+  });
+  $$('a', menu).forEach(function (a) { a.addEventListener('click', closeMenu); });
+
+  /* ---------- Cart and wishlist (saved in this browser, shared by every page) ---------- */
+  var CAT = window.SHAFAR_CATALOG || PRODUCTS;      // every product, so the cart can show a bottle added on another page
+  var cart = [], wish = [];
+  try {
+    cart = JSON.parse(localStorage.getItem('shafar.cart') || '[]').filter(function (l) { return CAT[l.id] && CAT[l.id].prices[l.size] != null && l.qty > 0; });
+    wish = JSON.parse(localStorage.getItem('shafar.wish') || '[]').filter(function (id) { return CAT[id]; });
+  } catch (e) { cart = []; wish = []; }
+  function save() { try { localStorage.setItem('shafar.cart', JSON.stringify(cart)); localStorage.setItem('shafar.wish', JSON.stringify(wish)); } catch (e) {} }
+  var drawer = $('#drawer'), scrim = $('#scrim'), list = $('#drawer-list'), foot = $('#drawer-foot');
+  var drawerMode = 'cart', lastFocus = null;
+
+  function badge(node, n) { node.textContent = n; node.hidden = n === 0; }
+  function syncBadges() {
+    badge($('#cart-count'), cart.reduce(function (s, l) { return s + l.qty; }, 0));
+    badge($('#wish-count'), wish.length);
+    save();
+  }
+  function addToCart(id, size) {
+    var line = cart.filter(function (l) { return l.id === id && l.size === size; })[0];
+    if (line) line.qty += 1; else cart.push({ id: id, size: size, qty: 1 });
+    syncBadges();
+    if (drawer.classList.contains('open')) renderDrawer();
+  }
+  function pic(id) {
+    var box = el('div', 'line__pic');
+    box.style.background = CAT[id].tint;
+    var im = el('img'); im.src = CAT[id].img; im.alt = '';
+    box.appendChild(im);
+    return box;
+  }
+  function renderDrawer() {
+    $('#drawer-title').textContent = drawerMode === 'cart' ? 'Cart' : 'Wishlist';
+    list.textContent = '';
+    var total = 0;
+    if (drawerMode === 'cart') {
+      if (!cart.length) list.appendChild(el('p', 'drawer__empty', 'Your cart is empty. Pick a size and add this bottle.'));
+      cart.forEach(function (l) {
+        var p = CAT[l.id], unit = p.prices[l.size];
+        total += unit * l.qty;
+        var row = el('div', 'line'), mid = el('div');
+        mid.appendChild(el('p', 'line__name', p.name));
+        mid.appendChild(el('p', 'line__meta', p.kind + ' · ' + l.size + ' ml'));
+        var q = el('div', 'qty');
+        var minus = el('button', '', '−'); minus.type = 'button'; minus.setAttribute('aria-label', 'One less ' + p.name);
+        var plus = el('button', '', '+'); plus.type = 'button'; plus.setAttribute('aria-label', 'One more ' + p.name);
+        minus.addEventListener('click', function () { l.qty -= 1; if (l.qty < 1) cart.splice(cart.indexOf(l), 1); syncBadges(); renderDrawer(); });
+        plus.addEventListener('click', function () { l.qty += 1; syncBadges(); renderDrawer(); });
+        q.appendChild(minus); q.appendChild(el('span', '', l.qty)); q.appendChild(plus);
+        mid.appendChild(q);
+        var side = el('div', 'line__side');
+        side.appendChild(el('b', '', rupees(unit * l.qty)));
+        var rm = el('button', 'link', 'Remove'); rm.type = 'button';
+        rm.addEventListener('click', function () { cart.splice(cart.indexOf(l), 1); syncBadges(); renderDrawer(); });
+        side.appendChild(rm);
+        row.appendChild(pic(l.id)); row.appendChild(mid); row.appendChild(side);
+        list.appendChild(row);
+      });
+      foot.hidden = !cart.length;
+      $('#drawer-total').textContent = rupees(total);
+    } else {
+      foot.hidden = true;
+      if (!wish.length) list.appendChild(el('p', 'drawer__empty', 'Nothing saved yet. Tap the heart on a bottle to keep it here.'));
+      wish.forEach(function (id) {
+        var p = CAT[id], row = el('div', 'line'), mid = el('div');
+        mid.appendChild(el('p', 'line__name', p.name));
+        var unit = p.prices[DEFAULT_SIZE];
+        mid.appendChild(el('p', 'line__meta', p.kind + ' · ' + (unit == null ? (p.soldout ? 'Sold out' : 'Price to be added') : rupees(unit) + ' for ' + DEFAULT_SIZE + ' ml')));
+        var side = el('div', 'line__side');
+        var add = el('button', 'link', 'Add to cart'); add.type = 'button';
+        add.addEventListener('click', function () { addToCart(id, DEFAULT_SIZE); toast(p.name + ', ' + DEFAULT_SIZE + ' ml added to cart.'); });
+        var rm = el('button', 'link', 'Remove'); rm.type = 'button';
+        rm.addEventListener('click', function () { setWish(id, false); renderDrawer(); });
+        if (unit != null) side.appendChild(add);
+        side.appendChild(rm);
+        row.appendChild(pic(id)); row.appendChild(mid); row.appendChild(side);
+        list.appendChild(row);
+      });
+    }
+  }
+  function openDrawer(mode, from) {
+    drawerMode = mode; lastFocus = from || null;
+    renderDrawer();
+    drawer.classList.add('open'); scrim.classList.add('open');
+    closeMenu();
+    $('#drawer-close').focus();
+  }
+  function closeDrawer() {
+    drawer.classList.remove('open'); scrim.classList.remove('open');
+    if (lastFocus) lastFocus.focus();
+  }
+  $('#open-cart').addEventListener('click', function () { openDrawer('cart', this); });
+  $('#open-wish').addEventListener('click', function () { openDrawer('wish', this); });
+  $('#drawer-close').addEventListener('click', closeDrawer);
+  scrim.addEventListener('click', closeDrawer);
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') { closeDrawer(); closeMenu(); } });
+
+  function setWish(id, on) {
+    var i = wish.indexOf(id);
+    if (on && i < 0) wish.push(id);
+    if (!on && i >= 0) wish.splice(i, 1);
+    $$('[data-wish="' + id + '"]').forEach(function (h) {
+      h.setAttribute('aria-pressed', String(on));
+      h.setAttribute('aria-label', on ? 'Remove ' + CAT[id].name + ' from wishlist' : 'Save ' + CAT[id].name + ' to wishlist');
+    });
+    syncBadges();
+  }
+  $$('[data-add]').forEach(function (b) {
+    b.addEventListener('click', function () {
+      var id = b.dataset.add;
+      if (CAT[id].prices[DEFAULT_SIZE] == null) { toast('The price for ' + CAT[id].name + ' is still to be added.'); return; }
+      addToCart(id, DEFAULT_SIZE);
+      toast(CAT[id].name + ', ' + DEFAULT_SIZE + ' ml added to cart.');
+    });
+  });
+  $$('[data-wish]').forEach(function (b) {
+    b.addEventListener('click', function () {
+      var id = b.dataset.wish, on = b.getAttribute('aria-pressed') !== 'true';
+      setWish(id, on);
+      toast(on ? CAT[id].name + ' saved to your wishlist.' : CAT[id].name + ' removed from your wishlist.');
+    });
+  });
+
+  // restore what was saved on other pages
+  wish.forEach(function (id) { $$('[data-wish="' + id + '"]').forEach(function (h) { h.setAttribute('aria-pressed', 'true'); }); });
+  syncBadges();
+
+  /* ---------- Header turns solid once you leave the top ---------- */
+  var topBar = $('#top');
+  function solid() { topBar.classList.toggle('is-solid', window.scrollY > 24); }
+  window.addEventListener('scroll', solid, { passive: true });
+  solid();
+
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var hasGsap = !!window.gsap && !reduce, hasST = hasGsap && !!window.ScrollTrigger;
+  if (hasST) gsap.registerPlugin(ScrollTrigger);
+  $$('a[href="#product"]').forEach(function (a) {
+    a.addEventListener('click', function (e) { e.preventDefault(); window.scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' }); });
+  });
+
+  /* ==================================================================
+     THE PRODUCT ON SHOW
+     One template for every fragrance. show(id) fills the page from PRODUCTS:
+     colours, bottle, giant word, copy, notes and the four suggestions.
+     The address can end in #belford, #shawano and so on to open that one.
+     ================================================================== */
+  var stage = $('#stage'), vis = $('#vis'), word = $('#p-word'), img = $('#p-img'), form = $('#buy');
+  var bSize = $('#b-size'), bTilt = $('#b-tilt'), bMove = $('#b-move'), bSwap = $('#b-swap');
+  var amt = $('#p-amt'), per = $('#p-for'), addBtn = $('#p-add'), heart = $('#p-heart'), qVal = $('#q-val');
+  var bar = $('#buybar'), barAdd = $('#bar-add');
+  var cur = null, qty = 1, shown = { v: 0 }, colours = null;
+
+  function fitWord() {
+    word.style.fontSize = '100px';
+    var size = Math.min(100 * (vis.clientWidth * 0.94) / word.offsetWidth, vis.clientHeight * 0.4);
+    word.style.fontSize = Math.floor(size) + 'px';
+  }
+  function paint(c) {
+    stage.style.setProperty('--pc', c.c); stage.style.setProperty('--pe', c.e);
+    root.style.setProperty('--wash', c.c);
+  }
+  function setTitle(text, animate) {
+    var h = $('#p-name'), letters = [];
+    h.textContent = ''; h.setAttribute('aria-label', text);
+    // letters are grouped by word, so a long name breaks between words and never inside one
+    text.split(' ').forEach(function (w, i) {
+      if (i) h.appendChild(document.createTextNode(' '));
+      var word = el('span', 'w'); word.setAttribute('aria-hidden', 'true');
+      w.split('').forEach(function (ch) { var s = el('span', '', ch); word.appendChild(s); letters.push(s); });
+      h.appendChild(word);
+    });
+    fitTitle();
+    if (animate && hasGsap) gsap.from(letters, { yPercent: 70, autoAlpha: 0, duration: 0.7, ease: 'power3.out', stagger: 0.03 });
+  }
+  // one very long word (Southampton) is scaled down until it fits the column
+  function fitTitle() {
+    var h = $('#p-name'); h.style.fontSize = '';
+    var room = h.parentElement.clientWidth, widest = Math.max.apply(null, $$('.w', h).map(function (n) { return n.offsetWidth; }));
+    if (widest > room) h.style.fontSize = Math.floor(parseFloat(getComputedStyle(h).fontSize) * room / widest) + 'px';
+  }
+  function size() { return Number(form.elements.size.value); }
+  function price() {
+    var p = PRODUCTS[cur], s = size(), v = p.prices[s];
+    amt.classList.toggle('is-open', v == null);
+    if (v == null) { amt.textContent = (p.soldout ? 'Sold out' : 'Price to be added'); shown.v = 0; }
+    else if (hasGsap) gsap.to(shown, { v: v * qty, duration: 0.5, ease: 'power2.out', overwrite: true, onUpdate: function () { amt.textContent = rupees(Math.round(shown.v)); } });
+    else amt.textContent = rupees(v * qty);
+    per.textContent = (qty > 1 ? qty + ' × ' : 'for ') + s + ' ml';
+    addBtn.disabled = barAdd.disabled = v == null;
+    $('#bar-price').textContent = v == null ? '' : rupees(v * qty);
+    $('#bar-meta').textContent = p.kind + ' · ' + s + ' ml';
+    $('#p-wa').textContent = v == null ? (p.soldout ? 'Ask on WhatsApp when it is back' : 'Ask the price on WhatsApp') : 'Order this on WhatsApp';
+    $('#p-wa').href = 'https://wa.me/923180250552?text=' + encodeURIComponent(v == null ? (p.soldout ? 'Hello Shafar, when will ' + p.name + ' be back in stock?' : 'Hello Shafar, what is the price of ' + p.name + ', ' + s + ' ml?') : 'Hello Shafar, I would like to order ' + p.name + ', ' + s + ' ml' + (qty > 1 ? ' x ' + qty : '') + '.');
+    if (hasGsap) gsap.to(bSize, { scale: SIZE_SCALE[s], duration: 0.7, ease: 'back.out(1.6)', overwrite: true });
+  }
+  function show(id, animateTitle) {
+    var p = PRODUCTS[id], n = p.notes || NOTE_SETS[NOTES[id] || 'warm'];          // real notes from the dashboard win over the samples
+    $('#notes-draft').hidden = !!p.notes;
+    cur = id; qty = 1; qVal.textContent = '1';
+    stage.style.setProperty('--ink', p.ink); stage.style.setProperty('--accent', p.accent);
+    colours = { c: p.tint, e: p.deep };
+    img.src = p.img; img.alt = 'Shafar ' + p.name + ' bottle';
+    word.textContent = p.name.split(' ')[0]; fitWord();
+    $('#p-crumb').textContent = p.name;
+    var catLink = $('#p-cat');                       // the category crumb only shows once the product has a category
+    catLink.style.display = catLink.nextElementSibling.style.display = p.cat ? '' : 'none';
+    if (p.cat) { catLink.textContent = CAT_NAME[p.cat]; catLink.href = 'shop.html#' + p.cat; }
+    var flags = $('#p-flags'); flags.textContent = '';
+    if (p.best) flags.appendChild(el('span', 'flag', 'Best seller'));
+    $('#p-kind').textContent = p.kind; $('#f-kind').textContent = p.kind;
+    setTitle(p.name, animateTitle);
+    $('#p-desc').textContent = p.desc;
+    $('#n-top').textContent = n.top.replace(', ', ' · '); $('#n-heart').textContent = n.heart.replace(', ', ' · '); $('#n-base').textContent = n.base.replace(', ', ' · ');
+    $('#s-50').checked = true;
+    var on = wish.indexOf(id) >= 0;
+    heart.dataset.wish = id; heart.setAttribute('aria-pressed', String(on)); heart.setAttribute('aria-label', (on ? 'Remove ' : 'Save ') + p.name + (on ? ' from wishlist' : ' to wishlist'));
+    $('#bar-img').src = p.img; $('#bar-name').textContent = p.name;
+    // four suggestions: the bottles that follow this one in shop order, same category first when it has one
+    var at = ORDER.indexOf(id), rest = ORDER.slice(at + 1).concat(ORDER.slice(0, at));
+    var priced = function (x) { return PRODUCTS[x].prices[DEFAULT_SIZE] != null; };
+    rest = rest.filter(priced).concat(rest.filter(function (x) { return !priced(x); }));     // bottles you can buy come first
+    var same = function (x) { return !!p.cat && PRODUCTS[x].cat === p.cat; };
+    var picks = rest.filter(same).concat(rest.filter(function (x) { return !same(x); })).slice(0, 4);
+    ORDER.forEach(function (x) { alsoCards[x].classList.toggle('is-out', picks.indexOf(x) < 0); });
+    picks.forEach(function (x) { also.appendChild(alsoCards[x]); });
+    document.title = p.name + ' | Shafar Fragrances';
+    try { history.replaceState(null, '', '#' + id); } catch (e) {}
+    price();
+  }
+
+  // change to another product in place: old bottle leaves, colours blend, new one arrives
+  function go(id) {
+    if (!PRODUCTS[id] || id === cur) return;
+    window.scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' });
+    if (!hasGsap) { show(id); paint(colours); return; }
+    var from = colours, to = { c: PRODUCTS[id].tint, e: PRODUCTS[id].deep }, mix = { t: 0 };
+    var blendC = gsap.utils.interpolate(from.c, to.c), blendE = gsap.utils.interpolate(from.e, to.e);
+    var kids = $$('[data-in]', form);
+    gsap.timeline()
+      .to(bSwap, { yPercent: -14, rotation: -9, autoAlpha: 0, duration: 0.38, ease: 'power2.in' }, 0)
+      .to(word, { yPercent: -24, autoAlpha: 0, duration: 0.32, ease: 'power2.in' }, 0)
+      .to(kids, { y: -16, autoAlpha: 0, duration: 0.26, stagger: 0.015, ease: 'power1.in' }, 0)
+      .to(mix, { t: 1, duration: 0.8, ease: 'power1.inOut', onUpdate: function () { paint({ c: blendC(mix.t), e: blendE(mix.t) }); } }, 0.1)
+      .add(function () { show(id, true); }, 0.42)
+      .fromTo(bSwap, { yPercent: 16, rotation: 9, autoAlpha: 0 }, { yPercent: 0, rotation: 0, autoAlpha: 1, duration: 0.85, ease: 'power3.out' }, 0.46)
+      .fromTo(word, { yPercent: 26, autoAlpha: 0 }, { yPercent: 0, autoAlpha: 1, duration: 0.75, ease: 'power3.out' }, 0.46)
+      .fromTo(kids, { y: 22, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 0.5, stagger: 0.04, ease: 'power2.out' }, 0.56);
+  }
+  also.addEventListener('click', function (e) { var b = e.target.closest('[data-go]'); if (b) go(b.dataset.go); });
+  // a link to another fragrance on this same page (product.html#cuba while product.html#belford is open) only changes the #part
+  window.addEventListener('hashchange', function () { go((location.hash || '').replace('#', '').toLowerCase()); });
+
+  /* ---------- Buying ---------- */
+  form.addEventListener('change', price);
+  $('#q-less').addEventListener('click', function () { qty = Math.max(1, qty - 1); qVal.textContent = qty; price(); });
+  $('#q-more').addEventListener('click', function () { qty = Math.min(9, qty + 1); qVal.textContent = qty; price(); });
+  function fly(fromEl) {
+    if (!hasGsap) return;
+    var a = fromEl.getBoundingClientRect(), b = $('#open-cart').getBoundingClientRect(), ghost = el('img', 'fly');
+    ghost.src = PRODUCTS[cur].img; ghost.alt = '';
+    ghost.style.cssText = 'left:' + a.left + 'px;top:' + a.top + 'px;width:' + a.width + 'px;height:' + a.height + 'px';
+    document.body.appendChild(ghost);
+    var dx = b.left + b.width / 2 - (a.left + a.width / 2), dy = b.top + b.height / 2 - (a.top + a.height / 2);
+    gsap.timeline({ onComplete: function () { ghost.remove(); gsap.fromTo('#cart-count', { scale: 1.7 }, { scale: 1, duration: 0.5, ease: 'back.out(3)' }); } })
+      .to(ghost, { x: dx, duration: 0.85, ease: 'power1.in' }, 0)
+      .to(ghost, { y: dy, duration: 0.85, ease: 'power2.inOut' }, 0)
+      .to(ghost, { scale: 0.07, rotation: 22, duration: 0.85, ease: 'power2.in' }, 0)
+      .to(ghost, { autoAlpha: 0, duration: 0.2 }, 0.68);
+  }
+  function addNow(fromEl) {
+    var p = PRODUCTS[cur], s = size();
+    if (p.prices[s] == null) return;
+    for (var i = 0; i < qty; i++) addToCart(cur, s);
+    toast((qty > 1 ? qty + ' × ' : '') + p.name + ', ' + s + ' ml added to cart.');
+    fly(fromEl);
+  }
+  form.addEventListener('submit', function (e) { e.preventDefault(); addNow(img); });
+  barAdd.addEventListener('click', function () { addNow(img.getBoundingClientRect().bottom > 80 ? img : $('#bar-img')); });
+
+  // the slim buy bar shows once the main Add to cart button has scrolled away, and hides again near the footer
+  function barState() {
+    var gone = addBtn.getBoundingClientRect().bottom < topBar.offsetHeight, atEnd = $('#footer').getBoundingClientRect().top < window.innerHeight;
+    var on = gone && !atEnd;
+    bar.classList.toggle('show', on); bar.setAttribute('aria-hidden', String(!on)); barAdd.tabIndex = on ? 0 : -1;
+  }
+  window.addEventListener('scroll', barState, { passive: true });
+  window.addEventListener('resize', function () { fitWord(); fitTitle(); barState(); });
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { fitWord(); fitTitle(); });
+
+  /* ---------- First product ---------- */
+  var first = (location.hash || '').replace('#', '').toLowerCase();
+  show(PRODUCTS[first] ? first : 'halila', false);
+  paint(colours);
+  barState();
+
+  /* ---------- Motion ---------- */
+  if (!hasGsap) return;
+  gsap.from(word, { yPercent: 30, autoAlpha: 0, duration: 1.2, ease: 'power3.out' });
+  gsap.from(bSwap, { yPercent: 14, rotation: 8, autoAlpha: 0, duration: 1.3, ease: 'power3.out', delay: 0.15 });
+  gsap.from($$('[data-in]', form), { y: 26, autoAlpha: 0, duration: 0.8, ease: 'power3.out', stagger: 0.06, delay: 0.25 });
+  gsap.from($$('#p-name .w span'), { yPercent: 70, autoAlpha: 0, duration: 0.8, ease: 'power3.out', stagger: 0.03, delay: 0.45 });
+
+  // the bottle leans gently with the pointer
+  if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+    var mx = gsap.quickTo(bMove, 'x', { duration: 0.8, ease: 'power3.out' }), my = gsap.quickTo(bMove, 'y', { duration: 0.8, ease: 'power3.out' }), mr = gsap.quickTo(bMove, 'rotation', { duration: 0.8, ease: 'power3.out' });
+    vis.addEventListener('pointermove', function (e) {
+      var r = vis.getBoundingClientRect(), nx = (e.clientX - r.left) / r.width - 0.5, ny = (e.clientY - r.top) / r.height - 0.5;
+      mx(nx * 26); my(ny * 18); mr(nx * 5);
+    });
+    vis.addEventListener('pointerleave', function () { mx(0); my(0); mr(0); });
+  }
+  if (hasST) {
+    // as the details scroll past, the bottle turns a little and the giant word drifts
+    gsap.fromTo(bTilt, { rotation: 0 }, { rotation: 6, ease: 'none', scrollTrigger: { trigger: stage, start: 'top top', end: 'bottom bottom', scrub: 0.6 } });
+    gsap.fromTo('.pvis__word', { yPercent: 0 }, { yPercent: -9, ease: 'none', scrollTrigger: { trigger: stage, start: 'top top', end: 'bottom bottom', scrub: 0.6 } });
+    gsap.from('#notes .note', { y: 30, autoAlpha: 0, duration: 0.8, ease: 'power3.out', stagger: 0.14, scrollTrigger: { trigger: '#notes', start: 'top 82%' } });
+    gsap.from('#wear li', { x: -24, autoAlpha: 0, duration: 0.8, ease: 'power3.out', stagger: 0.16, scrollTrigger: { trigger: '#wear', start: 'top 84%' } });
+    gsap.from('#facts div', { y: 20, autoAlpha: 0, duration: 0.7, ease: 'power3.out', stagger: 0.08, scrollTrigger: { trigger: '#facts', start: 'top 88%' } });
+    gsap.from('.pblock h2', { y: 24, autoAlpha: 0, duration: 0.8, ease: 'power3.out', scrollTrigger: { trigger: '#notes', start: 'top 92%' } });
+    gsap.from('#reviews-grid .review', { y: 46, autoAlpha: 0, duration: 1, ease: 'power3.out', stagger: 0.12, scrollTrigger: { trigger: '#reviews-grid', start: 'top 84%' } });
+    gsap.from('#also .card:not(.is-out)', { y: 46, autoAlpha: 0, duration: 0.9, ease: 'power3.out', stagger: 0.08, scrollTrigger: { trigger: '#also', start: 'top 84%' } });
+    gsap.from('.foot__top > *', { y: 30, autoAlpha: 0, duration: 0.9, ease: 'power3.out', stagger: 0.08, scrollTrigger: { trigger: '.foot', start: 'top 85%' } });
+    gsap.fromTo('#foot-word', { yPercent: 42 }, { yPercent: 0, ease: 'none', scrollTrigger: { trigger: '#foot-word', start: 'top bottom', end: 'bottom bottom', scrub: 0.6 } });
+  }
+})();
+</script>
+<script>
+/* Visitor count for the dashboard: a random id kept in this browser, no personal data. */
+(function () {
+  try {
+    var k = 'shafar.vid', v = localStorage.getItem(k);
+    if (!v) { v = Math.random().toString(36).slice(2) + Date.now().toString(36); localStorage.setItem(k, v); }
+    var data = JSON.stringify({ vid: v, path: location.pathname, ref: document.referrer });
+    if (navigator.sendBeacon) navigator.sendBeacon('/api/track', data);
+    else fetch('/api/track', { method: 'POST', body: data, keepalive: true });
+  } catch (e) {}
+})();
+</script>
+</body>
+</html>
