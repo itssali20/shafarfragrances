@@ -341,6 +341,7 @@ select.sel{height:38px;padding:0 30px 0 12px;border-radius:10px;border:1px solid
       <a href="#orders" data-icon="orders">Orders <span class="count num" id="pending-count" hidden></span></a>
       <a href="#products" data-icon="products">Products</a>
       <a href="#customers" data-icon="customers">Customers</a>
+      <a href="#members" data-icon="members">Members</a>
       <a href="#discounts" data-icon="discounts">Discount codes</a>
       <a href="#settings" data-icon="settings">Settings</a>
     </nav>
@@ -435,6 +436,8 @@ window.SHAFAR_SEED = [{"id": "halila", "name": "Halila Lane", "kind": "Parfum", 
     products: '<path d="M9 3h6v3H9zM10 6v2.5M14 6v2.5"/><rect x="6" y="8.5" width="12" height="12" rx="2"/><path d="M9 13h6"/>',
     customers: '<circle cx="9" cy="8" r="3.2"/><path d="M3.5 19c.8-3 3-4.6 5.5-4.6s4.7 1.6 5.5 4.6"/><path d="M15.5 5.3a3 3 0 0 1 0 5.4M17.5 14.6c1.5.6 2.5 2 3 4.4"/>',
     discounts: '<path d="M4 12V4h8l8 8-8 8z"/><circle cx="8.5" cy="8.5" r="1.4"/>',
+    members: '<circle cx="12" cy="8.5" r="3.4"/><path d="M5.5 20c.8-3.6 3.4-5.6 6.5-5.6s5.7 2 6.5 5.6"/><path d="M18.5 3.5l.6 1.3 1.4.2-1 1 .2 1.4-1.2-.7-1.2.7.2-1.4-1-1 1.4-.2z"/>',
+    mail: '<rect x="3.5" y="5.5" width="17" height="13" rx="2"/><path d="M4 7l8 6 8-6"/>',
     settings: '<circle cx="12" cy="12" r="3"/><path d="M12 2.8v2.4M12 18.8v2.4M4.2 7.5l2 1.2M17.8 15.3l2 1.2M4.2 16.5l2-1.2M17.8 8.7l2-1.2"/>',
     site: '<path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/>',
     moon: '<path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/>',
@@ -583,7 +586,14 @@ window.SHAFAR_SEED = [{"id": "halila", "name": "Halila Lane", "kind": "Parfum", 
       db = { products: products, orders: orders, visits: visits,
         discounts: [{ code: 'SHAFAR10', kind: 'percent', value: 10, min_total: 0, max_uses: null, uses: 31, expires: null, active: true, created_at: new Date(now - 90 * 864e5).toISOString() },
                     { code: 'EID500', kind: 'flat', value: 500, min_total: 4000, max_uses: 100, uses: 100, expires: null, active: false, created_at: new Date(now - 200 * 864e5).toISOString() }],
-        settings: { delivery_fee: 250, free_over: 5000, orders_open: true, notice: '' } };
+        settings: { delivery_fee: 250, free_over: 5000, orders_open: true, notice: '', alert_emails: '', loyalty: { on: true, after: 3, tiers: [{ qty: 2, pct: 10 }, { qty: 4, pct: 20 }] } } };
+      // demo accounts: the first customers who left an email
+      var seen = {}; db.members = [];
+      orders.slice().reverse().forEach(function (o) {
+        if (!o.email || seen[o.email] || db.members.length >= 18) return;
+        seen[o.email] = 1;
+        db.members.push({ id: db.members.length + 1, name: o.name, email: o.email, phone: o.phone, city: o.city, verified: r() > .1, created_at: o.created_at, last_login: o.created_at, loyal_since: null, wish: Math.floor(r() * 5) });
+      });
     }
     function monthKey(d) { return new Date(new Date(d).getTime() + 5 * 3600e3).toISOString().slice(0, 7); }
     var clone = function (x) { return JSON.parse(JSON.stringify(x)); };
@@ -633,12 +643,13 @@ window.SHAFAR_SEED = [{"id": "halila", "name": "Halila Lane", "kind": "Parfum", 
       customers: function () {
         var by = {};
         db.orders.forEach(function (o) {
-          var c = by[o.phone] = by[o.phone] || { phone: o.phone, name: o.name, email: o.email, city: o.city, orders: 0, spent: 0, first: o.created_at, last: o.created_at };
+          var c = by[o.phone] = by[o.phone] || { phone: o.phone, name: o.name, email: o.email, city: o.city, orders: 0, completed: 0, spent: 0, first: o.created_at, last: o.created_at };
           if (o.status !== 'cancelled') { c.orders++; c.spent += o.total; }
+          if (o.status === 'completed') c.completed++;
           if (o.created_at < c.first) c.first = o.created_at;
           if (o.created_at > c.last) c.last = o.created_at;
         });
-        return { customers: Object.values(by).sort(function (a, b) { return b.spent - a.spent; }) };
+        return { customers: Object.values(by).sort(function (a, b) { return b.spent - a.spent; }), loyalty: clone(db.settings.loyalty) };
       },
       customer: function (b) { return { orders: db.orders.filter(function (o) { return o.phone === b.phone; }) }; },
       products: function () {
@@ -673,6 +684,18 @@ window.SHAFAR_SEED = [{"id": "halila", "name": "Halila Lane", "kind": "Parfum", 
         db.products = db.products.filter(function (p) { return p.id !== b.id; }); return {};
       },
       upload: function (b) { return { url: 'data:' + b.mime + ';base64,' + b.data }; },
+      members: function () {
+        var cfg = db.settings.loyalty;
+        return { loyalty: clone(cfg), members: db.members.map(function (m) {
+          var mine = db.orders.filter(function (o) { return o.email === m.email; });
+          var live = mine.filter(function (o) { return o.status !== 'cancelled'; }), done = mine.filter(function (o) { return o.status === 'completed'; });
+          return Object.assign({}, m, { orders: live.length, completed: done.length, spent: live.reduce(function (a, o) { return a + o.total; }, 0), last: mine.length ? mine[0].created_at : null,
+            loyal_since: done.length >= cfg.after ? done[cfg.after - 1].created_at : null });
+        }) };
+      },
+      member: function (b) { var m = db.members.filter(function (x) { return x.id === b.id; })[0]; return { orders: db.orders.filter(function (o) { return m && o.email === m.email; }) }; },
+      loyalCount: function () { return { count: A.members().members.filter(function (m) { return m.verified && m.completed >= db.settings.loyalty.after; }).length }; },
+      discountSend: function () { throw new Error('Sending email works on the live site. This preview sends nothing.'); },
       discounts: function () { return { discounts: clone(db.discounts) }; },
       discountSave: function (b) {
         var d = b.discount, code = String(d.code || '').toUpperCase().replace(/[^A-Z0-9_-]/g, '');
@@ -680,15 +703,16 @@ window.SHAFAR_SEED = [{"id": "halila", "name": "Halila Lane", "kind": "Parfum", 
         var value = Number(d.value) || 0;
         if (value <= 0 || (d.kind === 'percent' && value > 90)) throw new Error(d.kind === 'percent' ? 'Use a percentage between 1 and 90.' : 'Enter the amount off in rupees.');
         var ex = db.discounts.filter(function (x) { return x.code === code; })[0];
-        var row = { code: code, kind: d.kind === 'flat' ? 'flat' : 'percent', value: value, min_total: Number(d.min_total) || 0, max_uses: d.max_uses === '' || d.max_uses == null ? null : Number(d.max_uses), expires: d.expires || null, active: d.active !== false };
+        var row = { code: code, kind: d.kind === 'flat' ? 'flat' : 'percent', value: value, min_total: Number(d.min_total) || 0, max_uses: d.max_uses === '' || d.max_uses == null ? null : Number(d.max_uses), expires: d.expires || null, active: d.active !== false, loyal_only: !!d.loyal_only, title: String(d.title || '').slice(0, 60) };
         if (ex) Object.assign(ex, row); else db.discounts.unshift(Object.assign({ uses: 0, created_at: new Date().toISOString() }, row));
         return A.discounts();
       },
       discountDelete: function (b) { db.discounts = db.discounts.filter(function (x) { return x.code !== b.code; }); return A.discounts(); },
-      settings: function () { return { settings: clone(db.settings) }; },
+      settings: function () { return { settings: clone(db.settings), mail: false }; },
       settingsSave: function (b) {
         var s = b.settings;
-        db.settings = { delivery_fee: Math.max(0, Number(s.delivery_fee) || 0), free_over: s.free_over === '' || s.free_over == null ? null : Number(s.free_over), orders_open: s.orders_open !== false, notice: String(s.notice || '').slice(0, 200) };
+        db.settings = { delivery_fee: Math.max(0, Number(s.delivery_fee) || 0), free_over: s.free_over === '' || s.free_over == null ? null : Number(s.free_over), orders_open: s.orders_open !== false, notice: String(s.notice || '').slice(0, 200),
+          alert_emails: String(s.alert_emails || '').split(/[\s,;]+/).filter(function (x) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(x); }).join(', '), loyalty: s.loyalty || db.settings.loyalty };
         return A.settings();
       },
       logout: function () { return {}; }
@@ -1084,7 +1108,7 @@ window.SHAFAR_SEED = [{"id": "halila", "name": "Halila Lane", "kind": "Parfum", 
           go.then(function (yes) {
             if (!yes) return;
             call('orderStatus', { id: o.id, status: st }).then(function (r) {
-              o.status = r.order.status; paintSteps(); toast(o.number + ' marked ' + STATUS_TEXT[st].toLowerCase() + '.');
+              o.status = r.order.status; paintSteps(); toast(r.loyal ? o.name.split(' ')[0] + ' is now Shafar Loyal. A welcome email has been sent.' : o.number + ' marked ' + STATUS_TEXT[st].toLowerCase() + '.');
               refreshBadge(); if (state.view === 'orders' || state.view === 'overview') state.reload && state.reload();
             }).catch(function (e) { toast(e.message); });
           });
@@ -1111,7 +1135,7 @@ window.SHAFAR_SEED = [{"id": "halila", "name": "Halila Lane", "kind": "Parfum", 
     })));
     body.appendChild(h('div', { class: 'totals num' }, [
       h('div', null, [h('span', { text: 'Subtotal' }), h('span', { text: rs(o.subtotal) })]),
-      o.discount ? h('div', null, [h('span', { text: 'Discount' + (o.code ? ' (' + o.code + ')' : '') }), h('span', { text: '− ' + rs(o.discount) })]) : null,
+      o.discount ? h('div', null, [h('span', { text: o.loyalty ? 'Loyal reward (' + o.loyalty + '%)' : 'Discount' + (o.code ? ' (' + o.code + ')' : '') }), h('span', { text: '− ' + rs(o.discount) })]) : null,
       h('div', null, [h('span', { text: 'Delivery' }), h('span', { text: o.delivery ? rs(o.delivery) : 'Free' })]),
       h('div', { class: 'grand' }, [h('span', { text: 'To collect' }), h('span', { text: rs(o.total) })])]));
     var msg = 'Hello ' + o.name.split(' ')[0] + ', this is Shafar Fragrances about your order ' + o.number + ' (' + rs(o.total) + ').';
@@ -1470,7 +1494,7 @@ window.SHAFAR_SEED = [{"id": "halila", "name": "Halila Lane", "kind": "Parfum", 
     sub: function () { return 'Everyone who has ordered, matched by phone number'; },
     render: function (page) {
       return call('customers').then(function (r) {
-        var all = r.customers, filter = 'all', term = '';
+        var all = r.customers, filter = 'all', term = '', after = (r.loyalty && r.loyalty.after) || 3;
         var frequent = all.filter(function (c) { return c.orders >= 2; });
         var spent = all.reduce(function (a, c) { return a + c.spent; }, 0);
         var cities = {}; all.forEach(function (c) { cities[c.city] = (cities[c.city] || 0) + 1; });
@@ -1499,7 +1523,7 @@ window.SHAFAR_SEED = [{"id": "halila", "name": "Halila Lane", "kind": "Parfum", 
             h('thead', null, [h('tr', null, ['Customer', 'Phone', 'Orders', 'Spent', 'Last order'].map(function (c, i) { return h('th', { class: i === 2 || i === 3 ? 'r' : '', text: c }); }))]),
             h('tbody', null, rows.slice(0, 500).map(function (c) {
               var tr = h('tr', { class: 'row', tabindex: 0 }, [
-                h('td', { class: 'who' }, [h('b', null, [c.name, c.orders >= 2 ? h('span', { class: 'tag tag--gold', style: 'margin-left:8px', text: c.orders >= 4 ? 'Loyal' : 'Frequent' }) : null]), h('span', { text: c.city })]),
+                h('td', { class: 'who' }, [h('b', null, [c.name, c.orders >= 2 || c.completed >= after ? h('span', { class: 'tag tag--gold', style: 'margin-left:8px', text: c.completed >= after ? 'Loyal' : 'Frequent' }) : null]), h('span', { text: c.city })]),
                 h('td', { class: 'num', text: c.phone }),
                 h('td', { class: 'r num', text: String(c.orders) }),
                 h('td', { class: 'r num', text: rs(c.spent) }),
@@ -1530,6 +1554,77 @@ window.SHAFAR_SEED = [{"id": "halila", "name": "Halila Lane", "kind": "Parfum", 
   }
 
   /* ==================================================================
+     MEMBERS: customer accounts and Shafar Loyal
+     ================================================================== */
+  VIEWS.members = {
+    title: 'Members',
+    sub: function () { return 'Customer accounts and Shafar Loyal'; },
+    render: function (page) {
+      return call('members').then(function (r) {
+        var all = r.members, cfg = r.loyalty || { after: 3, tiers: [] }, filter = 'all', term = '';
+        var isLoyal = function (m) { return m.verified && cfg.on !== false && m.completed >= cfg.after; };
+        var loyal = all.filter(isLoyal), waiting = all.filter(function (m) { return !m.verified; });
+        var near = all.filter(function (m) { return m.verified && !isLoyal(m) && m.completed === cfg.after - 1; });
+        page.appendChild(h('div', { class: 'stats', style: 'grid-template-columns:repeat(auto-fit,minmax(170px,1fr))' }, [
+          h('div', { class: 'card stat' }, [h('span', { class: 'stat__label', text: 'Accounts' }), h('span', { class: 'stat__value', text: all.length.toLocaleString('en-US') }), h('span', { class: 'stat__delta', text: waiting.length ? waiting.length + ' not confirmed yet' : 'All confirmed' })]),
+          h('div', { class: 'card stat' }, [h('span', { class: 'stat__label', text: 'Shafar Loyal' }), h('span', { class: 'stat__value', text: loyal.length.toLocaleString('en-US') }), h('span', { class: 'stat__delta', text: cfg.after + '+ completed orders' })]),
+          h('div', { class: 'card stat' }, [h('span', { class: 'stat__label', text: 'One order away' }), h('span', { class: 'stat__value', text: near.length.toLocaleString('en-US') }), h('span', { class: 'stat__delta', text: 'Become Loyal on their next delivery' })]),
+          h('div', { class: 'card stat' }, [h('span', { class: 'stat__label', text: 'Loyal rewards' }), h('span', { class: 'stat__value', style: 'font-size:20px', text: (cfg.tiers || []).map(function (t) { return t.pct + '% / ' + t.qty; }).join(' · ') || 'Off' }), h('span', { class: 'stat__delta', text: 'Percent off / bottles. Change in Settings' })])]));
+        var seg = h('div', { class: 'seg', role: 'group', 'aria-label': 'Show' });
+        var search = h('label', { class: 'search' }, [h('span', { class: 'sr', text: 'Search members' }), h('span', { html: icon('search') }), h('input', { type: 'search', placeholder: 'Search by name, email or phone' })]);
+        var list = h('section', { class: 'card', style: 'padding:6px 0' });
+        page.appendChild(h('div', { class: 'filters' }, [seg, search]));
+        page.appendChild(list);
+        function paint() {
+          seg.textContent = '';
+          [['all', 'All', all.length], ['loyal', 'Shafar Loyal', loyal.length], ['near', 'One order away', near.length], ['waiting', 'Not confirmed', waiting.length]].forEach(function (f) {
+            var b = h('button', { type: 'button', 'aria-pressed': String(filter === f[0]) }, [f[1], h('span', { class: 'n num', text: String(f[2]) })]);
+            b.addEventListener('click', function () { filter = f[0]; paint(); });
+            seg.appendChild(b);
+          });
+          var base = filter === 'loyal' ? loyal : filter === 'near' ? near : filter === 'waiting' ? waiting : all;
+          var rows = base.filter(function (m) { return !term || [m.name, m.email, m.phone, m.city].join(' ').toLowerCase().indexOf(term) >= 0; });
+          list.textContent = '';
+          if (!rows.length) { list.appendChild(h('p', { class: 'empty', text: all.length ? 'No members match.' : 'Accounts appear here once customers sign up on the website.' })); return; }
+          list.appendChild(h('div', { class: 'tablewrap' }, [h('table', null, [
+            h('thead', null, [h('tr', null, ['Member', 'Email', 'Completed', 'Spent', 'Joined'].map(function (c, i) { return h('th', { class: i === 2 || i === 3 ? 'r' : '', text: c }); }))]),
+            h('tbody', null, rows.slice(0, 500).map(function (m) {
+              var tag = isLoyal(m) ? h('span', { class: 'tag tag--gold', style: 'margin-left:8px', text: 'Loyal' }) : !m.verified ? h('span', { class: 'tag tag--warn', style: 'margin-left:8px', text: 'Not confirmed' }) : null;
+              var tr = h('tr', { class: 'row', tabindex: 0 }, [
+                h('td', { class: 'who' }, [h('b', null, [m.name, tag]), h('span', { text: m.city || m.phone || '' })]),
+                h('td', { text: m.email }),
+                h('td', { class: 'r num', text: m.completed + ' of ' + m.orders }),
+                h('td', { class: 'r num', text: rs(m.spent) }),
+                h('td', { class: 'num', title: fmtDate(m.created_at, true), text: fmtDate(m.created_at) })]);
+              var open = function () { memberDrawer(m, isLoyal(m), cfg); };
+              tr.addEventListener('click', open); tr.addEventListener('keydown', function (e) { if (e.key === 'Enter') open(); });
+              return tr;
+            }))])]));
+        }
+        var t;
+        $('input', search).addEventListener('input', function (e) { clearTimeout(t); t = setTimeout(function () { term = e.target.value.trim().toLowerCase(); paint(); }, 150); });
+        paint();
+      });
+    }
+  };
+  function memberDrawer(m, loyal, cfg) {
+    var body = h('div', { class: 'form' }, [h('dl', { class: 'dl' }, [
+      h('dt', { text: 'Status' }), h('dd', { text: loyal ? 'Shafar Loyal' + (m.loyal_since ? ' since ' + fmtDate(m.loyal_since) : '') : !m.verified ? 'Email not confirmed yet' : (cfg.after - m.completed) + ' completed ' + (cfg.after - m.completed === 1 ? 'order' : 'orders') + ' from Loyal' }),
+      h('dt', { text: 'Email' }), h('dd', { text: m.email }),
+      m.phone ? h('dt', { text: 'Phone' }) : null, m.phone ? h('dd', { class: 'num', text: m.phone }) : null,
+      h('dt', { text: 'Orders' }), h('dd', { class: 'num', text: m.orders + ' (' + m.completed + ' completed)' }),
+      h('dt', { text: 'Spent' }), h('dd', { class: 'num', text: rs(m.spent) }),
+      h('dt', { text: 'Wishlist' }), h('dd', { class: 'num', text: String(m.wish || 0) + ' saved' }),
+      h('dt', { text: 'Joined' }), h('dd', { text: fmtDate(m.created_at) })])]);
+    var holder = h('div', { class: 'card', style: 'padding:6px 0' }, [h('p', { class: 'empty', text: 'Loading orders…' })]);
+    body.appendChild(holder);
+    call('member', { id: m.id }).then(function (r) { holder.textContent = ''; holder.appendChild(r.orders.length ? orderTable(r.orders) : h('p', { class: 'empty', text: 'No orders yet.' })); });
+    var foot = [h('a', { class: 'btn btn--primary', href: 'mailto:' + m.email, html: icon('mail') + 'Email' })];
+    if (m.phone) foot.push(h('a', { class: 'btn', href: waLink(m.phone, 'Hello ' + m.name.split(' ')[0] + ', this is Shafar Fragrances.'), target: '_blank', rel: 'noopener', html: icon('wa') + 'WhatsApp' }));
+    openDrawer(m.name, body, foot);
+  }
+
+  /* ==================================================================
      DISCOUNT CODES
      ================================================================== */
   VIEWS.discounts = {
@@ -1545,13 +1640,14 @@ window.SHAFAR_SEED = [{"id": "halila", "name": "Halila Lane", "kind": "Parfum", 
         list.textContent = '';
         if (!rows.length) { list.appendChild(h('p', { class: 'empty', text: 'No codes yet. Make one for Eid, a launch or your Instagram followers.' })); return; }
         list.appendChild(h('div', { class: 'tablewrap' }, [h('table', null, [
-          h('thead', null, [h('tr', null, ['Code', 'Discount', 'Minimum order', 'Used', 'Ends', 'Status', ''].map(function (c, i) { return h('th', { class: i === 2 || i === 3 ? 'r' : '', text: c }); }))]),
+          h('thead', null, [h('tr', null, ['Code', 'Discount', 'For', 'Minimum order', 'Used', 'Ends', 'Status', ''].map(function (c, i) { return h('th', { class: i === 3 || i === 4 ? 'r' : '', text: c }); }))]),
           h('tbody', null, rows.map(function (d) {
             var used = d.max_uses ? d.uses + ' / ' + d.max_uses : String(d.uses);
             var ended = (d.expires && String(d.expires).slice(0, 10) < new Date().toISOString().slice(0, 10)) || (d.max_uses && d.uses >= d.max_uses);
             var edit = h('button', { class: 'btn btn--sm', type: 'button', html: icon('edit') + 'Edit', onclick: function () { discountEditor(d); } });
-            return h('tr', null, [h('td', null, [h('b', { class: 'num', text: d.code })]),
+            return h('tr', null, [h('td', null, [h('b', { class: 'num', text: d.code }), d.title ? h('div', { class: 'muted', style: 'font-size:12px', text: d.title }) : null]),
               h('td', { text: d.kind === 'percent' ? d.value + '% off' : rs(d.value) + ' off' }),
+              h('td', null, [d.loyal_only ? h('span', { class: 'tag tag--gold', text: 'Loyal members' + (d.sent_at ? ' · emailed' : '') }) : h('span', { class: 'muted', text: 'Everyone' })]),
               h('td', { class: 'r num', text: d.min_total ? rs(d.min_total) : 'None' }),
               h('td', { class: 'r num', text: used }),
               h('td', { text: d.expires ? fmtDate(d.expires) : 'No end date' }),
@@ -1565,7 +1661,7 @@ window.SHAFAR_SEED = [{"id": "halila", "name": "Halila Lane", "kind": "Parfum", 
     }
   };
   function discountEditor(d) {
-    var isNew = !d; d = d || { code: '', kind: 'percent', value: 10, min_total: 0, max_uses: '', expires: '', active: true };
+    var isNew = !d; d = d || { code: '', kind: 'percent', value: 10, min_total: 0, max_uses: '', expires: '', active: true, loyal_only: false, title: '' };
     var code = h('input', { type: 'text', id: 'dc-code', value: d.code, maxlength: 30, placeholder: 'e.g. EID2026', readonly: !isNew || null, style: 'text-transform:uppercase' });
     var kind = h('select', { id: 'dc-kind' }, [h('option', { value: 'percent', text: 'Percent off', selected: d.kind === 'percent' }), h('option', { value: 'flat', text: 'Rupees off', selected: d.kind === 'flat' })]);
     var value = h('input', { type: 'number', id: 'dc-value', min: 1, value: d.value });
@@ -1573,20 +1669,39 @@ window.SHAFAR_SEED = [{"id": "halila", "name": "Halila Lane", "kind": "Parfum", 
     var max = h('input', { type: 'number', id: 'dc-max', min: 1, value: d.max_uses == null ? '' : d.max_uses, placeholder: 'No limit' });
     var exp = h('input', { type: 'date', id: 'dc-exp', value: d.expires ? String(d.expires).slice(0, 10) : '' });
     var active = h('input', { type: 'checkbox', id: 'dc-active' }); active.checked = d.active !== false;
+    var loyalOnly = h('input', { type: 'checkbox', id: 'dc-loyal' }); loyalOnly.checked = !!d.loyal_only;
+    var title = h('input', { type: 'text', id: 'dc-title', value: d.title || '', maxlength: 60, placeholder: 'e.g. Eid Mubarak' });
     var err = h('p', { class: 'form-err', role: 'alert', style: 'text-align:left' });
     var body = h('div', { class: 'form' }, [
       h('div', { class: 'f' }, [h('label', { for: 'dc-code', text: 'Code' }), code, h('small', { text: 'Letters and numbers. Customers can type it in any case.' })]),
       h('div', { class: 'row2' }, [h('div', { class: 'f' }, [h('label', { for: 'dc-kind', text: 'Type' }), kind]), h('div', { class: 'f' }, [h('label', { for: 'dc-value', text: 'Amount' }), value])]),
       h('div', { class: 'row2' }, [h('div', { class: 'f' }, [h('label', { for: 'dc-min', text: 'Minimum order (Rs)' }), min]), h('div', { class: 'f' }, [h('label', { for: 'dc-max', text: 'How many times it can be used' }), max])]),
       h('div', { class: 'f' }, [h('label', { for: 'dc-exp', text: 'Last day it works' }), exp, h('small', { text: 'Leave empty for no end date.' })]),
+      h('label', { class: 'check' }, [loyalOnly, h('span', null, ['Only for Shafar Loyal members', h('br'), h('small', { class: 'muted', text: 'Signed-in Loyal members only, once each. You can email it to all of them.' })])]),
+      h('div', { class: 'f' }, [h('label', { for: 'dc-title', text: 'Occasion (shown in the email)' }), title, h('small', { text: 'Optional. Becomes the email headline, like "Eid Mubarak, Ali".' })]),
       h('label', { class: 'check' }, [active, 'Code is switched on']), err]);
     var save = h('button', { class: 'btn btn--primary', type: 'button', text: isNew ? 'Create code' : 'Save' });
     save.addEventListener('click', function () {
-      call('discountSave', { discount: { code: code.value, kind: kind.value, value: value.value, min_total: min.value, max_uses: max.value, expires: exp.value, active: active.checked } })
+      call('discountSave', { discount: { code: code.value, kind: kind.value, value: value.value, min_total: min.value, max_uses: max.value, expires: exp.value, active: active.checked, loyal_only: loyalOnly.checked, title: title.value } })
         .then(function (r) { toast('Code ' + code.value.toUpperCase() + ' saved.'); closeDrawer(); if (state.paintDiscounts && state.view === 'discounts') state.paintDiscounts(r.discounts); })
         .catch(function (e) { err.textContent = e.message; });
     });
     var foot = [save, h('button', { class: 'btn', type: 'button', text: 'Cancel', onclick: closeDrawer })];
+    if (!isNew && d.loyal_only) foot.push(h('button', { class: 'btn', type: 'button', html: icon('mail') + (d.sent_at ? 'Email again' : 'Email to Loyal members'), onclick: function () {
+      var btn = this;
+      call('loyalCount').then(function (c) {
+        if (!c.count) { toast('There are no Loyal members yet.'); return; }
+        confirmBox('Email ' + d.code + ' to ' + c.count + ' Loyal ' + (c.count === 1 ? 'member' : 'members') + '?',
+          (d.sent_at ? 'It was already emailed on ' + fmtDate(d.sent_at) + '. ' : '') + 'Each member gets a personal email with the code' + (d.title ? ' and "' + d.title + '" as the headline' : '') + '. Save any changes first.', 'Send emails').then(function (yes) {
+          if (!yes) return;
+          btn.disabled = true;
+          call('discountSend', { code: d.code }).then(function (r) {
+            toast('Sent to ' + r.sent + ' of ' + r.members + ' Loyal members.' + (r.failed ? ' ' + r.failed + ' could not be sent.' : ''));
+            closeDrawer(); if (state.paintDiscounts) state.paintDiscounts(r.discounts);
+          }).catch(function (e) { btn.disabled = false; toast(e.message); });
+        });
+      }).catch(function (e) { toast(e.message); });
+    } }));
     if (!isNew) foot.push(h('button', { class: 'btn btn--danger', type: 'button', style: 'margin-left:auto', html: icon('trash') + 'Delete', onclick: function () {
       confirmBox('Delete ' + d.code + '?', 'Customers will no longer be able to use it.', 'Delete', true).then(function (yes) {
         if (yes) call('discountDelete', { code: d.code }).then(function (r) { toast(d.code + ' deleted.'); closeDrawer(); if (state.paintDiscounts) state.paintDiscounts(r.discounts); });
@@ -1608,9 +1723,17 @@ window.SHAFAR_SEED = [{"id": "halila", "name": "Halila Lane", "kind": "Parfum", 
         var fee = h('input', { type: 'number', id: 'set-fee', min: 0, step: 10, value: st.delivery_fee || 0 });
         var free = h('input', { type: 'number', id: 'set-free', min: 0, step: 100, value: st.free_over == null ? '' : st.free_over, placeholder: 'Never free' });
         var notice = h('input', { type: 'text', id: 'set-notice', maxlength: 200, value: st.notice || '', placeholder: 'e.g. Orders placed during Eid ship from the 14th' });
+        var L = st.loyalty || { on: true, after: 3, tiers: [{ qty: 2, pct: 10 }, { qty: 4, pct: 20 }] };
+        var T = [L.tiers[0] || { qty: 2, pct: 10 }, L.tiers[1] || { qty: 4, pct: 20 }];
+        var lOn = h('input', { type: 'checkbox', id: 'set-loyal' }); lOn.checked = L.on !== false;
+        var lAfter = h('input', { type: 'number', id: 'set-after', min: 1, max: 50, value: L.after });
+        var t1q = h('input', { type: 'number', id: 'set-t1q', min: 1, value: T[0].qty }), t1p = h('input', { type: 'number', id: 'set-t1p', min: 0, max: 90, value: T[0].pct });
+        var t2q = h('input', { type: 'number', id: 'set-t2q', min: 1, value: T[1].qty }), t2p = h('input', { type: 'number', id: 'set-t2p', min: 0, max: 90, value: T[1].pct });
+        var alerts = h('input', { type: 'text', id: 'set-alerts', value: st.alert_emails || '', placeholder: 'you@example.com, partner@example.com' });
         var save = h('button', { class: 'btn btn--primary', type: 'button', text: 'Save settings' });
         save.addEventListener('click', function () {
-          call('settingsSave', { settings: { orders_open: open.checked, delivery_fee: fee.value, free_over: free.value, notice: notice.value } })
+          call('settingsSave', { settings: { orders_open: open.checked, delivery_fee: fee.value, free_over: free.value, notice: notice.value, alert_emails: alerts.value,
+            loyalty: { on: lOn.checked, after: lAfter.value, tiers: [{ qty: t1q.value, pct: t1p.value }, { qty: t2q.value, pct: t2p.value }] } } })
             .then(function () { toast('Settings saved. The checkout uses them straight away.'); }).catch(function (e) { toast(e.message); });
         });
         page.appendChild(h('div', { class: 'grid g-2', style: 'align-items:start' }, [
@@ -1619,12 +1742,22 @@ window.SHAFAR_SEED = [{"id": "halila", "name": "Halila Lane", "kind": "Parfum", 
               h('label', { class: 'check', style: 'justify-content:space-between;width:100%' }, [h('span', null, [h('b', { text: 'Take orders on the website' }), h('br'), h('small', { class: 'muted', text: 'Switch off to pause checkout, for example during a stock count.' })]), h('span', { class: 'switch' }, [open, h('span')])]),
               h('div', { class: 'row2' }, [h('div', { class: 'f' }, [h('label', { for: 'set-fee', text: 'Delivery charge (Rs)' }), fee]), h('div', { class: 'f' }, [h('label', { for: 'set-free', text: 'Free delivery from (Rs)' }), free, h('small', { text: 'Order total after discount' })])]),
               h('div', { class: 'f' }, [h('label', { for: 'set-notice', text: 'Note on the checkout page' }), notice]),
+              h('div', { class: 'f' }, [h('label', { for: 'set-alerts', text: 'Email new orders to' }), alerts, h('small', { text: 'One or more addresses, separated by commas. Each new order arrives as an email.' })]),
               h('div', null, [save])])]),
+          h('section', { class: 'card' }, [h('div', { class: 'card__head' }, [h('div', null, [h('h2', { text: 'Shafar Loyal' }), h('p', { text: 'Rewards for customers with an account' })])]),
+            h('div', { class: 'card__body form' }, [
+              h('label', { class: 'check', style: 'justify-content:space-between;width:100%' }, [h('span', null, [h('b', { text: 'Loyalty rewards on' }), h('br'), h('small', { class: 'muted', text: 'Applied at checkout for signed-in Loyal members. A discount code and the reward do not add up: the bigger saving is used.' })]), h('span', { class: 'switch' }, [lOn, h('span')])]),
+              h('div', { class: 'f' }, [h('label', { for: 'set-after', text: 'Completed orders to become Loyal' }), lAfter, h('small', { text: 'Only orders marked Completed count, so unpaid or returned parcels do not.' })]),
+              h('div', { class: 'row2' }, [h('div', { class: 'f' }, [h('label', { for: 'set-t1q', text: 'Bottles in one order' }), t1q]), h('div', { class: 'f' }, [h('label', { for: 'set-t1p', text: 'Percent off' }), t1p])]),
+              h('div', { class: 'row2' }, [h('div', { class: 'f' }, [h('label', { for: 'set-t2q', text: 'Bottles in one order' }), t2q]), h('div', { class: 'f' }, [h('label', { for: 'set-t2p', text: 'Percent off' }), t2p])]),
+              h('p', { class: 'muted', style: 'font-size:13px', text: 'Occasion codes: in Discount codes, make a code for Loyal members only, then email it to all of them.' }),
+              h('div', null, [h('button', { class: 'btn btn--primary', type: 'button', text: 'Save settings', onclick: function () { save.click(); } })])])]),
           h('section', { class: 'card' }, [h('div', { class: 'card__head' }, [h('div', null, [h('h2', { text: 'Your store' }), h('p', { text: MODE === 'demo' ? 'Preview with sample data' : 'Connected' })])]),
             h('div', { class: 'card__body' }, [h('dl', { class: 'dl' }, [
               h('dt', { text: 'Database' }), h('dd', { text: MODE === 'demo' ? 'Not connected in this preview' : 'Connected' }),
               h('dt', { text: 'Admin password' }), h('dd', { html: 'Set as <b>ADMIN_PASSWORD</b> in Vercel. Changing it there signs everyone out.' }),
               h('dt', { text: 'Payments' }), h('dd', { text: 'Cash on delivery' }),
+              h('dt', { text: 'Email' }), h('dd', { html: r.mail ? 'Sending through Resend' : 'Not switched on. Add <b>RESEND_API_KEY</b> and <b>MAIL_FROM</b> in Vercel to send order emails, account emails and Loyal codes.' }),
               h('dt', { text: 'Visitors' }), h('dd', { text: 'Counted per browser. No names or addresses are stored.' })])])])]));
       });
     }

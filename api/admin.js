@@ -4,8 +4,11 @@ import crypto from 'node:crypto';
 import { q, one, hasDb, ready } from '../lib/db.js';
 import { body, send, fail, clean, int } from '../lib/http.js';
 import { isAdmin, passwordOk, passwordSet, signIn, signOut } from '../lib/auth.js';
-import { setup, getSettings } from '../lib/schema.js';
+import { setup, getSettings, ensure } from '../lib/schema.js';
 import { STATUSES } from '../lib/store.js';
+import { loyaltyConfig, customerStats, isLoyal, EMAIL } from '../lib/customer.js';
+import { send as sendMail, sendMany, mailOn, siteUrl } from '../lib/mail.js';
+import { loyalWelcome, occasion } from '../lib/emails.js';
 
 const PINNED = ['halila', 'belford', 'charleston', 'shawano'];      // drawn by hand on the Featured page and Home's Featured collection
 const KINDS = ['Parfum', 'Eau de Parfum'];
@@ -19,7 +22,7 @@ export default async function handler(req, res) {
   try {
     if (action === 'status') {
       const isReady = await ready();
-      return send(res, 200, { ok: true, db: hasDb(), ready: isReady, password: passwordSet(), admin: isAdmin(req) });
+      return send(res, 200, { ok: true, db: hasDb(), ready: isReady, password: passwordSet(), admin: isAdmin(req), mail: mailOn() });
     }
     if (action === 'login') {
       if (!passwordSet()) return fail(res, 400, 'Add ADMIN_PASSWORD in Vercel first (Settings > Environment Variables), then redeploy.');
@@ -33,10 +36,11 @@ export default async function handler(req, res) {
     if (!hasDb()) return fail(res, 503, 'The database is not connected yet.', { noDb: true });
     if (action === 'setup') return send(res, 200, Object.assign({ ok: true }, await setup()));
     if (!(await ready())) return fail(res, 503, 'The store is not set up yet.', { notReady: true });
+    await ensure();
 
     const fn = ACTIONS[action];
     if (!fn) return fail(res, 400, 'Unknown action');
-    return send(res, 200, Object.assign({ ok: true }, await fn(b)));
+    return send(res, 200, Object.assign({ ok: true }, await fn(b, req)));
   } catch (e) {
     if (e.userMessage) return fail(res, 400, e.userMessage);
     console.error('admin action failed', action, e);
@@ -102,7 +106,7 @@ const ACTIONS = {
     const counts = await q('select status, count(*)::int as n from orders group by status');
     return { orders: rows, counts };
   },
-  async orderStatus(b) {
+  async orderStatus(b, req) {
     const id = int(b.id);
     const next = String(b.status || '');
     if (!STATUSES.includes(next)) throw oops('Unknown status');
@@ -115,17 +119,36 @@ const ACTIONS = {
       for (const l of items) await q('update products set stock = greatest(stock - $2, 0) where id = $1 and stock is not null', [l.id, l.qty]);
     }
     const row = await one('update orders set status = $2, updated_at = now() where id = $1 returning *', [id, next]);
-    return { order: row };
+    let loyal = false;
+    if (next === 'completed' && o.status !== 'completed' && row.customer_id) loyal = await promote(row.customer_id, req);
+    return { order: row, loyal };
   },
 
   /* ---------- Customers (everyone who has ordered, grouped by phone number) ---------- */
   async customers() {
     const rows = await q(`select phone, max(name) as name, max(email) as email, max(city) as city,
                                  (count(*) filter (where status <> 'cancelled'))::int as orders,
+                                 (count(*) filter (where status = 'completed'))::int as completed,
                                  coalesce(sum(total) filter (where status <> 'cancelled'), 0)::int as spent,
                                  min(created_at) as first, max(created_at) as last
                             from orders group by phone order by spent desc, last desc limit 2000`);
-    return { customers: rows };
+    return { customers: rows, loyalty: loyaltyConfig(await getSettings()) };
+  },
+
+  /* ---------- Members (customer accounts) ---------- */
+  async members() {
+    const rows = await q(`select c.id, c.name, c.email, c.phone, c.city, c.verified, c.created_at, c.last_login, c.loyal_since,
+                                 jsonb_array_length(c.wish)::int as wish,
+                                 (count(o.id) filter (where o.status <> 'cancelled'))::int as orders,
+                                 (count(o.id) filter (where o.status = 'completed'))::int as completed,
+                                 coalesce(sum(o.total) filter (where o.status <> 'cancelled'), 0)::int as spent,
+                                 max(o.created_at) as last
+                            from customers c left join orders o on o.customer_id = c.id
+                           group by c.id order by c.created_at desc limit 2000`);
+    return { members: rows, loyalty: loyaltyConfig(await getSettings()) };
+  },
+  async member(b) {
+    return { orders: await q('select * from orders where customer_id = $1 order by created_at desc', [int(b.id)]) };
   },
   async customer(b) {
     const phone = clean(b.phone, 20);
@@ -216,24 +239,61 @@ const ACTIONS = {
     const value = int(d.value, 0);
     if (value <= 0 || (kind === 'percent' && value > 90)) throw oops(kind === 'percent' ? 'Use a percentage between 1 and 90.' : 'Enter the amount off in rupees.');
     const expires = /^\d{4}-\d{2}-\d{2}$/.test(d.expires || '') ? d.expires : null;
-    await q(`insert into discounts (code, kind, value, min_total, max_uses, expires, active) values ($1,$2,$3,$4,$5,$6,$7)
-             on conflict (code) do update set kind=$2, value=$3, min_total=$4, max_uses=$5, expires=$6, active=$7`,
-      [code, kind, value, Math.max(0, int(d.min_total, 0)), int(d.max_uses), expires, d.active !== false]);
+    await q(`insert into discounts (code, kind, value, min_total, max_uses, expires, active, loyal_only, title) values ($1,$2,$3,$4,$5,$6,$7,$8,$9)
+             on conflict (code) do update set kind=$2, value=$3, min_total=$4, max_uses=$5, expires=$6, active=$7, loyal_only=$8, title=$9`,
+      [code, kind, value, Math.max(0, int(d.min_total, 0)), int(d.max_uses), expires, d.active !== false, !!d.loyal_only, clean(d.title, 60)]);
     return ACTIONS.discounts();
   },
+  /* Emails a Loyal-only code to every Loyal member. */
+  async discountSend(b, req) {
+    if (!mailOn()) throw oops('Email sending is not switched on yet. Add RESEND_API_KEY in Vercel first.');
+    const d = await one('select * from discounts where code = $1', [clean(b.code, 30)]);
+    if (!d) throw oops('Code not found');
+    if (!d.loyal_only) throw oops('Only codes for Loyal members can be emailed from here.');
+    if (!d.active) throw oops('Switch the code on before sending it.');
+    const list = await loyalMembers();
+    if (!list.length) throw oops('There are no Loyal members yet.');
+    const site = siteUrl(req);
+    const r = await sendMany(list.map((m) => Object.assign({ to: m.email }, occasion(site, { name: m.name, d }))));
+    if (r.sent) await q('update discounts set sent_at = now() where code = $1', [d.code]);
+    return Object.assign({ members: list.length }, r, await ACTIONS.discounts());
+  },
+  async loyalCount() { return { count: (await loyalMembers()).length }; },
   async discountDelete(b) { await q('delete from discounts where code = $1', [clean(b.code, 30)]); return ACTIONS.discounts(); },
 
   /* ---------- Settings ---------- */
-  async settings() { return { settings: await getSettings() }; },
+  async settings() { return { settings: await getSettings(), mail: mailOn(), mailEnv: !!process.env.ADMIN_EMAIL }; },
   async settingsSave(b) {
     const s = b.settings || {};
     const vals = {
       delivery_fee: Math.max(0, int(s.delivery_fee, 0)),
       free_over: s.free_over === '' || s.free_over === null || s.free_over === undefined ? null : Math.max(0, int(s.free_over, 0)),
       orders_open: s.orders_open !== false,
-      notice: clean(s.notice, 200)
+      notice: clean(s.notice, 200),
+      alert_emails: String(s.alert_emails || '').split(/[\s,;]+/).map((x) => x.trim().toLowerCase()).filter((x) => EMAIL.test(x)).slice(0, 10).join(', '),
+      loyalty: loyaltyConfig({ loyalty: s.loyalty })
     };
     for (const k in vals) await q('insert into settings (key, value) values ($1, $2::jsonb) on conflict (key) do update set value = $2::jsonb', [k, JSON.stringify(vals[k])]);
-    return { settings: await getSettings() };
+    return { settings: await getSettings(), mail: mailOn(), mailEnv: !!process.env.ADMIN_EMAIL };
   }
 };
+
+/* Verified accounts whose completed orders reach the loyalty mark. */
+async function loyalMembers() {
+  const cfg = loyaltyConfig(await getSettings());
+  if (!cfg.on) return [];
+  return q(`select c.id, c.name, c.email from customers c
+             where c.verified and (select count(*) from orders o where o.customer_id = c.id and o.status = 'completed') >= $1
+             order by c.id`, [cfg.after]);
+}
+
+/* After an order is completed: the first time a member reaches the mark, they get the Shafar Loyal email. */
+async function promote(customerId, req) {
+  const cfg = loyaltyConfig(await getSettings());
+  const c = await one('select * from customers where id = $1', [customerId]);
+  if (!c || !c.verified || c.loyal_since) return false;
+  if (!isLoyal(await customerStats(customerId), cfg)) return false;
+  const won = await one('update customers set loyal_since = now() where id = $1 and loyal_since is null returning id', [customerId]);
+  if (won) await sendMail(Object.assign({ to: c.email }, loyalWelcome(siteUrl(req), { name: c.name, loyalty: cfg })));
+  return !!won;
+}

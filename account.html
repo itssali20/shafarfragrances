@@ -1,0 +1,1278 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Your account | Shafar Fragrances</title>
+<meta name="description" content="Sign in to your Shafar account: your orders, your wishlist and your Shafar Loyal rewards.">
+<meta name="robots" content="noindex">   <!-- preview build with sample content: remove this line at launch -->
+<meta name="theme-color" content="#F6EFE4">
+<link rel="icon" type="image/png" href="assets/favicon.png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600&family=Noto+Serif+Display:ital,wdth,wght@0,62.5..100,400..900;1,62.5..100,400..900&display=swap">
+<style>
+/* base rules every page relies on */
+:root{color-scheme:light}
+html{-webkit-text-size-adjust:100%}
+body{margin:0}
+img{max-width:100%}
+[hidden]{display:none!important}
+</style>
+<style>
+/* Layout: signed out, the sign-in card beside three reasons to have an account.
+   Signed in, a small dashboard: Shafar Loyal, orders, wishlist and details, under tabs. */
+:root{
+  --cream:#F6EFE4;      /* page ground */
+  --linen:#FBF7F0;      /* raised surfaces: drawer, menu */
+  --sand:#E8DAC3;       /* hairlines and quiet fills */
+  --dune:#EBDDC6;       /* spotlight band */
+  --espresso:#2B1810;   /* brand brown: header, primary text */
+  --cocoa:#6B4A36;      /* secondary text */
+  --bronze:#8A5B1E;     /* small accents on light grounds */
+  --gold:#C9A24A;       /* logo gold, on brown only */
+  --amber-1:#F1D9B2;    /* Halila Lane arch, top */
+  --amber-2:#DDB684;    /* Halila Lane arch, base */
+  --word:#FFFBF4;
+  --display:"Noto Serif Display","Bodoni 72",Didot,"Playfair Display",Georgia,serif;
+  --ui:"Jost","Century Gothic","Avenir Next",Avenir,"Segoe UI",system-ui,sans-serif;
+  --pad:clamp(1.125rem,5vw,4.75rem);
+  --head:4.875rem;
+  color-scheme:light;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{font-size:clamp(12px,0.9467vw,18px)}   /*root*/
+@media (max-width:1080px){html{font-size:16px}}   /*root*/
+body{margin:0;background:var(--cream);color:var(--espresso);font-family:var(--ui);font-size:max(12.5px,1rem);line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+h1,h2,h3,p,ol,ul,dl,dd{margin:0}
+ol,ul{padding:0;list-style:none}
+button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:pointer}
+a{color:inherit}
+:focus-visible{outline:0.125rem solid currentColor;outline-offset:0.1875rem;border-radius:0.125rem}
+
+/* ---------- Header ---------- */
+.top{position:fixed;inset:0 0 auto 0;z-index:30;display:flex;align-items:center;justify-content:space-between;gap:1.25rem;
+  height:calc(var(--head) + env(safe-area-inset-top,0px));padding:env(safe-area-inset-top,0px) var(--pad) 0;
+  color:var(--espresso);transition:background-color .3s,box-shadow .3s}
+.top.is-solid{background:rgba(246,239,228,.9);-webkit-backdrop-filter:blur(0.75rem);backdrop-filter:blur(0.75rem);box-shadow:0 1px 0 rgba(43,24,16,.1)}
+.brand{display:flex;align-items:center;gap:0.75rem;text-decoration:none;flex:none}
+.brand img{display:block;width:auto;max-width:none}
+.brand__crest{height:3rem}
+.brand__word{height:1.9375rem}
+.menu{display:flex;align-items:center;gap:clamp(1.125rem,3vw,2.5rem)}
+.menu a,.menu button{font-size:max(10.5px,0.75rem);font-weight:500;letter-spacing:.2em;text-transform:uppercase;text-decoration:none;padding:0.625rem 0.125rem;position:relative}
+.menu a::after,.menu button::after{content:"";position:absolute;left:0.125rem;right:0.125rem;bottom:0.25rem;height:1px;background:currentColor;transform:scaleX(0);transform-origin:left;transition:transform .3s}
+.menu a:hover::after,.menu button:hover::after,.menu [aria-current]::after{transform:scaleX(1)}
+.tools{display:flex;align-items:center;gap:0.375rem;flex:none}
+.icon{position:relative;width:2.75rem;height:2.75rem;display:grid;place-items:center;border-radius:50%;transition:background-color .2s}
+.icon:hover{background:rgba(43,24,16,.08)}
+.icon svg{width:1.3125rem;height:1.3125rem;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.badge{position:absolute;top:0.1875rem;right:1px;min-width:1.125rem;height:1.125rem;padding:0 0.3125rem;border-radius:0.5625rem;background:var(--espresso);color:var(--cream);
+  font-size:max(10.5px,0.6562rem);font-weight:600;line-height:1.125rem;text-align:center;font-variant-numeric:tabular-nums}
+.burger{display:none}
+
+/* ---------- Shared pieces ---------- */
+main{position:relative}
+.eyebrow{font-size:max(10.5px,0.7188rem);font-weight:600;letter-spacing:.26em;text-transform:uppercase;color:var(--bronze)}
+.btn{display:inline-flex;align-items:center;justify-content:center;height:3.375rem;padding:0 1.875rem;border-radius:1.6875rem;background:var(--espresso);color:var(--word);
+  font-size:max(10.5px,0.75rem);font-weight:600;letter-spacing:.2em;text-transform:uppercase;text-decoration:none;transition:transform .2s}
+.btn:hover{transform:translateY(-0.125rem)}
+.more{display:inline-flex;align-items:center;gap:0.75rem;font-size:max(10.5px,0.75rem);font-weight:600;letter-spacing:.2em;text-transform:uppercase;text-decoration:none;padding:0.625rem 0}
+.more::after{content:"";width:2.125rem;height:1px;background:currentColor;transition:width .3s}
+.more:hover::after{width:3.25rem}
+.heart{flex:none;width:2.875rem;height:2.875rem;border-radius:50%;display:grid;place-items:center;border:1px solid rgba(43,24,16,.3);transition:border-color .2s}
+.heart:hover{border-color:currentColor}
+.heart svg{width:1.1875rem;height:1.1875rem;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linejoin:round;transition:fill .2s}
+.heart[aria-pressed="true"] svg{fill:currentColor}
+.slot{aspect-ratio:482/1100;position:relative}
+.slot img{display:block;height:100%;width:auto;max-width:none;position:relative;z-index:1}
+.slot::after,.traveller__shadow{content:"";position:absolute;left:-8%;right:-8%;bottom:-4.5%;height:9%;border-radius:50%;
+  background:radial-gradient(closest-side,#3A2113,transparent);opacity:.32;filter:blur(0.4375rem)}
+/* With the travelling bottle running, its three resting places stay empty */
+.travel .slot--t img,.travel .slot--t::after{visibility:hidden}
+
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+.draft{display:inline-flex;align-items:center;padding:0.25rem 0.75rem;border:1px dashed currentColor;border-radius:1.25rem;font-size:max(10.5px,0.6562rem);font-weight:600;letter-spacing:.2em;text-transform:uppercase;white-space:nowrap}
+
+/* ---------- Fields (as on the checkout) ---------- */
+.row2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1.25rem 1.625rem}
+.field{position:relative;display:block;min-width:0}
+.field input,.field select{display:block;width:100%;background:none;border:0;border-bottom:1px solid rgba(43,24,16,.3);border-radius:0;color:inherit;font:inherit;font-size:1.0625rem;padding:1.5rem 0 0.625rem;outline:none}
+.field select{-webkit-appearance:none;appearance:none;cursor:pointer;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5l5 5 5-5' fill='none' stroke='%232B1810' stroke-width='1.5'/%3E%3C/svg%3E") no-repeat right 0.125rem bottom 1rem/0.6875rem}
+.field label{position:absolute;left:0;top:1.5rem;font-size:1.0625rem;color:var(--cocoa);pointer-events:none;transform-origin:left top;transition:transform .25s,color .25s}
+.field input:focus + label,.field input:not(:placeholder-shown) + label,.field select + label{transform:translateY(-1.375rem) scale(.72);color:var(--bronze)}
+.field::after{content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background:var(--espresso);transform:scaleX(0);transform-origin:left;transition:transform .45s cubic-bezier(.2,.7,.2,1)}
+.field:focus-within::after{transform:scaleX(1)}
+.field input[readonly]{color:var(--cocoa);cursor:default}
+.field--err::after{transform:scaleX(1);background:#A3160F}
+.field__err{display:block;margin-top:0.375rem;font-size:max(10.5px,0.8125rem);color:#A3160F}
+.field--pw input{padding-right:3.75rem}
+.field__show{position:absolute;right:0;top:1.625rem;padding:0.25rem 0;font-size:max(10.5px,0.6875rem);font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--cocoa)}
+.field__show:hover{color:var(--espresso)}
+.hint{font-size:max(10.5px,0.8125rem);color:var(--cocoa);margin-top:-0.5rem}
+
+/* ---------- Signed out: sign in, create account ---------- */
+.acc{min-height:100vh;min-height:100svh;padding:calc(var(--head) + clamp(1.625rem,5vh,3.75rem)) var(--pad) clamp(4rem,9vw,7rem);
+  background:radial-gradient(48% 38% at 12% 0%,#F4E6CE 0%,rgba(244,230,206,0) 72%),radial-gradient(40% 46% at 94% 86%,#F1E0C2 0%,rgba(241,224,194,0) 70%),var(--cream)}
+.acc__in{max-width:77.5rem;margin-inline:auto;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.8fr);gap:clamp(2rem,6vw,6.25rem);align-items:center}
+.acc__intro{display:grid;gap:1.125rem;justify-items:start;min-width:0}
+.acc h1,.dash h1{font-family:var(--display);font-weight:500;font-size:clamp(3rem,6.4vw,6.5rem);line-height:.96;letter-spacing:-.02em}
+.acc h1 em,.dash h1 em{font-weight:400}
+.acc__lede{max-width:40ch;color:var(--cocoa);font-size:1.0625rem}
+.perks{display:grid;gap:1.25rem;margin-top:1.5rem;width:100%;max-width:31rem}
+.perks li{display:grid;grid-template-columns:3.25rem minmax(0,1fr);gap:1rem;align-items:start;padding-top:1.25rem;border-top:1px solid var(--sand)}
+.perks__no{font-family:var(--display);font-weight:900;font-stretch:62.5%;font-size:2.75rem;line-height:.8;background:linear-gradient(180deg,#C9A24A 0%,#8A5B1E 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.perks b{display:block;font-family:var(--display);font-weight:500;font-size:1.375rem;line-height:1.15}
+.perks small{display:block;margin-top:0.25rem;color:var(--cocoa);font-size:max(12.5px,0.9375rem);line-height:1.5}
+
+.auth{position:relative;overflow:hidden;min-width:0;padding:clamp(1.5rem,3.2vw,2.75rem);border-radius:0.875rem;background:var(--linen);border:1px solid var(--sand);
+  box-shadow:0 1.75rem 3.5rem -2rem rgba(43,24,16,.28)}
+.auth__mark{position:absolute;right:-2.75rem;bottom:-3rem;width:13rem;height:auto;opacity:.07;pointer-events:none}
+.auth > :not(.auth__mark){position:relative}
+.auth__tabs{display:grid;grid-template-columns:1fr 1fr;padding:0.3125rem;margin-bottom:1.875rem;border-radius:1.6875rem;background:var(--dune)}
+.auth__tabs button{height:2.75rem;border-radius:1.375rem;font-size:max(10.5px,0.7188rem);font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--cocoa);transition:background-color .25s,color .25s}
+.auth__tabs [aria-selected="true"]{background:var(--espresso);color:var(--word)}
+.auth form,.auth .pane{display:grid;gap:1.25rem}
+.auth [hidden]{display:none!important}
+.auth h2{font-family:var(--display);font-weight:500;font-size:clamp(1.75rem,2.6vw,2.25rem);line-height:1.05}
+.auth h2 em{font-weight:400}
+.auth p{color:var(--cocoa);font-size:max(12.5px,0.9688rem)}
+.auth p b{color:var(--espresso);font-weight:500;word-break:break-all}
+.auth .btn{width:100%;height:3.625rem;margin-top:0.375rem;font-size:max(10.5px,0.8125rem)}
+.auth .btn[disabled]{opacity:.6;cursor:default;transform:none}
+.auth__row{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:0.75rem}
+.auth__msg{min-height:1.25rem;font-size:max(12.5px,0.875rem);color:#A3160F}
+.auth__msg.ok{color:var(--bronze)}
+.auth__fine{font-size:max(10.5px,0.8125rem)!important}
+.auth .link{color:var(--espresso)}
+.sent__icon{width:3.75rem;height:3.75rem;border-radius:50%;display:grid;place-items:center;background:var(--espresso);color:#E3C57A}
+.sent__icon svg{width:1.625rem;height:1.625rem;fill:none;stroke:currentColor;stroke-width:1.4;stroke-linecap:round;stroke-linejoin:round}
+.btn--line{background:none;color:var(--espresso);border:1px solid var(--espresso)}
+.spin{width:2.25rem;height:2.25rem;border-radius:50%;border:2px solid var(--sand);border-top-color:var(--bronze);animation:spin 0.9s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* ---------- Signed in: the dashboard ---------- */
+.dash{min-height:100vh;min-height:100svh;padding:calc(var(--head) + clamp(1.625rem,5vh,3.5rem)) var(--pad) clamp(4.75rem,10vw,8rem);
+  background:radial-gradient(48% 34% at 10% 0%,#F4E6CE 0%,rgba(244,230,206,0) 72%),var(--cream)}
+.dash__in{max-width:77.5rem;margin-inline:auto}
+.dash__head{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:1.25rem 2rem;padding-bottom:clamp(1.5rem,3vw,2.5rem)}
+.dash__hello{display:grid;gap:0.875rem;justify-items:start;min-width:0}
+.dash h1{font-size:clamp(2.875rem,6vw,5.75rem)}
+.dash__meta{color:var(--cocoa);overflow-wrap:anywhere}
+.dash__acts{display:flex;flex-wrap:wrap;align-items:center;gap:0.75rem 1.5rem}
+.lbadge{display:inline-flex;align-items:center;gap:0.5625rem;padding:0.5625rem 1.0625rem;border-radius:1.375rem;background:var(--espresso);color:#E3C57A;
+  font-size:max(10.5px,0.7188rem);font-weight:600;letter-spacing:.18em;text-transform:uppercase;white-space:nowrap}
+.lbadge::before{content:"";width:0.4375rem;height:0.4375rem;border-radius:50%;background:var(--gold)}
+.welcome-note{display:flex;gap:0.875rem;align-items:center;margin-bottom:1.5rem;padding:1rem 1.25rem;border-radius:0.75rem;background:var(--espresso);color:#F1E6D3;font-size:max(12.5px,0.9375rem)}
+.welcome-note::before{content:"";flex:none;width:0.5rem;height:0.5rem;border-radius:50%;background:var(--gold)}
+.welcome-note b{font-weight:500;color:#E3C57A}
+
+.tabs{display:flex;gap:clamp(1.375rem,3vw,2.75rem);margin-bottom:clamp(1.75rem,3.5vw,2.75rem);border-bottom:1px solid var(--sand);overflow-x:auto;scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tabs a{position:relative;flex:none;padding:1rem 0.125rem;font-size:max(10.5px,0.75rem);font-weight:500;letter-spacing:.2em;text-transform:uppercase;text-decoration:none;color:var(--cocoa);transition:color .2s}
+.tabs a:hover,.tabs a[aria-current]{color:var(--espresso)}
+.tabs a::after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:2px;background:var(--espresso);transform:scaleX(0);transform-origin:left;transition:transform .35s cubic-bezier(.2,.7,.2,1)}
+.tabs a[aria-current]::after{transform:scaleX(1)}
+.tabs .n{margin-left:0.4375rem;color:var(--bronze);font-variant-numeric:tabular-nums}
+
+.h3{font-family:var(--display);font-weight:500;font-size:clamp(1.625rem,2.4vw,2.125rem);line-height:1.05}
+.h3 em{font-weight:400}
+.sechead{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:0.5rem 1rem;margin-bottom:1.125rem}
+.box{padding:clamp(1.25rem,2.4vw,1.875rem);border-radius:0.875rem;background:var(--linen);border:1px solid var(--sand);min-width:0}
+.empty{display:grid;gap:1rem;justify-items:start;padding:clamp(1.5rem,3vw,2.5rem);border-radius:0.875rem;background:var(--linen);border:1px dashed rgba(138,91,30,.4)}
+.empty p{color:var(--cocoa);max-width:44ch}
+
+/* overview */
+.ov{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:clamp(1rem,2vw,1.5rem);align-items:start}
+.ov__side{display:grid;gap:clamp(1rem,2vw,1.5rem);min-width:0}
+.tiles{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0.75rem}
+.tile{display:grid;gap:0.5rem;align-content:start;padding:1.125rem 1.25rem 1.25rem;border-radius:0.875rem;background:var(--linen);border:1px solid var(--sand);text-decoration:none;min-width:0}
+.tile span{font-size:max(10.5px,0.6875rem);font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--bronze)}
+.tile b{font-family:var(--display);font-weight:600;font-size:clamp(1.5rem,2.3vw,2.125rem);line-height:1;font-variant-numeric:lining-nums tabular-nums;white-space:nowrap}
+
+/* Shafar Loyal card (the brown panel from the checkout) */
+.loyal{position:relative;overflow:hidden;display:grid;gap:1.25rem;align-content:start;padding:clamp(1.5rem,3vw,2.5rem);border-radius:0.875rem;background:#2C190F;color:#F1E6D3;min-width:0}
+.loyal__mark{position:absolute;right:-2.125rem;top:-1.875rem;width:11.875rem;height:auto;opacity:.09;pointer-events:none}
+.loyal > :not(.loyal__mark){position:relative}
+.loyal .eyebrow{color:#E3C57A}
+.loyal h2{font-family:var(--display);font-weight:500;font-size:clamp(2rem,3.4vw,2.875rem);line-height:1}
+.loyal h2 em{font-weight:400;color:#E3C57A}
+.loyal p{color:#D9C7AC;max-width:46ch}
+.loyal__fine{font-size:max(10.5px,0.8125rem)}
+.prog{display:grid;grid-auto-flow:column;grid-auto-columns:1fr;gap:0.375rem}
+.prog span{height:0.3125rem;border-radius:0.25rem;background:rgba(241,230,211,.16)}
+.prog span.on{background:linear-gradient(90deg,#E3C57A,#C9A24A)}
+.tiers li{display:grid;grid-template-columns:7rem minmax(0,1fr);gap:1rem;align-items:baseline;padding:0.9375rem 0;border-top:1px solid rgba(241,230,211,.16)}
+.tiers b{font-family:var(--display);font-weight:600;font-size:1.875rem;line-height:1;color:#E3C57A;white-space:nowrap}
+.tiers span{color:#F1E6D3}
+.loyal--off .tiers b{color:#BFAE94}
+.loyal--off .tiers span{color:#D9C7AC}
+.codes{display:grid;gap:0.625rem}
+.codes__title{font-size:max(10.5px,0.7188rem);font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:#BFAE94}
+.code{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:0.875rem 1rem;border:1px dashed rgba(227,197,122,.55);border-radius:0.625rem}
+.code b{display:block;font-family:var(--display);font-weight:600;font-size:1.5rem;line-height:1.1;letter-spacing:.06em;color:#E3C57A}
+.code small{display:block;margin-top:0.125rem;color:#BFAE94;font-size:max(10.5px,0.8125rem)}
+.code button{flex:none;height:2.25rem;padding:0 0.9375rem;border-radius:1.125rem;border:1px solid rgba(227,197,122,.6);color:#E3C57A;font-size:max(10.5px,0.6875rem);font-weight:600;letter-spacing:.16em;text-transform:uppercase}
+.code button:hover{background:rgba(227,197,122,.1)}
+
+/* orders */
+.ords{display:grid;gap:0.875rem}
+.ord{border-radius:0.875rem;background:var(--linen);border:1px solid var(--sand);overflow:hidden;transition:box-shadow .3s}
+.ord[open]{box-shadow:0 1.25rem 2.5rem -1.75rem rgba(43,24,16,.35)}
+.ord summary{list-style:none;cursor:pointer;display:grid;grid-template-columns:minmax(9rem,1.1fr) auto minmax(0,1fr) auto 1.25rem;grid-template-areas:"no pics status total chev";align-items:center;gap:1rem 1.5rem;padding:1.125rem 1.375rem}
+.ord summary::-webkit-details-marker{display:none}
+.ord__no{grid-area:no;min-width:0}
+.ord__no b{display:block;font-family:var(--display);font-weight:500;font-size:1.375rem;line-height:1.1}
+.ord__no small{display:block;color:var(--cocoa);font-size:max(10.5px,0.8125rem)}
+.ord .pics{grid-area:pics}
+.ord .pill{grid-area:status;justify-self:start}
+.ord__total{grid-area:total;font-family:var(--display);font-weight:600;font-size:1.375rem;font-variant-numeric:lining-nums tabular-nums;white-space:nowrap}
+.ord__chev{grid-area:chev;width:1.125rem;height:1.125rem;fill:none;stroke:currentColor;stroke-width:1.5;transition:transform .3s}
+.ord[open] .ord__chev{transform:rotate(180deg)}
+.pics{display:flex}
+.pics span{width:2.375rem;height:3.125rem;margin-left:-0.625rem;border-radius:1.1875rem 1.1875rem 0.3125rem 0.3125rem;border:2px solid var(--linen);display:grid;place-items:end center;overflow:hidden}
+.pics span:first-child{margin-left:0}
+.pics img{height:2.625rem;width:auto;margin-bottom:0.125rem}
+.pics em{font-style:normal;align-self:center;font-size:max(10.5px,0.75rem);font-weight:600;color:var(--cocoa)}
+.pill{display:inline-flex;align-items:center;gap:0.5rem;padding:0.375rem 0.8125rem;border-radius:1rem;font-size:max(10.5px,0.6875rem);font-weight:600;letter-spacing:.14em;text-transform:uppercase;white-space:nowrap;background:var(--dune);color:var(--cocoa)}
+.pill::before{content:"";width:0.375rem;height:0.375rem;border-radius:50%;background:currentColor}
+.pill--processing{background:#F3E2C2;color:#8A5B1E}
+.pill--shipped{background:#E3E6EE;color:#2C3E63}
+.pill--completed{background:#2B1810;color:#E3C57A}
+.pill--cancelled{background:#F5DCD6;color:#A3160F}
+.ord__body{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:1.5rem clamp(1.5rem,4vw,3.5rem);padding:1.5rem 1.375rem 1.625rem;border-top:1px solid var(--sand)}
+.track{grid-column:1/-1;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));margin-bottom:0.25rem}
+.track li{position:relative;display:grid;justify-items:center;gap:0.5rem;text-align:center;font-size:max(10.5px,0.6875rem);font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#B9A48A}
+.track li::before{content:"";position:relative;z-index:1;width:0.875rem;height:0.875rem;border-radius:50%;background:var(--linen);border:1px solid #CDB894}
+.track li::after{content:"";position:absolute;top:0.4062rem;left:-50%;right:50%;height:1px;background:#DCCBAE}
+.track li:first-child::after{display:none}
+.track li.on{color:var(--espresso)}
+.track li.on::before{background:var(--gold);border-color:var(--gold);box-shadow:0 0 0 0.25rem rgba(201,162,74,.2)}
+.track li.on::after{background:var(--gold)}
+.ord__lines .line:last-child{border-bottom:0}
+.ord__side{display:grid;gap:1.25rem;align-content:start}
+.ord__label{font-size:max(10.5px,0.6875rem);font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--bronze);margin-bottom:0.375rem}
+.rows{display:grid;gap:0.5rem;font-size:max(12.5px,0.9375rem)}
+.rows div{display:flex;justify-content:space-between;gap:1rem}
+.rows span:first-child{color:var(--cocoa)}
+.rows span:last-child{font-variant-numeric:tabular-nums}
+.rows .gold span:last-child{color:var(--bronze)}
+.rows .tot{padding-top:0.75rem;margin-top:0.25rem;border-top:1px solid var(--sand);align-items:baseline}
+.rows .tot span:last-child{font-family:var(--display);font-weight:600;font-size:1.625rem;font-variant-numeric:lining-nums tabular-nums}
+
+/* wishlist */
+.wgrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(1.25rem,2.4vw,2rem) clamp(1rem,2vw,1.75rem)}
+.wcard{display:grid;gap:0.875rem;align-content:start;min-width:0}
+.wcard__pic{position:relative;aspect-ratio:4/5;border-radius:999px 999px 0.75rem 0.75rem;background:linear-gradient(180deg,var(--c),var(--e));display:grid;place-items:end center;padding-bottom:8%;text-decoration:none}
+.wcard__pic img{height:84%;width:auto;max-width:none;transition:transform .5s cubic-bezier(.2,.7,.2,1)}
+.wcard__pic:hover img{transform:translateY(-0.375rem)}
+.wcard__name{font-family:var(--display);font-weight:500;font-size:1.5rem;line-height:1.1}
+.wcard__meta{font-size:max(10.5px,0.75rem);letter-spacing:.12em;text-transform:uppercase;color:var(--cocoa)}
+.wcard__acts{display:flex;gap:0.5rem;align-items:center}
+.wcard__acts .btn{flex:1;height:2.875rem;padding:0 1rem;font-size:max(10.5px,0.6875rem)}
+.wcard__acts .btn[disabled]{opacity:.5;cursor:default;transform:none}
+
+/* details */
+.det{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:clamp(1rem,2vw,1.5rem);align-items:start}
+.det form{display:grid;gap:1.25rem}
+.det .btn{justify-self:start;margin-top:0.375rem}
+.det__msg{min-height:1.25rem;font-size:max(12.5px,0.875rem);color:var(--bronze)}
+.det__msg.bad{color:#A3160F}
+.det__out{display:grid;gap:0.875rem;justify-items:start;margin-top:1.75rem;padding-top:1.5rem;border-top:1px solid var(--sand)}
+.det__out p{color:var(--cocoa);font-size:max(12.5px,0.9375rem)}
+
+@media (max-width:1080px){
+  .wgrid{grid-template-columns:repeat(3,minmax(0,1fr))}
+}
+@media (max-width:900px){
+  .acc__in{display:flex;flex-direction:column;align-items:stretch;gap:1.125rem}
+  .acc__intro{display:contents}
+  .acc__intro > *{justify-self:start}
+  .auth{order:2;margin-top:0.75rem}
+  .perks{order:3;margin-top:1.5rem}
+  .acc h1{font-size:clamp(2.75rem,13vw,4.5rem)}
+  .row2{grid-template-columns:minmax(0,1fr)}
+  .ov,.det{grid-template-columns:minmax(0,1fr)}
+  .ord summary{grid-template-columns:minmax(0,1fr) auto 1.125rem;grid-template-areas:"no total chev" "pics status status";gap:0.75rem 1rem;padding:1rem 1.125rem}
+  .ord .pill{justify-self:end}
+  .ord__body{grid-template-columns:minmax(0,1fr);padding:1.25rem 1.125rem 1.375rem}
+  .wgrid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .wcard__acts .btn{padding:0 0.5rem;letter-spacing:.12em}
+}
+@media (max-width:420px){
+  .tiles{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .tiles .tile:first-child{grid-column:1/-1}
+  .tiers li{grid-template-columns:5.5rem minmax(0,1fr)}
+  .tiers b{font-size:1.5rem}
+  .track li{letter-spacing:.06em;font-size:10px}
+}
+@media (prefers-reduced-motion:reduce){.spin{animation-duration:3s}}
+
+/* ---------- Footer ---------- */
+.foot{position:relative;overflow:hidden;background:#2C190F;color:#E9DCC7;padding:clamp(3.5rem,8vw,6.875rem) var(--pad) 0}
+.foot a{color:inherit;text-decoration:none}
+.foot__top{max-width:77.5rem;margin-inline:auto;display:grid;grid-template-columns:minmax(0,1.5fr) repeat(3,minmax(0,1fr));gap:clamp(1.75rem,4vw,4.5rem)}
+.foot__brand{display:grid;gap:1.375rem;justify-items:start;align-content:start}
+.foot__brand img{width:11rem;height:auto;display:block}
+.foot__brand p{max-width:30ch;color:#D9C7AC}
+.foot__pay{white-space:nowrap;display:inline-flex;align-items:center;gap:0.625rem;padding:0.5625rem 1rem;border:1px solid rgba(201,162,74,.5);border-radius:1.375rem;font-size:max(10.5px,0.7188rem);font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:#E3C57A}
+.foot__pay::before{content:"";width:0.4375rem;height:0.4375rem;border-radius:50%;background:var(--gold)}
+.foot__col h3{font-size:max(10.5px,0.7188rem);font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);margin-bottom:1.125rem}
+.foot__col ul{display:grid;gap:0.6875rem}
+.foot__col a,.foot__col button{font-family:var(--display);font-size:1.3125rem;line-height:1.2;background-image:linear-gradient(currentColor,currentColor);background-repeat:no-repeat;background-position:0 100%;background-size:0 1px;transition:background-size .35s}
+.foot__col a:hover,.foot__col button:hover{background-size:100% 1px}
+.foot__col small{display:block;margin-top:0.875rem;font-size:max(10.5px,0.8125rem);color:#BFAE94}
+.foot__word{margin-top:clamp(2.25rem,6vw,5.25rem);font-family:var(--display);font-weight:900;font-stretch:62.5%;font-size:24.4vw;line-height:.74;text-align:center;text-transform:uppercase;white-space:nowrap;
+  background:linear-gradient(180deg,#E3C57A 0%,#B0842D 46%,#4A2F14 92%);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-user-select:none;user-select:none;padding-bottom:.1em}
+.foot__base{position:relative;max-width:77.5rem;margin-inline:auto;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:0.75rem 1.5rem;
+  padding:1.125rem 0 calc(1.375rem + env(safe-area-inset-bottom,0px));border-top:1px solid rgba(233,220,199,.16);font-size:max(10.5px,0.75rem);letter-spacing:.14em;text-transform:uppercase;color:#BFAE94}
+.foot__up{display:inline-flex;align-items:center;gap:0.625rem;color:#E9DCC7;font-size:max(10.5px,0.75rem);letter-spacing:.2em;text-transform:uppercase}
+.foot__up::after{content:"";width:2.375rem;height:2.375rem;border-radius:50%;border:1px solid rgba(233,220,199,.4);background:linear-gradient(#E9DCC7,#E9DCC7) center/1px 0.875rem no-repeat}
+
+/* ---------- Drawer, scrim, toast ---------- */
+.scrim{position:fixed;inset:0;z-index:40;background:rgba(43,24,16,.38);opacity:0;visibility:hidden;transition:opacity .3s,visibility 0s .3s}
+.scrim.open{opacity:1;visibility:visible;transition-delay:0s}
+.drawer{position:fixed;top:0;right:0;bottom:0;z-index:41;width:min(26.25rem,100%);background:var(--linen);color:var(--espresso);display:flex;flex-direction:column;
+  padding:calc(1.375rem + env(safe-area-inset-top,0px)) 1.5rem calc(1.375rem + env(safe-area-inset-bottom,0px));
+  transform:translateX(102%);visibility:hidden;transition:transform .38s cubic-bezier(.2,.7,.2,1),visibility 0s .38s}
+.drawer.open{transform:none;visibility:visible;transition-delay:0s}
+.drawer__head{display:flex;align-items:center;justify-content:space-between;padding-bottom:1rem;border-bottom:1px solid var(--sand)}
+.drawer__head h2{font-family:var(--display);font-weight:500;font-size:1.875rem;line-height:1}
+.drawer__list{flex:1;overflow-y:auto;min-height:0}
+.line{display:grid;grid-template-columns:3.375rem minmax(0,1fr) auto;gap:0.875rem;align-items:center;padding:1rem 0;border-bottom:1px solid var(--sand)}
+.line__pic{width:3.375rem;height:4.75rem;border-radius:1.6875rem 1.6875rem 0.25rem 0.25rem;display:grid;place-items:center}
+.line__pic img{height:3.625rem;width:auto}
+.line__name{font-family:var(--display);font-weight:500;font-size:1.25rem;line-height:1.1}
+.line__meta{font-size:max(10.5px,0.75rem);letter-spacing:.12em;text-transform:uppercase;color:var(--cocoa)}
+.line__side{display:grid;gap:0.375rem;justify-items:end;font-variant-numeric:tabular-nums}
+.qty{display:flex;align-items:center;gap:0.125rem;margin-top:0.375rem}
+.qty button{width:1.875rem;height:1.875rem;border-radius:50%;border:1px solid var(--sand);line-height:1}
+.qty span{min-width:1.5rem;text-align:center;font-variant-numeric:tabular-nums}
+.link{font-size:max(10.5px,0.75rem);letter-spacing:.12em;text-transform:uppercase;text-decoration:underline;text-underline-offset:0.1875rem;color:var(--cocoa)}
+.drawer__empty{padding:2.5rem 0;color:var(--cocoa)}
+.drawer__foot{padding-top:1rem;border-top:1px solid var(--sand);display:grid;gap:0.5rem}
+.drawer__total{display:flex;justify-content:space-between;align-items:baseline;font-size:max(10.5px,0.8125rem);letter-spacing:.16em;text-transform:uppercase}
+.drawer__total b{font-family:var(--display);font-size:1.75rem;font-weight:600;letter-spacing:0;text-transform:none;font-variant-numeric:lining-nums tabular-nums}
+.drawer__note{font-size:max(10.5px,0.8125rem);color:var(--cocoa)}
+.toast{position:fixed;left:50%;bottom:calc(1.375rem + env(safe-area-inset-bottom,0px));z-index:50;transform:translate(-50%,1.25rem);max-width:calc(100% - 2rem);
+  background:var(--espresso);color:var(--cream);padding:0.75rem 1.25rem;border-radius:1.5rem;font-size:max(12.5px,0.875rem);opacity:0;visibility:hidden;transition:opacity .25s,transform .25s,visibility 0s .25s}
+.toast.show{opacity:1;visibility:visible;transform:translate(-50%,0);transition-delay:0s}
+
+/* ---------- Narrow screens ---------- */
+@media (max-width:1080px){
+  :root{--head:4rem}
+  .brand{gap:0.5625rem}.brand__crest{height:2.375rem}.brand__word{height:1.5rem}
+  .burger{display:grid}
+  .menu{position:absolute;top:calc(100% - 0.25rem);left:0.75rem;right:0.75rem;flex-direction:column;align-items:stretch;gap:0;padding:0.5rem 1.25rem;border-radius:0.875rem;background:var(--linen);
+    box-shadow:0 1.125rem 2.5rem rgba(43,24,16,.18);opacity:0;visibility:hidden;transform:translateY(-0.5rem);transition:opacity .2s,transform .2s,visibility 0s .2s}
+  .menu.open{opacity:1;visibility:visible;transform:none;transition-delay:0s}
+  .menu a,.menu button{padding:0.9375rem 0.125rem;text-align:left;border-bottom:1px solid var(--sand)}
+  .menu > :last-child{border-bottom:0}
+  .menu a::after,.menu button::after{display:none}
+}
+@media (max-width:900px){
+  .foot__top{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .foot__brand{grid-column:1/-1}
+  .foot__base{justify-content:center;text-align:center}
+}
+@media (prefers-reduced-motion:reduce){*{transition-duration:.01ms!important}}
+</style>
+</head>
+<body>
+<header class="top" id="top">
+  <a class="brand" href="index.html" aria-label="Shafar Fragrances">
+    <img class="brand__crest" src="assets/crest.png" alt="" width="480" height="512">
+    <img class="brand__word" src="assets/wordmark.png" alt="" width="720" height="227">
+  </a>
+  <nav class="menu" id="menu" aria-label="Main">
+    <a href="index.html">Featured</a>
+    <a href="home.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="shop.html">Shop</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+  <div class="tools">
+    <a class="icon" href="account.html" id="open-account" aria-label="Account" aria-current="page">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8.6" r="3.6"/><path d="M4.8 20c.9-3.7 3.8-5.9 7.2-5.9s6.3 2.2 7.2 5.9"/></svg>
+    </a>
+    <button class="icon" type="button" id="open-wish" aria-label="Wishlist">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.3s-7.5-4.4-7.5-10.1A4.2 4.2 0 0 1 12 7.6a4.2 4.2 0 0 1 7.5 2.6c0 5.7-7.5 10.1-7.5 10.1z"/></svg>
+      <span class="badge" id="wish-count" hidden>0</span>
+    </button>
+    <button class="icon" type="button" id="open-cart" aria-label="Cart">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5.5 8.5h13l-1 11.5h-11z"/><path d="M9 8.5V7a3 3 0 0 1 6 0v1.5"/></svg>
+      <span class="badge" id="cart-count" hidden>0</span>
+    </button>
+    <button class="icon burger" type="button" id="burger" aria-label="Menu" aria-expanded="false" aria-controls="menu">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8h16M4 16h16"/></svg>
+    </button>
+  </div>
+</header>
+
+<main id="account">
+  <!-- Signed out: sign in, create an account, confirm the email, reset the password -->
+  <section class="acc" id="view-auth" aria-labelledby="acc-title" hidden>
+    <div class="acc__in">
+      <div class="acc__intro">
+        <p class="eyebrow" data-rise>Your account</p>
+        <h1 id="acc-title" data-rise>Welcome <em>back</em></h1>
+        <p class="acc__lede" id="acc-lede" data-rise>Sign in to see your orders, your wishlist and your Shafar Loyal rewards.</p>
+        <ol class="perks" data-rise>
+          <li><span class="perks__no" aria-hidden="true">01</span><div><b>Every order in one place</b><small>See what you ordered, when, and where it is now.</small></div></li>
+          <li><span class="perks__no" aria-hidden="true">02</span><div><b>A wishlist that follows you</b><small>Save a bottle on your phone and find it on any device you sign in on.</small></div></li>
+          <li><span class="perks__no" aria-hidden="true">03</span><div><b>Shafar Loyal</b><small id="perk-loyal">After three completed orders: 10% off two bottles, 20% off four, and private codes on every occasion.</small></div></li>
+        </ol>
+      </div>
+
+      <div class="auth" id="auth" data-rise>
+        <img class="auth__mark" src="assets/crest-gold.webp" alt="" width="420" height="447">
+        <div class="auth__tabs" role="tablist" aria-label="Account">
+          <button type="button" role="tab" id="tab-login" aria-selected="true" aria-controls="pane-login" data-mode="login">Sign in</button>
+          <button type="button" role="tab" id="tab-register" aria-selected="false" aria-controls="pane-register" data-mode="register">Create account</button>
+        </div>
+
+        <form class="pane" id="pane-login" data-pane="login" role="tabpanel" aria-labelledby="tab-login" novalidate>
+          <div class="field"><input type="email" id="l-email" name="email" placeholder=" " autocomplete="email" inputmode="email"><label for="l-email">Email</label></div>
+          <div class="field field--pw"><input type="password" id="l-pass" name="password" placeholder=" " autocomplete="current-password"><label for="l-pass">Password</label><button class="field__show" type="button" data-show>Show</button></div>
+          <div class="auth__row"><span></span><button class="link" type="button" data-go="forgot">Forgot your password?</button></div>
+          <button class="btn" type="submit">Sign in</button>
+          <p class="auth__msg" role="alert"></p>
+        </form>
+
+        <form class="pane" id="pane-register" data-pane="register" role="tabpanel" aria-labelledby="tab-register" novalidate hidden>
+          <div class="field"><input type="text" id="r-name" name="name" placeholder=" " autocomplete="name"><label for="r-name">Your name</label></div>
+          <div class="field"><input type="email" id="r-email" name="email" placeholder=" " autocomplete="email" inputmode="email"><label for="r-email">Email</label></div>
+          <div class="field field--pw"><input type="password" id="r-pass" name="password" placeholder=" " autocomplete="new-password" minlength="8"><label for="r-pass">Choose a password</label><button class="field__show" type="button" data-show>Show</button></div>
+          <p class="hint">At least 8 characters.</p>
+          <input class="sr" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+          <button class="btn" type="submit">Create account</button>
+          <p class="auth__fine">We will email you a link to confirm your address. Your account opens as soon as you press it.</p>
+          <p class="auth__msg" role="alert"></p>
+        </form>
+
+        <div class="pane" data-pane="sent" hidden>
+          <span class="sent__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3.5" y="5.5" width="17" height="13" rx="2"/><path d="M4 7l8 6 8-6"/></svg></span>
+          <h2>Check your <em>inbox</em></h2>
+          <p>We sent a link to <b id="sent-to"></b>. Open it to confirm your email, and your account opens straight away.</p>
+          <p class="auth__fine">Nothing there after a few minutes? Look in your spam or promotions folder, or send it again.</p>
+          <button class="btn btn--line" type="button" id="resend">Send the link again</button>
+          <div class="auth__row"><button class="link" type="button" data-go="register">Use a different email</button><button class="link" type="button" data-go="login">Back to sign in</button></div>
+          <p class="auth__msg" role="status"></p>
+        </div>
+
+        <form class="pane" id="pane-forgot" data-pane="forgot" novalidate hidden>
+          <h2>Reset your <em>password</em></h2>
+          <p>Type the email you signed up with and we will send you a link to choose a new password.</p>
+          <div class="field"><input type="email" id="f-email" name="email" placeholder=" " autocomplete="email" inputmode="email"><label for="f-email">Email</label></div>
+          <button class="btn" type="submit">Send the link</button>
+          <div class="auth__row"><button class="link" type="button" data-go="login">Back to sign in</button></div>
+          <p class="auth__msg" role="alert"></p>
+        </form>
+
+        <div class="pane" data-pane="fsent" hidden>
+          <span class="sent__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3.5" y="5.5" width="17" height="13" rx="2"/><path d="M4 7l8 6 8-6"/></svg></span>
+          <h2>Check your <em>inbox</em></h2>
+          <p>If there is an account for <b id="fsent-to"></b>, a link to reset the password is on its way. It works for one hour.</p>
+          <div class="auth__row"><button class="link" type="button" data-go="login">Back to sign in</button></div>
+        </div>
+
+        <form class="pane" id="pane-reset" data-pane="reset" novalidate hidden>
+          <h2>Choose a new <em>password</em></h2>
+          <div class="field field--pw"><input type="password" id="n-pass" name="password" placeholder=" " autocomplete="new-password" minlength="8"><label for="n-pass">New password</label><button class="field__show" type="button" data-show>Show</button></div>
+          <p class="hint">At least 8 characters.</p>
+          <button class="btn" type="submit">Save and sign in</button>
+          <p class="auth__msg" role="alert"></p>
+        </form>
+
+        <div class="pane" data-pane="verifying" hidden>
+          <div class="spin" aria-hidden="true"></div>
+          <h2>Opening your <em>account</em></h2>
+          <p>One moment while we confirm your email.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Signed in: the customer's own dashboard -->
+  <section class="dash" id="view-dash" aria-labelledby="dash-title" hidden>
+    <div class="dash__in">
+      <div class="dash__head">
+        <div class="dash__hello">
+          <p class="eyebrow" data-rise>Your account</p>
+          <h1 id="dash-title" data-rise>Hello, <em id="dash-name"></em></h1>
+          <p class="dash__meta" id="dash-meta" data-rise></p>
+        </div>
+        <div class="dash__acts" data-rise>
+          <span class="lbadge" id="dash-loyal" hidden>Shafar Loyal</span>
+          <button class="more" type="button" id="signout">Sign out</button>
+        </div>
+      </div>
+      <p class="welcome-note" id="welcome-note" role="status" hidden></p>
+
+      <nav class="tabs" aria-label="Your account" data-rise>
+        <a href="#overview" data-tab="overview">Overview</a>
+        <a href="#orders" data-tab="orders">Orders<span class="n" id="n-orders"></span></a>
+        <a href="#wishlist" data-tab="wishlist">Wishlist<span class="n" id="n-wish"></span></a>
+        <a href="#details" data-tab="details">Details</a>
+      </nav>
+
+      <div data-panel="overview" id="panel-overview"></div>
+      <div data-panel="orders" id="panel-orders" hidden></div>
+      <div data-panel="wishlist" id="panel-wishlist" hidden></div>
+      <div data-panel="details" id="panel-details" hidden>
+        <div class="det">
+          <form class="box" id="profile" novalidate>
+            <div class="sechead"><h2 class="h3">Delivery <em>details</em></h2></div>
+            <p class="hint" style="margin:-0.5rem 0 0">Saved here, filled in for you at checkout.</p>
+            <div class="row2">
+              <div class="field"><input type="text" id="p-name" name="name" placeholder=" " autocomplete="name"><label for="p-name">Full name</label></div>
+              <div class="field"><input type="tel" id="p-phone" name="phone" placeholder=" " autocomplete="tel" inputmode="tel"><label for="p-phone">Phone number</label></div>
+            </div>
+            <div class="field"><input type="email" id="p-email" name="email" placeholder=" " readonly><label for="p-email">Email</label></div>
+            <div class="field"><input type="text" id="p-address" name="address" placeholder=" " autocomplete="street-address"><label for="p-address">Address</label></div>
+            <div class="row2">
+              <div class="field"><input type="text" id="p-city" name="city" placeholder=" " autocomplete="address-level2"><label for="p-city">City</label></div>
+              <div class="field">
+                <select id="p-province" name="province" autocomplete="address-level1">
+                  <option value="">Choose…</option><option>Punjab</option><option>Sindh</option><option>Khyber Pakhtunkhwa</option><option>Balochistan</option>
+                  <option>Islamabad Capital Territory</option><option>Gilgit-Baltistan</option><option>Azad Jammu and Kashmir</option>
+                </select>
+                <label for="p-province">Province</label>
+              </div>
+            </div>
+            <button class="btn" type="submit">Save details</button>
+            <p class="det__msg" role="status"></p>
+          </form>
+
+          <div class="box">
+            <form id="pwform" novalidate>
+              <div class="sechead"><h2 class="h3">Your <em>password</em></h2></div>
+              <div class="field field--pw"><input type="password" id="c-cur" name="current" placeholder=" " autocomplete="current-password"><label for="c-cur">Current password</label><button class="field__show" type="button" data-show>Show</button></div>
+              <div class="field field--pw"><input type="password" id="c-new" name="next" placeholder=" " autocomplete="new-password" minlength="8"><label for="c-new">New password</label><button class="field__show" type="button" data-show>Show</button></div>
+              <p class="hint">At least 8 characters. Other devices are signed out.</p>
+              <button class="btn" type="submit">Change password</button>
+              <p class="det__msg" role="status"></p>
+            </form>
+            <div class="det__out">
+              <p>Signed in on a shared phone or computer?</p>
+              <button class="btn btn--line" type="button" id="signout2">Sign out</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="foot" id="footer">
+  <div class="foot__top">
+    <div class="foot__brand">
+      <img src="assets/logo-gold.png" alt="Shafar Fragrances" width="488" height="516" loading="lazy">
+      <p>Where every scent tells a tale. Affordable luxury perfumes in Parfum and Eau de Parfum strength.</p>
+      <span class="foot__pay">Cash on delivery across Pakistan</span>
+    </div>
+    <nav class="foot__col" aria-label="Shop">
+      <h3>Shop</h3>
+      <ul>
+        <li><a href="index.html">Featured</a></li>
+        <li><a href="home.html#best-sellers">Best sellers</a></li>
+        <li><a href="shop.html#men">Men</a></li>
+        <li><a href="shop.html#women">Women</a></li>
+        <li><a href="shop.html#unisex">Unisex</a></li>
+      </ul>
+    </nav>
+    <nav class="foot__col" aria-label="Shafar">
+      <h3>Shafar</h3>
+      <ul>
+        <li><a href="about.html">Our story</a></li>
+        <li><a href="home.html#reviews">Reviews</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+    <div class="foot__col">
+      <h3>Get in touch</h3>
+      <ul>
+        <li><a href="https://wa.me/923180250552" target="_blank" rel="noopener">WhatsApp</a></li>
+        <li><a href="https://www.instagram.com/shafar.fragrances/" target="_blank" rel="noopener">Instagram</a></li>
+      </ul>
+      <small>0318 0250552<br>shafarfragrances@gmail.com<br>www.shafarfragrances.com</small>
+    </div>
+  </div>
+  <div class="foot__word" id="foot-word" aria-hidden="true">Shafar</div>
+  <div class="foot__base">
+    <p>&copy; 2026 Shafar Fragrances</p>
+    <a class="foot__up" href="#account">Back to top</a>
+  </div>
+</footer>
+
+<div class="scrim" id="scrim"></div>
+<aside class="drawer" id="drawer" role="dialog" aria-modal="true" aria-labelledby="drawer-title">
+  <div class="drawer__head">
+    <h2 id="drawer-title">Cart</h2>
+    <button class="icon" type="button" id="drawer-close" aria-label="Close">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+  </div>
+  <div class="drawer__list" id="drawer-list"></div>
+  <div class="drawer__foot" id="drawer-foot" hidden>
+    <p class="drawer__total"><span>Subtotal</span><b id="drawer-total"></b></p>
+    <a class="btn" href="checkout.html" style="display:flex;align-items:center;justify-content:center;text-decoration:none;--ink:#2B1810;margin-top:6px">Checkout</a>
+    <p class="drawer__note">Cash on delivery across Pakistan.</p>
+  </div>
+</aside>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="js/catalog.js"></script>
+<script src="/api/catalog"></script>
+<script src="js/account.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script>
+(function () {
+  'use strict';
+
+  var DEFAULT_SIZE = 50;
+
+  var $ = function (s, el) { return (el || document).querySelector(s); };
+  var $$ = function (s, el) { return Array.prototype.slice.call((el || document).querySelectorAll(s)); };
+  var rupees = function (n) { return 'Rs ' + Number(n).toLocaleString('en-US'); };
+  var el = function (tag, cls, text) { var n = document.createElement(tag); if (cls) n.className = cls; if (text != null) n.textContent = text; return n; };
+  var root = document.documentElement;
+
+  /* ---------- Toast ---------- */
+  var toastEl = $('#toast'), toastTimer;
+  function toast(msg) {
+    toastEl.textContent = msg;
+    toastEl.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(function () { toastEl.classList.remove('show'); }, 2400);
+  }
+  $$('[data-soon]').forEach(function (b) {
+    b.addEventListener('click', function () { toast(b.dataset.soon === 'sign-in' ? 'Accounts are switched on with the backend.' : 'The ' + b.dataset.soon + ' page is not built yet.'); closeMenu(); });
+  });
+
+  /* ---------- Mobile menu ---------- */
+  var menu = $('#menu'), burger = $('#burger');
+  function closeMenu() { menu.classList.remove('open'); burger.setAttribute('aria-expanded', 'false'); }
+  burger.addEventListener('click', function () {
+    var open = menu.classList.toggle('open');
+    burger.setAttribute('aria-expanded', String(open));
+  });
+  $$('a', menu).forEach(function (a) { a.addEventListener('click', closeMenu); });
+
+  /* ---------- Cart and wishlist (saved in this browser, shared by every page) ---------- */
+  var CAT = window.SHAFAR_CATALOG || {};      // every product (js/catalog.js, or the live list from /api/catalog)
+  var cart = [], wish = [];
+  try {
+    cart = JSON.parse(localStorage.getItem('shafar.cart') || '[]').filter(function (l) { return CAT[l.id] && CAT[l.id].prices[l.size] != null && l.qty > 0; });
+    wish = JSON.parse(localStorage.getItem('shafar.wish') || '[]').filter(function (id) { return CAT[id]; });
+  } catch (e) { cart = []; wish = []; }
+  function save() { try { localStorage.setItem('shafar.cart', JSON.stringify(cart)); localStorage.setItem('shafar.wish', JSON.stringify(wish)); } catch (e) {} document.dispatchEvent(new CustomEvent('shafar:save')); }      // js/account.js keeps a signed-in wishlist in step
+  var drawer = $('#drawer'), scrim = $('#scrim'), list = $('#drawer-list'), foot = $('#drawer-foot');
+  var drawerMode = 'cart', lastFocus = null;
+
+  function badge(node, n) { node.textContent = n; node.hidden = n === 0; }
+  function syncBadges() {
+    badge($('#cart-count'), cart.reduce(function (s, l) { return s + l.qty; }, 0));
+    badge($('#wish-count'), wish.length);
+    save();
+  }
+  function addToCart(id, size) {
+    var line = cart.filter(function (l) { return l.id === id && l.size === size; })[0];
+    if (line) line.qty += 1; else cart.push({ id: id, size: size, qty: 1 });
+    syncBadges();
+    if (drawer.classList.contains('open')) renderDrawer();
+  }
+  function pic(id) {
+    var box = el('div', 'line__pic');
+    box.style.background = CAT[id].tint;
+    var im = el('img'); im.src = CAT[id].img; im.alt = '';
+    box.appendChild(im);
+    return box;
+  }
+  function renderDrawer() {
+    $('#drawer-title').textContent = drawerMode === 'cart' ? 'Cart' : 'Wishlist';
+    list.textContent = '';
+    var total = 0;
+    if (drawerMode === 'cart') {
+      if (!cart.length) list.appendChild(el('p', 'drawer__empty', 'Your cart is empty. Add a bottle from the Shop.'));
+      cart.forEach(function (l) {
+        var p = CAT[l.id], unit = p.prices[l.size];
+        total += unit * l.qty;
+        var row = el('div', 'line'), mid = el('div');
+        mid.appendChild(el('p', 'line__name', p.name));
+        mid.appendChild(el('p', 'line__meta', p.kind + ' · ' + l.size + ' ml'));
+        var q = el('div', 'qty');
+        var minus = el('button', '', '−'); minus.type = 'button'; minus.setAttribute('aria-label', 'One less ' + p.name);
+        var plus = el('button', '', '+'); plus.type = 'button'; plus.setAttribute('aria-label', 'One more ' + p.name);
+        minus.addEventListener('click', function () { l.qty -= 1; if (l.qty < 1) cart.splice(cart.indexOf(l), 1); syncBadges(); renderDrawer(); });
+        plus.addEventListener('click', function () { l.qty += 1; syncBadges(); renderDrawer(); });
+        q.appendChild(minus); q.appendChild(el('span', '', l.qty)); q.appendChild(plus);
+        mid.appendChild(q);
+        var side = el('div', 'line__side');
+        side.appendChild(el('b', '', rupees(unit * l.qty)));
+        var rm = el('button', 'link', 'Remove'); rm.type = 'button';
+        rm.addEventListener('click', function () { cart.splice(cart.indexOf(l), 1); syncBadges(); renderDrawer(); });
+        side.appendChild(rm);
+        row.appendChild(pic(l.id)); row.appendChild(mid); row.appendChild(side);
+        list.appendChild(row);
+      });
+      foot.hidden = !cart.length;
+      $('#drawer-total').textContent = rupees(total);
+    } else {
+      foot.hidden = true;
+      if (!wish.length) list.appendChild(el('p', 'drawer__empty', 'Nothing saved yet. Tap the heart on a bottle to keep it here.'));
+      wish.forEach(function (id) {
+        var p = CAT[id], row = el('div', 'line'), mid = el('div');
+        mid.appendChild(el('p', 'line__name', p.name));
+        var unit = p.prices[DEFAULT_SIZE];
+        mid.appendChild(el('p', 'line__meta', p.kind + ' · ' + (unit == null ? (p.soldout ? 'Sold out' : 'Price to be added') : rupees(unit) + ' for ' + DEFAULT_SIZE + ' ml')));
+        var side = el('div', 'line__side');
+        var add = el('button', 'link', 'Add to cart'); add.type = 'button';
+        add.addEventListener('click', function () { addToCart(id, DEFAULT_SIZE); toast(p.name + ', ' + DEFAULT_SIZE + ' ml added to cart.'); });
+        var rm = el('button', 'link', 'Remove'); rm.type = 'button';
+        rm.addEventListener('click', function () { setWish(id, false); renderDrawer(); });
+        if (unit != null) side.appendChild(add);
+        side.appendChild(rm);
+        row.appendChild(pic(id)); row.appendChild(mid); row.appendChild(side);
+        list.appendChild(row);
+      });
+    }
+  }
+  function openDrawer(mode, from) {
+    drawerMode = mode; lastFocus = from || null;
+    renderDrawer();
+    drawer.classList.add('open'); scrim.classList.add('open');
+    closeMenu();
+    $('#drawer-close').focus();
+  }
+  function closeDrawer() {
+    drawer.classList.remove('open'); scrim.classList.remove('open');
+    if (lastFocus) lastFocus.focus();
+  }
+  $('#open-cart').addEventListener('click', function () { openDrawer('cart', this); });
+  $('#open-wish').addEventListener('click', function () { openDrawer('wish', this); });
+  $('#drawer-close').addEventListener('click', closeDrawer);
+  scrim.addEventListener('click', closeDrawer);
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') { closeDrawer(); closeMenu(); } });
+
+  function setWish(id, on) {
+    var i = wish.indexOf(id);
+    if (on && i < 0) wish.push(id);
+    if (!on && i >= 0) wish.splice(i, 1);
+    $$('[data-wish="' + id + '"]').forEach(function (h) {
+      h.setAttribute('aria-pressed', String(on));
+      h.setAttribute('aria-label', on ? 'Remove ' + CAT[id].name + ' from wishlist' : 'Save ' + CAT[id].name + ' to wishlist');
+    });
+    syncBadges();
+  }
+  $$('[data-add]').forEach(function (b) {
+    b.addEventListener('click', function () {
+      var id = b.dataset.add;
+      if (CAT[id].prices[DEFAULT_SIZE] == null) { toast('The price for ' + CAT[id].name + ' is still to be added.'); return; }
+      addToCart(id, DEFAULT_SIZE);
+      toast(CAT[id].name + ', ' + DEFAULT_SIZE + ' ml added to cart.');
+    });
+  });
+  $$('[data-wish]').forEach(function (b) {
+    b.addEventListener('click', function () {
+      var id = b.dataset.wish, on = b.getAttribute('aria-pressed') !== 'true';
+      setWish(id, on);
+      toast(on ? CAT[id].name + ' saved to your wishlist.' : CAT[id].name + ' removed from your wishlist.');
+    });
+  });
+
+  // restore what was saved on other pages
+  wish.forEach(function (id) { $$('[data-wish="' + id + '"]').forEach(function (h) { h.setAttribute('aria-pressed', 'true'); }); });
+  syncBadges();
+
+  /* ---------- Header turns solid once you leave the top ---------- */
+  var topBar = $('#top');
+  function solid() { topBar.classList.toggle('is-solid', window.scrollY > 24); }
+  window.addEventListener('scroll', solid, { passive: true });
+  solid();
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  $$('a[href="#account"]').forEach(function (a) {
+    a.addEventListener('click', function (e) { e.preventDefault(); window.scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' }); });
+  });
+
+
+  /* ==================================================================
+     ACCOUNT
+     Signed out: sign in, create an account (confirmed by email), reset a password.
+     Signed in: overview with Shafar Loyal, orders, wishlist and details.
+     ================================================================== */
+  var SYNCED = 'shafar.wish.synced';
+  var params = new URLSearchParams(location.search);
+  var nextPage = params.get('next') === 'checkout' ? 'checkout.html' : '';
+  var viewAuth = $('#view-auth'), viewDash = $('#view-dash'), auth = $('#auth');
+  var ME = null, sentEmail = '', welcomed = false;
+  var firstName = function (n) { return String(n || '').trim().split(/\s+/)[0] || ''; };
+  var monthYear = function (d) { return new Date(d).toLocaleDateString('en-GB', { month: 'long', year: 'numeric' }); };
+  var dayMonth = function (d) { return new Date(d).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' }); };
+  var bottlesWord = function (n) { return n === 2 ? 'two bottles' : n === 3 ? 'three bottles' : n === 4 ? 'four or more bottles' : n + ' or more bottles'; };
+
+  function api(action, data) {
+    return fetch('/api/account', { method: 'POST', credentials: 'same-origin', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(Object.assign({ action: action }, data || {})) })
+      .then(function (r) { return r.json().catch(function () { return { ok: false, offline: true, error: 'The server did not answer. Please try again.' }; }); })
+      .catch(function () { return { ok: false, offline: true, error: 'You seem to be offline. Please try again.' }; });
+  }
+  function rise(scope) {
+    if (!window.gsap || reduce) return;
+    gsap.from($$('[data-rise]', scope), { y: 26, autoAlpha: 0, duration: 0.9, ease: 'power3.out', stagger: 0.07, clearProps: 'all' });
+  }
+
+  /* ---------- signed out ---------- */
+  var MODES = {
+    login: ['Welcome <em>back</em>', 'Sign in to see your orders, your wishlist and your Shafar Loyal rewards.'],
+    register: ['Join <em>Shafar</em>', 'One account for your orders, your wishlist and the rewards that come with them.'],
+    sent: ['Almost <em>there</em>', 'One tap on the link in our email and your account is open.'],
+    forgot: ['Account <em>help</em>', 'It happens to everyone. We will send you a link to choose a new password.'],
+    fsent: ['Account <em>help</em>', 'The link is on its way. It works for one hour.'],
+    reset: ['A new <em>password</em>', 'Choose a new password. You will be signed in straight after.'],
+    verifying: ['Welcome to <em>Shafar</em>', 'Your email is being confirmed.']
+  };
+  function mode(m, focus) {
+    $$('[data-pane]', auth).forEach(function (p) { p.hidden = p.dataset.pane !== m; });
+    var tabbed = m === 'login' || m === 'register';
+    $('.auth__tabs', auth).hidden = !tabbed;
+    $$('.auth__tabs [data-mode]', auth).forEach(function (t) { t.setAttribute('aria-selected', String(t.dataset.mode === m)); });
+    $('#acc-title').innerHTML = MODES[m][0];            // fixed strings above, never user text
+    $('#acc-lede').textContent = MODES[m][1];
+    $$('.auth__msg', auth).forEach(function (x) { x.textContent = ''; x.classList.remove('ok'); });
+    viewDash.hidden = true; viewAuth.hidden = false;
+    if (focus !== false) { var first = $('[data-pane="' + m + '"] input:not([type=hidden]):not(.sr)', auth); if (first && window.innerWidth > 900) first.focus(); }
+  }
+  $$('[data-mode]', auth).forEach(function (b) { b.addEventListener('click', function () { mode(b.dataset.mode); }); });
+  $$('[data-go]', auth).forEach(function (b) { b.addEventListener('click', function () { mode(b.dataset.go); }); });
+  $$('[data-show]').forEach(function (b) {
+    b.addEventListener('click', function () {
+      var input = b.parentNode.querySelector('input'), show = input.type === 'password';
+      input.type = show ? 'text' : 'password'; b.textContent = show ? 'Hide' : 'Show';
+    });
+  });
+
+  function fieldErr(form, name, text) {
+    var input = form.elements[name]; if (!input) return;
+    var box = input.closest('.field'); if (!box) return;
+    box.classList.toggle('field--err', !!text);
+    var old = $('.field__err', box); if (old) old.remove();
+    if (text) box.appendChild(el('small', 'field__err', text));
+  }
+  function clearErrs(form) { $$('.field', form).forEach(function (b) { b.classList.remove('field--err'); var o = $('.field__err', b); if (o) o.remove(); }); }
+  /* Sends a form, with the button busy meanwhile. */
+  function submit(form, label, action, data) {
+    var btn = $('button[type=submit]', form), msg = $('.auth__msg, .det__msg', form), was = btn.textContent;
+    clearErrs(form); if (msg) { msg.textContent = ''; msg.classList.remove('ok', 'bad'); }
+    btn.disabled = true; btn.textContent = label;
+    return api(action, data).then(function (r) {
+      btn.disabled = false; btn.textContent = was;
+      if (!r.ok) {
+        if (r.fields) Object.keys(r.fields).forEach(function (n) { fieldErr(form, n, r.fields[n]); });
+        if (msg) { msg.textContent = r.error || 'Something went wrong. Please try again.'; msg.classList.add('bad'); }
+      }
+      return r;
+    });
+  }
+
+  $('#pane-login').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var f = this.elements, form = this;
+    if (!f.email.value.trim() || !f.password.value) { $('.auth__msg', form).textContent = 'Please enter your email and password.'; return; }
+    submit(form, 'Signing in…', 'login', { email: f.email.value, password: f.password.value }).then(function (r) {
+      if (r.ok) return enter(r, 'Welcome back, ' + firstName(r.customer.name) + '.');
+      if (r.unverified) { sentEmail = r.email; $('#sent-to').textContent = r.email; mode('sent'); var m = $('[data-pane="sent"] .auth__msg', auth); m.textContent = r.error; }
+    });
+  });
+  $('#pane-register').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var f = this.elements;
+    submit(this, 'Creating your account…', 'register', { name: f.name.value, email: f.email.value, password: f.password.value, website: f.website.value }).then(function (r) {
+      if (!r.ok) { if (r.exists) $('#l-email').value = f.email.value.trim(); return; }
+      sentEmail = r.email; $('#sent-to').textContent = r.email; mode('sent', false); cooldown($('#resend'), 60);
+    });
+  });
+  function cooldown(btn, s) {
+    var label = 'Send the link again';
+    btn.disabled = true;
+    (function tick() {
+      if (s <= 0) { btn.disabled = false; btn.textContent = label; return; }
+      btn.textContent = 'Send again in ' + s + 's'; s--; setTimeout(tick, 1000);
+    })();
+  }
+  $('#resend').addEventListener('click', function () {
+    var btn = this, msg = $('[data-pane="sent"] .auth__msg', auth);
+    btn.disabled = true;
+    api('resend', { email: sentEmail }).then(function (r) {
+      msg.textContent = r.ok ? 'A new link is on its way to ' + sentEmail + '.' : r.error;
+      msg.classList.toggle('ok', !!r.ok);
+      cooldown(btn, 60);
+    });
+  });
+  $('#pane-forgot').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var email = this.elements.email.value.trim();
+    if (!email) { $('.auth__msg', this).textContent = 'Please enter your email.'; return; }
+    submit(this, 'Sending…', 'forgot', { email: email }).then(function (r) { if (r.ok) { $('#fsent-to').textContent = email; mode('fsent'); } });
+  });
+  $('#pane-reset').addEventListener('submit', function (e) {
+    e.preventDefault();
+    submit(this, 'Saving…', 'reset', { token: params.get('reset'), password: this.elements.password.value }).then(function (r) {
+      if (r.ok) enter(r, 'Your new password is saved.');
+      else if (r.expired) { mode('forgot'); $('#pane-forgot .auth__msg').textContent = r.error; }
+    });
+  });
+
+  /* ---------- signing in ---------- */
+  function cleanUrl() { try { history.replaceState(null, '', location.pathname + (location.hash || '')); } catch (e) {} }
+  function paintHeader(name) {
+    var btn = $('#open-account'); if (!btn) return;
+    btn.textContent = '';
+    var me = el('span', 'icon__me', String(name || '?').trim().charAt(0).toUpperCase()); me.setAttribute('aria-hidden', 'true');
+    btn.appendChild(me); btn.setAttribute('aria-label', 'Your account');
+  }
+  function enter(r, msg) {
+    ME = r;
+    if (nextPage) { location.href = nextPage; return; }
+    cleanUrl();
+    paintHeader(r.customer.name);
+    mergeWish(r.wish || []);
+    renderDash();
+    if (msg) toast(msg);
+  }
+
+  /* The wishlist saved on the account and the one in this browser become one list. */
+  function pushWish() {
+    var now = JSON.stringify(wish);
+    try { if (localStorage.getItem(SYNCED) === now) return; } catch (e) {}
+    api('wish', { ids: wish }).then(function (r) { if (r.ok) { try { localStorage.setItem(SYNCED, now); } catch (e) {} } });
+  }
+  var wishHooked = false;
+  function mergeWish(server) {
+    server.forEach(function (id) { if (CAT[id] && wish.indexOf(id) < 0) wish.push(id); });
+    wish.forEach(function (id) { $$('[data-wish="' + id + '"]').forEach(function (h) { h.setAttribute('aria-pressed', 'true'); }); });
+    syncBadges();
+    pushWish();
+    // js/account.js already keeps the list in step when the page opened signed in; otherwise do it here
+    if (!wishHooked && !(window.ShafarAccount && window.ShafarAccount.signedIn)) {
+      wishHooked = true;
+      var t; document.addEventListener('shafar:save', function () { if (!ME) return; clearTimeout(t); t = setTimeout(pushWish, 600); });
+    }
+  }
+
+  function signOut() {
+    api('logout').then(function () {
+      try { localStorage.removeItem(SYNCED); localStorage.setItem('shafar.wish', '[]'); } catch (e) {}
+      location.href = 'account.html';
+    });
+  }
+  $('#signout').addEventListener('click', signOut);
+  $('#signout2').addEventListener('click', signOut);
+
+  /* ---------- the dashboard ---------- */
+  var STATUS = {
+    pending: ['Awaiting confirmation', 1], processing: ['Being prepared', 2], shipped: ['On its way', 3], completed: ['Delivered', 4], cancelled: ['Cancelled', 0]
+  };
+  function renderDash() {
+    var c = ME.customer, L = ME.loyalty;
+    viewAuth.hidden = true; viewDash.hidden = false;
+    $('#dash-name').textContent = firstName(c.name);
+    $('#dash-meta').textContent = c.email + ' · Member since ' + monthYear(c.since);
+    $('#dash-loyal').hidden = !(L && L.loyal);
+    document.title = 'Your account | Shafar Fragrances';
+    if (ME.welcome && !welcomed) {
+      welcomed = true;
+      var note = $('#welcome-note'); note.hidden = false; note.textContent = '';
+      note.appendChild(el('span', '', 'Your account is open, ' + firstName(c.name) + '. '));
+      note.appendChild(el('b', '', 'A welcome note is in your inbox.'));
+    }
+    counts();
+    paintOverview(); paintOrders(); paintWishlist(); fillDetails();
+    showTab(tabFromHash(), true);
+    rise(viewDash);
+  }
+  function counts() {
+    $('#n-orders').textContent = ME.orders.length || '';
+    $('#n-wish').textContent = wish.length || '';
+  }
+  function tabFromHash() { var t = (location.hash || '').slice(1); return ['overview', 'orders', 'wishlist', 'details'].indexOf(t) >= 0 ? t : 'overview'; }
+  function showTab(t, quiet) {
+    $$('[data-panel]').forEach(function (p) { p.hidden = p.dataset.panel !== t; });
+    $$('.tabs [data-tab]').forEach(function (a) { if (a.dataset.tab === t) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current'); });
+    if (t === 'wishlist') paintWishlist();
+    if (!quiet && window.gsap && !reduce) gsap.from('[data-panel="' + t + '"] > *', { y: 18, autoAlpha: 0, duration: 0.6, ease: 'power3.out', stagger: 0.06, clearProps: 'all' });
+  }
+  window.addEventListener('hashchange', function () { if (ME) showTab(tabFromHash()); });
+
+  /* Shafar Loyal card */
+  function loyalCard() {
+    var L = ME.loyalty, card = el('section', 'loyal' + (L.loyal ? '' : ' loyal--off'));
+    var mark = el('img', 'loyal__mark'); mark.src = 'assets/crest-gold.webp'; mark.alt = ''; card.appendChild(mark);
+    var h = el('h2');
+    if (L.loyal) {
+      card.appendChild(el('p', 'eyebrow', 'Shafar Loyal' + (L.since ? ' · since ' + monthYear(L.since) : '')));
+      h.innerHTML = 'Your <em>rewards</em>'; card.appendChild(h);
+      card.appendChild(el('p', '', 'Applied for you at checkout whenever you are signed in. No codes to remember.'));
+    } else {
+      var left = Math.max(0, L.after - L.completed);
+      card.appendChild(el('p', 'eyebrow', 'Shafar Loyal'));
+      h.innerHTML = '<em></em> of ' + L.after + ' completed orders'; h.querySelector('em').textContent = L.completed; card.appendChild(h);
+      var prog = el('div', 'prog'); prog.setAttribute('aria-hidden', 'true');
+      for (var i = 0; i < L.after; i++) prog.appendChild(el('span', i < L.completed ? 'on' : ''));
+      card.appendChild(prog);
+      card.appendChild(el('p', '', (left === 1 ? 'One more completed order' : (left === 2 ? 'Two more' : left + ' more') + ' completed orders') + ' and you are Shafar Loyal, with these rewards from then on:'));
+    }
+    var tiers = el('ul', 'tiers');
+    L.tiers.forEach(function (t) { var li = el('li'); li.appendChild(el('b', '', t.pct + '% off')); li.appendChild(el('span', '', 'whenever you buy ' + bottlesWord(t.qty) + ' together')); tiers.appendChild(li); });
+    var gift = el('li'); gift.appendChild(el('b', '', 'Gifts')); gift.appendChild(el('span', '', 'private codes for Eid and the moments worth marking, by email')); tiers.appendChild(gift);
+    card.appendChild(tiers);
+    if (L.loyal) {
+      var codes = el('div', 'codes');
+      codes.appendChild(el('p', 'codes__title', 'Your codes'));
+      if (!ME.codes.length) codes.appendChild(el('p', 'loyal__fine', 'Occasion codes arrive by email and wait for you here.'));
+      ME.codes.forEach(function (d) {
+        var row = el('div', 'code'), txt = el('div');
+        txt.appendChild(el('b', '', d.code));
+        txt.appendChild(el('small', '', [d.kind === 'percent' ? d.value + '% off' : rupees(d.value) + ' off', d.title || null, d.min_total ? 'orders of ' + rupees(d.min_total) + '+' : null, d.expires ? 'until ' + dayMonth(d.expires) : null].filter(Boolean).join(' · ')));
+        var copy = el('button', '', 'Copy'); copy.type = 'button';
+        copy.addEventListener('click', function () {
+          var done = function () { copy.textContent = 'Copied'; toast(d.code + ' copied. Type it at checkout.'); setTimeout(function () { copy.textContent = 'Copy'; }, 1800); };
+          if (navigator.clipboard) navigator.clipboard.writeText(d.code).then(done, done); else done();
+        });
+        row.appendChild(txt); row.appendChild(copy); codes.appendChild(row);
+      });
+      card.appendChild(codes);
+    } else {
+      card.appendChild(el('p', 'loyal__fine', 'An order counts once it has been delivered.'));
+    }
+    return card;
+  }
+
+  function tile(label, value, href) {
+    var t = el(href ? 'a' : 'div', 'tile'); if (href) t.href = href;
+    t.appendChild(el('span', '', label)); t.appendChild(el('b', '', value));
+    return t;
+  }
+  function paintOverview() {
+    var box = $('#panel-overview'); box.textContent = '';
+    var ov = el('div', 'ov'), side = el('div', 'ov__side');
+    if (ME.loyalty.on) ov.appendChild(loyalCard());
+    var tiles = el('div', 'tiles');
+    tiles.appendChild(tile('Orders', String(ME.stats.orders), '#orders'));
+    tiles.appendChild(tile('Spent', rupees(ME.stats.spent)));
+    tiles.appendChild(tile('Wishlist', String(wish.length), '#wishlist'));
+    side.appendChild(tiles);
+    if (ME.orders.length) {
+      var latest = el('div');
+      var head = el('div', 'sechead'), h = el('h2', 'h3'); h.innerHTML = 'Latest <em>order</em>'; head.appendChild(h);
+      var all = el('a', 'more', 'All orders'); all.href = '#orders'; head.appendChild(all);
+      latest.appendChild(head); latest.appendChild(orderEl(ME.orders[0]));
+      side.appendChild(latest);
+    } else {
+      var empty = el('div', 'empty');
+      var eh = el('h2', 'h3'); eh.innerHTML = 'Your first bottle is <em>waiting</em>'; empty.appendChild(eh);
+      empty.appendChild(el('p', '', 'Orders you place while signed in, or with this email, appear here.'));
+      var go = el('a', 'btn', 'Shop the collection'); go.href = 'shop.html'; empty.appendChild(go);
+      side.appendChild(empty);
+    }
+    ov.appendChild(side);
+    box.appendChild(ov);
+  }
+
+  function pics(items) {
+    var p = el('div', 'pics');
+    items.slice(0, 3).forEach(function (l) {
+      var s = el('span'), prod = CAT[l.id];
+      s.style.background = prod ? prod.tint : 'var(--dune)';
+      if (prod) { var im = el('img'); im.src = prod.img; im.alt = ''; s.appendChild(im); }
+      p.appendChild(s);
+    });
+    if (items.length > 3) p.appendChild(el('em', '', '+' + (items.length - 3)));
+    return p;
+  }
+  function orderEl(o) {
+    var st = STATUS[o.status] || [o.status, 0];
+    var d = el('details', 'ord'), s = el('summary');
+    var no = el('div', 'ord__no'); no.appendChild(el('b', '', o.number)); no.appendChild(el('small', '', dayMonth(o.created_at)));
+    s.appendChild(no); s.appendChild(pics(o.items));
+    s.appendChild(el('span', 'pill pill--' + o.status, st[0]));
+    s.appendChild(el('span', 'ord__total', rupees(o.total)));
+    var chev = document.createElementNS('http://www.w3.org/2000/svg', 'svg'); chev.setAttribute('viewBox', '0 0 24 24'); chev.setAttribute('class', 'ord__chev'); chev.setAttribute('aria-hidden', 'true');
+    chev.innerHTML = '<path d="M6 9.5l6 6 6-6"/>'; s.appendChild(chev);
+    d.appendChild(s);
+
+    var body = el('div', 'ord__body');
+    if (o.status !== 'cancelled') {
+      var track = el('ol', 'track');
+      ['Placed', 'Confirmed', 'Shipped', 'Delivered'].forEach(function (t, i) { track.appendChild(el('li', i < st[1] ? 'on' : '', t)); });
+      body.appendChild(track);
+    }
+    var lines = el('div', 'ord__lines');
+    o.items.forEach(function (l) {
+      var row = el('div', 'line'), prod = CAT[l.id], box = el('div', 'line__pic');
+      box.style.background = prod ? prod.tint : 'var(--dune)';
+      if (prod) { var im = el('img'); im.src = prod.img; im.alt = ''; box.appendChild(im); }
+      var mid = el('div'); mid.appendChild(el('p', 'line__name', l.name)); mid.appendChild(el('p', 'line__meta', (prod ? prod.kind + ' · ' : '') + (l.size || 50) + ' ml · qty ' + l.qty));
+      var side = el('div', 'line__side'); side.appendChild(el('b', '', rupees(l.price * l.qty)));
+      if (prod && prod.prices[DEFAULT_SIZE] != null) {
+        var again = el('button', 'link', 'Buy again'); again.type = 'button';
+        again.addEventListener('click', function () { addToCart(l.id, DEFAULT_SIZE); toast(l.name + ', ' + DEFAULT_SIZE + ' ml added to cart.'); });
+        side.appendChild(again);
+      }
+      row.appendChild(box); row.appendChild(mid); row.appendChild(side); lines.appendChild(row);
+    });
+    body.appendChild(lines);
+    var aside = el('div', 'ord__side'), rows = el('div', 'rows');
+    var r = function (a, b, cls) { var x = el('div', cls || ''); x.appendChild(el('span', '', a)); x.appendChild(el('span', '', b)); rows.appendChild(x); };
+    r('Subtotal', rupees(o.subtotal));
+    if (o.discount) r(o.loyalty ? 'Loyal reward · ' + o.loyalty + '%' : 'Discount' + (o.code ? ' (' + o.code + ')' : ''), '− ' + rupees(o.discount), 'gold');
+    r('Delivery', o.delivery ? rupees(o.delivery) : 'Free');
+    r('Total, cash on delivery', rupees(o.total), 'tot');
+    aside.appendChild(rows);
+    var to = el('div'); to.appendChild(el('p', 'ord__label', 'Delivering to'));
+    to.appendChild(el('p', '', [o.address, [o.city, o.province].filter(Boolean).join(', ')].filter(Boolean).join(', ')));
+    aside.appendChild(to);
+    var help = el('a', 'more', 'Ask about this order'); help.href = 'https://wa.me/923180250552?text=' + encodeURIComponent('Hello Shafar, about my order ' + o.number + '.'); help.target = '_blank'; help.rel = 'noopener';
+    aside.appendChild(help);
+    body.appendChild(aside);
+    d.appendChild(body);
+    return d;
+  }
+  function paintOrders() {
+    var box = $('#panel-orders'); box.textContent = '';
+    if (!ME.orders.length) {
+      var empty = el('div', 'empty'), h = el('h2', 'h3'); h.innerHTML = 'No orders <em>yet</em>'; empty.appendChild(h);
+      empty.appendChild(el('p', '', 'When you order while signed in, or with ' + ME.customer.email + ', it appears here with its progress.'));
+      var go = el('a', 'btn', 'Shop the collection'); go.href = 'shop.html'; empty.appendChild(go);
+      box.appendChild(empty); return;
+    }
+    var list = el('div', 'ords');
+    ME.orders.forEach(function (o, i) { var d = orderEl(o); if (i === 0) d.open = true; list.appendChild(d); });
+    box.appendChild(list);
+  }
+
+  function paintWishlist() {
+    var box = $('#panel-wishlist'); box.textContent = '';
+    if (!wish.length) {
+      var empty = el('div', 'empty'), h = el('h2', 'h3'); h.innerHTML = 'Nothing saved <em>yet</em>'; empty.appendChild(h);
+      empty.appendChild(el('p', '', 'Tap the heart on any bottle to keep it here. Your list follows you to every device you sign in on.'));
+      var go = el('a', 'btn', 'Browse the shop'); go.href = 'shop.html'; empty.appendChild(go);
+      box.appendChild(empty); return;
+    }
+    var grid = el('div', 'wgrid');
+    wish.forEach(function (id) {
+      var p = CAT[id]; if (!p) return;
+      var card = el('article', 'wcard'), unit = p.prices[DEFAULT_SIZE];
+      var link = el('a', 'wcard__pic'); link.href = 'product.html#' + id; link.style.cssText = '--c:' + p.tint + ';--e:' + p.deep;
+      var im = el('img'); im.src = p.img; im.alt = p.name; im.loading = 'lazy'; link.appendChild(im);
+      card.appendChild(link);
+      var txt = el('div'); txt.appendChild(el('p', 'wcard__name', p.name));
+      txt.appendChild(el('p', 'wcard__meta', p.kind + ' · ' + (unit == null ? (p.soldout ? 'Sold out' : 'Price to be added') : rupees(unit))));
+      card.appendChild(txt);
+      var acts = el('div', 'wcard__acts'), add = el('button', 'btn', unit == null ? (p.soldout ? 'Sold out' : 'Coming soon') : 'Add to cart'); add.type = 'button';
+      if (unit == null) add.disabled = true;
+      add.addEventListener('click', function () { addToCart(id, DEFAULT_SIZE); toast(p.name + ', ' + DEFAULT_SIZE + ' ml added to cart.'); });
+      var heart = el('button', 'heart'); heart.type = 'button'; heart.setAttribute('aria-pressed', 'true'); heart.setAttribute('aria-label', 'Remove ' + p.name + ' from wishlist');
+      heart.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.3s-7.5-4.4-7.5-10.1A4.2 4.2 0 0 1 12 7.6a4.2 4.2 0 0 1 7.5 2.6c0 5.7-7.5 10.1-7.5 10.1z"/></svg>';
+      heart.addEventListener('click', function () { setWish(id, false); toast(p.name + ' removed from your wishlist.'); });
+      acts.appendChild(add); acts.appendChild(heart); card.appendChild(acts);
+      grid.appendChild(card);
+    });
+    box.appendChild(grid);
+  }
+  // the drawer and the hearts change the wishlist too: keep the dashboard in step
+  var syncAccountBadges = syncBadges;
+  syncBadges = function () {
+    syncAccountBadges();
+    if (!ME) return;
+    counts();
+    if (!$('#panel-wishlist').hidden) paintWishlist();
+    var t = $('#panel-overview .tiles .tile:last-child b'); if (t) t.textContent = String(wish.length);
+  };
+
+  function fillDetails() {
+    var c = ME.customer, f = $('#profile').elements;
+    f.name.value = c.name || ''; f.phone.value = c.phone || ''; f.email.value = c.email || '';
+    f.address.value = c.address || ''; f.city.value = c.city || ''; f.province.value = c.province || '';
+  }
+  $('#profile').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var f = this.elements, form = this;
+    submit(form, 'Saving…', 'profile', { profile: { name: f.name.value, phone: f.phone.value, address: f.address.value, city: f.city.value, province: f.province.value } }).then(function (r) {
+      if (!r.ok) return;
+      ME = Object.assign(ME, r); fillDetails();
+      $('#dash-name').textContent = firstName(r.customer.name);
+      var m = $('.det__msg', form); m.textContent = 'Saved. Checkout fills these in for you.';
+    });
+  });
+  $('#pwform').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var f = this.elements, form = this;
+    submit(form, 'Saving…', 'password', { current: f.current.value, next: f.next.value }).then(function (r) {
+      if (!r.ok) return;
+      f.current.value = ''; f.next.value = '';
+      $('.det__msg', form).textContent = 'Password changed. Other devices have been signed out.';
+    });
+  });
+
+  /* ---------- start ---------- */
+  function perkText(L) {
+    if (!L || !L.on) { $('.perks li:last-child').hidden = true; return; }
+    $('#perk-loyal').textContent = 'After ' + (L.after === 3 ? 'three' : L.after) + ' completed orders: ' +
+      L.tiers.map(function (t) { return t.pct + '% off ' + (t.qty === 2 ? 'two' : t.qty === 4 ? 'four' : t.qty) + ' bottles'; }).join(', ') + ', and private codes on every occasion.';
+  }
+  function signedOutStart(r) {
+    if (r && r.loyalty) perkText(r.loyalty);
+    var join = params.get('join');
+    if (join !== null) { mode('register', false); $('#r-email').value = join; cleanUrl(); }
+    else mode(location.hash === '#register' ? 'register' : 'login', false);
+    rise(viewAuth);
+  }
+  if (params.get('verify')) {
+    mode('verifying', false); rise(viewAuth);
+    api('verify', { token: params.get('verify') }).then(function (r) {
+      cleanUrl();
+      if (r.ok) return enter(r, 'Welcome to Shafar, ' + firstName(r.customer.name) + '.');
+      mode('login', false);
+      var m = $('#pane-login .auth__msg'); m.textContent = r.error || 'That link did not work. Please sign in.';
+    });
+  } else if (params.get('reset')) {
+    mode('reset'); rise(viewAuth);
+  } else if (/(?:^|;\s*)sf_in=/.test(document.cookie)) {
+    api('me').then(function (r) {
+      if (r.ok && r.signedIn) { if (nextPage) { location.href = nextPage; return; } enter(r); }
+      else signedOutStart(r);
+    });
+  } else {
+    signedOutStart(null);
+    api('me').then(function (r) { if (r.ok && r.loyalty) perkText(r.loyalty); });
+  }
+})();
+</script>
+<script>
+/* Arriving with #section in the address (for example home.html#reviews): scroll there once the page has settled. */
+window.addEventListener('load', function () {
+  var id = (location.hash || '').slice(1); if (!id) return;
+  var target = document.getElementById(id), bar = document.getElementById('top');
+  if (!target || target === document.querySelector('main')) return;
+  setTimeout(function () {
+    if (window.ScrollTrigger) ScrollTrigger.refresh();
+    window.scrollTo(0, target.getBoundingClientRect().top + window.scrollY - (bar ? bar.offsetHeight : 0) + 2);
+  }, 350);
+});
+</script>
+<script>
+/* Visitor count for the dashboard: a random id kept in this browser, no personal data. */
+(function () {
+  try {
+    var k = 'shafar.vid', v = localStorage.getItem(k);
+    if (!v) { v = Math.random().toString(36).slice(2) + Date.now().toString(36); localStorage.setItem(k, v); }
+    var data = JSON.stringify({ vid: v, path: location.pathname, ref: document.referrer });
+    if (navigator.sendBeacon) navigator.sendBeacon('/api/track', data);
+    else fetch('/api/track', { method: 'POST', body: data, keepalive: true });
+  } catch (e) {}
+})();
+</script>
+</body>
+</html>

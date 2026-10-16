@@ -261,6 +261,9 @@ main{position:relative}
     <a href="#contact" aria-current="page">Contact</a>
   </nav>
   <div class="tools">
+    <a class="icon" href="account.html" id="open-account" aria-label="Account">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8.6" r="3.6"/><path d="M4.8 20c.9-3.7 3.8-5.9 7.2-5.9s6.3 2.2 7.2 5.9"/></svg>
+    </a>
     <button class="icon" type="button" id="open-wish" aria-label="Wishlist">
       <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.3s-7.5-4.4-7.5-10.1A4.2 4.2 0 0 1 12 7.6a4.2 4.2 0 0 1 7.5 2.6c0 5.7-7.5 10.1-7.5 10.1z"/></svg>
       <span class="badge" id="wish-count" hidden>0</span>
@@ -449,6 +452,7 @@ main{position:relative}
 
 <script src="js/catalog.js"></script>
 <script src="/api/catalog"></script>
+<script src="js/account.js" defer></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <script>
@@ -526,7 +530,7 @@ main{position:relative}
     cart = JSON.parse(localStorage.getItem('shafar.cart') || '[]').filter(function (l) { return CAT[l.id] && CAT[l.id].prices[l.size] != null && l.qty > 0; });
     wish = JSON.parse(localStorage.getItem('shafar.wish') || '[]').filter(function (id) { return CAT[id]; });
   } catch (e) { cart = []; wish = []; }
-  function save() { try { localStorage.setItem('shafar.cart', JSON.stringify(cart)); localStorage.setItem('shafar.wish', JSON.stringify(wish)); } catch (e) {} }
+  function save() { try { localStorage.setItem('shafar.cart', JSON.stringify(cart)); localStorage.setItem('shafar.wish', JSON.stringify(wish)); } catch (e) {} document.dispatchEvent(new CustomEvent('shafar:save')); }      // js/account.js keeps a signed-in wishlist in step
   var drawer = $('#drawer'), scrim = $('#scrim'), list = $('#drawer-list'), foot = $('#drawer-foot');
   var drawerMode = 'cart', lastFocus = null;
 

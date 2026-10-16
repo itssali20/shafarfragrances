@@ -153,13 +153,19 @@ main{position:relative}
 .sum__rows div{display:flex;justify-content:space-between;gap:1rem}
 .sum__rows span:first-child{color:#D9C7AC}
 .sum__rows span:last-child{font-variant-numeric:tabular-nums;text-align:right}
-.sum__code{display:flex;gap:0.625rem;align-items:flex-end}
+.co .sum__code{display:flex;gap:0.625rem;align-items:flex-end;margin-top:0}      /* .co prefix: '.co form' would otherwise turn this row into a grid */
 .sum__code input{flex:1;min-width:0;height:2.625rem;background:none;border:0;border-bottom:1px solid rgba(241,230,211,.4);color:#F1E6D3;font:inherit;font-size:max(12.5px,0.9375rem);letter-spacing:.08em;text-transform:uppercase;padding:0 0.125rem}
 .sum__code input::placeholder{color:#BFAE94;text-transform:none;letter-spacing:0}
 .sum__code input:focus{outline:none;border-bottom-color:#E3C57A}
 .sum__code button{height:2.375rem;padding:0 1rem;border-radius:1.1875rem;border:1px solid rgba(227,197,122,.6);color:#E3C57A;font-size:max(10.5px,0.75rem);font-weight:600;letter-spacing:.16em;text-transform:uppercase}
 .sum__codemsg{min-height:1.125rem;font-size:max(10.5px,0.8125rem);color:#D9C7AC}
 .sum__codemsg.ok{color:#E3C57A}
+.sum__perk{display:flex;gap:0.75rem;align-items:flex-start;padding:0.875rem 1rem;border:1px solid rgba(201,162,74,.38);border-radius:0.625rem;font-size:max(12.5px,0.875rem);line-height:1.45;color:#F1E6D3}
+.sum__perk::before{content:"";flex:none;width:0.4375rem;height:0.4375rem;margin-top:0.4375rem;border-radius:50%;background:var(--gold)}
+.sum__perk b{font-weight:500;color:#E3C57A}
+.co__account b{font-weight:500;color:var(--espresso)}
+.co__loyal{display:inline-flex;align-items:center;gap:0.4375rem;margin-left:0.375rem;padding:0.1875rem 0.6875rem;border-radius:1rem;background:var(--espresso);color:#E3C57A;font-size:max(10.5px,0.6562rem);font-weight:600;letter-spacing:.18em;text-transform:uppercase;vertical-align:0.0625rem}
+.co__loyal::before{content:"";width:0.3125rem;height:0.3125rem;border-radius:50%;background:var(--gold)}
 .sum__warn{font-size:max(12.5px,0.8438rem);color:#F2B8A8}
 .sum__total{display:flex;align-items:baseline;justify-content:space-between;gap:1rem;padding-top:1rem;border-top:1px solid rgba(241,230,211,.26);font-size:max(10.5px,0.75rem);letter-spacing:.18em;text-transform:uppercase}
 .sum__total b{font-family:var(--display);font-weight:600;font-size:2.5rem;line-height:1;letter-spacing:0;text-transform:none;color:#E3C57A;font-variant-numeric:lining-nums tabular-nums}
@@ -258,6 +264,9 @@ main{position:relative}
     <a href="contact.html">Contact</a>
   </nav>
   <div class="tools">
+    <a class="icon" href="account.html" id="open-account" aria-label="Account">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8.6" r="3.6"/><path d="M4.8 20c.9-3.7 3.8-5.9 7.2-5.9s6.3 2.2 7.2 5.9"/></svg>
+    </a>
     <button class="icon" type="button" id="open-wish" aria-label="Wishlist">
       <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.3s-7.5-4.4-7.5-10.1A4.2 4.2 0 0 1 12 7.6a4.2 4.2 0 0 1 7.5 2.6c0 5.7-7.5 10.1-7.5 10.1z"/></svg>
       <span class="badge" id="wish-count" hidden>0</span>
@@ -279,7 +288,7 @@ main{position:relative}
         <p class="eyebrow" data-rise>Checkout</p>
         <h1 id="co-title" data-rise>Almost <em>yours</em></h1>
         <p class="co__lede" data-rise>Tell us where to send it. You pay in cash when the parcel arrives.</p>
-        <p class="co__account" data-rise>Have an account? <button class="link" type="button" data-soon="sign-in">Sign in</button> to fill this in faster, or carry on as a guest.</p>
+        <p class="co__account" id="co-account" data-rise>Have an account? <a class="link" href="account.html?next=checkout">Sign in</a> to fill this in faster and earn Shafar Loyal rewards, or carry on as a guest.</p>
 
         <form id="co-form" novalidate>
           <fieldset class="step" data-step>
@@ -336,6 +345,7 @@ main{position:relative}
         </div>
         <form class="sum__code" id="sum-code"><label class="sr" for="code">Discount code</label><input id="code" name="code" type="text" placeholder="Discount code" autocomplete="off" maxlength="30"><button type="submit">Apply</button></form>
         <p class="sum__codemsg" id="code-msg" role="status"></p>
+        <p class="sum__perk" id="sum-perk" hidden></p>
         <p class="sum__warn" id="sum-warn" role="alert" hidden></p>
         <p class="sum__total"><span>Total</span><b id="sum-total"></b></p>
         <div class="sum__foot">
@@ -407,6 +417,7 @@ main{position:relative}
 
 <script src="js/catalog.js"></script>
 <script src="/api/catalog"></script>
+<script src="js/account.js" defer></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script>
 (function () {
@@ -483,7 +494,7 @@ main{position:relative}
     cart = JSON.parse(localStorage.getItem('shafar.cart') || '[]').filter(function (l) { return CAT[l.id] && CAT[l.id].prices[l.size] != null && l.qty > 0; });
     wish = JSON.parse(localStorage.getItem('shafar.wish') || '[]').filter(function (id) { return CAT[id]; });
   } catch (e) { cart = []; wish = []; }
-  function save() { try { localStorage.setItem('shafar.cart', JSON.stringify(cart)); localStorage.setItem('shafar.wish', JSON.stringify(wish)); } catch (e) {} }
+  function save() { try { localStorage.setItem('shafar.cart', JSON.stringify(cart)); localStorage.setItem('shafar.wish', JSON.stringify(wish)); } catch (e) {} document.dispatchEvent(new CustomEvent('shafar:save')); }      // js/account.js keeps a signed-in wishlist in step
   var drawer = $('#drawer'), scrim = $('#scrim'), list = $('#drawer-list'), foot = $('#drawer-foot');
   var drawerMode = 'cart', lastFocus = null;
 
@@ -654,7 +665,8 @@ main{position:relative}
     live = q;
     $('#sum-sub').textContent = rupees(q.subtotal);
     $('#sum-disc-row').hidden = !q.discount;
-    $('#sum-disc-label').textContent = 'Discount' + (q.code && q.code.ok ? ' (' + q.code.code + ')' : '');
+    $('#sum-disc-label').textContent = q.loyaltyPct ? 'Loyal reward · ' + q.loyaltyPct + '%' : 'Discount' + (q.code && q.code.ok ? ' (' + q.code.code + ')' : '');
+    paintPerk(q.loyalty);
     $('#sum-disc').textContent = '− ' + rupees(q.discount);
     $('#sum-del').textContent = !q.lines.length ? '–' : q.delivery ? rupees(q.delivery) : 'Free';
     $('#sum-total').textContent = rupees(q.total);
@@ -666,6 +678,20 @@ main{position:relative}
     warn.textContent = w.join(' '); warn.hidden = !w.length;
     var note = $('#co-shopnote'); note.textContent = q.notice || ''; note.hidden = !q.notice;
   }
+  /* Shafar Loyal: what this cart earns, or how close the customer is */
+  function paintPerk(L) {
+    var box = $('#sum-perk'), html = '';
+    var bottles = function (n) { return n + (n === 1 ? ' more bottle' : ' more bottles'); };
+    if (L && L.on && L.loyal) {
+      if (L.pct) html = '<b>Shafar Loyal · ' + L.pct + '% off</b> applied to this order.' + (L.next ? ' Add ' + bottles(L.next.more) + ' for ' + L.next.pct + '% off.' : '');
+      else if (L.tierPct) html = 'Your discount code saves more than your <b>Loyal ' + L.tierPct + '%</b> here, so the code is used.';
+      else if (L.next) html = 'Add ' + bottles(L.next.more) + ' and your <b>Shafar Loyal ' + L.next.pct + '% off</b> applies.';
+    } else if (L && L.on) {
+      var left = Math.max(0, L.after - L.completed);
+      html = left ? '<b>' + L.completed + ' of ' + L.after + '</b> completed orders towards Shafar Loyal: ' + L.tiers.map(function (t) { return t.pct + '% off ' + t.qty + ' bottles'; }).join(', ') + '.' : '';
+    }
+    box.innerHTML = html; box.hidden = !html;
+  }
   function requote() {
     if (!cart.length) { $('#sum-warn').hidden = true; return; }
     post({ dry: true, items: items(), code: codeVal }).then(paintQuote);
@@ -674,6 +700,30 @@ main{position:relative}
   syncBadges = function () { syncSummary(); requote(); };
   requote();
   $('#sum-code').addEventListener('submit', function (e) { e.preventDefault(); codeVal = $('#code').value.trim(); requote(); });
+
+  /* Signed in: say so, and fill the form from the account */
+  var member = null;
+  if (/(?:^|;\s*)sf_in=/.test(document.cookie)) {
+    fetch('/api/account', { method: 'POST', credentials: 'same-origin', headers: { 'Content-Type': 'application/json' }, body: '{"action":"me"}' })
+      .then(function (r) { return r.json(); })
+      .then(function (m) {
+        if (!m || !m.ok || !m.signedIn) return;
+        member = m;
+        var c = m.customer, f = form.elements, line = $('#co-account');
+        line.textContent = '';
+        line.appendChild(document.createTextNode('Signed in as '));
+        line.appendChild(el('b', '', c.name));
+        if (m.loyalty && m.loyalty.loyal) line.appendChild(el('span', 'co__loyal', 'Shafar Loyal'));
+        line.appendChild(document.createTextNode('. This order is saved to your account. '));
+        var other = el('button', 'link', 'Not you? Sign out'); other.type = 'button'; line.appendChild(other);
+        other.addEventListener('click', function () {
+          fetch('/api/account', { method: 'POST', credentials: 'same-origin', headers: { 'Content-Type': 'application/json' }, body: '{"action":"logout"}' })
+            .then(function () { try { localStorage.removeItem('shafar.wish.synced'); localStorage.setItem('shafar.wish', '[]'); } catch (e) {} location.reload(); });
+        });
+        [['name', c.name], ['phone', c.phone], ['email', c.email], ['address', c.address], ['city', c.city]].forEach(function (x) { if (x[1] && !String(f[x[0]].value || '').trim()) f[x[0]].value = x[1]; });
+        if (c.province) f.province.value = c.province;
+      }).catch(function () {});
+  }
 
   function fieldError(name, text) {
     var input = form.elements[name]; if (!input) return;
@@ -715,10 +765,11 @@ main{position:relative}
         done.appendChild(el('p', 'eyebrow', 'Order placed'));
         done.appendChild(h2);
         done.appendChild(el('p', 'no', r.number));
-        done.appendChild(el('p', '', 'We will call or message you on ' + phone + ' to confirm, then send your parcel. You pay ' + rupees(r.total) + ' in cash when it arrives.'));
+        done.appendChild(el('p', '', 'We will call or message you on ' + phone + ' to confirm, then send your parcel. You pay ' + rupees(r.total) + ' in cash when it arrives.' + (r.emailed ? ' A confirmation is on its way to your inbox.' : '')));
         var acts = el('div', 'acts'), shop = el('a', 'btn', 'Keep shopping'), wa = el('a', 'btn', 'Message us on WhatsApp');
         shop.href = 'shop.html'; wa.href = 'https://wa.me/923180250552?text=' + encodeURIComponent('Hello Shafar, about my order ' + r.number + '.'); wa.target = '_blank'; wa.rel = 'noopener';
         wa.style.cssText = 'background:none;color:var(--espresso);border:1px solid var(--espresso)';
+        if (r.member) { var mine = el('a', 'btn', 'View in your account'); mine.href = 'account.html#orders'; acts.appendChild(mine); shop.style.cssText = 'background:none;color:var(--espresso);border:1px solid var(--espresso)'; }
         acts.appendChild(shop); acts.appendChild(wa); done.appendChild(acts);
         form.replaceWith(done);
         $('#sum-edit').hidden = true;
